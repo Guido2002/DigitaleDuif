@@ -4,7 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import pigeon1Image from "@/assets/pigeon1.png";
-import pigeon2Image from "@/assets/pigeon3.png"; // This was pigeon3.png, but the user wants to remove it. Assuming pigeon3.png is actually pigeon2.png in the assets folder.
 import pigeon4Image from "@/assets/pigeon4.png";
 
 interface FlyingBirdIllustrationProps {
@@ -19,8 +18,8 @@ interface FlyingBirdIllustrationProps {
   animateOpacity?: number; // New prop for controlling final opacity
 }
 
-// Removed pigeon3Image from the list
-const pigeonImages = [pigeon1Image, pigeon2Image, pigeon4Image];
+// Only pigeon1Image and pigeon4Image are used now
+const pigeonImages = [pigeon1Image, pigeon4Image];
 
 const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
   className,
@@ -49,19 +48,19 @@ const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
       src={selectedPigeonImage}
       alt="Flying bird illustration"
       className={cn(
-        "absolute object-contain pointer-events-none z-1", // Changed z-index from z-20 to z-1
+        "absolute object-contain pointer-events-none z-1",
         sizeClasses[size],
         className
       )}
       initial={{ opacity: 0, x: initialX, y: initialY }}
       animate={{
-        opacity: animateOpacity, // Use the new prop
+        opacity: animateOpacity,
         y: [initialY, `${parseFloat(initialY) + floatIntensity}%`, initialY, `${parseFloat(initialY) - floatIntensity}%`, initialY],
         x: [initialX, `${parseFloat(initialX) + floatIntensity}%`, initialX, `${parseFloat(initialX) - floatIntensity}%`, initialX],
         rotate: [0, rotateIntensity, -rotateIntensity, rotateIntensity, 0],
       }}
       transition={{
-        opacity: { duration: 1, delay: animationDelay, ease: "easeOut" }, // Fade in once
+        opacity: { duration: 1, delay: animationDelay, ease: "easeOut" },
         y: { duration: animationDuration, repeat: Infinity, ease: "easeInOut", delay: animationDelay },
         x: { duration: animationDuration * 1.2, repeat: Infinity, ease: "easeInOut", delay: animationDelay + 0.5 },
         rotate: { duration: animationDuration * 0.8, repeat: Infinity, ease: "easeInOut", delay: animationDelay + 0.2 },
