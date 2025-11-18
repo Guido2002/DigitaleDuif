@@ -15,7 +15,7 @@ const AboutSection = () => {
       <div className="mb-16 flex flex-col items-center text-center md:flex-row md:text-left md:gap-8">
         <div className="mb-8 flex justify-center md:mb-0 md:w-1/3">
           <img
-            src="/placeholder.svg" // Gebruikt de bestaande placeholder afbeelding
+            src="/profile-photo.jpeg" // Gebruikt de geüploade afbeelding
             alt="Persoonlijke foto van de oprichter"
             className="h-48 w-48 rounded-full object-cover shadow-lg"
           />
@@ -61,7 +61,7 @@ const AboutSection = () => {
             geloven sterk in een iteratieve aanpak en co-creatie met onze
             klanten.
           </p>
-          <p className="text-muted-foreground">
+          <p className="mb-4 text-muted-foreground">
             Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering
             werken we nauw samen, waarbij we prototypes ontwikkelen en continu
             feedback integreren om ervoor te zorgen dat het eindproduct
