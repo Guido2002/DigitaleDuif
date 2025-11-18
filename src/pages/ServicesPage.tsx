@@ -4,8 +4,8 @@ import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { services, Service } from "@/data/mockData";
-import SectionHeader from "@/components/SectionHeader"; // Import SectionHeader
-import FadeInWhenVisible from "@/components/FadeInWhenVisible"; // Import FadeInWhenVisible
+import SectionHeader from "@/components/SectionHeader";
+import FadeInWhenVisible from "@/components/FadeInWhenVisible";
 
 const ServicesPage = () => {
   return (
@@ -14,6 +14,7 @@ const ServicesPage = () => {
         <SectionHeader
           title="Wat biedt DigitaleDuif?"
           subtitle="Bij DigitaleDuif zijn we gespecialiseerd in het creëren van innovatieve XR-oplossingen die uw bedrijf vooruit helpen. Ontdek hieronder ons uitgebreide aanbod aan diensten."
+          align="left" // Left align header for Services page
         />
       </FadeInWhenVisible>
 

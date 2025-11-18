@@ -4,8 +4,8 @@ import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { projects, Project } from "@/data/mockData";
-import SectionHeader from "@/components/SectionHeader"; // Import SectionHeader
-import FadeInWhenVisible from "@/components/FadeInWhenVisible"; // Import FadeInWhenVisible
+import SectionHeader from "@/components/SectionHeader";
+import FadeInWhenVisible from "@/components/FadeInWhenVisible";
 
 const ProjectsPage = () => {
   return (
@@ -14,6 +14,7 @@ const ProjectsPage = () => {
         <SectionHeader
           title="Onze Projecten"
           subtitle="Ontdek een selectie van onze innovatieve XR-projecten. Wij combineren technische diepgang met creativiteit om unieke en impactvolle oplossingen te leveren."
+          align="left" // Left align header for Projects page
         />
       </FadeInWhenVisible>
 
