@@ -3,7 +3,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import birdImage from "@/assets/bas-van-toor.png"; // Assuming this is the bird asset
+import pigeon1Image from "@/assets/pigeon1.png";
+import pigeon2Image from "@/assets/pigeon3.png";
+import pigeon3Image from "@/assets/pigeon2.png";
+import pigeon4Image from "@/assets/pigeon4.png";
 
 interface FlyingBirdIllustrationProps {
   className?: string;
@@ -16,6 +19,8 @@ interface FlyingBirdIllustrationProps {
   rotateIntensity?: number; // How much it rotates
   animateOpacity?: number; // New prop for controlling final opacity
 }
+
+const pigeonImages = [pigeon1Image, pigeon2Image, pigeon3Image, pigeon4Image];
 
 const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
   className,
@@ -34,9 +39,14 @@ const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
     large: "h-32 w-32",
   };
 
+  // Randomly select a pigeon image once per component instance
+  const [selectedPigeonImage] = React.useState(() =>
+    pigeonImages[Math.floor(Math.random() * pigeonImages.length)]
+  );
+
   return (
     <motion.img
-      src={birdImage}
+      src={selectedPigeonImage}
       alt="Flying bird illustration"
       className={cn(
         "absolute object-contain pointer-events-none z-20", // Higher z-index than background animations
