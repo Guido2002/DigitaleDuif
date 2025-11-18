@@ -42,8 +42,8 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
         <CardHeader className="mb-4 p-0">
           {isMobile ? (
             // Show step number inside card on mobile with original styling
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary">
-              <span className="text-2xl font-extrabold">{stepNumber}</span> {/* Reverted to original styling */}
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground ring-2 ring-primary-foreground">
+              <span className="text-2xl font-extrabold">{stepNumber}</span>
             </div>
           ) : (
             // Show icon inside card on desktop
