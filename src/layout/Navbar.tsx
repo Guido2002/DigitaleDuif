@@ -7,15 +7,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/s
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ModeToggle } from "@/components/ModeToggle";
-
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "Over ons", path: "/#about" },
-  { name: "Diensten", path: "/diensten" },
-  { name: "Projecten", path: "/projecten" },
-  { name: "Hoe wij werken", path: "/#process" },
-  { name: "Contact", path: "/contact" },
-];
+import { navLinks } from "@/data/mockData"; // Import navLinks from mockData
 
 const Navbar = () => {
   const isMobile = useIsMobile();

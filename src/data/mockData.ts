@@ -175,3 +175,18 @@ export const services: Service[] = [
     tags: ["Data Analytics", "Telemetry", "Insights", "Optimization"],
   },
 ];
+
+// Navigation Links Data
+interface NavLink {
+  name: string;
+  path: string;
+}
+
+export const navLinks: NavLink[] = [
+  { name: "Home", path: "/" },
+  { name: "Over ons", path: "/#about" },
+  { name: "Diensten", path: "/diensten" },
+  { name: "Projecten", path: "/projecten" },
+  { name: "Hoe wij werken", path: "/#process" },
+  { name: "Contact", path: "/contact" },
+];
