@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion"; // Re-import motion
+import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import profilePhoto from "../assets/1711446418839.jpeg";
 import { cn } from "@/lib/utils";
-import { CheckCircle2 } from "lucide-react"; // Import CheckCircle2 icon
+import { CheckCircle2 } from "lucide-react";
+import FlyingBirdIllustration from "./FlyingBirdIllustration"; // Import FlyingBirdIllustration
 
 const GuidoIntroSection = () => {
   return (
@@ -13,13 +14,13 @@ const GuidoIntroSection = () => {
       className="mb-16 grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16"
     >
       {/* Image Section */}
-      <motion.div // Restored motion.div
+      <motion.div
         className="relative flex justify-center md:justify-end"
-        whileHover={{ scale: 1.03, rotate: 1 }} // Enhanced hover effect
+        whileHover={{ scale: 1.03, rotate: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         {/* Subtle background glow behind the image */}
-        <motion.div // Restored motion.div
+        <motion.div
           className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-primary/50 to-purple-accent/50 blur-xl"
           animate={{ opacity: [0.5, 0.8, 0.5], scale: [0.95, 1.05, 0.95] }}
           transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
@@ -30,8 +31,20 @@ const GuidoIntroSection = () => {
           className="w-full max-w-md rounded-xl object-cover shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out"
           style={{ aspectRatio: '4/5' }}
         />
+        {/* Static bird near the image */}
+        <FlyingBirdIllustration
+          className="absolute -top-8 right-0 md:-right-12" // Positioned top-right of the image
+          size="small"
+          initialX="0%"
+          initialY="0%"
+          animationDelay={0.5}
+          animationDuration={0} // Make it static
+          floatIntensity={0} // No floating
+          rotateIntensity={0} // No rotation
+          animateOpacity={0.8} // Slightly transparent
+        />
         {/* Optional: Add a subtle floating UI element near the image */}
-        <motion.div // Restored motion.div
+        <motion.div
           className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

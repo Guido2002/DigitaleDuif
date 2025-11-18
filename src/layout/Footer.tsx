@@ -2,11 +2,23 @@
 
 import React from "react";
 import { Mail, Linkedin } from "lucide-react";
-// Removed FlyingBirdIllustration import
+import FlyingBirdIllustration from "@/components/FlyingBirdIllustration"; // Import FlyingBirdIllustration
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-background py-8">
+    <footer className="border-t border-border bg-background py-8 relative overflow-hidden"> {/* Added relative and overflow-hidden */}
+      {/* Static bird in the footer */}
+      <FlyingBirdIllustration
+        className="absolute top-4 right-4 md:top-8 md:right-8" // Positioned top-right of the footer
+        size="small"
+        initialX="0%"
+        initialY="0%"
+        animationDelay={0.5}
+        animationDuration={0} // Make it static
+        floatIntensity={0} // No floating
+        rotateIntensity={0} // No rotation
+        animateOpacity={0.6} // Slightly transparent
+      />
       <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
         <div className="text-center md:text-left">
           <h3 className="text-lg font-bold text-primary">DigitaleDuif</h3>
@@ -14,7 +26,6 @@ const Footer = () => {
             Innovatieve digitale oplossingen die écht vliegen. Uw partner in Virtual Reality, Mixed Reality, Web Development en Mobiele Apps.
           </p>
         </div>
-        {/* Subtle bird in the footer - REMOVED */}
         <div className="flex flex-col items-center space-y-2 md:items-end">
           <a
             href="mailto:digitaleduif@outlook.com"
