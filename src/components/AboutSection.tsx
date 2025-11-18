@@ -41,7 +41,7 @@ const AboutSection = () => {
           {services.map((service, index) => (
             <FadeInWhenVisible key={index} delay={0.3 + index * 0.1} className="h-full">
               <Card
-                className="group relative flex flex-col items-center justify-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border-4 border-blue-500 glassmorphism h-full" // Aangepast naar border-4 border-blue-500
+                className="group relative flex flex-col items-center justify-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border-2 border-primary glassmorphism h-full" // Teruggezet naar border-2 border-primary
               >
                 <AbstractBackgroundAnimation className="opacity-20" />
                 <CardHeader className="relative z-10 mb-4 p-0">
