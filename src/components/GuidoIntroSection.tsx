@@ -32,8 +32,6 @@ const GuidoIntroSection = () => {
             className="w-full max-w-md rounded-xl object-cover shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out"
             style={{ aspectRatio: '4/5' }}
           />
-          {/* Static bird near the image, adjusted to sit exactly in the middle on top */}
-          {/* Removed FlyingBirdIllustration */}
           {/* Optional: Add a subtle floating UI element near the image */}
           <motion.div
             className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
@@ -53,7 +51,7 @@ const GuidoIntroSection = () => {
               Hallo, ik ben Guido
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0 px-4 md:px-0">
+          <CardContent className="p-0"> {/* Removed px-4 to align with parent container padding */}
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
