@@ -18,13 +18,19 @@ const GuidoIntroSection = () => {
       {/* Image Section */}
       <motion.div
         className="relative flex justify-center md:justify-end"
-        whileHover={{ scale: 1.02 }}
+        whileHover={{ scale: 1.03, rotate: 1 }} {/* Enhanced hover effect */}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
+        {/* Subtle background glow behind the image */}
+        <motion.div
+          className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-primary/50 to-purple-accent/50 blur-xl"
+          animate={{ opacity: [0.5, 0.8, 0.5], scale: [0.95, 1.05, 0.95] }}
+          transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
+        />
         <img
           src={profilePhoto} // Using the imported image path
           alt="Bas van Toor - Oprichter DigitaleDuif"
-          className="w-full max-w-md rounded-xl object-cover shadow-2xl border-4 border-primary/20 transition-all duration-300 ease-in-out"
+          className="w-full max-w-md rounded-xl object-cover shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out" {/* Changed border to ring for a more modern look */}
           style={{ aspectRatio: '4/5' }}
         />
         {/* Optional: Add a subtle floating UI element near the image */}
@@ -47,7 +53,7 @@ const GuidoIntroSection = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0 px-4 md:px-0">
-          <div className="space-y-4"> {/* Changed from ul to div, removed list-disc and pl-5 */}
+          <div className="space-y-4">
             <div className="flex items-start space-x-3">
               <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
               <p className="text-mobile-body md:text-body-lg text-muted-foreground">
