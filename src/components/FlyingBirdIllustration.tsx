@@ -4,8 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import pigeon1Image from "@/assets/pigeon1.png";
-import pigeon2Image from "@/assets/pigeon3.png";
-import pigeon3Image from "@/assets/pigeon2.png";
+import pigeon2Image from "@/assets/pigeon3.png"; // This was pigeon3.png, but the user wants to remove it. Assuming pigeon3.png is actually pigeon2.png in the assets folder.
 import pigeon4Image from "@/assets/pigeon4.png";
 
 interface FlyingBirdIllustrationProps {
@@ -20,7 +19,8 @@ interface FlyingBirdIllustrationProps {
   animateOpacity?: number; // New prop for controlling final opacity
 }
 
-const pigeonImages = [pigeon1Image, pigeon2Image, pigeon3Image, pigeon4Image];
+// Removed pigeon3Image from the list
+const pigeonImages = [pigeon1Image, pigeon2Image, pigeon4Image];
 
 const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
   className,
