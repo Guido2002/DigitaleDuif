@@ -234,48 +234,5 @@ interface AboutExpertise {
 }
 
 export const aboutExpertiseCards: AboutExpertise[] = [
-  {
-    icon: Brain,
-    title: "XR & VR Expertise",
-    description: "Met jarenlange ervaring in de XR-sector, zijn wij experts in het ontwikkelen van zowel Virtual Reality als Mixed Reality applicaties. Of het nu gaat om complexe simulaties, interactieve trainingsmodules of innovatieve visualisatietools, wij leveren oplossingen die de grenzen van het mogelijke verleggen. Onze focus ligt op het benutten van de kracht van XR om concrete zakelijke uitdagingen op te lossen en nieuwe kansen te creëren.",
-  },
-  {
-    icon: Code, // Using Code for Unity Development
-    title: "Unity Development",
-    description: "Unity is de kern van onze technische stack. Onze ontwikkelaars zijn bedreven in het creëren van robuuste, schaalbare en hoogwaardige applicaties binnen dit veelzijdige platform. Wij geloven sterk in een iteratieve aanpak en co-creatie met onze klanten. Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering werken we nauw samen, waarbij we prototypes ontwikkelen en continu feedback integreren om ervoor te zorgen dat het eindproduct perfect aansluit bij uw visie en behoeften.",
-  },
-  {
-    icon: Users, // Using Users for Co-creatie
-    title: "Co-creatie Aanpak",
-    description: "Wij geloven sterk in een iteratieve aanpak en co-creatie met onze klanten. Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering werken we nauw samen, waarbij we prototypes ontwikkelen en continu feedback integreren om ervoor te zorgen dat het eindproduct perfect aansluit bij uw visie en behoeften. Uw visie is onze drijfveer, en samen bouwen we aan de toekomst.",
-  },
-];
-
-// FAQ Data
-export interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-export const faqItems: FAQItem[] = [
-  {
-    question: "Wat is Extended Reality (XR)?",
-    answer: "Extended Reality (XR) is een overkoepelende term die Virtual Reality (VR), Augmented Reality (AR) en Mixed Reality (MR) omvat. Het verwijst naar technologieën die de echte en virtuele werelden combineren of een volledig virtuele ervaring creëren.",
-  },
-  {
-    question: "Welke technologieën gebruiken jullie?",
-    answer: "Wij zijn gespecialiseerd in Unity development en werken met diverse XR-hardware, waaronder Meta Quest (VR) en HoloLens (MR). Onze expertise omvat C#, 3D-modellering en data-integratie.",
-  },
-  {
-    question: "Kunnen jullie helpen met conceptontwikkeling?",
-    answer: "Absoluut! Wij geloven in co-creatie en werken nauw samen met onze klanten vanaf de eerste brainstormsessie. We helpen u uw ideeën te verfijnen en om te zetten in concrete, werkende prototypes.",
-  },
-  {
-    question: "Wat zijn de voordelen van XR voor mijn bedrijf?",
-    answer: "XR kan uw bedrijf transformeren door middel van interactieve trainingen, efficiënte visualisaties, verbeterde samenwerking op afstand en innovatieve marketingervaringen. Het kan leiden tot kostenbesparingen, hogere productiviteit en een concurrentievoordeel.",
-  },
-  {
-    question: "Hoe lang duurt de ontwikkeling van een XR-applicatie?",
-    answer: "De duur van de ontwikkeling hangt sterk af van de complexiteit en de scope van het project. Na een initiële behoefteanalyse en conceptfase kunnen we een realistische tijdslijn en budget inschatten. We werken vaak met agile methoden voor snelle iteraties.",
-  },
+  // De kaarten 'XR & VR Expertise', 'Unity Development' en 'Co-creatie Aanpak' zijn verwijderd.
 ];
