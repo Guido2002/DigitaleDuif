@@ -8,6 +8,7 @@ import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { navLinks } from "@/data/mockData";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion"; // Import motion
 
 const Navbar = () => {
   const isMobile = useIsMobile();
@@ -27,7 +28,13 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="text-xl font-bold text-primary">DigitaleDuif</span>
+          <motion.span
+            className="text-xl font-bold text-primary"
+            whileHover={{ scale: 1.05, rotate: 2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            DigitaleDuif
+          </motion.span>
         </Link>
 
         {isMobile ? (
@@ -44,11 +51,17 @@ const Navbar = () => {
                     <Link
                       to={link.path}
                       className={cn(
-                        "text-lg font-medium text-foreground hover:text-primary",
+                        "relative text-lg font-medium text-foreground hover:text-primary",
                         isActive(link.path) && "text-primary font-bold",
                       )}
                     >
                       {link.name}
+                      {isActive(link.path) && (
+                        <motion.span
+                          layoutId="underline"
+                          className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
+                        />
+                      )}
                     </Link>
                   </SheetClose>
                 ))}
@@ -67,11 +80,17 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 className={cn(
-                  "text-sm font-medium text-foreground transition-colors hover:text-primary",
+                  "relative text-sm font-medium text-foreground transition-colors hover:text-primary",
                   isActive(link.path) && "text-primary font-bold",
                 )}
               >
                 {link.name}
+                {isActive(link.path) && (
+                  <motion.span
+                    layoutId="underline"
+                    className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
+                  />
+                )}
               </Link>
             ))}
             <Link to="/contact">
