@@ -9,34 +9,34 @@
 
   :root {
     --background: 0 0% 100%; /* Pure White */
-    --foreground: 220 20% 10%; /* Dark Gray */
+    --foreground: 210 10% 20%; /* Darker Gray */
 
     --card: 0 0% 100%; /* Pure White */
-    --card-foreground: 220 20% 10%; /* Dark Gray */
+    --card-foreground: 210 10% 20%; /* Darker Gray */
 
     --popover: 0 0% 100%; /* Pure White */
-    --popover-foreground: 220 20% 10%; /* Dark Gray */
+    --popover-foreground: 210 10% 20%; /* Darker Gray */
 
-    --primary: 220 70% 30%; /* Deep Indigo Blue */
+    --primary: 140 60% 30%; /* Deep Forest Green */
     --primary-foreground: 0 0% 100%; /* White */
-    --hero-gradient-end: 230 80% 25%; /* Darker Indigo for potential gradient end */
-    --light-blue: 220 70% 95%; /* Very Light Indigo for Hero Section */
+    --hero-gradient-end: 150 70% 25%; /* Even Darker Green for gradient end */
+    --light-blue: 140 60% 95%; /* Very Light Green for Hero Section */
 
     --secondary: 210 20% 96%; /* Very Light Gray */
-    --secondary-foreground: 220 20% 10%; /* Dark Gray */
+    --secondary-foreground: 210 10% 20%; /* Darker Gray */
 
     --muted: 210 40% 96.1%; /* Light Gray */
     --muted-foreground: 215.4 16.3% 46.9%; /* Medium Gray */
 
-    --accent: 220 70% 45%; /* Brighter Indigo for accents */
-    --accent-foreground: 220 20% 10%; /* Dark Gray */
+    --accent: 140 60% 45%; /* Brighter Green for accents */
+    --accent-foreground: 210 10% 20%; /* Darker Gray */
 
     --destructive: 0 84.2% 60.2%; /* Red */
     --destructive-foreground: 0 0% 100%; /* White */
 
     --border: 214.3 31.8% 91.4%; /* Light Gray-Blue */
     --input: 214.3 31.8% 91.4%; /* Light Gray-Blue */
-    --ring: 220 70% 30%; /* Primary Indigo for ring */
+    --ring: 140 60% 30%; /* Primary Green for ring */
 
     --radius: 0.5rem;
   }
