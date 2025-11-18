@@ -30,7 +30,7 @@ const HeroSection = () => {
           <Link to="/projecten">
             <Button 
               size="lg" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+              className="bg-white text-primary hover:bg-gray-100 transition-all duration-300 hover:scale-105"
             >
               Bekijk projecten
             </Button>
