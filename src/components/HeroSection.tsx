@@ -4,15 +4,14 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom"; // Correct import for React Router
-import FlyingBirdIllustration from "@/components/FlyingBirdIllustration"; // New import
-// Removed HeroBackgroundAnimation, VrHeadsetIllustration, ScrollIndicator imports
+import { Link } from "react-router-dom";
+import FlyingBirdIllustration from "@/components/FlyingBirdIllustration";
 
 interface HeroSectionProps {
   // children: React.ReactNode; // Removed as it's not used
 }
 
-const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from props
+const HeroSection: React.FC<HeroSectionProps> = () => {
   return (
     <section
       id="home"
@@ -22,28 +21,17 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
       {/* HeroBackgroundAnimation /> {/* Render the background animation */}
       {/* VrHeadsetIllustration /> {/* Render the VR headset illustration */}
 
-      {/* Flying Birds */}
+      {/* Single Flying Bird in bottom-left */}
       <FlyingBirdIllustration
-        className="top-[10%] left-[10%]" // Adjusted position
-        size="medium"
+        className="bottom-[10%] left-[10%]" // Positioned bottom-left
+        size="medium" // Medium size for better visibility
         initialX="-10%"
         initialY="10%"
         animationDelay={2}
         animationDuration={10}
         floatIntensity={15}
         rotateIntensity={3}
-        animateOpacity={0.8} // Slightly transparent
-      />
-      <FlyingBirdIllustration
-        className="bottom-[10%] right-[10%]" // Adjusted position
-        size="small"
-        initialX="10%"
-        initialY="-10%"
-        animationDelay={3.5}
-        animationDuration={12}
-        floatIntensity={10}
-        rotateIntensity={2}
-        animateOpacity={0.7} // Slightly more transparent
+        animateOpacity={1} // Fully visible
       />
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
@@ -69,9 +57,9 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
         >
-          <Button 
-            asChild 
-            size="lg" 
+          <Button
+            asChild
+            size="lg"
             className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105"
           >
             <Link to="/contact">

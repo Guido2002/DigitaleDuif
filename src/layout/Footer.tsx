@@ -2,8 +2,7 @@
 
 import React from "react";
 import { Mail, Linkedin } from "lucide-react";
-import FlyingBirdIllustration from "@/components/FlyingBirdIllustration"; // New import
-
+// Removed FlyingBirdIllustration import
 
 const Footer = () => {
   return (
@@ -15,18 +14,7 @@ const Footer = () => {
             Innovatieve digitale oplossingen die écht vliegen. Uw partner in Virtual Reality, Mixed Reality, Web Development en Mobiele Apps.
           </p>
         </div>
-        {/* Subtle bird in the footer */}
-        <FlyingBirdIllustration
-          className="absolute left-4 bottom-4 hidden md:block" // Hidden on mobile for less clutter
-          size="small"
-          initialX="0%"
-          initialY="0%"
-          animationDelay={0}
-          animationDuration={6}
-          floatIntensity={5}
-          rotateIntensity={1}
-          animateOpacity={0.15} // Very subtle
-        />
+        {/* Subtle bird in the footer - REMOVED */}
         <div className="flex flex-col items-center space-y-2 md:items-end">
           <a
             href="mailto:digitaleduif@outlook.com"
