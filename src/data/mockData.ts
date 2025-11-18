@@ -236,3 +236,32 @@ interface AboutExpertise {
 export const aboutExpertiseCards: AboutExpertise[] = [
   // De kaarten 'XR & VR Expertise', 'Unity Development' en 'Co-creatie Aanpak' zijn verwijderd.
 ];
+
+// FAQ Data
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export const faqItems: FAQItem[] = [
+  {
+    question: "Wat is Extended Reality (XR)?",
+    answer: "Extended Reality (XR) is een overkoepelende term die alle real-and-virtual gecombineerde omgevingen en mens-machine-interacties omvat, inclusief Virtual Reality (VR), Augmented Reality (AR) en Mixed Reality (MR).",
+  },
+  {
+    question: "Welke technologieën gebruiken jullie voor XR-ontwikkeling?",
+    answer: "Wij zijn gespecialiseerd in Unity 3D development met C#, en werken met toonaangevende hardware zoals Meta Quest (VR) en Microsoft HoloLens (MR).",
+  },
+  {
+    question: "Kunnen jullie helpen met conceptontwikkeling als we nog geen concreet idee hebben?",
+    answer: "Absoluut! Wij begeleiden u graag van de initiële brainstormfase tot een concreet concept en een werkend prototype, om de mogelijkheden van XR voor uw specifieke behoeften te verkennen.",
+  },
+  {
+    question: "Wat zijn de voordelen van VR-trainingssimulaties?",
+    answer: "VR-trainingssimulaties bieden een veilige, kosteneffectieve en herhaalbare manier om medewerkers te trainen in complexe of gevaarlijke scenario's, wat leidt tot hogere retentie en betere prestaties in de praktijk.",
+  },
+  {
+    question: "Hoe lang duurt het om een XR-applicatie te ontwikkelen?",
+    answer: "De ontwikkeltijd varieert sterk afhankelijk van de complexiteit en de scope van het project. Na een kennismaking en behoefteanalyse kunnen we een realistische tijdsinschatting geven.",
+  },
+];
