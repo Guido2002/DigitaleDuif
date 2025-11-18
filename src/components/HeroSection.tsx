@@ -4,84 +4,74 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom"; // Correct import for React Router
-import FlyingBirdIllustration from "@/components/FlyingBirdIllustration"; // New import
-// Removed HeroBackgroundAnimation, VrHeadsetIllustration, ScrollIndicator imports
+import Link from "next/link";
+import FlyingBirdIllustration from "./FlyingBirdIllustration"; // Import the bird component
 
-interface HeroSectionProps {
-  // children: React.ReactNode; // Removed as it's not used
-}
-
-const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from props
+const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
       className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
-      {/* HeroBackgroundAnimation /> {/* Render the background animation */}
-      {/* VrHeadsetIllustration /> {/* Render the VR headset illustration */}
-
-      {/* Flying Birds */}
+      {/* Flying Bird Illustrations */}
       <FlyingBirdIllustration
-        className="top-[10%] left-[10%]" // Adjusted position
+        className="top-[10%] left-[5%] md:top-[15%] md:left-[10%]"
         size="medium"
         initialX="-10%"
         initialY="10%"
-        animationDelay={2}
-        animationDuration={10}
-        floatIntensity={15}
-        rotateIntensity={3}
-        animateOpacity={0.8} // Slightly transparent
+        animationDelay={0}
+        animateOpacity={0.8}
       />
       <FlyingBirdIllustration
-        className="bottom-[10%] right-[10%]" // Adjusted position
-        size="small"
+        className="top-[20%] right-[10%] md:top-[25%] md:right-[15%]"
+        size="large"
         initialX="10%"
         initialY="-10%"
-        animationDelay={3.5}
-        animationDuration={12}
-        floatIntensity={10}
-        rotateIntensity={2}
-        animateOpacity={0.7} // Slightly more transparent
+        animationDelay={1}
+        animateOpacity={0.9}
+      />
+      {/* De duif linksonder is verwijderd */}
+      <FlyingBirdIllustration
+        className="bottom-[5%] right-[5%] md:bottom-[10%] md:right-[10%]"
+        size="medium"
+        initialX="20%"
+        initialY="10%"
+        animationDelay={3}
+        animateOpacity={0.85}
       />
 
-      <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
+      {/* Main content */}
+      <div className="relative z-10 max-w-4xl text-center px-4">
         <motion.h1
-          className="mb-6 text-4xl font-extrabold leading-tight tracking-tighter md:text-6xl lg:text-7xl text-shadow-hero-title"
-          initial={{ opacity: 0, y: -20 }}
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg"
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          DigitaleDuif: Uw Partner in <br className="hidden sm:inline" />
-          <span className="text-accent-foreground">Digitale Innovatie & XR</span>
+          DigitaleDuif: Jouw Partner in Digitale Innovatie & XR
         </motion.h1>
         <motion.p
-          className="mb-8 max-w-3xl text-lg md:text-xl text-primary-foreground/90 text-shadow-hero-body"
-          initial={{ opacity: 0, y: -10 }}
+          className="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto drop-shadow"
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         >
-          Wij creëren Virtual, Mixed Reality ervaringen, websites en apps die mensen écht raken en bedrijven vooruit helpen. Of je nu een eerste stap in digitale innovatie wilt zetten of een ambitieus project voor ogen hebt - wij denken graag met je mee, van het allereerste idee tot de uiteindelijke lancering.
+          Wij transformeren jouw visie naar meeslepende digitale ervaringen met
+          op maat gemaakte XR-oplossingen en innovatieve webapplicaties.
         </motion.p>
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
         >
-          <Button 
-            asChild 
-            size="lg" 
-            className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105"
-          >
-            <Link to="/contact">
-              Start uw Digitale Project
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          <Button asChild className="px-8 py-6 text-lg">
+            <Link href="#contact">
+              Neem Contact Op <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
         </motion.div>
       </div>
-      {/* ScrollIndicator /> {/* Render the scroll indicator */}
     </section>
   );
 };
