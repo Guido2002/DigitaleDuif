@@ -15,7 +15,7 @@ const AboutSection = () => {
       <div className="mb-16 flex flex-col items-center text-center md:flex-row md:text-left md:gap-8">
         <div className="mb-8 flex justify-center md:mb-0 md:w-1/3">
           <img
-            src="/profile-photo.jpeg" // Gebruikt de geüploade afbeelding
+            src="/1711446418839.jpeg" // Gebruikt de zojuist geüploade afbeelding
             alt="Persoonlijke foto van de oprichter"
             className="h-48 w-48 rounded-full object-cover shadow-lg"
           />
