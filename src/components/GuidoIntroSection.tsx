@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // Re-import motion
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import profilePhoto from "../assets/1711446418839.jpeg";
 import { cn } from "@/lib/utils";
@@ -13,13 +13,13 @@ const GuidoIntroSection = () => {
       className="mb-16 grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16"
     >
       {/* Image Section */}
-      <motion.div
+      <motion.div // Restored motion.div
         className="relative flex justify-center md:justify-end"
-        whileHover={{ scale: 1.03, rotate: 1 }}
+        whileHover={{ scale: 1.03, rotate: 1 }} // Enhanced hover effect
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         {/* Subtle background glow behind the image */}
-        <motion.div
+        <motion.div // Restored motion.div
           className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-primary/50 to-purple-accent/50 blur-xl"
           animate={{ opacity: [0.5, 0.8, 0.5], scale: [0.95, 1.05, 0.95] }}
           transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
@@ -31,7 +31,7 @@ const GuidoIntroSection = () => {
           style={{ aspectRatio: '4/5' }}
         />
         {/* Optional: Add a subtle floating UI element near the image */}
-        <motion.div
+        <motion.div // Restored motion.div
           className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -40,17 +40,6 @@ const GuidoIntroSection = () => {
         >
           Innovatie met impact!
         </motion.div>
-
-        {/* Pigeon 2 */}
-        <motion.img
-          src="/pigeon2.png"
-          alt="Zittende duif"
-          className="absolute -top-8 left-1/4 w-20 h-auto object-contain opacity-90 hidden md:block"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
-          style={{ animation: "float 4s ease-in-out infinite alternate 1.8s" }}
-        />
       </motion.div>
 
       {/* Text Content Section */}

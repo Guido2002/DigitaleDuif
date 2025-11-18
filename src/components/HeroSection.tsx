@@ -5,9 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom"; // Correct import for React Router
-import HeroBackgroundAnimation from "./HeroBackgroundAnimation"; // Re-import HeroBackgroundAnimation
-import VrHeadsetIllustration from "./VrHeadsetIllustration"; // Re-import VrHeadsetIllustration
-import ScrollIndicator from "./ScrollIndicator"; // Re-import ScrollIndicator
+// Removed HeroBackgroundAnimation, VrHeadsetIllustration, ScrollIndicator imports
 
 interface HeroSectionProps {
   // children: React.ReactNode; // Removed as it's not used
@@ -20,28 +18,8 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
       className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
-      <HeroBackgroundAnimation /> {/* Render the background animation */}
-      <VrHeadsetIllustration /> {/* Render the VR headset illustration */}
-
-      {/* Pigeon 1 */}
-      <motion.img
-        src="/pigeon1.png"
-        alt="Vliegende duif"
-        className="absolute left-[5%] top-[10%] w-24 h-auto object-contain opacity-80 hidden md:block"
-        initial={{ opacity: 0, x: -50, y: -50 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ delay: 2.5, duration: 1, ease: "easeOut" }}
-        style={{ animation: "float 6s ease-in-out infinite alternate 2.8s" }}
-      />
-      <motion.img
-        src="/pigeon1.png"
-        alt="Vliegende duif"
-        className="absolute right-[5%] bottom-[15%] w-20 h-auto object-contain opacity-70 hidden lg:block"
-        initial={{ opacity: 0, x: 50, y: 50 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ delay: 3, duration: 1, ease: "easeOut" }}
-        style={{ animation: "float 7s ease-in-out infinite alternate 3.5s" }}
-      />
+      {/* HeroBackgroundAnimation /> {/* Render the background animation */}
+      {/* VrHeadsetIllustration /> {/* Render the VR headset illustration */}
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
@@ -78,7 +56,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
           </Button>
         </motion.div>
       </div>
-      <ScrollIndicator /> {/* Render the scroll indicator */}
+      {/* ScrollIndicator /> {/* Render the scroll indicator */}
     </section>
   );
 };
