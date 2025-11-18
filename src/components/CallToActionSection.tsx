@@ -11,12 +11,12 @@ const CallToActionSection = () => {
       <div className="container text-center md:text-left">
         <FadeInWhenVisible delay={0.1}>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Klaar om uw digitale aanwezigheid te transformeren?
+            Klaar om uw toekomst met XR vorm te geven?
           </h2>
         </FadeInWhenVisible>
         <FadeInWhenVisible delay={0.2}>
           <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto md:mx-0">
-            Neem vandaag nog contact met ons op voor een vrijblijvend gesprek en ontdek hoe DigitaleDuif uw bedrijf kan laten vliegen.
+            Wacht niet langer! Neem vandaag nog contact op voor een vrijblijvend gesprek en ontdek hoe DigitaleDuif uw bedrijf kan laten vliegen met innovatieve Virtual en Mixed Reality oplossingen.
           </p>
         </FadeInWhenVisible>
         <FadeInWhenVisible delay={0.3}>
@@ -25,7 +25,7 @@ const CallToActionSection = () => {
               size="lg"
               className="bg-primary-foreground text-primary hover:bg-secondary transition-all duration-300 hover:scale-105"
             >
-              Neem Contact Op
+              Plan een gratis consult
             </Button>
           </Link>
         </FadeInWhenVisible>

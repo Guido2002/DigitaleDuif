@@ -12,13 +12,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useIsMobile } from "@/hooks/use-mobile"; // Import useIsMobile
-import Autoplay from "embla-carousel-autoplay"; // Import Autoplay plugin
+import { useIsMobile } from "@/hooks/use-mobile";
+import Autoplay from "embla-carousel-autoplay";
 
 const TestimonialsSection = () => {
   const isMobile = useIsMobile();
 
-  // Configure autoplay plugin
   const autoplayPlugin = React.useRef(
     Autoplay({ delay: 4000, stopOnInteraction: false })
   );
@@ -35,9 +34,9 @@ const TestimonialsSection = () => {
       <Carousel
         opts={{
           align: "start",
-          loop: isMobile, // Loop only on mobile
+          loop: isMobile,
         }}
-        plugins={isMobile ? [autoplayPlugin.current] : []} // Autoplay only on mobile
+        plugins={isMobile ? [autoplayPlugin.current] : []}
         className="w-full max-w-4xl mx-auto"
       >
         <CarouselContent>
@@ -50,6 +49,8 @@ const TestimonialsSection = () => {
                     author={testimonial.author}
                     title={testimonial.title}
                     avatar={testimonial.avatar}
+                    rating={testimonial.rating} // Pass the new rating prop
+                    companyLogo={testimonial.companyLogo} // Pass the new companyLogo prop
                   />
                 </FadeInWhenVisible>
               </div>

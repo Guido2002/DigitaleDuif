@@ -2,9 +2,9 @@
 
 import React from "react";
 import SectionHeader from "./SectionHeader";
-import FeatureCard from "./FeatureCard";
 import { processSteps } from "@/data/mockData";
 import FadeInWhenVisible from "./FadeInWhenVisible";
+import ProcessStepCard from "./ProcessStepCard"; // Import the new component
 
 const ProcessSection = () => {
   return (
@@ -16,13 +16,15 @@ const ProcessSection = () => {
         />
       </FadeInWhenVisible>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="relative grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
         {processSteps.map((step, index) => (
           <FadeInWhenVisible key={index} delay={0.1 + index * 0.1}>
-            <FeatureCard
+            <ProcessStepCard
               icon={step.icon}
               title={step.title}
               description={step.description}
+              stepNumber={index + 1}
+              isLast={index === processSteps.length - 1}
             />
           </FadeInWhenVisible>
         ))}

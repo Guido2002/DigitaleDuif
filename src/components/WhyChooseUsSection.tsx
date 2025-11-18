@@ -23,6 +23,7 @@ const WhyChooseUsSection = () => {
               icon={usp.icon}
               title={usp.title}
               description={usp.description}
+              highlight={index < 3} // Highlight the first three USP cards
             />
           </FadeInWhenVisible>
         ))}

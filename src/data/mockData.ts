@@ -1,6 +1,6 @@
 // This file will contain mock data for various sections of the website.
 
-import { LucideIcon, Brain, Rocket, Lightbulb, Users, TrendingUp, Code, Quote } from "lucide-react";
+import { LucideIcon, Brain, Rocket, Lightbulb, Users, TrendingUp, Code, Star } from "lucide-react"; // Import Star icon
 
 // USP Card Data
 interface USP {
@@ -78,6 +78,8 @@ interface Testimonial {
   author: string;
   title: string;
   avatar?: string; // Optional avatar image URL
+  rating: number; // New: Star rating (1-5)
+  companyLogo?: string; // New: Optional company logo URL
 }
 
 export const testimonials: Testimonial[] = [
@@ -86,18 +88,32 @@ export const testimonials: Testimonial[] = [
     author: "Jan de Vries",
     title: "CEO, Innovatie B.V.",
     avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Jan",
+    rating: 5,
+    companyLogo: "https://via.placeholder.com/40x40/0074FF/FFFFFF?text=IB", // Dummy logo
   },
   {
     quote: "De Mixed Reality oplossing die DigitaleDuif voor ons ontwikkelde, heeft onze operationele efficiëntie aanzienlijk verbeterd. Hun expertise in Unity is indrukwekkend.",
     author: "Sophie Bakker",
     title: "Projectmanager, Tech Solutions",
     avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Sophie",
+    rating: 4,
+    companyLogo: "https://via.placeholder.com/40x40/3AA7FF/FFFFFF?text=TS", // Dummy logo
   },
   {
     quote: "Vanaf het eerste concept tot de uiteindelijke oplevering was de samenwerking met DigitaleDuif uitstekend. Ze luisteren echt naar de klant en leveren maatwerk van topkwaliteit.",
     author: "Mark Jansen",
     title: "Hoofd R&D, Future Systems",
     avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Mark",
+    rating: 5,
+    companyLogo: "https://via.placeholder.com/40x40/0074FF/FFFFFF?text=FS", // Dummy logo
+  },
+  {
+    quote: "De flexibiliteit en technische kennis van DigitaleDuif waren cruciaal voor het succes van ons project. Een echte aanrader voor iedereen die met XR aan de slag wil.",
+    author: "Lisa Vermeer",
+    title: "Innovatie Specialist, Global Corp",
+    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Lisa",
+    rating: 5,
+    companyLogo: "https://via.placeholder.com/40x40/3AA7FF/FFFFFF?text=GC", // Dummy logo
   },
 ];
 
