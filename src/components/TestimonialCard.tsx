@@ -20,13 +20,13 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 }) => {
   return (
     <Card className="group relative flex flex-col p-6 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-card border border-border">
-      <Quote className="absolute left-6 top-6 h-8 w-8 text-primary/20" />
+      <Quote className="absolute left-6 top-6 h-8 w-8 text-light-accent/50" />
       <CardContent className="flex flex-grow flex-col items-center justify-center p-0 pt-8">
         <p className="mb-6 text-lg italic text-foreground">"{quote}"</p>
         <div className="mt-auto flex flex-col items-center">
           <Avatar className="mb-3 h-16 w-16">
             <AvatarImage src={avatar} alt={author} />
-            <AvatarFallback className="bg-primary/20 text-primary">{author.charAt(0)}</AvatarFallback>
+            <AvatarFallback className="bg-light-accent/20 text-primary">{author.charAt(0)}</AvatarFallback>
           </Avatar>
           <p className="text-xl font-semibold text-primary">{author}</p>
           <p className="text-sm text-muted-foreground">{title}</p>

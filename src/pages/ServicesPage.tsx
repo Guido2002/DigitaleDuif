@@ -33,7 +33,7 @@ const ServicesPage = () => {
               </CardHeader>
               <div className="mt-4 flex flex-wrap gap-2">
                 {service.tags.map((tag, tagIndex) => (
-                  <Badge key={tagIndex} variant="secondary" className="bg-secondary text-secondary-foreground">
+                  <Badge key={tagIndex} variant="outline" className="border-primary text-primary bg-primary/10">
                     {tag}
                   </Badge>
                 ))}

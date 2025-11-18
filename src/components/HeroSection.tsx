@@ -28,7 +28,7 @@ const HeroSection = () => {
           <Link to="/projecten">
             <Button 
               size="lg" 
-              className="bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:scale-105"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105"
             >
               Bekijk projecten
             </Button>

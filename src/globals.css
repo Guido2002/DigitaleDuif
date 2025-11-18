@@ -9,26 +9,26 @@
 
   :root {
     --background: 0 0% 100%; /* White */
-    --foreground: 210 10% 20%; /* Dark gray for text */
+    --foreground: 0 0% 10%; /* #1A1A1A - Dark text */
 
-    --card: 0 0% 100%; /* Pure White */
-    --card-foreground: 210 10% 20%; /* Dark gray */
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 0 0% 10%; /* Dark text */
 
-    --popover: 0 0% 100%; /* Pure White */
-    --popover-foreground: 210 10% 20%; /* Dark gray */
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 0 0% 10%; /* Dark text */
 
-    --primary: 210 40% 20%; /* Dark Navy Blue */
+    --primary: 217 100% 50%; /* #0074FF - Digitale Duif Blauw */
     --primary-foreground: 0 0% 100%; /* White */
-    --hero-gradient-end: 210 50% 15%; /* Even darker blue for gradient */
-    --light-accent: 210 20% 95%; /* Very light blue-gray for subtle backgrounds */
+    --hero-gradient-end: 217 100% 30%; /* Darker primary blue for gradient */
+    --light-accent: 207 100% 61%; /* #3AA7FF - Lichtblauw */
 
-    --secondary: 210 10% 95%; /* Light Gray */
-    --secondary-foreground: 210 10% 25%; /* Slightly darker gray */
+    --secondary: 210 20% 95%; /* Very light blue-gray for subtle backgrounds */
+    --secondary-foreground: 0 0% 10%; /* Dark text */
 
     --muted: 210 20% 90%; /* Medium light gray */
-    --muted-foreground: 210 10% 40%; /* Medium gray */
+    --muted-foreground: 0 0% 42%; /* #6B6B6B - Subtext Grijs */
 
-    --accent: 30 90% 50%; /* Vibrant Orange */
+    --accent: 217 100% 50%; /* Using primary blue as accent for consistency with blue/white theme */
     --accent-foreground: 0 0% 100%; /* White */
 
     --destructive: 0 84.2% 60.2%; /* Red (standard for destructive actions) */
@@ -36,7 +36,7 @@
 
     --border: 210 15% 85%; /* Soft light gray border */
     --input: 210 15% 85%; /* Soft light gray input border */
-    --ring: 30 90% 50%; /* Accent orange for focus ring */
+    --ring: 217 100% 50%; /* Primary blue for focus ring */
 
     --radius: 0.5rem;
   }
@@ -48,6 +48,6 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }
