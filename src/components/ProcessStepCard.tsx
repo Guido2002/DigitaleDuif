@@ -36,7 +36,7 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       <Card
         className={cn(
           "group mt-4 flex-grow p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card glassmorphism h-full",
-          isMobile ? "border-4 border-primary rounded-xl" : "border border-border" // Corrected: desktop border is now 'border-border'
+          isMobile ? "border-4 border-primary rounded-xl" : "border border-primary/50" // Desktop border now has a subtle blue tint for more contrast
         )}
       >
         <CardHeader className="mb-4 p-0">
