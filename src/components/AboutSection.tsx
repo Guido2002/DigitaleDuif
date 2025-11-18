@@ -2,6 +2,7 @@
 
 import React from "react";
 import SectionHeader from "./SectionHeader";
+import AbstractBackgroundAnimation from "@/components/AbstractBackgroundAnimation"; // Import the new component
 
 const AboutSection = () => {
   console.log("AboutSection rendering. Image path:", "/1711446418839.jpeg"); // Added console log
@@ -37,7 +38,8 @@ const AboutSection = () => {
 
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <div className="relative flex flex-col items-center justify-center p-4">
-          <div className="z-10">
+          <AbstractBackgroundAnimation className="opacity-20" /> {/* Voeg de custom animatie toe */}
+          <div className="z-10"> {/* Z-index om tekst boven animatie te houden */}
             <h3 className="mb-4 text-2xl font-semibold text-foreground">
               Onze Expertise: XR & VR
             </h3>
@@ -55,7 +57,8 @@ const AboutSection = () => {
           </div>
         </div>
         <div className="relative flex flex-col items-center justify-center p-4">
-          <div className="z-10">
+          <AbstractBackgroundAnimation className="opacity-20" /> {/* Voeg de custom animatie toe */}
+          <div className="z-10"> {/* Z-index om tekst boven animatie te houden */}
             <h3 className="mb-4 text-2xl font-semibold text-foreground">
               Unity Development & Co-creatie
             </h3>

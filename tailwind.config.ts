@@ -80,11 +80,16 @@ export default {
           "50%": { "background-position": "100% 50%" },
           "100%": { "background-position": "0% 50%" },
         },
+        "pulse-fade": { // Nieuwe keyframes voor een subtiel pulserend effect
+          "0%, 100%": { transform: "scale(0.8)", opacity: "0.2" },
+          "50%": { transform: "scale(1.1)", opacity: "0.4" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "gradient-move": "gradient-move 15s ease infinite",
+        "pulse-fade": "pulse-fade 4s ease-in-out infinite", // Nieuwe animatie
       },
     },
   },
