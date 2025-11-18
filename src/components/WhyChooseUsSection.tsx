@@ -24,6 +24,7 @@ const WhyChooseUsSection = () => {
               title={usp.title}
               description={usp.description}
               highlight={index < 3} // Highlight the first three USP cards
+              stepNumber={index + 1} // Pass the step number
             />
           </FadeInWhenVisible>
         ))}
