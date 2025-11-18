@@ -24,22 +24,22 @@ const AboutSection = () => {
 
       {/* Personal Introduction Card */}
       <FadeInWhenVisible delay={0.2}>
-        <Card className="mb-16 flex flex-col items-center text-center md:flex-row md:items-start md:text-left md:gap-8 p-6 border border-border bg-card shadow-lg">
-          <div className="mb-8 flex justify-center md:mb-0 md:w-1/3">
+        <Card className="mb-16 flex flex-col items-center text-center md:flex-row md:items-start md:gap-8 p-6 border border-border bg-card shadow-lg">
+          <div className="mb-8 flex justify-center md:mb-0 md:w-1/4"> {/* Adjusted width for larger photo */}
             <img
               src={profilePhoto} // Gebruik de geïmporteerde variabele
               alt="Persoonlijke foto van de oprichter"
-              className="h-48 w-48 rounded-full object-cover shadow-lg"
+              className="h-64 w-64 rounded-full object-cover shadow-lg" // Made photo larger
             />
           </div>
-          <div className="md:w-2/3">
+          <div className="md:w-3/4"> {/* Adjusted width for text content */}
             <CardHeader className="p-0 mb-4">
-              <CardTitle className="text-2xl font-semibold text-foreground">
+              <CardTitle className="text-3xl font-bold text-foreground"> {/* Made title larger and bolder */}
                 Hallo, ik ben Guido Duif!
               </CardTitle>
             </CardHeader>
             <CardContent className="p-0">
-              <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+              <ul className="list-disc pl-5 space-y-2 text-lg text-muted-foreground"> {/* Made list items larger */}
                 <li>Oprichter van DigitaleDuif, gedreven door digitale innovatie.</li>
                 <li>Creëert digitale ervaringen waar je écht 'in stapt', zowel in XR als op web/mobiel.</li>
                 <li>Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.</li>
