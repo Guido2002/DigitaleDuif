@@ -6,16 +6,54 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { showSuccess } from "@/utils/toast";
+import { showSuccess, showError } from "@/utils/toast";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+// Define the schema for the contact form
+const formSchema = z.object({
+  name: z.string().min(2, {
+    message: "Naam moet minimaal 2 karakters bevatten.",
+  }).max(50, {
+    message: "Naam mag maximaal 50 karakters bevatten.",
+  }),
+  email: z.string().email({
+    message: "Voer een geldig e-mailadres in.",
+  }),
+  message: z.string().min(10, {
+    message: "Bericht moet minimaal 10 karakters bevatten.",
+  }).max(500, {
+    message: "Bericht mag maximaal 500 karakters bevatten.",
+  }),
+});
 
 const ContactPage = () => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Initialize react-hook-form with zodResolver
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  // Handle form submission
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
     // In een echte applicatie zou hier de formulierdata naar een backend gestuurd worden.
     // Voor nu tonen we alleen een succesbericht.
+    console.log("Formulier verzonden:", values);
     showSuccess("Uw bericht is succesvol verzonden!");
-    // Reset form fields if needed
-    (e.target as HTMLFormElement).reset();
+    form.reset(); // Reset form fields after successful submission
   };
 
   return (
@@ -31,50 +69,52 @@ const ContactPage = () => {
           </p>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <Label htmlFor="name" className="mb-2 block text-sm font-medium">
-                Naam
-              </Label>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Uw naam"
-                required
-                className="w-full"
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Naam</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Uw naam" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div>
-              <Label htmlFor="email" className="mb-2 block text-sm font-medium">
-                E-mailadres
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="uw.email@voorbeeld.nl"
-                required
-                className="w-full"
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>E-mailadres</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="uw.email@voorbeeld.nl" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div>
-              <Label
-                htmlFor="message"
-                className="mb-2 block text-sm font-medium"
-              >
-                Bericht
-              </Label>
-              <Textarea
-                id="message"
-                placeholder="Uw bericht..."
-                rows={5}
-                required
-                className="w-full"
+              <FormField
+                control={form.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Bericht</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="Uw bericht..." rows={5} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <Button type="submit" className="w-full">
-              Verzenden
-            </Button>
-          </form>
+              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? "Verzenden..." : "Verzenden"}
+              </Button>
+            </form>
+          </Form>
         </CardContent>
       </Card>
     </div>
