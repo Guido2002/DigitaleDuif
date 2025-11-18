@@ -40,7 +40,8 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       </Card>
 
       {!isLast && (
-        <div className="absolute left-1/2 top-16 z-0 h-full w-0.5 -translate-x-1/2 bg-primary/30 md:left-auto md:top-8 md:h-0.5 md:w-[calc(100%+24px)] md:translate-x-0 md:translate-y-1/2" />
+        // Increased thickness of the line from w-0.5/h-0.5 to w-1/h-1
+        <div className="absolute left-1/2 top-16 z-0 h-full w-1 -translate-x-1/2 bg-primary/30 md:left-auto md:top-8 md:h-1 md:w-[calc(100%+24px)] md:translate-x-0 md:translate-y-1/2" />
       )}
     </div>
   );
