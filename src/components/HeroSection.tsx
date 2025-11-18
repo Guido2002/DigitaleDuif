@@ -8,17 +8,17 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-light-accent py-20 text-primary-foreground overflow-hidden"
+      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-primary to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
     >
       
       <div className="container z-10 text-center">
-        <h1 className="mb-4 text-5xl font-extrabold leading-tight md:text-6xl text-foreground">
+        <h1 className="mb-4 text-5xl font-extrabold leading-tight md:text-6xl text-primary-foreground">
           DigitaleDuif
         </h1>
-        <p className="mb-6 text-2xl font-semibold md:text-3xl text-muted-foreground">
+        <p className="mb-6 text-2xl font-semibold md:text-3xl text-primary-foreground/90">
           Innovatieve XR-oplossingen die écht vliegen.
         </p>
-        <p className="mx-auto mb-10 max-w-3xl text-lg md:text-xl text-muted-foreground">
+        <p className="mx-auto mb-10 max-w-3xl text-lg md:text-xl text-primary-foreground/80">
           Wij zijn DigitaleDuif, uw partner in de ontwikkeling van baanbrekende
           Virtual Reality (VR), Mixed Reality (MR) en interactieve applicaties.
           Met een focus op Unity development creëren we data-gedreven
@@ -28,7 +28,7 @@ const HeroSection = () => {
           <Link to="/projecten">
             <Button 
               size="lg" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 transition-all duration-300 hover:scale-105"
             >
               Bekijk projecten
             </Button>
@@ -37,7 +37,7 @@ const HeroSection = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105"
+              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all duration-300 hover:scale-105"
             >
               Plan een gesprek
             </Button>

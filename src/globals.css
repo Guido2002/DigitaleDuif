@@ -8,35 +8,35 @@
   }
 
   :root {
-    --background: 30 10% 98%; /* Very light warm gray/off-white */
-    --foreground: 210 10% 20%; /* Soft dark gray for text */
+    --background: 0 0% 100%; /* White */
+    --foreground: 210 10% 20%; /* Dark gray for text */
 
     --card: 0 0% 100%; /* Pure White */
-    --card-foreground: 210 10% 20%; /* Soft dark gray */
+    --card-foreground: 210 10% 20%; /* Dark gray */
 
     --popover: 0 0% 100%; /* Pure White */
-    --popover-foreground: 210 10% 20%; /* Soft dark gray */
+    --popover-foreground: 210 10% 20%; /* Dark gray */
 
-    --primary: 140 40% 35%; /* Muted, earthy green */
+    --primary: 210 40% 20%; /* Dark Navy Blue */
     --primary-foreground: 0 0% 100%; /* White */
-    --hero-gradient-end: 150 50% 28%; /* Deeper, richer green for gradient */
-    --light-accent: 140 40% 90%; /* Very light earthy green for Hero Section */
+    --hero-gradient-end: 210 50% 15%; /* Even darker blue for gradient */
+    --light-accent: 210 20% 95%; /* Very light blue-gray for subtle backgrounds */
 
-    --secondary: 40 20% 95%; /* Soft beige/cream */
-    --secondary-foreground: 210 10% 25%; /* Slightly darker soft gray */
+    --secondary: 210 10% 95%; /* Light Gray */
+    --secondary-foreground: 210 10% 25%; /* Slightly darker gray */
 
-    --muted: 210 20% 90%; /* Light gray */
-    --muted-foreground: 210 10% 40%; /* Medium soft gray */
+    --muted: 210 20% 90%; /* Medium light gray */
+    --muted-foreground: 210 10% 40%; /* Medium gray */
 
-    --accent: 140 40% 45%; /* Slightly brighter earthy green for accents */
-    --accent-foreground: 210 10% 20%; /* Soft dark gray */
+    --accent: 30 90% 50%; /* Vibrant Orange */
+    --accent-foreground: 0 0% 100%; /* White */
 
     --destructive: 0 84.2% 60.2%; /* Red (standard for destructive actions) */
     --destructive-foreground: 0 0% 100%; /* White */
 
     --border: 210 15% 85%; /* Soft light gray border */
     --input: 210 15% 85%; /* Soft light gray input border */
-    --ring: 140 40% 35%; /* Primary green for focus ring */
+    --ring: 30 90% 50%; /* Accent orange for focus ring */
 
     --radius: 0.5rem;
   }
