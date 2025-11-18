@@ -28,7 +28,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
           {subtitle}
         </p>
       )}
-      <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-primary/20" /> {/* Decorative line */}
+      <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-primary/20" />
     </div>
   );
 };

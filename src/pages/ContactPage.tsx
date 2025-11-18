@@ -18,9 +18,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Loader2 } from "lucide-react"; // Import Loader2 icon
+import { Loader2 } from "lucide-react";
 
-// Define the schema for the contact form
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Naam moet minimaal 2 karakters bevatten.",
@@ -38,7 +37,6 @@ const formSchema = z.object({
 });
 
 const ContactPage = () => {
-  // Initialize react-hook-form with zodResolver
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,22 +46,18 @@ const ContactPage = () => {
     },
   });
 
-  // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // In een echte applicatie zou hier de formulierdata naar een backend gestuurd worden.
-    // Voor nu tonen we alleen een succesbericht en simuleren we een API-call.
     console.log("Formulier verzonden:", values);
     
-    // Simulate an API call
     await new Promise(resolve => setTimeout(resolve, 2000)); 
 
     showSuccess("Uw bericht is succesvol verzonden!");
-    form.reset(); // Reset form fields after successful submission
+    form.reset();
   };
 
   return (
-    <div className="container flex flex-col items-center justify-center py-12">
-      <Card className="w-full max-w-lg p-6 md:p-8">
+    <div className="container flex flex-col items-center justify-center py-12 bg-background">
+      <Card className="w-full max-w-lg p-6 md:p-8 border border-border bg-card shadow-lg">
         <CardHeader className="text-center">
           <CardTitle className="mb-2 text-3xl font-bold text-primary">
             Neem Contact Op
@@ -81,9 +75,9 @@ const ContactPage = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Naam</FormLabel>
+                    <FormLabel className="text-foreground">Naam</FormLabel>
                     <FormControl>
-                      <Input placeholder="Uw naam" {...field} />
+                      <Input placeholder="Uw naam" {...field} className="border-input bg-background text-foreground" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -94,9 +88,9 @@ const ContactPage = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>E-mailadres</FormLabel>
+                    <FormLabel className="text-foreground">E-mailadres</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="uw.email@voorbeeld.nl" {...field} />
+                      <Input type="email" placeholder="uw.email@voorbeeld.nl" {...field} className="border-input bg-background text-foreground" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -107,15 +101,15 @@ const ContactPage = () => {
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Bericht</FormLabel>
+                    <FormLabel className="text-foreground">Bericht</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Uw bericht..." rows={5} {...field} />
+                      <Textarea placeholder="Uw bericht..." rows={5} {...field} className="border-input bg-background text-foreground" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+              <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

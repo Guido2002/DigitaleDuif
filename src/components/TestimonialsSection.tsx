@@ -4,11 +4,11 @@ import React from "react";
 import SectionHeader from "./SectionHeader";
 import TestimonialCard from "./TestimonialCard";
 import { testimonials } from "@/data/mockData";
-import FadeInWhenVisible from "./FadeInWhenVisible"; // Import the new component
+import FadeInWhenVisible from "./FadeInWhenVisible";
 
 const TestimonialsSection = () => {
   return (
-    <section id="testimonials" className="container bg-muted py-16 md:py-24">
+    <section id="testimonials" className="container bg-secondary py-16 md:py-24">
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Wat onze klanten zeggen"

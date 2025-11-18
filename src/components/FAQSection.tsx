@@ -9,11 +9,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { faqItems } from "@/data/mockData";
-import FadeInWhenVisible from "./FadeInWhenVisible"; // Import the new component
+import FadeInWhenVisible from "./FadeInWhenVisible";
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="container py-16 md:py-24">
+    <section id="faq" className="container bg-background py-16 md:py-24">
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Veelgestelde Vragen"
@@ -25,8 +25,8 @@ const FAQSection = () => {
         <Accordion type="single" collapsible className="w-full">
           {faqItems.map((item, index) => (
             <FadeInWhenVisible key={index} delay={0.1 + index * 0.05}>
-              <AccordionItem value={`item-${index + 1}`}>
-                <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline">
+              <AccordionItem value={`item-${index + 1}`} className="border-b border-border">
+                <AccordionTrigger className="text-left text-lg font-semibold text-foreground hover:no-underline">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-base text-muted-foreground">

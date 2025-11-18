@@ -2,24 +2,23 @@
 
 import React from "react";
 import SectionHeader from "./SectionHeader";
-import AbstractBackgroundAnimation from "@/components/AbstractBackgroundAnimation"; // Import the new component
+import AbstractBackgroundAnimation from "@/components/AbstractBackgroundAnimation";
 
 const AboutSection = () => {
-  console.log("AboutSection rendering. Image path:", "/1711446418839.jpeg"); // Added console log
+  console.log("AboutSection rendering. Image path:", "/1711446418839.jpeg");
 
   return (
-    <section id="about" className="container py-16 md:py-24">
+    <section id="about" className="container bg-background py-16 md:py-24">
       <SectionHeader
         title="Wie is DigitaleDuif?"
         subtitle="DigitaleDuif is een gespecialiseerde studio die zich richt op de voorhoede van Extended Reality (XR) technologie. Wij combineren diepgaande technische kennis met een passie voor innovatie om impactvolle en meeslepende ervaringen te creëren."
       />
 
-      {/* Nieuwe sectie voor persoonlijke introductie */}
       <div className="mb-16 flex flex-col items-center text-center md:flex-row md:text-left md:gap-8">
         <div className="mb-8 flex justify-center md:mb-0 md:w-1/3">
           <img
-            src="/1711446418839.jpeg" // Gebruikt de zojuist geüploade afbeelding
-            alt="Persoonlijke foto van de oprichter" // Ensure alt text is present
+            src="/1711446418839.jpeg"
+            alt="Persoonlijke foto van de oprichter"
             className="h-48 w-48 rounded-full object-cover shadow-lg"
           />
         </div>
@@ -37,9 +36,9 @@ const AboutSection = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-        <div className="relative flex flex-col items-center justify-center p-4">
-          <AbstractBackgroundAnimation className="opacity-20" /> {/* Voeg de custom animatie toe */}
-          <div className="z-10"> {/* Z-index om tekst boven animatie te houden */}
+        <div className="relative flex flex-col items-center justify-center rounded-lg border bg-card p-6 shadow-sm">
+          <AbstractBackgroundAnimation className="opacity-20" />
+          <div className="z-10">
             <h3 className="mb-4 text-2xl font-semibold text-foreground">
               Onze Expertise: XR & VR
             </h3>
@@ -56,9 +55,9 @@ const AboutSection = () => {
             </p>
           </div>
         </div>
-        <div className="relative flex flex-col items-center justify-center p-4">
-          <AbstractBackgroundAnimation className="opacity-20" /> {/* Voeg de custom animatie toe */}
-          <div className="z-10"> {/* Z-index om tekst boven animatie te houden */}
+        <div className="relative flex flex-col items-center justify-center rounded-lg border bg-card p-6 shadow-sm">
+          <AbstractBackgroundAnimation className="opacity-20" />
+          <div className="z-10">
             <h3 className="mb-4 text-2xl font-semibold text-foreground">
               Unity Development & Co-creatie
             </h3>

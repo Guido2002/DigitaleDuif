@@ -4,11 +4,11 @@ import React from "react";
 import SectionHeader from "./SectionHeader";
 import FeatureCard from "./FeatureCard";
 import { processSteps } from "@/data/mockData";
-import FadeInWhenVisible from "./FadeInWhenVisible"; // Import the new component
+import FadeInWhenVisible from "./FadeInWhenVisible";
 
 const ProcessSection = () => {
   return (
-    <section id="process" className="container py-16 md:py-24">
+    <section id="process" className="container bg-background py-16 md:py-24">
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Hoe werkt DigitaleDuif?"

@@ -2,11 +2,11 @@
 
 import React from "react";
 import { Mail, Linkedin } from "lucide-react";
-import { MadeWithDyad } from "@/components/made-with-dyad"; // Import MadeWithDyad
+import { MadeWithDyad } from "@/components/made-with-dyad";
 
 const Footer = () => {
   return (
-    <footer className="border-t bg-background py-8">
+    <footer className="border-t border-border bg-background py-8">
       <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
         <div className="text-center md:text-left">
           <h3 className="text-lg font-bold text-primary">DigitaleDuif</h3>
@@ -35,7 +35,7 @@ const Footer = () => {
       <div className="mt-8 text-center text-xs text-muted-foreground">
         &copy; {new Date().getFullYear()} DigitaleDuif. Alle rechten voorbehouden.
       </div>
-      <MadeWithDyad /> {/* Add MadeWithDyad here */}
+      <MadeWithDyad />
     </footer>
   );
 };

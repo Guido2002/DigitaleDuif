@@ -12,13 +12,13 @@ const HeroSection = () => {
     >
       
       <div className="container z-10 text-center">
-        <h1 className="mb-4 text-5xl font-extrabold leading-tight md:text-6xl">
+        <h1 className="mb-4 text-5xl font-extrabold leading-tight md:text-6xl text-foreground">
           DigitaleDuif
         </h1>
-        <p className="mb-6 text-2xl font-semibold md:text-3xl">
+        <p className="mb-6 text-2xl font-semibold md:text-3xl text-muted-foreground">
           Innovatieve XR-oplossingen die écht vliegen.
         </p>
-        <p className="mx-auto mb-10 max-w-3xl text-lg md:text-xl">
+        <p className="mx-auto mb-10 max-w-3xl text-lg md:text-xl text-muted-foreground">
           Wij zijn DigitaleDuif, uw partner in de ontwikkeling van baanbrekende
           Virtual Reality (VR), Mixed Reality (MR) en interactieve applicaties.
           Met een focus op Unity development creëren we data-gedreven
@@ -28,7 +28,7 @@ const HeroSection = () => {
           <Link to="/projecten">
             <Button 
               size="lg" 
-              className="bg-primary-foreground text-primary hover:bg-secondary transition-all duration-300 hover:scale-105"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105"
             >
               Bekijk projecten
             </Button>
@@ -37,7 +37,7 @@ const HeroSection = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-primary-foreground text-primary-foreground bg-transparent hover:bg-primary-foreground hover:text-primary transition-all duration-300 hover:scale-105"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105"
             >
               Plan een gesprek
             </Button>

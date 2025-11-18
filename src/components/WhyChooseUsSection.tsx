@@ -4,11 +4,11 @@ import React from "react";
 import SectionHeader from "./SectionHeader";
 import FeatureCard from "./FeatureCard";
 import { uspCards } from "@/data/mockData";
-import FadeInWhenVisible from "./FadeInWhenVisible"; // Import the new component
+import FadeInWhenVisible from "./FadeInWhenVisible";
 
 const WhyChooseUsSection = () => {
   return (
-    <section id="why-us" className="container bg-muted py-16 md:py-24">
+    <section id="why-us" className="container bg-secondary py-16 md:py-24">
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Waarom DigitaleDuif?"

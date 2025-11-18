@@ -4,39 +4,39 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth; /* Add smooth scroll for anchor links */
+    scroll-behavior: smooth;
   }
 
   :root {
     --background: 0 0% 100%; /* Pure White */
-    --foreground: 210 10% 20%; /* Darker Gray */
+    --foreground: 210 20% 15%; /* Very Dark Blue-Gray */
 
     --card: 0 0% 100%; /* Pure White */
-    --card-foreground: 210 10% 20%; /* Darker Gray */
+    --card-foreground: 210 20% 15%; /* Very Dark Blue-Gray */
 
     --popover: 0 0% 100%; /* Pure White */
-    --popover-foreground: 210 10% 20%; /* Darker Gray */
+    --popover-foreground: 210 20% 15%; /* Very Dark Blue-Gray */
 
-    --primary: 140 60% 30%; /* Deep Forest Green */
+    --primary: 210 80% 40%; /* Vibrant Blue */
     --primary-foreground: 0 0% 100%; /* White */
-    --hero-gradient-end: 150 70% 25%; /* Even Darker Green for gradient end */
-    --light-blue: 140 60% 95%; /* Very Light Green for Hero Section */
+    --hero-gradient-end: 220 90% 30%; /* Deeper Blue for gradient end */
+    --light-blue: 210 80% 95%; /* Very Pale Blue for Hero Section */
 
-    --secondary: 210 20% 96%; /* Very Light Gray */
-    --secondary-foreground: 210 10% 20%; /* Darker Gray */
+    --secondary: 210 30% 98%; /* Off-white / Very Light Blue-Gray */
+    --secondary-foreground: 210 20% 25%; /* Medium Dark Blue-Gray */
 
-    --muted: 210 40% 96.1%; /* Light Gray */
-    --muted-foreground: 215.4 16.3% 46.9%; /* Medium Gray */
+    --muted: 210 20% 90%; /* Light Blue-Gray */
+    --muted-foreground: 210 15% 45%; /* Medium Blue-Gray */
 
-    --accent: 140 60% 45%; /* Brighter Green for accents */
-    --accent-foreground: 210 10% 20%; /* Darker Gray */
+    --accent: 210 80% 50%; /* Brighter Blue for accents */
+    --accent-foreground: 210 20% 15%; /* Very Dark Blue-Gray */
 
-    --destructive: 0 84.2% 60.2%; /* Red */
+    --destructive: 0 84.2% 60.2%; /* Red (standard for destructive actions) */
     --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 214.3 31.8% 91.4%; /* Light Gray-Blue */
-    --input: 214.3 31.8% 91.4%; /* Light Gray-Blue */
-    --ring: 140 60% 30%; /* Primary Green for ring */
+    --border: 210 20% 85%; /* Light Blue-Gray Border */
+    --input: 210 20% 85%; /* Light Blue-Gray Input Border */
+    --ring: 210 80% 40%; /* Primary Blue for focus ring */
 
     --radius: 0.5rem;
   }
