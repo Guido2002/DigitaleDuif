@@ -3,7 +3,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// Corrected import path to reference the image from src/assets
 import profilePhoto from "../assets/1711446418839.jpeg"; // Import the image directly
 import { cn } from "@/lib/utils";
 
@@ -42,12 +41,12 @@ const GuidoIntroSection = () => {
       {/* Text Content Section */}
       <div className="text-left md:text-left">
         <CardHeader className="p-0 mb-6">
-          <CardTitle className="text-4xl font-extrabold text-primary md:text-5xl lg:text-6xl">
+          <CardTitle className="text-mobile-h1 md:text-h1 font-extrabold text-primary">
             Hallo, ik ben Guido Duif!
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-0">
-          <ul className="list-disc pl-5 space-y-3 text-lg text-muted-foreground">
+        <CardContent className="p-0 px-4 md:px-0"> {/* Added responsive padding */}
+          <ul className="list-disc pl-5 space-y-4 text-mobile-body md:text-body-lg text-muted-foreground"> {/* Updated text size and space-y */}
             <li>Oprichter van DigitaleDuif, gedreven door digitale innovatie.</li>
             <li>Creëert digitale ervaringen waar je écht 'in stapt', zowel in XR als op web/mobiel.</li>
             <li>Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.</li>

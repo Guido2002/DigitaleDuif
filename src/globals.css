@@ -99,19 +99,3 @@
   color: transparent;
   background-size: 200% auto;
 }
-
-/* Responsive typography */
-@media (max-width: 767px) {
-  .text-h1 {
-    font-size: var(--mobile-h1-font-size);
-    line-height: var(--mobile-h1-line-height);
-  }
-  .text-h3 {
-    font-size: var(--mobile-h3-font-size);
-    line-height: var(--mobile-h3-line-height);
-  }
-  .text-body-lg {
-    font-size: var(--mobile-body-font-size);
-    line-height: var(--mobile-body-line-height);
-  }
-}
