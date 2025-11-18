@@ -18,7 +18,6 @@ interface FlyingBirdIllustrationProps {
   animateOpacity?: number; // New prop for controlling final opacity
 }
 
-// Only pigeon1Image and pigeon4Image are used now
 const pigeonImages = [pigeon1Image, pigeon4Image];
 
 const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
@@ -33,9 +32,9 @@ const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
   animateOpacity = 1, // Default to full opacity after fade-in
 }) => {
   const sizeClasses = {
-    small: "h-12 w-12",
-    medium: "h-20 w-20",
-    large: "h-32 w-32",
+    small: "h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20", // Small on mobile, larger on desktop
+    medium: "h-20 w-20 md:h-28 md:w-28 lg:h-36 lg:w-36", // Medium on mobile, larger on desktop
+    large: "h-32 w-32 md:h-48 md:w-48 lg:h-64 lg:w-64", // Large on mobile, much larger on desktop
   };
 
   // Randomly select a pigeon image once per component instance
