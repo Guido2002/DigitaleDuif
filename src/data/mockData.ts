@@ -1,6 +1,6 @@
 // This file will contain mock data for various sections of the website.
 
-import { LucideIcon, Brain, Rocket, Lightbulb, Users, TrendingUp, Code, Star } from "lucide-react"; // Import Star icon
+import { LucideIcon, Brain, Rocket, Lightbulb, Users, TrendingUp, Code, Star, Globe, Smartphone, LayoutDashboard, Cloud } from "lucide-react"; // Import new icons
 
 // USP Card Data
 interface USP {
@@ -13,32 +13,32 @@ export const uspCards: USP[] = [
   {
     icon: Brain,
     title: "XR Specialist",
-    description: "Diepgaande XR kennis.",
+    description: "Diepgaande XR kennis voor innovatieve ervaringen.",
   },
   {
-    icon: Rocket,
-    title: "Snelle Concepten & Prototypes",
-    description: "Razendsnel prototypes.",
+    icon: Globe,
+    title: "Web & App Development",
+    description: "Van concept tot lancering, robuuste websites en apps.",
   },
   {
     icon: Lightbulb,
     title: "Techniek & UX in Balans",
-    description: "Solide techniek, fijn gebruik.",
+    description: "Solide techniek gecombineerd met een fijne gebruikservaring.",
   },
   {
     icon: Users,
     title: "Co-creatie met Klanten",
-    description: "Samenwerking, jouw inspraak.",
+    description: "Samenwerking staat centraal, jouw inspraak telt.",
   },
   {
     icon: TrendingUp,
-    title: "Data-gedreven Ervaringen",
-    description: "Meetbare resultaten.",
+    title: "Resultaatgericht",
+    description: "Focus op meetbare resultaten en impact.",
   },
   {
     icon: Code,
-    title: "Ervaring met Meta Quest & Unity",
-    description: "Bewezen expertise.",
+    title: "Moderne Technologieën",
+    description: "Expertise in Unity, React, TypeScript en meer.",
   },
 ];
 
@@ -63,7 +63,7 @@ export const processSteps: ProcessStep[] = [
     icon: Lightbulb,
     title: "Concept & Prototype",
     description: [
-      "Ontwikkelen van een concreet XR-concept.",
+      "Ontwikkelen van een concreet digitaal concept.",
       "Bouwen van een werkend prototype voor snelle validatie.",
       "Verzamelen van feedback en bijsturen van het ontwerp."
     ],
@@ -81,7 +81,7 @@ export const processSteps: ProcessStep[] = [
     icon: Rocket,
     title: "Oplevering & Support",
     description: [
-      "Leveren van de complete, geteste XR-oplossing.",
+      "Leveren van de complete, geteste oplossing.",
       "Voorzien van heldere documentatie en instructies.",
       "Bieden van nazorg en technische ondersteuning."
     ],
@@ -157,14 +157,19 @@ export const projects: Project[] = [
     techStack: ["Unity", "C#", "Meta Quest Pro", "Simulatie"],
   },
   {
-    title: "Augmented Reality gids voor museumbezoekers",
-    description: "Een mobiele AR-applicatie die museumbezoekers verrijkte informatie en interactieve elementen biedt bij kunstwerken en tentoonstellingen, via hun smartphone of tablet.",
-    techStack: ["Unity", "AR Foundation", "Mobile AR", "UX Design"],
+    title: "Maatwerk E-commerce Platform",
+    description: "Ontwikkeling van een schaalbaar e-commerce platform met geavanceerde productbeheerfuncties en een gepersonaliseerde gebruikerservaring.",
+    techStack: ["React", "Node.js", "TypeScript", "PostgreSQL", "Stripe API"],
   },
   {
-    title: "Data-gedreven XR-ervaring voor productontwerp",
-    description: "Een VR-applicatie die real-time productiedata visualiseert binnen een virtuele omgeving, waardoor ontwerpers en ingenieurs direct inzicht krijgen in prestaties en optimalisatiemogelijkheden.",
-    techStack: ["Unity", "C#", "Data Streaming", "VR Analytics"],
+    title: "Mobiele Event App",
+    description: "Een native mobiele applicatie voor evenementen met functies zoals agenda, sprekersinformatie, netwerkmogelijkheden en live polls.",
+    techStack: ["React Native", "TypeScript", "Firebase", "Push Notifications"],
+  },
+  {
+    title: "Bedrijfswebsite met CMS",
+    description: "Een responsieve en SEO-vriendelijke bedrijfswebsite, gebouwd met een gebruiksvriendelijk Content Management Systeem voor eenvoudige updates.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Headless CMS"],
   },
 ];
 
@@ -178,6 +183,18 @@ export interface Service {
 
 export const services: Service[] = [
   {
+    id: "web-development",
+    title: "Web Development",
+    description: "Ontwikkeling van responsieve en krachtige websites en webapplicaties, van marketingwebsites tot complexe SaaS-oplossingen. Wij bouwen met moderne frameworks zoals React en Next.js.",
+    tags: ["React", "Next.js", "TypeScript", "Frontend", "Backend", "CMS"],
+  },
+  {
+    id: "mobile-app-development",
+    title: "Mobiele App Ontwikkeling",
+    description: "Native en cross-platform mobiele applicaties voor iOS en Android. Wij creëren intuïtieve en performante apps die uw gebruikers zullen waarderen.",
+    tags: ["React Native", "iOS", "Android", "UI/UX", "API Integration"],
+  },
+  {
     id: "vr-app-dev", // Corresponding ID
     title: "VR-applicatieontwikkeling",
     description: "Ontwikkeling van op maat gemaakte Virtual Reality applicaties voor training, simulatie, visualisatie en entertainment. Van concept tot implementatie, wij brengen uw ideeën tot leven in VR.",
@@ -190,9 +207,15 @@ export const services: Service[] = [
     tags: ["Unity", "HoloLens", "MR Design", "UX"],
   },
   {
+    id: "ui-ux-design",
+    title: "UI/UX Design",
+    description: "Gebruikersgerichte ontwerpen die niet alleen mooi zijn, maar ook functioneel en intuïtief. Wij zorgen voor een optimale gebruikerservaring voor al uw digitale producten.",
+    tags: ["UI Design", "UX Research", "Wireframing", "Prototyping", "Figma"],
+  },
+  {
     id: "prototyping", // Corresponding ID
     title: "Prototyping & conceptontwikkeling",
-    description: "Snelle ontwikkeling van prototypes en proof-of-concepts om ideeën te valideren en te visualiseren. Wij helpen u met het verkennen van de mogelijkheden van XR voor uw specifieke behoeften.",
+    description: "Snelle ontwikkeling van prototypes en proof-of-concepts om ideeën te valideren en te visualiseren. Wij helpen u met het verkennen van de mogelijkheden van digitale innovatie.",
     tags: ["Rapid Prototyping", "Concepting", "Ideation", "Agile"],
   },
   {
@@ -202,16 +225,10 @@ export const services: Service[] = [
     tags: ["Unity", "C#", "Consultancy", "Development"],
   },
   {
-    id: "training-sims", // Corresponding ID
-    title: "XR-trainingssimulaties",
-    description: "Ontwikkeling van realistische en effectieve XR-trainingssimulaties die medewerkers in een veilige omgeving complexe taken laten oefenen. Verhoog de retentie en verminder risico's.",
-    tags: ["Training", "Simulatie", "Educatie", "Serious Gaming"],
-  },
-  {
     id: "data-analytics", // Corresponding ID
-    title: "Data logging & analyse in XR",
-    description: "Implementatie van systemen voor het loggen en analyseren van gebruikersgedrag binnen XR-applicaties. Verkrijg waardevolle inzichten om uw ervaringen te optimaliseren en beslissingen te onderbouwen.",
-    tags: ["Data Analytics", "Telemetry", "Insights", "Optimization"],
+    title: "Data logging & analyse in XR & Web",
+    description: "Implementatie van systemen voor het loggen en analyseren van gebruikersgedrag binnen XR-applicaties en webplatforms. Verkrijg waardevolle inzichten om uw ervaringen te optimaliseren.",
+    tags: ["Data Analytics", "Telemetry", "Insights", "Optimization", "Google Analytics"],
   },
 ];
 
@@ -225,7 +242,7 @@ interface NavLink {
 export const navLinks: NavLink[] = [
   { name: "Home", path: "/" },
   { name: "Over ons", path: "/#about" },
-  { name: "Diensten", path: "/diensten" }, // Removed children for Diensten
+  { name: "Diensten", path: "/diensten" },
   { name: "Projecten", path: "/projecten" },
   { name: "Hoe wij werken", path: "/#process" },
   { name: "Contact", path: "/contact" },
@@ -239,7 +256,36 @@ interface AboutExpertise {
 }
 
 export const aboutExpertiseCards: AboutExpertise[] = [
-  // De kaarten 'XR & VR Expertise', 'Unity Development' en 'Co-creatie Aanpak' zijn verwijderd.
+  {
+    icon: Globe,
+    title: "Full-stack Web Development",
+    description: "Van frontend tot backend, wij bouwen robuuste en schaalbare webapplicaties met moderne technologieën.",
+  },
+  {
+    icon: Smartphone,
+    title: "Mobiele App Ontwikkeling",
+    description: "Creëren van intuïtieve en performante mobiele apps voor iOS en Android die uw gebruikers zullen boeien.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "UI/UX Design",
+    description: "Focus op gebruikersgerichte ontwerpen die niet alleen mooi zijn, maar ook een optimale ervaring bieden.",
+  },
+  {
+    icon: Brain,
+    title: "XR & VR Expertise",
+    description: "Diepgaande kennis van Virtual en Mixed Reality voor innovatieve en meeslepende ervaringen.",
+  },
+  {
+    icon: Code,
+    title: "Unity Development",
+    description: "Specialisten in Unity 3D voor complexe simulaties, games en interactieve XR-applicaties.",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & API Integraties",
+    description: "Naadloze integratie met cloudservices en externe API's voor uitgebreide functionaliteit.",
+  },
 ];
 
 // FAQ Data
@@ -254,19 +300,23 @@ export const faqItems: FAQItem[] = [
     answer: "Extended Reality (XR) is een overkoepelende term die alle real-and-virtual gecombineerde omgevingen en mens-machine-interacties omvat, inclusief Virtual Reality (VR), Augmented Reality (AR) en Mixed Reality (MR).",
   },
   {
-    question: "Welke technologieën gebruiken jullie voor XR-ontwikkeling?",
-    answer: "Wij zijn gespecialiseerd in Unity 3D development met C#, en werken met toonaangevende hardware zoals Meta Quest (VR) en Microsoft HoloLens (MR).",
+    question: "Bouwen jullie ook reguliere websites en apps?",
+    answer: "Jazeker! Naast onze expertise in XR, ontwikkelen wij ook maatwerk websites en mobiele applicaties. Van complexe webplatforms tot intuïtieve mobiele apps, wij leveren complete digitale oplossingen.",
+  },
+  {
+    question: "Welke technologieën gebruiken jullie voor web- en app-ontwikkeling?",
+    answer: "Voor webontwikkeling werken we voornamelijk met React, Next.js, TypeScript en Node.js. Voor mobiele apps gebruiken we React Native voor cross-platform ontwikkeling, of native technologieën indien nodig.",
   },
   {
     question: "Kunnen jullie helpen met conceptontwikkeling als we nog geen concreet idee hebben?",
-    answer: "Absoluut! Wij begeleiden u graag van de initiële brainstormfase tot een concreet concept en een werkend prototype, om de mogelijkheden van XR voor uw specifieke behoeften te verkennen.",
+    answer: "Absoluut! Wij begeleiden u graag van de initiële brainstormfase tot een concreet concept en een werkend prototype, om de mogelijkheden van digitale innovatie voor uw specifieke behoeften te verkennen.",
   },
   {
     question: "Wat zijn de voordelen van VR-trainingssimulaties?",
     answer: "VR-trainingssimulaties bieden een veilige, kosteneffectieve en herhaalbare manier om medewerkers te trainen in complexe of gevaarlijke scenario's, wat leidt tot hogere retentie en betere prestaties in de praktijk.",
   },
   {
-    question: "Hoe lang duurt het om een XR-applicatie te ontwikkelen?",
+    question: "Hoe lang duurt het om een digitale applicatie te ontwikkelen?",
     answer: "De ontwikkeltijd varieert sterk afhankelijk van de complexiteit en de scope van het project. Na een kennismaking en behoefteanalyse kunnen we een realistische tijdsinschatting geven.",
   },
 ];

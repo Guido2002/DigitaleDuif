@@ -13,7 +13,7 @@ const ProjectsPage = () => {
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Onze Projecten"
-          subtitle="Ontdek een selectie van onze innovatieve XR-projecten. Wij combineren technische diepgang met creativiteit om unieke en impactvolle oplossingen te leveren."
+          subtitle="Ontdek een selectie van onze innovatieve digitale projecten, variërend van XR-oplossingen tot maatwerk websites en mobiele applicaties. Wij combineren technische diepgang met creativiteit om unieke en impactvolle oplossingen te leveren."
           align="left" // Left align header for Projects page
         />
       </FadeInWhenVisible>

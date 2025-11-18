@@ -13,7 +13,7 @@ const ServicesPage = () => {
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Wat biedt DigitaleDuif?"
-          subtitle="Bij DigitaleDuif zijn we gespecialiseerd in het creëren van innovatieve XR-oplossingen die uw bedrijf vooruit helpen. Ontdek hieronder ons uitgebreide aanbod aan diensten."
+          subtitle="Bij DigitaleDuif zijn we gespecialiseerd in het creëren van innovatieve digitale oplossingen, waaronder XR, web en mobiele apps, die uw bedrijf vooruit helpen. Ontdek hieronder ons uitgebreide aanbod aan diensten."
           align="left" // Left align header for Services page
         />
       </FadeInWhenVisible>

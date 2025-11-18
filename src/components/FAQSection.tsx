@@ -17,7 +17,7 @@ const FAQSection = () => {
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Veelgestelde Vragen"
-          subtitle="Vragen? Natuurlijk! XR is voor veel mensen nog redelijk nieuw terrein. Hier vind je antwoorden op de vragen die we het vaakst krijgen. Staat jouw vraag er niet bij? Stuur gerust een berichtje!"
+          subtitle="Vragen? Natuurlijk! Digitale innovatie en XR zijn voor veel mensen nog redelijk nieuw terrein. Hier vind je antwoorden op de vragen die we het vaakst krijgen. Staat jouw vraag er niet bij? Stuur gerust een berichtje!"
         />
       </FadeInWhenVisible>
 

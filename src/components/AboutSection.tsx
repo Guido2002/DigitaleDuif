@@ -17,7 +17,7 @@ const AboutSection = () => {
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Wie is DigitaleDuif?"
-          subtitle="DigitaleDuif is ontstaan uit een diepe fascinatie voor wat Extended Reality (XR) voor mensen en bedrijven kan betekenen. Wij zijn geen groot bureau met eindeloze lagen - bij ons krijg je te maken met mensen die oprecht enthousiast worden van innovatieve technologie én begrijpen wat het in de praktijk moet opleveren."
+          subtitle="DigitaleDuif is ontstaan uit een diepe fascinatie voor wat digitale technologie, inclusief Extended Reality (XR), voor mensen en bedrijven kan betekenen. Wij zijn geen groot bureau met eindeloze lagen - bij ons krijg je te maken met mensen die oprecht enthousiast worden van innovatieve technologie én begrijpen wat het in de praktijk moet opleveren."
           align="left" // Left align header for About section
         />
       </FadeInWhenVisible>
@@ -40,9 +40,9 @@ const AboutSection = () => {
             </CardHeader>
             <CardContent className="p-0">
               <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                <li>Oprichter van DigitaleDuif, gedreven door XR-innovatie.</li>
-                <li>Creëert digitale ervaringen waar je écht 'in stapt'.</li>
-                <li>Focus op VR-trainingen, MR-applicaties en data-visualisatie.</li>
+                <li>Oprichter van DigitaleDuif, gedreven door digitale innovatie.</li>
+                <li>Creëert digitale ervaringen waar je écht 'in stapt', zowel in XR als op web/mobiel.</li>
+                <li>Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.</li>
                 <li>Passie voor het 'wauw-moment' bij klanten.</li>
                 <li>Perfectionist met oog voor detail en resultaat.</li>
                 <li>Nieuwsgierig naar jouw ideeën voor een kop koffie!</li>

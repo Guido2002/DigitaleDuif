@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="text-center md:text-left">
           <h3 className="text-lg font-bold text-primary">DigitaleDuif</h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Innovatieve XR-oplossingen die écht vliegen. Uw partner in Virtual Reality, Mixed Reality en interactieve applicaties.
+            Innovatieve digitale oplossingen die écht vliegen. Uw partner in Virtual Reality, Mixed Reality, Web Development en Mobiele Apps.
           </p>
         </div>
         <div className="flex flex-col items-center space-y-2 md:items-end">
