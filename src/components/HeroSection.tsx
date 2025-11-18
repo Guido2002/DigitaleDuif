@@ -21,31 +21,20 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       {/* HeroBackgroundAnimation /> {/* Render the background animation */}
       {/* VrHeadsetIllustration /> {/* Render the VR headset illustration */}
 
-      {/* Flying Bird 1: bottom-left */}
+      {/* Single Flying Bird in bottom-left */}
       <FlyingBirdIllustration
         className="bottom-[10%] left-[10%]" // Positioned bottom-left
-        size="medium"
+        size="medium" // Medium size for better visibility
         initialX="-10%"
         initialY="10%"
         animationDelay={2}
         animationDuration={10}
         floatIntensity={15}
         rotateIntensity={3}
-        animateOpacity={1}
+        animateOpacity={1} // Fully visible
       />
 
-      {/* Flying Bird 2: top-right */}
-      <FlyingBirdIllustration
-        className="top-[15%] right-[15%]" // Positioned top-right
-        size="small"
-        initialX="10%"
-        initialY="-10%"
-        animationDelay={3}
-        animationDuration={12}
-        floatIntensity={10}
-        rotateIntensity={2}
-        animateOpacity={0.8} // Slightly transparent
-      />
+      {/* Flying Bird 2: top-right - REMOVED */}
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
