@@ -1,0 +1,35 @@
+"use client";
+
+import React from "react";
+import { cn } from "@/lib/utils";
+
+interface SectionHeaderProps {
+  title: string;
+  subtitle?: string;
+  className?: string;
+  titleClassName?: string;
+  subtitleClassName?: string;
+}
+
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  title,
+  subtitle,
+  className,
+  titleClassName,
+  subtitleClassName,
+}) => {
+  return (
+    <div className={cn("mb-12 text-center", className)}>
+      <h2 className={cn("text-4xl font-bold text-primary", titleClassName)}>
+        {title}
+      </h2>
+      {subtitle && (
+        <p className={cn("mt-4 text-lg text-muted-foreground max-w-3xl mx-auto", subtitleClassName)}>
+          {subtitle}
+        </p>
+      )}
+    </div>
+  );
+};
+
+export default SectionHeader;
