@@ -85,6 +85,13 @@
   border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
 }
 
+/* Dark Glassmorphism effect for dark backgrounds */
+.dark-glassmorphism {
+  background-color: rgba(0, 0, 0, 0.2); /* Slightly transparent black */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle light border */
+}
+
 /* Gradient text effect */
 .gradient-text {
   background-clip: text;

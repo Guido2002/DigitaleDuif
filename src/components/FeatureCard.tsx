@@ -13,16 +13,19 @@ interface FeatureCardProps {
   highlight?: boolean; // New prop for highlighting
   stepNumber?: number; // New prop for step number
   learnMoreLink?: string; // New prop for learn more link
+  isDarkBackground?: boolean; // New prop to indicate dark parent background
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, highlight = false, stepNumber, learnMoreLink }) => {
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, highlight = false, stepNumber, learnMoreLink, isDarkBackground = false }) => {
   return (
     <Card 
       className={cn(
-        "group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-border h-full", // Added h-full
+        "group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border h-full", // Added h-full
         highlight 
-          ? "bg-primary text-primary-foreground shadow-xl p-8 md:p-10" // Larger padding for highlighted cards
-          : "bg-card text-foreground glassmorphism p-6" // Standard padding for non-highlighted cards
+          ? "bg-primary text-primary-foreground shadow-xl p-8 md:p-10 border-primary" // Larger padding for highlighted cards
+          : isDarkBackground
+            ? "bg-neutral-800 text-neutral-100 dark-glassmorphism p-6 border-neutral-700" // Dark card on dark background
+            : "bg-card text-foreground glassmorphism p-6 border-border" // Standard card
       )}
     >
       {highlight && stepNumber && (
@@ -45,7 +48,11 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       <CardTitle 
         className={cn(
           "mb-2 text-xl font-semibold",
-          highlight ? "text-primary-foreground" : "text-foreground"
+          highlight 
+            ? "text-primary-foreground" 
+            : isDarkBackground 
+              ? "text-neutral-100" 
+              : "text-foreground"
         )}
       >
         {title}
@@ -53,7 +60,11 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       <CardDescription 
         className={cn(
           "flex-grow", // Allow description to grow and push link to bottom
-          highlight ? "text-primary-foreground/90" : "text-muted-foreground"
+          highlight 
+            ? "text-primary-foreground/90" 
+            : isDarkBackground 
+              ? "text-neutral-300" 
+              : "text-muted-foreground"
         )}
       >
         {description}
