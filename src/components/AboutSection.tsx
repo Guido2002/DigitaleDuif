@@ -11,6 +11,28 @@ const AboutSection = () => {
         subtitle="DigitaleDuif is een gespecialiseerde studio die zich richt op de voorhoede van Extended Reality (XR) technologie. Wij combineren diepgaande technische kennis met een passie voor innovatie om impactvolle en meeslepende ervaringen te creëren."
       />
 
+      {/* Nieuwe sectie voor persoonlijke introductie */}
+      <div className="mb-16 flex flex-col items-center text-center md:flex-row md:text-left md:gap-8">
+        <div className="mb-8 flex justify-center md:mb-0 md:w-1/3">
+          <img
+            src="/placeholder.svg" // Gebruikt de bestaande placeholder afbeelding
+            alt="Persoonlijke foto van de oprichter"
+            className="h-48 w-48 rounded-full object-cover shadow-lg"
+          />
+        </div>
+        <div className="md:w-2/3">
+          <h3 className="mb-4 text-2xl font-semibold text-foreground">
+            Hallo, ik ben [Uw Naam]!
+          </h3>
+          <p className="mb-4 text-muted-foreground">
+            Als oprichter van DigitaleDuif ben ik gepassioneerd door de kracht van XR om complexe problemen op te lossen en nieuwe werelden te creëren. Mijn reis in de technologie begon met een fascinatie voor interactieve ervaringen, en dat heeft me geleid tot het bouwen van innovatieve VR- en MR-oplossingen.
+          </p>
+          <p className="text-muted-foreground">
+            Ik geloof sterk in een persoonlijke aanpak en werk graag nauw samen met klanten om hun visie te vertalen naar impactvolle digitale realiteiten. Laten we samen iets buitengewoons bouwen!
+          </p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <div>
           <h3 className="mb-4 text-2xl font-semibold text-foreground">
