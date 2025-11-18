@@ -31,9 +31,9 @@ const GuidoIntroSection = () => {
           className="w-full max-w-md rounded-xl object-cover shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out"
           style={{ aspectRatio: '4/5' }}
         />
-        {/* Static bird near the image */}
+        {/* Static bird near the image, adjusted to sit on the top-right edge */}
         <FlyingBirdIllustration
-          className="absolute -top-8 right-0 md:-right-12" // Positioned top-right of the image
+          className="absolute -top-4 -right-4" // Adjusted position to sit on the edge
           size="small"
           initialX="0%"
           initialY="0%"
