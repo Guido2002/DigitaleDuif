@@ -5,6 +5,13 @@ import SectionHeader from "./SectionHeader";
 import TestimonialCard from "./TestimonialCard";
 import { testimonials } from "@/data/mockData";
 import FadeInWhenVisible from "./FadeInWhenVisible";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const TestimonialsSection = () => {
   return (
@@ -16,18 +23,31 @@ const TestimonialsSection = () => {
         />
       </FadeInWhenVisible>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {testimonials.map((testimonial, index) => (
-          <FadeInWhenVisible key={index} delay={0.1 + index * 0.1}>
-            <TestimonialCard
-              quote={testimonial.quote}
-              author={testimonial.author}
-              title={testimonial.title}
-              avatar={testimonial.avatar}
-            />
-          </FadeInWhenVisible>
-        ))}
-      </div>
+      <Carousel
+        opts={{
+          align: "start",
+        }}
+        className="w-full max-w-4xl mx-auto"
+      >
+        <CarouselContent>
+          {testimonials.map((testimonial, index) => (
+            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              <div className="p-1">
+                <FadeInWhenVisible delay={0.1 + index * 0.1}>
+                  <TestimonialCard
+                    quote={testimonial.quote}
+                    author={testimonial.author}
+                    title={testimonial.title}
+                    avatar={testimonial.avatar}
+                  />
+                </FadeInWhenVisible>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
     </section>
   );
 };
