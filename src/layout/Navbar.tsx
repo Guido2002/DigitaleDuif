@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom"; // Removed useLocation as it's no longer needed for handleNavLinkClick
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { ModeToggle } from "@/components/ModeToggle"; // Import ModeToggle
+import { ModeToggle } from "@/components/ModeToggle";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -19,17 +19,7 @@ const navLinks = [
 
 const Navbar = () => {
   const isMobile = useIsMobile();
-  const location = useLocation();
-
-  const handleNavLinkClick = (path: string) => {
-    if (path.startsWith("/#") && location.pathname === "/") {
-      // If on homepage and clicking an anchor, just scroll
-      const id = path.substring(path.indexOf("#") + 1);
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }
-    // For other cases (navigating to homepage anchor from another page, or to a different page),
-    // the Link component handles it, and the browser will scroll if it's an anchor.
-  };
+  // Removed useLocation and handleNavLinkClick as scrolling is now handled globally by useScrollToHash
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -51,7 +41,7 @@ const Navbar = () => {
                   <SheetClose asChild key={link.name}>
                     <Link
                       to={link.path}
-                      onClick={() => handleNavLinkClick(link.path)}
+                      // onClick removed, scrolling handled by useScrollToHash
                       className="text-lg font-medium text-foreground hover:text-primary"
                     >
                       {link.name}
@@ -75,7 +65,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                onClick={() => handleNavLinkClick(link.path)}
+                // onClick removed, scrolling handled by useScrollToHash
                 className="text-sm font-medium text-foreground transition-colors hover:text-primary"
               >
                 {link.name}
@@ -84,7 +74,7 @@ const Navbar = () => {
             <Link to="/contact">
               <Button>Plan een gesprek</Button>
             </Link>
-            <ModeToggle /> {/* Add ModeToggle here for desktop */}
+            <ModeToggle />
           </div>
         )}
       </div>
