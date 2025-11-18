@@ -39,18 +39,14 @@ const AboutSection = () => {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-0">
-              <p className="mb-4 text-muted-foreground">
-                Als oprichter van DigitaleDuif mag ik elke dag werken aan wat mij het meest boeit: het creëren van digitale ervaringen waar je echt 'in stapt'.
-              </p>
-              <p className="mb-4 text-muted-foreground">
-                Mijn liefde voor technologie begon met simpele vraag: hoe kunnen we mensen écht laten ervaren wat anders alleen in hun verbeelding bestaat? Die vraag drijft me nog steeds - of het nu gaat om een VR-training die levensreddende vaardigheden overbrengt, of een MR-applicatie die complexe data plotseling glashelder maakt.
-              </p>
-              <p className="mb-4 text-muted-foreground">
-                Wat ik het allerleukste vind? Dat moment waarop een klant voor het eerst hun eigen project ziet en voelt in virtual reality. Die verwondering, dat 'wauw-moment' - daar doe ik het voor. En ja, ik ben een beetje een perfectionist als het om details gaat, maar dat betekent wel dat je een product krijgt waar je echt trots op kunt zijn.
-              </p>
-              <p className="text-muted-foreground">
-                Zullen we een keer koffie drinken en sparren over jouw ideeën? Ik ben benieuwd!
-              </p>
+              <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                <li>Oprichter van DigitaleDuif, gedreven door XR-innovatie.</li>
+                <li>Creëert digitale ervaringen waar je écht 'in stapt'.</li>
+                <li>Focus op VR-trainingen, MR-applicaties en data-visualisatie.</li>
+                <li>Passie voor het 'wauw-moment' bij klanten.</li>
+                <li>Perfectionist met oog voor detail en resultaat.</li>
+                <li>Nieuwsgierig naar jouw ideeën voor een kop koffie!</li>
+              </ul>
             </CardContent>
           </div>
         </Card>

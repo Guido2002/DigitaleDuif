@@ -46,29 +46,45 @@ export const uspCards: USP[] = [
 interface ProcessStep {
   icon: LucideIcon;
   title: string;
-  description: string;
+  description: string[]; // Changed to string array for list items
 }
 
 export const processSteps: ProcessStep[] = [
   {
     icon: Users,
     title: "Kennismaking & Behoefteanalyse",
-    description: "Gesprek, kern begrijpen.",
+    description: [
+      "Diepgaand gesprek over jouw visie en doelen.",
+      "Identificeren van de kernuitdagingen en kansen.",
+      "Vaststellen van projectscope en verwachtingen."
+    ],
   },
   {
     icon: Lightbulb,
     title: "Concept & Prototype",
-    description: "Concept, werkend prototype.",
+    description: [
+      "Ontwikkelen van een concreet XR-concept.",
+      "Bouwen van een werkend prototype voor snelle validatie.",
+      "Verzamelen van feedback en bijsturen van het ontwerp."
+    ],
   },
   {
     icon: Brain,
     title: "Testen & Itereren",
-    description: "Testen, verfijnen, optimaliseren.",
+    description: [
+      "Uitgebreid testen van de applicatie.",
+      "Verfijnen van functionaliteiten en gebruikerservaring.",
+      "Optimaliseren van prestaties en stabiliteit."
+    ],
   },
   {
     icon: Rocket,
     title: "Oplevering & Support",
-    description: "Complete oplossing, nazorg.",
+    description: [
+      "Leveren van de complete, geteste XR-oplossing.",
+      "Voorzien van heldere documentatie en instructies.",
+      "Bieden van nazorg en technische ondersteuning."
+    ],
   },
 ];
 

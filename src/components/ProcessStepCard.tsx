@@ -9,7 +9,7 @@ import { motion } from "framer-motion"; // Import motion for animations
 interface ProcessStepCardProps {
   icon: LucideIcon;
   title: string;
-  description: string;
+  description: string[]; // Changed to string array
   stepNumber: number;
   isLast: boolean;
 }
@@ -36,8 +36,12 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
         <CardTitle className="mb-2 text-xl font-semibold text-foreground">
           {title}
         </CardTitle>
-        <CardDescription className="text-muted-foreground">
-          {description}
+        <CardDescription asChild className="text-muted-foreground"> {/* Use asChild to pass props to ul */}
+          <ul className="list-disc pl-5 space-y-1">
+            {description.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
         </CardDescription>
       </Card>
 
