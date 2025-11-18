@@ -17,7 +17,6 @@ const ProcessSection = () => {
         {processSteps.map((step, index) => (
           <ProcessStep
             key={index}
-            stepNumber={index + 1}
             icon={step.icon}
             title={step.title}
             description={step.description}
