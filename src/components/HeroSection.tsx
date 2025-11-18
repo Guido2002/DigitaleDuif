@@ -5,20 +5,19 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom"; // Correct import for React Router
-import HeroBackgroundAnimation from "./HeroBackgroundAnimation"; // Import HeroBackgroundAnimation
-import VrHeadsetIllustration from "./VrHeadsetIllustration"; // Import VrHeadsetIllustration
-import ScrollIndicator from "./ScrollIndicator"; // Import ScrollIndicator
 
-const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  children: React.ReactNode;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ children }) => {
   return (
     <section
       id="home"
       className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
-      <HeroBackgroundAnimation />
-      <VrHeadsetIllustration />
-      <ScrollIndicator />
+      {children} {/* Render children here */}
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
