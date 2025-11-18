@@ -2,8 +2,9 @@
 
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ArrowRight } from "lucide-react"; // Import ArrowRight icon
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 interface FeatureCardProps {
   icon: LucideIcon;
@@ -11,9 +12,10 @@ interface FeatureCardProps {
   description: string;
   highlight?: boolean; // New prop for highlighting
   stepNumber?: number; // New prop for step number
+  learnMoreLink?: string; // New prop for learn more link
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, highlight = false, stepNumber }) => {
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, highlight = false, stepNumber, learnMoreLink }) => {
   return (
     <Card 
       className={cn(
@@ -55,6 +57,14 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       >
         {description}
       </CardDescription>
+      {highlight && learnMoreLink && (
+        <Link 
+          to={learnMoreLink} 
+          className="mt-6 flex items-center text-sm font-semibold text-primary-foreground hover:text-primary-foreground/80 group-hover:underline"
+        >
+          Lees meer <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+        </Link>
+      )}
     </Card>
   );
 };

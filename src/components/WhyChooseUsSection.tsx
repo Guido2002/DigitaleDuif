@@ -24,7 +24,8 @@ const WhyChooseUsSection = () => {
               title={usp.title}
               description={usp.description}
               highlight={index < 3} // Highlight the first three USP cards
-              stepNumber={index + 1} // Pass the step number
+              stepNumber={index < 3 ? index + 1 : undefined} // Pass step number only for highlighted cards
+              learnMoreLink={index === 0 ? "/diensten#vr-app-dev" : index === 1 ? "/diensten#prototyping" : index === 2 ? "/#about" : undefined} // Example links
             />
           </FadeInWhenVisible>
         ))}
