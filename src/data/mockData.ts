@@ -13,32 +13,32 @@ export const uspCards: USP[] = [
   {
     icon: Brain,
     title: "XR Specialist",
-    description: "Ja, wij zijn nerds als het om Virtual en Mixed Reality gaat. Maar het mooie is: wij vertalen die technische kennis naar oplossingen die gewoon werken - ook voor mensen die geen VR-headset van een broodrooster kunnen onderscheiden.",
+    description: "Diepgaande kennis van Virtual & Mixed Reality. Praktische oplossingen, geen jargon.",
   },
   {
     icon: Rocket,
     title: "Snelle Concepten & Prototypes",
-    description: "Lange theoretische rapporten? Niet ons ding. Wij geloven in 'laten zien' in plaats van 'vertellen'. Daarom bouwen we razendsnel prototypes waar je meteen mee aan de slag kunt. Zo weet je snel of een idee vliegt of niet.",
+    description: "Razendsnel werkende prototypes. Direct inzicht, snelle validatie.",
   },
   {
     icon: Lightbulb,
     title: "Techniek & UX in Balans",
-    description: "Een technisch vernuft dat niemand snapt of durft te gebruiken? Daar heb je weinig aan. Daarom combineren wij solide technische expertise met gebruiksvriendelijk ontwerp. Het moet niet alleen werken - het moet ook fijn aanvoelen.",
+    description: "Solide techniek gecombineerd met gebruiksvriendelijk ontwerp. Werkt én voelt goed.",
   },
   {
     icon: Users,
     title: "Co-creatie met Klanten",
-    description: "Jij kent jouw bedrijf het beste, wij kennen XR het beste. Samen zijn we onverslaanbaar. Van brainstorm tot oplevering: je bent erbij, je hebt inspraak, en samen bouwen we aan iets waar we allebei trots op zijn.",
+    description: "Samenwerking van brainstorm tot oplevering. Jouw inspraak, ons vakmanschap.",
   },
   {
     icon: TrendingUp,
     title: "Data-gedreven Ervaringen",
-    description: "'Cool' is leuk, maar 'nuttig' is beter. Onze XR-oplossingen zijn ontworpen om je concrete inzichten en meetbare resultaten te geven. Want uiteindelijk wil je weten: wat levert het op?",
+    description: "Meetbare resultaten en concrete inzichten. Wat levert het op?",
   },
   {
     icon: Code,
     title: "Ervaring met Meta Quest & Unity",
-    description: "We hebben de kilometers gemaakt met toonaangevende platforms en tools. Dat scheelt jou experimenten, tijd en kosten - wij weten gewoon wat werkt (en wat niet).",
+    description: "Bewezen expertise met toonaangevende platforms en tools. Efficiënt en effectief.",
   },
 ];
 
@@ -53,22 +53,22 @@ export const processSteps: ProcessStep[] = [
   {
     icon: Users,
     title: "Kennismaking & Behoefteanalyse",
-    description: "We beginnen met een goed gesprek. Wat wil je bereiken? Waar loop je nu tegenaan? Wat zou het ideale eindresultaat zijn? We stellen veel vragen (sorry, maar het is belangrijk!) en luisteren nog meer. Pas als we de kern van je uitdaging echt begrijpen, gaan we aan de slag.",
+    description: "Diepgaand gesprek, kern van de uitdaging begrijpen.",
   },
   {
     icon: Lightbulb,
     title: "Concept & Prototype",
-    description: "Op basis van ons gesprek vertalen we jouw ideeën naar een concreet concept en - hier komt het mooie - een werkend prototype. Geen PowerPoint-plaatjes, maar iets wat je echt kunt uitproberen. Zo krijg je snel een gevoel bij de richting en kunnen we bijsturen als dat nodig is.",
+    description: "Concreet concept, werkend prototype. Snel uitproberen en bijsturen.",
   },
   {
     icon: Brain,
     title: "Testen & Itereren",
-    description: "Nu wordt het écht leuk. Je test het prototype, wij kijken over je schouder mee, en samen ontdekken we wat werkt en wat beter kan. We verfijnen, optimaliseren en polijsten totdat alles aanvoelt zoals het moet. Deze iteratieve aanpak zorgt ervoor dat het eindproduct precies doet wat jij nodig hebt.",
+    description: "Samen testen, verfijnen en optimaliseren. Perfectie door herhaling.",
   },
   {
     icon: Rocket,
     title: "Oplevering & Support",
-    description: "Wanneer je helemaal tevreden bent, ronden we het project af. Je krijgt natuurlijk de complete oplossing, maar ook heldere documentatie en - belangrijk - ondersteuning na oplevering. Want een goede relatie stopt niet bij het 'Live'-knopje.",
+    description: "Complete oplossing, heldere documentatie, nazorg en ondersteuning.",
   },
 ];
 
