@@ -28,12 +28,7 @@ const GuidoIntroSection = () => {
           style={{ aspectRatio: '4/5' }}
         />
         {/* Optional: Add a subtle floating UI element near the image */}
-        <div // Replaced motion.div with a standard div
-          className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
-          // Removed animation props
-        >
-          Innovatie met impact!
-        </div>
+        {/* Removed the div containing "Innovatie met impact!" */}
       </div>
 
       {/* Text Content Section */}
