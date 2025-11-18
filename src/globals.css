@@ -20,6 +20,7 @@
     --primary: 210 80% 45%; /* Slightly more vibrant blue */
     --primary-foreground: 0 0% 100%; /* White */
     --hero-gradient-end: 190 80% 30%; /* Dark teal for hero gradient end */
+    --light-blue: 210 80% 90%; /* A soft light blue */
 
     --secondary: 210 40% 96.1%; /* Light Gray */
     --secondary-foreground: 220 20% 10%;
