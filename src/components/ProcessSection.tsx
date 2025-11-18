@@ -17,6 +17,9 @@ const ProcessSection = () => {
       </FadeInWhenVisible>
 
       <div className="relative grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+        {/* Horizontal connector line for desktop */}
+        <div className="absolute top-[40px] left-0 right-0 h-1.5 bg-primary/30 z-0 hidden lg:block" />
+
         {processSteps.map((step, index) => (
           <FadeInWhenVisible key={index} delay={0.1 + index * 0.1}>
             <ProcessStepCard
