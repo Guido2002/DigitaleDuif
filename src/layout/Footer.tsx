@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="border-t border-border bg-background py-8 relative overflow-hidden"> {/* Added relative and overflow-hidden */}
       {/* Static bird in the footer */}
       <FlyingBirdIllustration
-        className="absolute top-8 right-8 h-16 w-16" // Vaste positie en grootte voor alle schermformaten
+        className="absolute top-8 right-8 h-16 w-16 hidden sm:block" // Hides on screens smaller than 'sm' (640px)
         initialX="0%"
         initialY="0%"
         animationDelay={0.5}
