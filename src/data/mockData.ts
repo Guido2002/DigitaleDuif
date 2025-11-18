@@ -209,18 +209,7 @@ interface NavLink {
 export const navLinks: NavLink[] = [
   { name: "Home", path: "/" },
   { name: "Over ons", path: "/#about" },
-  {
-    name: "Diensten",
-    path: "/diensten", // Main services page
-    children: [
-      { name: "VR-applicatieontwikkeling", path: "/diensten#vr-app-dev" },
-      { name: "Mixed Reality interfaces", path: "/diensten#mr-interfaces" },
-      { name: "Prototyping & conceptontwikkeling", path: "/diensten#prototyping" },
-      { name: "Unity consultancy", path: "/diensten#unity-consultancy" },
-      { name: "XR-trainingssimulaties", path: "/diensten#training-sims" },
-      { name: "Data logging & analyse in XR", path: "/diensten#data-analytics" },
-    ],
-  },
+  { name: "Diensten", path: "/diensten" }, // Removed children for Diensten
   { name: "Projecten", path: "/projecten" },
   { name: "Hoe wij werken", path: "/#process" },
   { name: "Contact", path: "/contact" },
