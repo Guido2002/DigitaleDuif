@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: ["class"],
+  // Removed darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -52,7 +52,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "hero-gradient-end": "hsl(var(--hero-gradient-end))", // Add this line
+        // Removed "hero-gradient-end": "hsl(var(--hero-gradient-end))",
       },
       borderRadius: {
         lg: "var(--radius)",

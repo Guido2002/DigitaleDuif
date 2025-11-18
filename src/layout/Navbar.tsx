@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { ModeToggle } from "@/components/ModeToggle";
 import { navLinks } from "@/data/mockData"; // Import navLinks from mockData
 import { cn } from "@/lib/utils"; // Import cn for conditional class names
 
@@ -59,9 +58,6 @@ const Navbar = () => {
                     <Button className="w-full">Plan een gesprek</Button>
                   </Link>
                 </SheetClose>
-                <div className="flex justify-center pt-4">
-                  <ModeToggle />
-                </div>
               </div>
             </SheetContent>
           </Sheet>
@@ -82,7 +78,6 @@ const Navbar = () => {
             <Link to="/contact">
               <Button>Plan een gesprek</Button>
             </Link>
-            <ModeToggle />
           </div>
         )}
       </div>
