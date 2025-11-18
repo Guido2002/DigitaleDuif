@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { LucideIcon, ArrowDown } from "lucide-react"; // Import ArrowDown icon
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion"; // Import motion for animations
@@ -36,13 +36,14 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
         <CardTitle className="mb-2 text-xl font-semibold text-foreground">
           {title}
         </CardTitle>
-        <CardDescription asChild className="text-muted-foreground flex-grow"> {/* Use asChild to pass props to ul, added flex-grow */}
+        {/* Replaced CardDescription with a div to fix DOM nesting warning */}
+        <div className="text-muted-foreground flex-grow">
           <ul className="list-disc pl-5 space-y-1">
             {description.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
-        </CardDescription>
+        </div>
       </Card>
 
       {!isLast && (
