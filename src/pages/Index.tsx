@@ -5,7 +5,8 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ProcessSection from "@/components/ProcessSection";
-import CallToActionSection from "@/components/CallToActionSection"; // Import the new component
+import TestimonialsSection from "@/components/TestimonialsSection"; // Import the new component
+import CallToActionSection from "@/components/CallToActionSection";
 
 const Index = () => {
   return (
@@ -14,7 +15,8 @@ const Index = () => {
       <AboutSection />
       <WhyChooseUsSection />
       <ProcessSection />
-      <CallToActionSection /> {/* Add the new component here */}
+      <TestimonialsSection /> {/* Add the new component here */}
+      <CallToActionSection />
     </>
   );
 };

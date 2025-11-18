@@ -1,6 +1,6 @@
 // This file will contain mock data for various sections of the website.
 
-import { LucideIcon, Brain, Rocket, Lightbulb, Users, TrendingUp, Code } from "lucide-react";
+import { LucideIcon, Brain, Rocket, Lightbulb, Users, TrendingUp, Code, Quote } from "lucide-react";
 
 // USP Card Data
 interface USP {
@@ -69,5 +69,34 @@ export const processSteps: ProcessStep[] = [
     icon: Rocket,
     title: "Oplevering & Support",
     description: "Na goedkeuring leveren we de complete oplossing op, inclusief documentatie en nazorg.",
+  },
+];
+
+// Testimonial Data
+interface Testimonial {
+  quote: string;
+  author: string;
+  title: string;
+  avatar?: string; // Optional avatar image URL
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    quote: "DigitaleDuif heeft onze verwachtingen overtroffen met hun VR-trainingssimulatie. De kwaliteit en het realisme zijn ongeëvenaard, en onze medewerkers zijn er enorm door geholpen.",
+    author: "Jan de Vries",
+    title: "CEO, Innovatie B.V.",
+    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Jan",
+  },
+  {
+    quote: "De Mixed Reality oplossing die DigitaleDuif voor ons ontwikkelde, heeft onze operationele efficiëntie aanzienlijk verbeterd. Hun expertise in Unity is indrukwekkend.",
+    author: "Sophie Bakker",
+    title: "Projectmanager, Tech Solutions",
+    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Sophie",
+  },
+  {
+    quote: "Vanaf het eerste concept tot de uiteindelijke oplevering was de samenwerking met DigitaleDuif uitstekend. Ze luisteren echt naar de klant en leveren maatwerk van topkwaliteit.",
+    author: "Mark Jansen",
+    title: "Hoofd R&D, Future Systems",
+    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Mark",
   },
 ];
