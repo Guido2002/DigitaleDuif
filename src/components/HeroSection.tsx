@@ -5,21 +5,24 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom"; // Correct import for React Router
+import HeroBackgroundAnimation from "./HeroBackgroundAnimation"; // Import HeroBackgroundAnimation
+import VrHeadsetIllustration from "./VrHeadsetIllustration"; // Import VrHeadsetIllustration
+import ScrollIndicator from "./ScrollIndicator"; // Import ScrollIndicator
 
-interface HeroSectionProps {
-  children?: React.ReactNode;
-}
-
-const HeroSection: React.FC<HeroSectionProps> = ({ children }) => {
+const HeroSection: React.FC = () => {
   return (
     <section
       id="home"
       className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
+      <HeroBackgroundAnimation />
+      <VrHeadsetIllustration />
+      <ScrollIndicator />
+
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
-          className="mb-6 text-4xl font-extrabold leading-tight tracking-tighter md:text-6xl lg:text-7xl text-shadow-hero"
+          className="mb-6 text-4xl font-extrabold leading-tight tracking-tighter md:text-6xl lg:text-7xl text-shadow-hero-title"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -28,7 +31,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ children }) => {
           <span className="text-accent-foreground">Digitale Innovatie & XR</span>
         </motion.h1>
         <motion.p
-          className="mb-8 max-w-3xl text-lg md:text-xl text-primary-foreground/90 text-shadow-hero"
+          className="mb-8 max-w-3xl text-lg md:text-xl text-primary-foreground/90 text-shadow-hero-body"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
@@ -48,7 +51,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ children }) => {
           </Button>
         </motion.div>
       </div>
-      {children}
     </section>
   );
 };

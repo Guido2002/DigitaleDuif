@@ -6,7 +6,7 @@ import AboutSection from "@/components/AboutSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ProcessSection from "@/components/ProcessSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import FAQSection from "@/components/FAQSection"; // Import the new component
+import FAQSection from "@/components/FAQSection";
 import CallToActionSection from "@/components/CallToActionSection";
 
 const Index = () => {
@@ -17,7 +17,7 @@ const Index = () => {
       <WhyChooseUsSection />
       <ProcessSection />
       <TestimonialsSection />
-      <FAQSection /> {/* Add the new component here */}
+      <FAQSection />
       <CallToActionSection />
     </>
   );
