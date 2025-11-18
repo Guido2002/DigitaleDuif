@@ -57,7 +57,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="container flex min-h-[calc(100vh-16rem)] flex-col items-center justify-center py-12">
+    <div className="container flex flex-col items-center justify-center py-12">
       <Card className="w-full max-w-lg p-6 md:p-8">
         <CardHeader className="text-center">
           <CardTitle className="mb-2 text-3xl font-bold text-primary">
