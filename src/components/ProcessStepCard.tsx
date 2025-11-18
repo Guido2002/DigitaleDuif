@@ -2,8 +2,9 @@
 
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, ArrowDown } from "lucide-react"; // Import ArrowDown icon
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion"; // Import motion for animations
 
 interface ProcessStepCardProps {
   icon: LucideIcon;
@@ -40,8 +41,19 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       </Card>
 
       {!isLast && (
-        // De lijn is nu altijd zichtbaar. De glassmorphism op de kaart zorgt voor de blur.
-        <div className="absolute left-1/2 top-16 z-0 h-full w-1.5 -translate-x-1/2 bg-primary/30 md:left-auto md:top-8 md:h-1.5 md:w-[calc(100%+24px)] md:translate-x-0 md:translate-y-1/2" />
+        <>
+          {/* Desktop line (hidden on mobile) */}
+          <div className="absolute left-1/2 top-16 z-0 hidden h-full w-1.5 -translate-x-1/2 bg-primary/30 md:block md:left-auto md:top-8 md:h-1.5 md:w-[calc(100%+24px)] md:translate-x-0 md:translate-y-1/2" />
+          
+          {/* Mobile arrow indicator (hidden on desktop) */}
+          <motion.div
+            className="mt-4 mb-4 flex items-center justify-center text-primary md:hidden"
+            animate={{ y: [0, 5, 0] }} // Subtle bounce animation
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ArrowDown className="h-8 w-8" />
+          </motion.div>
+        </>
       )}
     </div>
   );
