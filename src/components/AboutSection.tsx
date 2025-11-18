@@ -24,17 +24,17 @@ const AboutSection = () => {
 
       {/* Personal Introduction Card */}
       <FadeInWhenVisible delay={0.2}>
-        <Card className="mb-16 flex flex-col items-center text-center md:flex-row md:items-start md:gap-8 p-6 border border-border bg-card shadow-lg">
-          <div className="mb-8 flex justify-center md:mb-0 md:w-1/4"> {/* Adjusted width for larger photo */}
+        <Card className="mb-16 flex flex-col items-center text-center md:flex-row md:items-start md:gap-12 p-8 border border-border bg-card shadow-xl glassmorphism"> {/* Enhanced styling */}
+          <div className="mb-8 flex justify-center md:mb-0 md:w-1/3"> {/* Adjusted width for larger photo */}
             <img
               src={profilePhoto} // Gebruik de geïmporteerde variabele
               alt="Persoonlijke foto van de oprichter"
-              className="h-64 w-64 rounded-full object-cover shadow-lg" // Made photo larger
+              className="h-72 w-72 rounded-full object-cover shadow-lg border-4 border-primary/20" // Made photo larger with subtle border
             />
           </div>
-          <div className="md:w-3/4"> {/* Adjusted width for text content */}
+          <div className="md:w-2/3"> {/* Adjusted width for text content */}
             <CardHeader className="p-0 mb-4">
-              <CardTitle className="text-3xl font-bold text-foreground"> {/* Made title larger and bolder */}
+              <CardTitle className="text-4xl font-extrabold text-primary"> {/* Made title larger and bolder */}
                 Hallo, ik ben Guido Duif!
               </CardTitle>
             </CardHeader>
