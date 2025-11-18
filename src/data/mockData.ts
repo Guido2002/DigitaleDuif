@@ -13,17 +13,17 @@ export const uspCards: USP[] = [
   {
     icon: Brain,
     title: "XR Specialist",
-    description: "Diepgaande kennis, praktische oplossingen.",
+    description: "Diepgaande XR kennis.",
   },
   {
     icon: Rocket,
     title: "Snelle Concepten & Prototypes",
-    description: "Razendsnel prototypes, directe validatie.",
+    description: "Razendsnel prototypes.",
   },
   {
     icon: Lightbulb,
     title: "Techniek & UX in Balans",
-    description: "Solide techniek, gebruiksvriendelijk ontwerp.",
+    description: "Solide techniek, fijn gebruik.",
   },
   {
     icon: Users,
@@ -33,12 +33,12 @@ export const uspCards: USP[] = [
   {
     icon: TrendingUp,
     title: "Data-gedreven Ervaringen",
-    description: "Meetbare resultaten, concrete inzichten.",
+    description: "Meetbare resultaten.",
   },
   {
     icon: Code,
     title: "Ervaring met Meta Quest & Unity",
-    description: "Bewezen expertise, efficiënt en effectief.",
+    description: "Bewezen expertise.",
   },
 ];
 
@@ -53,22 +53,22 @@ export const processSteps: ProcessStep[] = [
   {
     icon: Users,
     title: "Kennismaking & Behoefteanalyse",
-    description: "Diepgaand gesprek, kern begrijpen.",
+    description: "Gesprek, kern begrijpen.",
   },
   {
     icon: Lightbulb,
     title: "Concept & Prototype",
-    description: "Concreet concept, werkend prototype.",
+    description: "Concept, werkend prototype.",
   },
   {
     icon: Brain,
     title: "Testen & Itereren",
-    description: "Samen testen, verfijnen, optimaliseren.",
+    description: "Testen, verfijnen, optimaliseren.",
   },
   {
     icon: Rocket,
     title: "Oplevering & Support",
-    description: "Complete oplossing, nazorg en ondersteuning.",
+    description: "Complete oplossing, nazorg.",
   },
 ];
 
