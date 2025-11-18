@@ -8,7 +8,19 @@ import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { navLinks } from "@/data/mockData";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion"; // Import motion
+import { motion } from "framer-motion";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Navbar = () => {
   const isMobile = useIsMobile();
@@ -21,7 +33,11 @@ const Navbar = () => {
     if (path.startsWith("/#")) {
       return location.pathname === "/" && location.hash === path;
     }
-    return location.pathname === path;
+    // Handle active state for parent link when a child link is active
+    if (navLinks.some(link => link.path === path && link.children?.some(child => location.pathname + location.hash === child.path))) {
+      return true;
+    }
+    return location.pathname + location.hash === path;
   };
 
   return (
@@ -47,23 +63,57 @@ const Navbar = () => {
             <SheetContent side="right" className="bg-background">
               <div className="flex flex-col space-y-4 pt-8">
                 {navLinks.map((link) => (
-                  <SheetClose asChild key={link.name}>
-                    <Link
-                      to={link.path}
-                      className={cn(
-                        "relative text-lg font-medium text-foreground hover:text-primary",
-                        isActive(link.path) && "text-primary font-bold",
-                      )}
-                    >
-                      {link.name}
-                      {isActive(link.path) && (
-                        <motion.span
-                          layoutId="underline"
-                          className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
-                        />
-                      )}
-                    </Link>
-                  </SheetClose>
+                  link.children ? (
+                    <Accordion type="single" collapsible key={link.name} className="w-full">
+                      <AccordionItem value={link.name} className="border-b-0">
+                        <AccordionTrigger className={cn(
+                          "relative text-lg font-medium text-foreground hover:text-primary hover:no-underline",
+                          isActive(link.path) && "text-primary font-bold",
+                        )}>
+                          {link.name}
+                          {isActive(link.path) && (
+                            <motion.span
+                              layoutId="underline-mobile"
+                              className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
+                            />
+                          )}
+                        </AccordionTrigger>
+                        <AccordionContent className="pl-4 pt-2 pb-0 space-y-2">
+                          {link.children.map((childLink) => (
+                            <SheetClose asChild key={childLink.name}>
+                              <Link
+                                to={childLink.path}
+                                className={cn(
+                                  "block text-base text-muted-foreground hover:text-primary",
+                                  isActive(childLink.path) && "text-primary font-semibold",
+                                )}
+                              >
+                                {childLink.name}
+                              </Link>
+                            </SheetClose>
+                          ))}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  ) : (
+                    <SheetClose asChild key={link.name}>
+                      <Link
+                        to={link.path}
+                        className={cn(
+                          "relative text-lg font-medium text-foreground hover:text-primary",
+                          isActive(link.path) && "text-primary font-bold",
+                        )}
+                      >
+                        {link.name}
+                        {isActive(link.path) && (
+                          <motion.span
+                            layoutId="underline-mobile"
+                            className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
+                          />
+                        )}
+                      </Link>
+                    </SheetClose>
+                  )
                 ))}
                 <SheetClose asChild>
                   <Link to="/contact">
@@ -76,22 +126,59 @@ const Navbar = () => {
         ) : (
           <div className="flex items-center space-x-6">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={cn(
-                  "relative text-sm font-medium text-foreground transition-colors hover:text-primary",
-                  isActive(link.path) && "text-primary font-bold",
-                )}
-              >
-                {link.name}
-                {isActive(link.path) && (
-                  <motion.span
-                    layoutId="underline"
-                    className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
-                  />
-                )}
-              </Link>
+              link.children ? (
+                <DropdownMenu key={link.name}>
+                  <DropdownMenuTrigger asChild>
+                    <Link
+                      to={link.path} // Link to the main services page
+                      className={cn(
+                        "relative text-sm font-medium text-foreground transition-colors hover:text-primary",
+                        isActive(link.path) && "text-primary font-bold",
+                      )}
+                    >
+                      {link.name}
+                      {isActive(link.path) && (
+                        <motion.span
+                          layoutId="underline"
+                          className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
+                        />
+                      )}
+                    </Link>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56 bg-card border border-border shadow-lg">
+                    {link.children.map((childLink) => (
+                      <DropdownMenuItem key={childLink.name} asChild>
+                        <Link
+                          to={childLink.path}
+                          className={cn(
+                            "block px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer",
+                            isActive(childLink.path) && "text-primary font-semibold",
+                          )}
+                        >
+                          {childLink.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={cn(
+                    "relative text-sm font-medium text-foreground transition-colors hover:text-primary",
+                    isActive(link.path) && "text-primary font-bold",
+                  )}
+                >
+                  {link.name}
+                  {isActive(link.path) && (
+                    <motion.span
+                      layoutId="underline"
+                      className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
+                    />
+                  )}
+                </Link>
+              )
             ))}
             <Link to="/contact">
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button>

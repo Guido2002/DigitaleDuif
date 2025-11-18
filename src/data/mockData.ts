@@ -154,6 +154,7 @@ export const projects: Project[] = [
 
 // Service Data
 export interface Service {
+  id: string; // Added ID for hash linking
   title: string;
   description: string;
   tags: string[];
@@ -161,31 +162,37 @@ export interface Service {
 
 export const services: Service[] = [
   {
+    id: "vr-app-dev", // Corresponding ID
     title: "VR-applicatieontwikkeling",
     description: "Ontwikkeling van op maat gemaakte Virtual Reality applicaties voor training, simulatie, visualisatie en entertainment. Van concept tot implementatie, wij brengen uw ideeën tot leven in VR.",
     tags: ["Unity", "Meta Quest", "C#", "VR Design"],
   },
   {
+    id: "mr-interfaces", // Corresponding ID
     title: "Mixed Reality interfaces",
     description: "Creëren van intuïtieve en functionele Mixed Reality interfaces die digitale informatie naadloos integreren met de fysieke wereld. Ideaal voor industriële toepassingen en interactieve ervaringen.",
     tags: ["Unity", "HoloLens", "MR Design", "UX"],
   },
   {
+    id: "prototyping", // Corresponding ID
     title: "Prototyping & conceptontwikkeling",
     description: "Snelle ontwikkeling van prototypes en proof-of-concepts om ideeën te valideren en te visualiseren. Wij helpen u met het verkennen van de mogelijkheden van XR voor uw specifieke behoeften.",
     tags: ["Rapid Prototyping", "Concepting", "Ideation", "Agile"],
   },
   {
+    id: "unity-consultancy", // Corresponding ID
     title: "Unity consultancy / developer-as-a-service",
     description: "Expertise en ondersteuning voor uw Unity-projecten. Huur onze ervaren Unity-ontwikkelaars in voor advies, code review, projectmanagement of als tijdelijke uitbreiding van uw team.",
     tags: ["Unity", "C#", "Consultancy", "Development"],
   },
   {
+    id: "training-sims", // Corresponding ID
     title: "XR-trainingssimulaties",
     description: "Ontwikkeling van realistische en effectieve XR-trainingssimulaties die medewerkers in een veilige omgeving complexe taken laten oefenen. Verhoog de retentie en verminder risico's.",
     tags: ["Training", "Simulatie", "Educatie", "Serious Gaming"],
   },
   {
+    id: "data-analytics", // Corresponding ID
     title: "Data logging & analyse in XR",
     description: "Implementatie van systemen voor het loggen en analyseren van gebruikersgedrag binnen XR-applicaties. Verkrijg waardevolle inzichten om uw ervaringen te optimaliseren en beslissingen te onderbouwen.",
     tags: ["Data Analytics", "Telemetry", "Insights", "Optimization"],
@@ -196,15 +203,52 @@ export const services: Service[] = [
 interface NavLink {
   name: string;
   path: string;
+  children?: NavLink[]; // Added for dropdowns
 }
 
 export const navLinks: NavLink[] = [
   { name: "Home", path: "/" },
   { name: "Over ons", path: "/#about" },
-  { name: "Diensten", path: "/diensten" },
+  {
+    name: "Diensten",
+    path: "/diensten", // Main services page
+    children: [
+      { name: "VR-applicatieontwikkeling", path: "/diensten#vr-app-dev" },
+      { name: "Mixed Reality interfaces", path: "/diensten#mr-interfaces" },
+      { name: "Prototyping & conceptontwikkeling", path: "/diensten#prototyping" },
+      { name: "Unity consultancy", path: "/diensten#unity-consultancy" },
+      { name: "XR-trainingssimulaties", path: "/diensten#training-sims" },
+      { name: "Data logging & analyse in XR", path: "/diensten#data-analytics" },
+    ],
+  },
   { name: "Projecten", path: "/projecten" },
   { name: "Hoe wij werken", path: "/#process" },
   { name: "Contact", path: "/contact" },
+];
+
+// About Section Expertise Data
+interface AboutExpertise {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+export const aboutExpertiseCards: AboutExpertise[] = [
+  {
+    icon: Brain,
+    title: "XR & VR Expertise",
+    description: "Met jarenlange ervaring in de XR-sector, zijn wij experts in het ontwikkelen van zowel Virtual Reality als Mixed Reality applicaties. Of het nu gaat om complexe simulaties, interactieve trainingsmodules of innovatieve visualisatietools, wij leveren oplossingen die de grenzen van het mogelijke verleggen. Onze focus ligt op het benutten van de kracht van XR om concrete zakelijke uitdagingen op te lossen en nieuwe kansen te creëren.",
+  },
+  {
+    icon: Code, // Using Code for Unity Development
+    title: "Unity Development",
+    description: "Unity is de kern van onze technische stack. Onze ontwikkelaars zijn bedreven in het creëren van robuuste, schaalbare en hoogwaardige applicaties binnen dit veelzijdige platform. Wij geloven sterk in een iteratieve aanpak en co-creatie met onze klanten. Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering werken we nauw samen, waarbij we prototypes ontwikkelen en continu feedback integreren om ervoor te zorgen dat het eindproduct perfect aansluit bij uw visie en behoeften.",
+  },
+  {
+    icon: Users, // Using Users for Co-creatie
+    title: "Co-creatie Aanpak",
+    description: "Wij geloven sterk in een iteratieve aanpak en co-creatie met onze klanten. Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering werken we nauw samen, waarbij we prototypes ontwikkelen en continu feedback integreren om ervoor te zorgen dat het eindproduct perfect aansluit bij uw visie en behoeften. Uw visie is onze drijfveer, en samen bouwen we aan de toekomst.",
+  },
 ];
 
 // FAQ Data
@@ -233,30 +277,5 @@ export const faqItems: FAQItem[] = [
   {
     question: "Hoe lang duurt de ontwikkeling van een XR-applicatie?",
     answer: "De duur van de ontwikkeling hangt sterk af van de complexiteit en de scope van het project. Na een initiële behoefteanalyse en conceptfase kunnen we een realistische tijdslijn en budget inschatten. We werken vaak met agile methoden voor snelle iteraties.",
-  },
-];
-
-// About Section Expertise Data
-interface AboutExpertise {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
-
-export const aboutExpertiseCards: AboutExpertise[] = [
-  {
-    icon: Brain,
-    title: "XR & VR Expertise",
-    description: "Met jarenlange ervaring in de XR-sector, zijn wij experts in het ontwikkelen van zowel Virtual Reality als Mixed Reality applicaties. Of het nu gaat om complexe simulaties, interactieve trainingsmodules of innovatieve visualisatietools, wij leveren oplossingen die de grenzen van het mogelijke verleggen. Onze focus ligt op het benutten van de kracht van XR om concrete zakelijke uitdagingen op te lossen en nieuwe kansen te creëren.",
-  },
-  {
-    icon: Code, // Using Code for Unity Development
-    title: "Unity Development",
-    description: "Unity is de kern van onze technische stack. Onze ontwikkelaars zijn bedreven in het creëren van robuuste, schaalbare en hoogwaardige applicaties binnen dit veelzijdige platform. Wij geloven sterk in een iteratieve aanpak en co-creatie met onze klanten. Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering werken we nauw samen, waarbij we prototypes ontwikkelen en continu feedback integreren om ervoor te zorgen dat het eindproduct perfect aansluit bij uw visie en behoeften.",
-  },
-  {
-    icon: Users, // Using Users for Co-creatie
-    title: "Co-creatie Aanpak",
-    description: "Wij geloven sterk in een iteratieve aanpak en co-creatie met onze klanten. Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering werken we nauw samen, waarbij we prototypes ontwikkelen en continu feedback integreren om ervoor te zorgen dat het eindproduct perfect aansluit bij uw visie en behoeften. Uw visie is onze drijfveer, en samen bouwen we aan de toekomst.",
   },
 ];

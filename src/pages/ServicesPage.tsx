@@ -21,7 +21,8 @@ const ServicesPage = () => {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {services.map((service, index) => (
           <FadeInWhenVisible key={index} delay={0.1 + index * 0.1}>
-            <Card 
+            <Card
+              id={service.id} // Add ID here
               className="group flex flex-col justify-between p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border"
             >
               <CardHeader className="px-0 pt-0">
