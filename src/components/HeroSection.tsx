@@ -8,8 +8,11 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-primary to-blue-800 py-20 text-white"
+      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-primary to-blue-800 py-20 text-white overflow-hidden"
     >
+      {/* Animated background overlay */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 bg-[length:400%_400%] animate-gradient-move"></div>
+      
       <div className="container z-10 text-center">
         <h1 className="mb-4 text-5xl font-extrabold leading-tight md:text-6xl">
           DigitaleDuif
@@ -35,10 +38,6 @@ const HeroSection = () => {
             </Button>
           </Link>
         </div>
-      </div>
-      {/* Optional: Add a subtle background pattern or animation for a techy feel */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        {/* Example: SVG pattern or particles */}
       </div>
     </section>
   );
