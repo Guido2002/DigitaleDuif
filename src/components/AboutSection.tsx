@@ -3,9 +3,10 @@
 import React from "react";
 import SectionHeader from "./SectionHeader";
 import AbstractBackgroundAnimation from "@/components/AbstractBackgroundAnimation";
+import profilePhoto from "/public/1711446418839.jpeg"; // Direct import van de afbeelding
 
 const AboutSection = () => {
-  console.log("AboutSection rendering. Image path:", "/1711446418839.jpeg");
+  console.log("AboutSection rendering. Image path:", profilePhoto);
 
   return (
     <section id="about" className="container bg-background py-16 md:py-24">
@@ -17,7 +18,7 @@ const AboutSection = () => {
       <div className="mb-16 flex flex-col items-center text-center md:flex-row md:text-left md:gap-8">
         <div className="mb-8 flex justify-center md:mb-0 md:w-1/3">
           <img
-            src="/1711446418839.jpeg"
+            src={profilePhoto} // Gebruik de geïmporteerde variabele
             alt="Persoonlijke foto van de oprichter"
             className="h-48 w-48 rounded-full object-cover shadow-lg"
           />
