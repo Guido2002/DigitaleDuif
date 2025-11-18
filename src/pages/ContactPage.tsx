@@ -18,6 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Loader2 } from "lucide-react"; // Import Loader2 icon
 
 // Define the schema for the contact form
 const formSchema = z.object({
@@ -48,10 +49,14 @@ const ContactPage = () => {
   });
 
   // Handle form submission
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     // In een echte applicatie zou hier de formulierdata naar een backend gestuurd worden.
-    // Voor nu tonen we alleen een succesbericht.
+    // Voor nu tonen we alleen een succesbericht en simuleren we een API-call.
     console.log("Formulier verzonden:", values);
+    
+    // Simulate an API call
+    await new Promise(resolve => setTimeout(resolve, 2000)); 
+
     showSuccess("Uw bericht is succesvol verzonden!");
     form.reset(); // Reset form fields after successful submission
   };
@@ -111,7 +116,14 @@ const ContactPage = () => {
                 )}
               />
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? "Verzenden..." : "Verzenden"}
+                {form.formState.isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Verzenden...
+                  </>
+                ) : (
+                  "Verzenden"
+                )}
               </Button>
             </form>
           </Form>
