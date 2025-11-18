@@ -8,35 +8,35 @@
   }
 
   :root {
-    --background: 0 0% 100%; /* White */
+    --background: 0 0% 100%; /* Pure White */
     --foreground: 220 20% 10%; /* Dark Gray */
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card: 0 0% 100%; /* Pure White */
+    --card-foreground: 220 20% 10%; /* Dark Gray */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover: 0 0% 100%; /* Pure White */
+    --popover-foreground: 220 20% 10%; /* Dark Gray */
 
-    --primary: 210 80% 45%; /* Slightly more vibrant blue */
+    --primary: 180 70% 30%; /* Deep Teal */
     --primary-foreground: 0 0% 100%; /* White */
-    --hero-gradient-end: 190 80% 30%; /* Dark teal for hero gradient end */
-    --light-blue: 210 80% 90%; /* A soft light blue */
+    --hero-gradient-end: 190 80% 25%; /* Darker Teal for potential gradient end */
+    --light-blue: 180 70% 95%; /* Very Light Teal for Hero Section */
 
-    --secondary: 210 40% 96.1%; /* Light Gray */
-    --secondary-foreground: 220 20% 10%;
+    --secondary: 210 20% 96%; /* Very Light Gray */
+    --secondary-foreground: 220 20% 10%; /* Dark Gray */
 
-    --muted: 210 40% 96.1%;
+    --muted: 210 40% 96.1%; /* Light Gray */
     --muted-foreground: 215.4 16.3% 46.9%; /* Medium Gray */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 220 20% 10%;
+    --accent: 180 70% 45%; /* Brighter Teal for accents */
+    --accent-foreground: 220 20% 10%; /* Dark Gray */
 
     --destructive: 0 84.2% 60.2%; /* Red */
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 210 80% 45%; /* Primary color for ring */
+    --border: 214.3 31.8% 91.4%; /* Light Gray-Blue */
+    --input: 214.3 31.8% 91.4%; /* Light Gray-Blue */
+    --ring: 180 70% 30%; /* Primary Teal for ring */
 
     --radius: 0.5rem;
   }
