@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { MadeWithDyad } from "@/components/made-with-dyad";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
@@ -14,7 +13,6 @@ const Index = () => {
       <AboutSection />
       <WhyChooseUsSection />
       <ProcessSection />
-      <MadeWithDyad />
     </>
   );
 };

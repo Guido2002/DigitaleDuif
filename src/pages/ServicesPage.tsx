@@ -3,7 +3,6 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MadeWithDyad } from "@/components/made-with-dyad";
 
 interface Service {
   title: string;
@@ -77,7 +76,6 @@ const ServicesPage = () => {
           </Card>
         ))}
       </div>
-      <MadeWithDyad />
     </div>
   );
 };

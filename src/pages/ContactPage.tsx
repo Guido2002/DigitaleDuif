@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MadeWithDyad } from "@/components/made-with-dyad";
 import { showSuccess } from "@/utils/toast";
 
 const ContactPage = () => {
@@ -78,7 +77,6 @@ const ContactPage = () => {
           </form>
         </CardContent>
       </Card>
-      <MadeWithDyad />
     </div>
   );
 };
