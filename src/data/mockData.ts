@@ -13,32 +13,32 @@ export const uspCards: USP[] = [
   {
     icon: Brain,
     title: "XR Specialist",
-    description: "Diepgaande kennis van Virtual & Mixed Reality. Praktische oplossingen, geen jargon.",
+    description: "Diepgaande kennis, praktische oplossingen.",
   },
   {
     icon: Rocket,
     title: "Snelle Concepten & Prototypes",
-    description: "Razendsnel werkende prototypes. Direct inzicht, snelle validatie.",
+    description: "Razendsnel prototypes, directe validatie.",
   },
   {
     icon: Lightbulb,
     title: "Techniek & UX in Balans",
-    description: "Solide techniek gecombineerd met gebruiksvriendelijk ontwerp. Werkt én voelt goed.",
+    description: "Solide techniek, gebruiksvriendelijk ontwerp.",
   },
   {
     icon: Users,
     title: "Co-creatie met Klanten",
-    description: "Samenwerking van brainstorm tot oplevering. Jouw inspraak, ons vakmanschap.",
+    description: "Samenwerking, jouw inspraak.",
   },
   {
     icon: TrendingUp,
     title: "Data-gedreven Ervaringen",
-    description: "Meetbare resultaten en concrete inzichten. Wat levert het op?",
+    description: "Meetbare resultaten, concrete inzichten.",
   },
   {
     icon: Code,
     title: "Ervaring met Meta Quest & Unity",
-    description: "Bewezen expertise met toonaangevende platforms en tools. Efficiënt en effectief.",
+    description: "Bewezen expertise, efficiënt en effectief.",
   },
 ];
 
@@ -53,22 +53,22 @@ export const processSteps: ProcessStep[] = [
   {
     icon: Users,
     title: "Kennismaking & Behoefteanalyse",
-    description: "Diepgaand gesprek, kern van de uitdaging begrijpen.",
+    description: "Diepgaand gesprek, kern begrijpen.",
   },
   {
     icon: Lightbulb,
     title: "Concept & Prototype",
-    description: "Concreet concept, werkend prototype. Snel uitproberen en bijsturen.",
+    description: "Concreet concept, werkend prototype.",
   },
   {
     icon: Brain,
     title: "Testen & Itereren",
-    description: "Samen testen, verfijnen en optimaliseren. Perfectie door herhaling.",
+    description: "Samen testen, verfijnen, optimaliseren.",
   },
   {
     icon: Rocket,
     title: "Oplevering & Support",
-    description: "Complete oplossing, heldere documentatie, nazorg en ondersteuning.",
+    description: "Complete oplossing, nazorg en ondersteuning.",
   },
 ];
 
