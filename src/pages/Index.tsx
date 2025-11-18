@@ -8,17 +8,15 @@ import ProcessSection from "@/components/ProcessSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import CallToActionSection from "@/components/CallToActionSection";
-import HeroBackgroundAnimation from "@/components/HeroBackgroundAnimation";
-import VrHeadsetIllustration from "@/components/VrHeadsetIllustration";
-import ScrollIndicator from "@/components/ScrollIndicator";
+// Removed HeroBackgroundAnimation, VrHeadsetIllustration, ScrollIndicator imports
 
 const Index = () => {
   return (
     <>
       <HeroSection>
-        <HeroBackgroundAnimation />
-        <VrHeadsetIllustration />
-        <ScrollIndicator />
+        {/* Removed HeroBackgroundAnimation */}
+        {/* Removed VrHeadsetIllustration */}
+        {/* Removed ScrollIndicator */}
       </HeroSection>
       <AboutSection />
       <WhyChooseUsSection />
