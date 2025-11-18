@@ -17,10 +17,10 @@
     --popover: 0 0% 100%; /* Pure White */
     --popover-foreground: 220 20% 10%; /* Dark Gray */
 
-    --primary: 180 70% 30%; /* Deep Teal */
+    --primary: 220 70% 30%; /* Deep Indigo Blue */
     --primary-foreground: 0 0% 100%; /* White */
-    --hero-gradient-end: 190 80% 25%; /* Darker Teal for potential gradient end */
-    --light-blue: 180 80% 40%; /* Very Light Teal for Hero Section */
+    --hero-gradient-end: 230 80% 25%; /* Darker Indigo for potential gradient end */
+    --light-blue: 220 70% 95%; /* Very Light Indigo for Hero Section */
 
     --secondary: 210 20% 96%; /* Very Light Gray */
     --secondary-foreground: 220 20% 10%; /* Dark Gray */
@@ -28,7 +28,7 @@
     --muted: 210 40% 96.1%; /* Light Gray */
     --muted-foreground: 215.4 16.3% 46.9%; /* Medium Gray */
 
-    --accent: 180 70% 45%; /* Brighter Teal for accents */
+    --accent: 220 70% 45%; /* Brighter Indigo for accents */
     --accent-foreground: 220 20% 10%; /* Dark Gray */
 
     --destructive: 0 84.2% 60.2%; /* Red */
@@ -36,7 +36,7 @@
 
     --border: 214.3 31.8% 91.4%; /* Light Gray-Blue */
     --input: 214.3 31.8% 91.4%; /* Light Gray-Blue */
-    --ring: 180 70% 30%; /* Primary Teal for ring */
+    --ring: 220 70% 30%; /* Primary Indigo for ring */
 
     --radius: 0.5rem;
   }
