@@ -3,97 +3,99 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import profilePhoto from "../assets/1711446418839.jpeg"; // Import the image directly
+import profilePhoto from "../assets/bas-van-toor.png"; // Corrected image import path
 import { cn } from "@/lib/utils";
 import { CheckCircle2 } from "lucide-react"; // Import CheckCircle2 icon
 
 const GuidoIntroSection = () => {
   return (
-    <motion.div
-      className="mb-16 grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-    >
-      {/* Image Section */}
+    <React.Fragment> {/* Added React.Fragment wrapper */}
       <motion.div
-        className="relative flex justify-center md:justify-end"
-        whileHover={{ scale: 1.03, rotate: 1 }} {/* Enhanced hover effect */}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="mb-16 grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
       >
-        {/* Subtle background glow behind the image */}
+        {/* Image Section */}
         <motion.div
-          className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-primary/50 to-purple-accent/50 blur-xl"
-          animate={{ opacity: [0.5, 0.8, 0.5], scale: [0.95, 1.05, 0.95] }}
-          transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
-        />
-        <img
-          src={profilePhoto} // Using the imported image path
-          alt="Bas van Toor - Oprichter DigitaleDuif"
-          className="w-full max-w-md rounded-xl object-cover shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out" {/* Changed border to ring for a more modern look */}
-          style={{ aspectRatio: '4/5' }}
-        />
-        {/* Optional: Add a subtle floating UI element near the image */}
-        <motion.div
-          className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          style={{ animation: "float 5s ease-in-out infinite alternate 1s" }}
+          className="relative flex justify-center md:justify-end"
+          whileHover={{ scale: 1.03, rotate: 1 }} {/* Enhanced hover effect */}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
-          Innovatie met impact!
+          {/* Subtle background glow behind the image */}
+          <motion.div
+            className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-primary/50 to-purple-accent/50 blur-xl"
+            animate={{ opacity: [0.5, 0.8, 0.5], scale: [0.95, 1.05, 0.95] }}
+            transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
+          />
+          <img
+            src={profilePhoto} // Using the imported image path
+            alt="Bas van Toor - Oprichter DigitaleDuif"
+            className="w-full max-w-md rounded-xl object-cover shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out" {/* Changed border to ring for a more modern look */}
+            style={{ aspectRatio: '4/5' }}
+          />
+          {/* Optional: Add a subtle floating UI element near the image */}
+          <motion.div
+            className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            style={{ animation: "float 5s ease-in-out infinite alternate 1s" }}
+          >
+            Innovatie met impact!
+          </motion.div>
         </motion.div>
-      </motion.div>
 
-      {/* Text Content Section */}
-      <div className="text-left md:text-left">
-        <CardHeader className="p-0 mb-6">
-          <CardTitle className="text-mobile-h1 md:text-h1 font-extrabold text-primary">
-            Hallo, ik ben Guido
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-0 px-4 md:px-0">
-          <div className="space-y-4">
-            <div className="flex items-start space-x-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                Oprichter van DigitaleDuif, gedreven door digitale innovatie.
-              </p>
+        {/* Text Content Section */}
+        <div className="text-left md:text-left">
+          <CardHeader className="p-0 mb-6">
+            <CardTitle className="text-mobile-h1 md:text-h1 font-extrabold text-primary">
+              Hallo, ik ben Guido
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0 px-4 md:px-0">
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                  Oprichter van DigitaleDuif, gedreven door digitale innovatie.
+                </p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                  Creëert digitale ervaringen waar je écht 'in stapt', zowel in XR als op web/mobiel.
+                </p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                  Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.
+                </p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                  Passie voor het 'wauw-moment' bij klanten.
+                </p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                  Perfectionist met oog voor detail en resultaat.
+                </p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                  Nieuwsgierig naar jouw ideeën voor een kop koffie!
+                </p>
+              </div>
             </div>
-            <div className="flex items-start space-x-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                Creëert digitale ervaringen waar je écht 'in stapt', zowel in XR als op web/mobiel.
-              </p>
-            </div>
-            <div className="flex items-start space-x-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.
-              </p>
-            </div>
-            <div className="flex items-start space-x-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                Passie voor het 'wauw-moment' bij klanten.
-              </p>
-            </div>
-            <div className="flex items-start space-x-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                Perfectionist met oog voor detail en resultaat.
-              </p>
-            </div>
-            <div className="flex items-start space-x-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                Nieuwsgierig naar jouw ideeën voor een kop koffie!
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </div>
-    </motion.div>
+          </CardContent>
+        </div>
+      </motion.div>
+    </React.Fragment>
   );
 };
 
