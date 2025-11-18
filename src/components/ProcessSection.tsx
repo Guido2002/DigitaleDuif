@@ -34,7 +34,7 @@ const ProcessSection = () => {
         />
 
         {processSteps.map((step, index) => (
-          <FadeInWhenVisible key={index} delay={0.1 + index * 0.1}>
+          <FadeInWhenVisible key={index} delay={0.1 + index * 0.1} className="h-full"> {/* Added h-full here */}
             <ProcessStepCard
               icon={step.icon}
               title={step.title}

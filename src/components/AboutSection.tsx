@@ -55,9 +55,9 @@ const AboutSection = () => {
       {/* Expertise Grid */}
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {aboutExpertiseCards.map((item, index) => (
-          <FadeInWhenVisible key={index} delay={0.3 + index * 0.1}>
+          <FadeInWhenVisible key={index} delay={0.3 + index * 0.1} className="h-full"> {/* Added h-full here */}
             <Card
-              className="group relative flex flex-col items-center justify-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border glassmorphism"
+              className="group relative flex flex-col items-center justify-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border glassmorphism h-full" // Added h-full here
             >
               <AbstractBackgroundAnimation className="opacity-20" /> {/* Keep this for subtle background animation */}
               <div className="z-10">
