@@ -3,13 +3,7 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { projects } from "@/data/mockData"; // Import projects from mockData
-
-interface Project {
-  title: string;
-  description: string;
-  techStack: string[];
-}
+import { projects, Project } from "@/data/mockData"; // Import projects and Project interface from mockData
 
 const ProjectsPage = () => {
   return (

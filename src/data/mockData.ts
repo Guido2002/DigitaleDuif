@@ -102,7 +102,7 @@ export const testimonials: Testimonial[] = [
 ];
 
 // Project Data
-interface Project {
+export interface Project {
   title: string;
   description: string;
   techStack: string[];
@@ -137,7 +137,7 @@ export const projects: Project[] = [
 ];
 
 // Service Data
-interface Service {
+export interface Service {
   title: string;
   description: string;
   tags: string[];

@@ -3,13 +3,7 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { services } from "@/data/mockData"; // Import services from mockData
-
-interface Service {
-  title: string;
-  description: string;
-  tags: string[];
-}
+import { services, Service } from "@/data/mockData"; // Import services and Service interface from mockData
 
 const ServicesPage = () => {
   return (
