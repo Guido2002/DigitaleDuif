@@ -23,7 +23,7 @@ const CallToActionSection = () => {
           <Link to="/contact">
             <Button
               size="lg"
-              className="bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105"
+              className="h-14 text-xl bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105" // Made button larger
             >
               Plan een gratis consult
             </Button>

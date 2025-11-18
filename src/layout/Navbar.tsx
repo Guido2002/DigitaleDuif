@@ -56,7 +56,7 @@ const Navbar = () => {
         {isMobile ? (
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" className="h-12 w-12"> {/* Made menu icon button larger */}
                 <Menu className="h-6 w-6 text-foreground" />
               </Button>
             </SheetTrigger>
@@ -117,7 +117,7 @@ const Navbar = () => {
                 ))}
                 <SheetClose asChild>
                   <Link to="/contact">
-                    <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button>
+                    <Button className="w-full h-12 text-lg bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button> {/* Made button larger */}
                   </Link>
                 </SheetClose>
               </div>
