@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Mail, Linkedin } from "lucide-react";
-import { MadeWithDyad } from "@/components/made-with-dyad";
+
 
 const Footer = () => {
   return (
@@ -34,7 +34,6 @@ const Footer = () => {
       <div className="mt-8 text-center text-xs text-muted-foreground">
         &copy; {new Date().getFullYear()} DigitaleDuif. Alle rechten voorbehouden.
       </div>
-      <MadeWithDyad />
     </footer>
   );
 };
