@@ -14,7 +14,6 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      {/* Removed <Toaster /> from @/components/ui/toaster */}
       <Sonner /> {/* This is for the sonner toast library */}
       <BrowserRouter>
         <Layout>
