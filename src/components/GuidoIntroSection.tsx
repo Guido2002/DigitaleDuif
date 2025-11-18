@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import profilePhoto from "/public/bas-van-toor.png"; // Updated to use the new image
+import profilePhoto from "/bas-van-toor.png"; // Corrected: direct reference from root
 import { cn } from "@/lib/utils";
 
 const GuidoIntroSection = () => {
@@ -16,15 +16,15 @@ const GuidoIntroSection = () => {
     >
       {/* Image Section */}
       <motion.div
-        className="relative flex justify-center md:justify-end" // Changed to justify-start for mobile, justify-end for desktop
-        whileHover={{ scale: 1.02 }} // Subtle scale on hover for the image container
+        className="relative flex justify-center md:justify-end"
+        whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         <img
           src={profilePhoto}
           alt="Bas van Toor - Oprichter DigitaleDuif"
           className="w-full max-w-md rounded-xl object-cover shadow-2xl border-4 border-primary/20 transition-all duration-300 ease-in-out"
-          style={{ aspectRatio: '4/5' }} // Adjust aspect ratio for a standing photo look
+          style={{ aspectRatio: '4/5' }}
         />
         {/* Optional: Add a subtle floating UI element near the image */}
         <motion.div
@@ -39,7 +39,7 @@ const GuidoIntroSection = () => {
       </motion.div>
 
       {/* Text Content Section */}
-      <div className="text-left md:text-left"> {/* Changed to text-left for mobile */}
+      <div className="text-left md:text-left">
         <CardHeader className="p-0 mb-6">
           <CardTitle className="text-4xl font-extrabold text-primary md:text-5xl lg:text-6xl">
             Hallo, ik ben Guido Duif!
