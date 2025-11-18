@@ -28,7 +28,7 @@ const AboutSection = () => {
         {aboutExpertiseCards.map((item, index) => (
           <FadeInWhenVisible key={index} delay={0.3 + index * 0.1} className="h-full">
             <Card
-              className="group relative flex flex-col items-center justify-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border glassmorphism h-full"
+              className="group relative flex flex-col items-center justify-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border-2 border-primary glassmorphism h-full"
             >
               <AbstractBackgroundAnimation className="opacity-20" />
               <div className="z-10">
