@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import profilePhoto from "/public/1711446418839.jpeg"; // De grote foto
+import profilePhoto from "/public/bas-van-toor.png"; // Updated to use the new image
 import { cn } from "@/lib/utils";
 
 const GuidoIntroSection = () => {
@@ -22,7 +22,7 @@ const GuidoIntroSection = () => {
       >
         <img
           src={profilePhoto}
-          alt="Guido Duif - Oprichter DigitaleDuif"
+          alt="Bas van Toor - Oprichter DigitaleDuif"
           className="w-full max-w-md rounded-xl object-cover shadow-2xl border-4 border-primary/20 transition-all duration-300 ease-in-out"
           style={{ aspectRatio: '4/5' }} // Adjust aspect ratio for a standing photo look
         />
