@@ -27,7 +27,7 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md ring-2 ring-primary/50 ring-offset-2 ring-offset-background">
         <span className="text-2xl font-extrabold">{stepNumber}</span>
       </div>
-      <Card className="group mt-4 flex-grow p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border glassmorphism">
+      <Card className="group mt-4 flex-grow p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border glassmorphism h-full"> {/* Added h-full */}
         <CardHeader className="mb-4 p-0">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-light-accent/20 text-primary">
             <Icon className="h-6 w-6" />

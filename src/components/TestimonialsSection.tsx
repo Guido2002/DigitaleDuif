@@ -42,7 +42,7 @@ const TestimonialsSection = () => {
         <CarouselContent>
           {testimonials.map((testimonial, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <div className="p-1">
+              <div className="p-1 h-full"> {/* Added h-full here */}
                 <FadeInWhenVisible delay={0.1 + index * 0.1}>
                   <TestimonialCard
                     quote={testimonial.quote}

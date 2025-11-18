@@ -19,7 +19,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
   return (
     <Card 
       className={cn(
-        "group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-border",
+        "group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border border-border h-full", // Added h-full
         highlight 
           ? "bg-primary text-primary-foreground shadow-xl p-8 md:p-10" // Larger padding for highlighted cards
           : "bg-card text-foreground glassmorphism p-6" // Standard padding for non-highlighted cards
@@ -52,6 +52,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       </CardTitle>
       <CardDescription 
         className={cn(
+          "flex-grow", // Allow description to grow and push link to bottom
           highlight ? "text-primary-foreground/90" : "text-muted-foreground"
         )}
       >

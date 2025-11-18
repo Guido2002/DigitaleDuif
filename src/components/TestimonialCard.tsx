@@ -24,7 +24,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   companyLogo,
 }) => {
   return (
-    <Card className="group relative flex flex-col p-6 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-card border border-border glassmorphism">
+    <Card className="group relative flex flex-col p-6 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-card border border-border glassmorphism h-full"> {/* Added h-full */}
       <Quote className="absolute left-6 top-6 h-8 w-8 text-light-accent/50" />
       <CardContent className="flex flex-grow flex-col items-center justify-center p-0 pt-8">
         <p className="mb-6 text-lg italic text-foreground">"{quote}"</p>
