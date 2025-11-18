@@ -23,11 +23,12 @@ const TestimonialsSection = () => {
   );
 
   return (
-    <section id="testimonials" className="container bg-secondary py-16 md:py-24">
+    <section id="testimonials" className="container bg-neutral-900 py-16 md:py-24">
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Wat onze klanten zeggen"
           subtitle="Mooie verhalen vertellen over onszelf? Dat kunnen we. Maar we laten liever anderen aan het woord die al met ons hebben gewerkt."
+          subtitleClassName="text-neutral-300" // Ensure subtitle is readable on dark background
         />
       </FadeInWhenVisible>
 
@@ -51,6 +52,7 @@ const TestimonialsSection = () => {
                     avatar={testimonial.avatar}
                     rating={testimonial.rating} // Pass the new rating prop
                     companyLogo={testimonial.companyLogo} // Pass the new companyLogo prop
+                    isDarkBackground={true} // Indicate that the card is on a dark background
                   />
                 </FadeInWhenVisible>
               </div>
