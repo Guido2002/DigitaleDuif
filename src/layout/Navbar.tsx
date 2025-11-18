@@ -42,7 +42,7 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-20 items-center justify-between"> {/* Increased height to h-20 */}
         <Link to="/" className="flex items-center space-x-2">
           <motion.span
             className="text-xl font-bold text-primary"
@@ -56,7 +56,7 @@ const Navbar = () => {
         {isMobile ? (
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" className="h-12 w-12"> {/* Made menu icon button larger */}
+              <Button variant="ghost" className="h-12 w-12">
                 <Menu className="h-6 w-6 text-foreground" />
               </Button>
             </SheetTrigger>
@@ -117,7 +117,7 @@ const Navbar = () => {
                 ))}
                 <SheetClose asChild>
                   <Link to="/contact">
-                    <Button className="w-full h-12 text-lg bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button> {/* Made button larger */}
+                    <Button className="w-full h-12 text-lg bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button>
                   </Link>
                 </SheetClose>
               </div>
@@ -132,7 +132,7 @@ const Navbar = () => {
                     <Link
                       to={link.path} // Link to the main services page
                       className={cn(
-                        "relative text-sm font-medium text-foreground transition-colors hover:text-primary",
+                        "relative text-base font-medium text-foreground transition-colors hover:text-primary", // Increased text size to text-base
                         isActive(link.path) && "text-primary font-bold",
                       )}
                     >
@@ -166,7 +166,7 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={cn(
-                    "relative text-sm font-medium text-foreground transition-colors hover:text-primary",
+                    "relative text-base font-medium text-foreground transition-colors hover:text-primary", // Increased text size to text-base
                     isActive(link.path) && "text-primary font-bold",
                   )}
                 >
