@@ -19,7 +19,10 @@ const ServicesPage = () => {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {services.map((service, index) => (
-          <Card key={index} className="flex flex-col justify-between p-6">
+          <Card 
+            key={index} 
+            className="group flex flex-col justify-between p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+          >
             <CardHeader className="px-0 pt-0">
               <CardTitle className="mb-2 text-2xl font-semibold">
                 {service.title}

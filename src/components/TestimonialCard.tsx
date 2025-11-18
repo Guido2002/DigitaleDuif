@@ -19,7 +19,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   avatar,
 }) => {
   return (
-    <Card className="relative flex flex-col p-6 text-center shadow-lg">
+    <Card className="group relative flex flex-col p-6 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <Quote className="absolute left-6 top-6 h-8 w-8 text-primary/20" />
       <CardContent className="flex flex-grow flex-col items-center justify-center p-0 pt-8">
         <p className="mb-6 text-lg italic text-foreground">"{quote}"</p>

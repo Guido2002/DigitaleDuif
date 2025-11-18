@@ -17,12 +17,19 @@ const CallToActionSection = () => {
         </p>
         <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
           <Link to="/contact">
-            <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
+            <Button 
+              size="lg" 
+              className="bg-white text-primary hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+            >
               Plan een gesprek
             </Button>
           </Link>
           <Link to="/projecten">
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105"
+            >
               Bekijk onze projecten
             </Button>
           </Link>
