@@ -28,7 +28,7 @@ const CallToActionSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105"
+              className="border-primary text-primary bg-primary-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105"
             >
               Bekijk projecten
             </Button>
