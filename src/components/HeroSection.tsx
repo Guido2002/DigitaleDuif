@@ -39,7 +39,7 @@ const HeroSection = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-primary transition-all duration-300 hover:scale-105"
+              className="border-primary-foreground text-primary-foreground bg-transparent hover:bg-primary-foreground hover:text-primary transition-all duration-300 hover:scale-105"
             >
               Plan een gesprek
             </Button>
