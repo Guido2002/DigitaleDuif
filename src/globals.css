@@ -8,35 +8,35 @@
   }
 
   :root {
-    --background: 220 20% 15%; /* Dark blue-gray */
-    --foreground: 210 10% 90%; /* Light gray for text */
+    --background: 30 10% 98%; /* Very light warm gray/off-white */
+    --foreground: 210 10% 20%; /* Soft dark gray for text */
 
-    --card: 220 15% 20%; /* Slightly lighter dark blue-gray for cards */
-    --card-foreground: 210 10% 90%; /* Light gray */
+    --card: 0 0% 100%; /* Pure White */
+    --card-foreground: 210 10% 20%; /* Soft dark gray */
 
-    --popover: 220 15% 20%; /* Same as card */
-    --popover-foreground: 210 10% 90%; /* Light gray */
+    --popover: 0 0% 100%; /* Pure White */
+    --popover-foreground: 210 10% 20%; /* Soft dark gray */
 
-    --primary: 240 60% 50%; /* Vibrant blue/purple */
+    --primary: 140 40% 35%; /* Muted, earthy green */
     --primary-foreground: 0 0% 100%; /* White */
-    --hero-gradient-end: 240 60% 40%; /* Deeper blue/purple for gradient */
-    --light-accent: 240 60% 90%; /* Very light blue/purple for subtle accents */
+    --hero-gradient-end: 150 50% 28%; /* Deeper, richer green for gradient */
+    --light-accent: 140 40% 90%; /* Very light earthy green for Hero Section */
 
-    --secondary: 220 18% 25%; /* Another shade of dark blue-gray for secondary backgrounds */
-    --secondary-foreground: 210 10% 90%; /* Light gray */
+    --secondary: 40 20% 95%; /* Soft beige/cream */
+    --secondary-foreground: 210 10% 25%; /* Slightly darker soft gray */
 
-    --muted: 210 10% 50%; /* Medium gray */
-    --muted-foreground: 210 10% 70%; /* Lighter gray */
+    --muted: 210 20% 90%; /* Light gray */
+    --muted-foreground: 210 10% 40%; /* Medium soft gray */
 
-    --accent: 240 60% 60%; /* Brighter blue/purple for accents */
-    --accent-foreground: 210 10% 20%; /* Dark text on accent */
+    --accent: 140 40% 45%; /* Slightly brighter earthy green for accents */
+    --accent-foreground: 210 10% 20%; /* Soft dark gray */
 
     --destructive: 0 84.2% 60.2%; /* Red (standard for destructive actions) */
     --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 220 15% 30%; /* Subtle dark border */
-    --input: 220 15% 30%; /* Subtle dark input border */
-    --ring: 240 60% 50%; /* Primary color for focus ring */
+    --border: 210 15% 85%; /* Soft light gray border */
+    --input: 210 15% 85%; /* Soft light gray input border */
+    --ring: 140 40% 35%; /* Primary green for focus ring */
 
     --radius: 0.5rem;
   }
