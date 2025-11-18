@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link"; // Assuming Next.js Link for navigation
+import { Link } from "react-router-dom"; // Correct import for React Router
 
 interface HeroSectionProps {
   children?: React.ReactNode;
@@ -41,7 +41,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ children }) => {
           transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
         >
           <Button asChild size="lg" className="group px-8 py-6 text-lg">
-            <Link href="/contact">
+            <Link to="/contact"> {/* Changed href to to */}
               Start uw XR Project
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
