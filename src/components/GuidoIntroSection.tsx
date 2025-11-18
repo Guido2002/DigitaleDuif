@@ -42,7 +42,7 @@ const GuidoIntroSection = () => {
       <div className="text-left md:text-left">
         <CardHeader className="p-0 mb-6">
           <CardTitle className="text-mobile-h1 md:text-h1 font-extrabold text-primary">
-            Hallo, ik ben Guido Duif!
+            Guido!
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0 px-4 md:px-0"> {/* Added responsive padding */}
