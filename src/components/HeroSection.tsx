@@ -11,20 +11,20 @@ const HeroSection = () => {
       className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-primary to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
     >
       
-      <div className="container z-10 text-center">
+      <div className="container z-10 text-center md:text-left">
         <h1 className="mb-4 text-5xl font-extrabold leading-tight md:text-6xl text-primary-foreground">
           DigitaleDuif
         </h1>
         <p className="mb-6 text-2xl font-semibold md:text-3xl text-primary-foreground/90">
           Innovatieve XR-oplossingen die écht vliegen.
         </p>
-        <p className="mx-auto mb-10 max-w-3xl text-lg md:text-xl text-primary-foreground/80">
+        <p className="mx-auto mb-10 max-w-3xl text-lg md:text-xl text-primary-foreground/80 md:mx-0">
           Wij zijn DigitaleDuif, uw partner in de ontwikkeling van baanbrekende
           Virtual Reality (VR), Mixed Reality (MR) en interactieve applicaties.
           Met een focus op Unity development creëren we data-gedreven
           XR-experiences die uw visie tot leven brengen.
         </p>
-        <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+        <div className="flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 md:justify-start">
           <Link to="/projecten">
             <Button 
               size="lg" 

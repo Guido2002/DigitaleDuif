@@ -8,14 +8,14 @@ import FadeInWhenVisible from "./FadeInWhenVisible";
 const CallToActionSection = () => {
   return (
     <section id="cta" className="bg-primary text-primary-foreground py-16 md:py-24">
-      <div className="container text-center">
+      <div className="container text-center md:text-left">
         <FadeInWhenVisible delay={0.1}>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Klaar om uw digitale aanwezigheid te transformeren?
           </h2>
         </FadeInWhenVisible>
         <FadeInWhenVisible delay={0.2}>
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto md:mx-0">
             Neem vandaag nog contact met ons op voor een vrijblijvend gesprek en ontdek hoe DigitaleDuif uw bedrijf kan laten vliegen.
           </p>
         </FadeInWhenVisible>
