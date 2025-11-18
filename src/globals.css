@@ -17,8 +17,9 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 10%;
 
-    --primary: 210 80% 55%; /* Lighter Blue */
+    --primary: 210 80% 45%; /* Slightly more vibrant blue */
     --primary-foreground: 0 0% 100%; /* White */
+    --hero-gradient-end: 190 80% 30%; /* Dark teal for hero gradient end */
 
     --secondary: 210 40% 96.1%; /* Light Gray */
     --secondary-foreground: 220 20% 10%;
@@ -34,7 +35,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 210 80% 55%; /* Primary color for ring (Lighter Blue) */
+    --ring: 210 80% 45%; /* Primary color for ring */
 
     --radius: 0.5rem;
   }
@@ -49,8 +50,9 @@
     --popover: 220 20% 10%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 210 80% 75%; /* Even Lighter Blue for dark mode */
+    --primary: 210 80% 65%; /* Lighter blue for dark mode */
     --primary-foreground: 220 20% 10%; /* Dark Gray */
+    --hero-gradient-end: 220 20% 15%; /* Very dark blue/charcoal for hero gradient end */
 
     --secondary: 210 20% 20%; /* Darker Gray */
     --secondary-foreground: 0 0% 95%;
@@ -66,7 +68,7 @@
 
     --border: 210 20% 25%;
     --input: 210 20% 25%;
-    --ring: 210 80% 75%; /* Primary color for ring (Even Lighter Blue) */
+    --ring: 210 80% 65%; /* Primary color for ring */
   }
 }
 

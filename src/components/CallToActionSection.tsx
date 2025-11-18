@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const CallToActionSection = () => {
   return (
-    <section className="bg-gradient-to-br from-primary to-emerald-800 py-20 text-white">
+    <section className="bg-gradient-to-br from-primary to-hero-gradient-end py-20 text-primary-foreground">
       <div className="container text-center">
         <h2 className="mb-4 text-4xl font-extrabold md:text-5xl">
           Klaar om uw visie te realiseren?

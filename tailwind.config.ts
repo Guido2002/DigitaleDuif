@@ -52,6 +52,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "hero-gradient-end": "hsl(var(--hero-gradient-end))", // Add this line
       },
       borderRadius: {
         lg: "var(--radius)",

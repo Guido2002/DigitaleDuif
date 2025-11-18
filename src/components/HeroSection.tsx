@@ -8,10 +8,10 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-primary to-emerald-800 py-20 text-white overflow-hidden"
+      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-primary to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
     >
       {/* Animated background overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-lime-500/20 bg-[length:400%_400%] animate-gradient-move"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 bg-[length:400%_400%] animate-gradient-move"></div>
       
       <div className="container z-10 text-center">
         <h1 className="mb-4 text-5xl font-extrabold leading-tight md:text-6xl">
