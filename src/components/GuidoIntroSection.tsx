@@ -16,7 +16,7 @@ const GuidoIntroSection = () => {
     >
       {/* Image Section */}
       <motion.div
-        className="relative flex justify-center md:justify-end"
+        className="relative flex justify-center md:justify-end" // Changed to justify-start for mobile, justify-end for desktop
         whileHover={{ scale: 1.02 }} // Subtle scale on hover for the image container
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
@@ -39,7 +39,7 @@ const GuidoIntroSection = () => {
       </motion.div>
 
       {/* Text Content Section */}
-      <div className="text-center md:text-left">
+      <div className="text-left md:text-left"> {/* Changed to text-left for mobile */}
         <CardHeader className="p-0 mb-6">
           <CardTitle className="text-4xl font-extrabold text-primary md:text-5xl lg:text-6xl">
             Hallo, ik ben Guido Duif!
