@@ -3,9 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// Corrected import path to reference the existing image in the public folder
-// For images in the public folder, you can directly reference them from the root.
-import profilePhoto from "/public/1711446418839.jpeg"; // Import the image directly
+// Corrected import path to reference the image from src/assets
+import profilePhoto from "../assets/1711446418839.jpeg"; // Import the image directly
 import { cn } from "@/lib/utils";
 
 const GuidoIntroSection = () => {
