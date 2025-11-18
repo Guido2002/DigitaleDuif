@@ -12,8 +12,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useIsMobile } from "@/hooks/use-mobile"; // Import useIsMobile
+import Autoplay from "embla-carousel-autoplay"; // Import Autoplay plugin
 
 const TestimonialsSection = () => {
+  const isMobile = useIsMobile();
+
+  // Configure autoplay plugin
+  const autoplayPlugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: false })
+  );
+
   return (
     <section id="testimonials" className="container bg-secondary py-16 md:py-24">
       <FadeInWhenVisible delay={0.1}>
@@ -26,7 +35,9 @@ const TestimonialsSection = () => {
       <Carousel
         opts={{
           align: "start",
+          loop: isMobile, // Loop only on mobile
         }}
+        plugins={isMobile ? [autoplayPlugin.current] : []} // Autoplay only on mobile
         className="w-full max-w-4xl mx-auto"
       >
         <CarouselContent>
