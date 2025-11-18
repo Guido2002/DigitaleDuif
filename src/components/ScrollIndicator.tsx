@@ -36,7 +36,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({ className }) => {
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: "cubic-bezier(0.4, 0, 0.6, 1)",
+          ease: [0.4, 0, 0.6, 1], // Corrected cubic-bezier format
         }}
       >
         <ArrowDown className="h-5 w-5" />
