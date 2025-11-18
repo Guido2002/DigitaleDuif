@@ -3,7 +3,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import profilePhoto from "@/assets/bas-van-toor.png"; // Correct import path for assets processed by Vite
+// Corrected import path to reference the existing image in the public folder
+// For images in the public folder, you can directly reference them from the root.
+const profilePhoto = "/profile-photo.jpeg"; 
 import { cn } from "@/lib/utils";
 
 const GuidoIntroSection = () => {
@@ -21,7 +23,7 @@ const GuidoIntroSection = () => {
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         <img
-          src={profilePhoto} // Using the imported module
+          src={profilePhoto} // Using the directly referenced image path
           alt="Bas van Toor - Oprichter DigitaleDuif"
           className="w-full max-w-md rounded-xl object-cover shadow-2xl border-4 border-primary/20 transition-all duration-300 ease-in-out"
           style={{ aspectRatio: '4/5' }}
