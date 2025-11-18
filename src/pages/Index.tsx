@@ -8,9 +8,7 @@ import ProcessSection from "@/components/ProcessSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import CallToActionSection from "@/components/CallToActionSection";
-import HeroBackgroundAnimation from "@/components/HeroBackgroundAnimation"; // Added import
-import VrHeadsetIllustration from "@/components/VrHeadsetIllustration"; // Added import
-import ScrollIndicator from "@/components/ScrollIndicator"; // Added import
+// Removed HeroBackgroundAnimation, VrHeadsetIllustration, ScrollIndicator imports
 
 const Index = () => {
   return (
