@@ -8,7 +8,9 @@ import ProcessSection from "@/components/ProcessSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import CallToActionSection from "@/components/CallToActionSection";
-// Removed HeroBackgroundAnimation, VrHeadsetIllustration, ScrollIndicator imports
+import HeroBackgroundAnimation from "@/components/HeroBackgroundAnimation"; // Re-import
+import VrHeadsetIllustration from "@/components/VrHeadsetIllustration"; // Re-import
+import ScrollIndicator from "@/components/ScrollIndicator"; // Re-import
 
 const Index = () => {
   return (

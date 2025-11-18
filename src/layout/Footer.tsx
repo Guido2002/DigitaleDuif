@@ -2,11 +2,11 @@
 
 import React from "react";
 import { Mail, Linkedin } from "lucide-react";
-
+import { motion } from "framer-motion"; // Import motion
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-background py-8">
+    <footer className="relative border-t border-border bg-background py-8 overflow-hidden"> {/* Added relative and overflow-hidden */}
       <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
         <div className="text-center md:text-left">
           <h3 className="text-lg font-bold text-primary">DigitaleDuif</h3>
@@ -34,6 +34,17 @@ const Footer = () => {
       <div className="mt-8 text-center text-xs text-muted-foreground">
         &copy; {new Date().getFullYear()} DigitaleDuif. Alle rechten voorbehouden.
       </div>
+
+      {/* Pigeon 4 */}
+      <motion.img
+        src="/pigeon4.png"
+        alt="Zittende duif"
+        className="absolute left-[5%] bottom-[5%] w-16 h-auto object-contain opacity-70 hidden sm:block"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+        style={{ animation: "float 4s ease-in-out infinite alternate 0.8s" }}
+      />
     </footer>
   );
 };
