@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom"; // Corrected import for Link
+import Link from "next/link";
 import FlyingBirdIllustration from "./FlyingBirdIllustration"; // Import the bird component
 
 const HeroSection: React.FC = () => {
@@ -31,6 +31,7 @@ const HeroSection: React.FC = () => {
         animationDelay={1}
         animateOpacity={0.9}
       />
+      {/* De duif linksonder is verwijderd */}
       <FlyingBirdIllustration
         className="bottom-[5%] right-[5%] md:bottom-[10%] md:right-[10%]"
         size="medium"
@@ -65,7 +66,7 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
         >
           <Button asChild className="px-8 py-6 text-lg">
-            <Link to="/contact"> {/* Changed href to to */}
+            <Link href="#contact">
               Neem Contact Op <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
