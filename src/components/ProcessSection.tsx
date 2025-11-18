@@ -2,7 +2,7 @@
 
 import React from "react";
 import SectionHeader from "./SectionHeader";
-import ProcessStep from "./ProcessStep";
+import FeatureCard from "./FeatureCard"; // Use FeatureCard instead of ProcessStep
 import { processSteps } from "@/data/mockData";
 
 const ProcessSection = () => {
@@ -15,7 +15,7 @@ const ProcessSection = () => {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {processSteps.map((step, index) => (
-          <ProcessStep
+          <FeatureCard // Use FeatureCard here
             key={index}
             icon={step.icon}
             title={step.title}

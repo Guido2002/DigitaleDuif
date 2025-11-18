@@ -4,13 +4,13 @@ import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
 
-interface USP_CardProps {
+interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
 }
 
-const USP_Card: React.FC<USP_CardProps> = ({ icon: Icon, title, description }) => {
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description }) => {
   return (
     <Card className="flex flex-col items-center p-6 text-center">
       <CardHeader className="mb-4 p-0">
@@ -28,4 +28,4 @@ const USP_Card: React.FC<USP_CardProps> = ({ icon: Icon, title, description }) =
   );
 };
 
-export default USP_Card;
+export default FeatureCard;

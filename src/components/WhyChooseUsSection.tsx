@@ -2,7 +2,7 @@
 
 import React from "react";
 import SectionHeader from "./SectionHeader";
-import USP_Card from "./USP_Card";
+import FeatureCard from "./FeatureCard"; // Use FeatureCard instead of USP_Card
 import { uspCards } from "@/data/mockData";
 
 const WhyChooseUsSection = () => {
@@ -15,7 +15,7 @@ const WhyChooseUsSection = () => {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {uspCards.map((usp, index) => (
-          <USP_Card
+          <FeatureCard // Use FeatureCard here
             key={index}
             icon={usp.icon}
             title={usp.title}
