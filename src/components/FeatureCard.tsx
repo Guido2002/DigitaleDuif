@@ -22,7 +22,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       className={cn(
         "group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg border h-full", // Added h-full
         highlight 
-          ? "bg-primary text-primary-foreground shadow-xl p-8 md:p-10 border-primary" // Larger padding for highlighted cards
+          ? "bg-primary text-primary-foreground shadow-xl p-6 border-primary" // Changed padding from p-8 md:p-10 to p-6
           : isDarkBackground
             ? "bg-neutral-800 text-neutral-100 dark-glassmorphism p-6 border-neutral-700" // Dark card on dark background
             : "bg-card text-foreground glassmorphism p-6 border-border" // Standard card
@@ -38,11 +38,11 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
           className={cn(
             "flex items-center justify-center rounded-full",
             highlight 
-              ? "h-20 w-20 bg-primary-foreground/20 text-primary-foreground" // Larger icon container for highlighted
+              ? "h-16 w-16 bg-primary-foreground/20 text-primary-foreground" // Changed icon container size from h-20 w-20 to h-16 w-16
               : "h-16 w-16 bg-light-accent/20 text-primary" // Standard icon container
           )}
         >
-          <Icon className={cn(highlight ? "h-10 w-10" : "h-8 w-8")} /> {/* Larger icon for highlighted */}
+          <Icon className={cn(highlight ? "h-8 w-8" : "h-8 w-8")} /> {/* Changed icon size from h-10 w-10 to h-8 w-8 */}
         </div>
       </CardHeader>
       <CardTitle 
