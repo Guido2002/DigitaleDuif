@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion"; // We'll need framer-motion for more advanced animations
+import { motion } from "framer-motion"; // Ensure motion is used
 
 interface FadeInWhenVisibleProps {
   children: React.ReactNode;
@@ -23,17 +23,18 @@ const FadeInWhenVisible: React.FC<FadeInWhenVisibleProps> = ({
   });
 
   return (
-    <div
+    <motion.div // Changed to motion.div
       ref={ref}
       className={className}
-      style={{
-        opacity: inView ? 1 : 0,
-        transform: inView ? "translateY(0)" : "translateY(20px)",
-        transition: `opacity ${duration}s ease-out ${delay}s, transform ${duration}s ease-out ${delay}s`,
+      initial={{ opacity: 0, y: 20 }} // Initial state for animation
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} // Animate based on inView status
+      transition={{
+        opacity: { duration: duration, ease: "easeOut", delay: delay },
+        y: { duration: duration, ease: "easeOut", delay: delay },
       }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
