@@ -4,6 +4,8 @@ import React from "react";
 import SectionHeader from "./SectionHeader";
 
 const AboutSection = () => {
+  console.log("AboutSection rendering. Image path:", "/1711446418839.jpeg"); // Added console log
+
   return (
     <section id="about" className="container py-16 md:py-24">
       <SectionHeader
@@ -16,6 +18,8 @@ const AboutSection = () => {
         <div className="mb-8 flex justify-center md:mb-0 md:w-1/3">
           <img
             src="/1711446418839.jpeg" // Gebruikt de zojuist geüploade afbeelding
+            alt="Persoonlijke foto van de oprichter" // Ensure alt text is present
+            className="h-48 w-48 rounded-full object-cover shadow-lg"
           />
         </div>
         <div className="md:w-2/3">
