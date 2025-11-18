@@ -24,7 +24,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
 
       {/* Flying Birds */}
       <FlyingBirdIllustration
-        className="top-1/4 left-1/4"
+        className="top-[10%] left-[10%]" // Adjusted position
         size="medium"
         initialX="-10%"
         initialY="10%"
@@ -35,7 +35,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
         animateOpacity={0.8} // Slightly transparent
       />
       <FlyingBirdIllustration
-        className="bottom-1/4 right-1/4"
+        className="bottom-[10%] right-[10%]" // Adjusted position
         size="small"
         initialX="10%"
         initialY="-10%"

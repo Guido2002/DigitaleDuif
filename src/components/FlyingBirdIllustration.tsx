@@ -49,7 +49,7 @@ const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
       src={selectedPigeonImage}
       alt="Flying bird illustration"
       className={cn(
-        "absolute object-contain pointer-events-none z-20", // Higher z-index than background animations
+        "absolute object-contain pointer-events-none z-1", // Changed z-index from z-20 to z-1
         sizeClasses[size],
         className
       )}
