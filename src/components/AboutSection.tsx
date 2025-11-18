@@ -60,7 +60,7 @@ const AboutSection = () => {
               <AbstractBackgroundAnimation className="opacity-20" /> {/* Keep this for subtle background animation */}
               <div className="z-10">
                 <CardHeader className="mb-4 p-0">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-light-accent/20 text-primary mx-auto">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-cyan-accent/20 text-primary mx-auto">
                     <item.icon className="h-8 w-8" />
                   </div>
                 </CardHeader>
