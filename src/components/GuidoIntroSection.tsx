@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-// Removed motion import
+import { motion } from "framer-motion"; // Re-import motion
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import profilePhoto from "../assets/1711446418839.jpeg";
 import { cn } from "@/lib/utils";
@@ -9,17 +9,20 @@ import { CheckCircle2 } from "lucide-react"; // Import CheckCircle2 icon
 
 const GuidoIntroSection = () => {
   return (
-    <div // Replaced motion.div with a standard div
+    <div
       className="mb-16 grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16"
     >
       {/* Image Section */}
-      <div // Replaced motion.div with a standard div
+      <motion.div // Restored motion.div
         className="relative flex justify-center md:justify-end"
+        whileHover={{ scale: 1.03, rotate: 1 }} // Enhanced hover effect
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         {/* Subtle background glow behind the image */}
-        <div // Replaced motion.div with a standard div
+        <motion.div // Restored motion.div
           className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-primary/50 to-purple-accent/50 blur-xl"
-          // Removed animation props
+          animate={{ opacity: [0.5, 0.8, 0.5], scale: [0.95, 1.05, 0.95] }}
+          transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
         />
         <img
           src={profilePhoto}
@@ -28,8 +31,16 @@ const GuidoIntroSection = () => {
           style={{ aspectRatio: '4/5' }}
         />
         {/* Optional: Add a subtle floating UI element near the image */}
-        {/* Removed the div containing "Innovatie met impact!" */}
-      </div>
+        <motion.div // Restored motion.div
+          className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          style={{ animation: "float 5s ease-in-out infinite alternate 1s" }}
+        >
+          Innovatie met impact!
+        </motion.div>
+      </motion.div>
 
       {/* Text Content Section */}
       <div className="text-left md:text-left">
