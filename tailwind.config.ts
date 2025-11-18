@@ -53,7 +53,7 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         "hero-gradient-end": "hsl(var(--hero-gradient-end))",
-        "light-blue": "hsl(var(--light-blue))",
+        "light-accent": "hsl(var(--light-accent))", // Changed from light-blue to light-accent
       },
       borderRadius: {
         lg: "var(--radius)",

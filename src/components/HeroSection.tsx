@@ -8,7 +8,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-light-blue py-20 text-primary-foreground overflow-hidden"
+      className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-light-accent py-20 text-primary-foreground overflow-hidden"
     >
       
       <div className="container z-10 text-center">

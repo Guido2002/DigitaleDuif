@@ -8,35 +8,35 @@
   }
 
   :root {
-    --background: 0 0% 100%; /* Pure White */
-    --foreground: 210 20% 15%; /* Very Dark Blue-Gray */
+    --background: 30 10% 98%; /* Very light warm gray/off-white */
+    --foreground: 210 10% 20%; /* Soft dark gray for text */
 
     --card: 0 0% 100%; /* Pure White */
-    --card-foreground: 210 20% 15%; /* Very Dark Blue-Gray */
+    --card-foreground: 210 10% 20%; /* Soft dark gray */
 
     --popover: 0 0% 100%; /* Pure White */
-    --popover-foreground: 210 20% 15%; /* Very Dark Blue-Gray */
+    --popover-foreground: 210 10% 20%; /* Soft dark gray */
 
-    --primary: 210 80% 40%; /* Vibrant Blue */
+    --primary: 140 40% 35%; /* Muted, earthy green */
     --primary-foreground: 0 0% 100%; /* White */
-    --hero-gradient-end: 220 90% 30%; /* Deeper Blue for gradient end */
-    --light-blue: 210 80% 95%; /* Very Pale Blue for Hero Section */
+    --hero-gradient-end: 150 50% 28%; /* Deeper, richer green for gradient */
+    --light-accent: 140 40% 90%; /* Very light earthy green for Hero Section */
 
-    --secondary: 210 30% 98%; /* Off-white / Very Light Blue-Gray */
-    --secondary-foreground: 210 20% 25%; /* Medium Dark Blue-Gray */
+    --secondary: 40 20% 95%; /* Soft beige/cream */
+    --secondary-foreground: 210 10% 25%; /* Slightly darker soft gray */
 
-    --muted: 210 20% 90%; /* Light Blue-Gray */
-    --muted-foreground: 210 15% 45%; /* Medium Blue-Gray */
+    --muted: 210 20% 90%; /* Light gray */
+    --muted-foreground: 210 10% 40%; /* Medium soft gray */
 
-    --accent: 210 80% 50%; /* Brighter Blue for accents */
-    --accent-foreground: 210 20% 15%; /* Very Dark Blue-Gray */
+    --accent: 140 40% 45%; /* Slightly brighter earthy green for accents */
+    --accent-foreground: 210 10% 20%; /* Soft dark gray */
 
     --destructive: 0 84.2% 60.2%; /* Red (standard for destructive actions) */
     --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 210 20% 85%; /* Light Blue-Gray Border */
-    --input: 210 20% 85%; /* Light Blue-Gray Input Border */
-    --ring: 210 80% 40%; /* Primary Blue for focus ring */
+    --border: 210 15% 85%; /* Soft light gray border */
+    --input: 210 15% 85%; /* Soft light gray input border */
+    --ring: 140 40% 35%; /* Primary green for focus ring */
 
     --radius: 0.5rem;
   }
