@@ -3,40 +3,13 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { projects } from "@/data/mockData"; // Import projects from mockData
 
 interface Project {
   title: string;
   description: string;
   techStack: string[];
 }
-
-const projects: Project[] = [
-  {
-    title: "MR BIM 4D visualisatie voor ombouwplanning",
-    description: "Een Mixed Reality applicatie die 3D BIM-modellen projecteert in de fysieke ruimte, inclusief tijdsdimensie (4D), voor efficiënte ombouwplanning en clashdetectie op locatie.",
-    techStack: ["Unity", "C#", "HoloLens 2", "BIM Integration"],
-  },
-  {
-    title: "XR sportanalyse: passing & positionering",
-    description: "Een Virtual Reality trainingsmodule voor voetbalcoaches en spelers om passing en positionering te analyseren en te oefenen in gesimuleerde wedstrijdscenario's.",
-    techStack: ["Unity", "C#", "Meta Quest 3", "Data Visualization"],
-  },
-  {
-    title: "Interactieve VR-trainingsmodule voor complexe machines",
-    description: "Een gedetailleerde VR-simulatie die operators traint in de veilige en efficiënte bediening van complexe industriële machines, inclusief noodprocedures.",
-    techStack: ["Unity", "C#", "Meta Quest Pro", "Simulatie"],
-  },
-  {
-    title: "Augmented Reality gids voor museumbezoekers",
-    description: "Een mobiele AR-applicatie die museumbezoekers verrijkte informatie en interactieve elementen biedt bij kunstwerken en tentoonstellingen, via hun smartphone of tablet.",
-    techStack: ["Unity", "AR Foundation", "Mobile AR", "UX Design"],
-  },
-  {
-    title: "Data-gedreven XR-ervaring voor productontwerp",
-    description: "Een VR-applicatie die real-time productiedata visualiseert binnen een virtuele omgeving, waardoor ontwerpers en ingenieurs direct inzicht krijgen in prestaties en optimalisatiemogelijkheden.",
-    techStack: ["Unity", "C#", "Data Streaming", "VR Analytics"],
-  },
-];
 
 const ProjectsPage = () => {
   return (

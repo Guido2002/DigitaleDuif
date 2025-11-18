@@ -100,3 +100,78 @@ export const testimonials: Testimonial[] = [
     avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Mark",
   },
 ];
+
+// Project Data
+interface Project {
+  title: string;
+  description: string;
+  techStack: string[];
+}
+
+export const projects: Project[] = [
+  {
+    title: "MR BIM 4D visualisatie voor ombouwplanning",
+    description: "Een Mixed Reality applicatie die 3D BIM-modellen projecteert in de fysieke ruimte, inclusief tijdsdimensie (4D), voor efficiënte ombouwplanning en clashdetectie op locatie.",
+    techStack: ["Unity", "C#", "HoloLens 2", "BIM Integration"],
+  },
+  {
+    title: "XR sportanalyse: passing & positionering",
+    description: "Een Virtual Reality trainingsmodule voor voetbalcoaches en spelers om passing en positionering te analyseren en te oefenen in gesimuleerde wedstrijdscenario's.",
+    techStack: ["Unity", "C#", "Meta Quest 3", "Data Visualization"],
+  },
+  {
+    title: "Interactieve VR-trainingsmodule voor complexe machines",
+    description: "Een gedetailleerde VR-simulatie die operators traint in de veilige en efficiënte bediening van complexe industriële machines, inclusief noodprocedures.",
+    techStack: ["Unity", "C#", "Meta Quest Pro", "Simulatie"],
+  },
+  {
+    title: "Augmented Reality gids voor museumbezoekers",
+    description: "Een mobiele AR-applicatie die museumbezoekers verrijkte informatie en interactieve elementen biedt bij kunstwerken en tentoonstellingen, via hun smartphone of tablet.",
+    techStack: ["Unity", "AR Foundation", "Mobile AR", "UX Design"],
+  },
+  {
+    title: "Data-gedreven XR-ervaring voor productontwerp",
+    description: "Een VR-applicatie die real-time productiedata visualiseert binnen een virtuele omgeving, waardoor ontwerpers en ingenieurs direct inzicht krijgen in prestaties en optimalisatiemogelijkheden.",
+    techStack: ["Unity", "C#", "Data Streaming", "VR Analytics"],
+  },
+];
+
+// Service Data
+interface Service {
+  title: string;
+  description: string;
+  tags: string[];
+}
+
+export const services: Service[] = [
+  {
+    title: "VR-applicatieontwikkeling",
+    description: "Ontwikkeling van op maat gemaakte Virtual Reality applicaties voor training, simulatie, visualisatie en entertainment. Van concept tot implementatie, wij brengen uw ideeën tot leven in VR.",
+    tags: ["Unity", "Meta Quest", "C#", "VR Design"],
+  },
+  {
+    title: "Mixed Reality interfaces",
+    description: "Creëren van intuïtieve en functionele Mixed Reality interfaces die digitale informatie naadloos integreren met de fysieke wereld. Ideaal voor industriële toepassingen en interactieve ervaringen.",
+    tags: ["Unity", "HoloLens", "MR Design", "UX"],
+  },
+  {
+    title: "Prototyping & conceptontwikkeling",
+    description: "Snelle ontwikkeling van prototypes en proof-of-concepts om ideeën te valideren en te visualiseren. Wij helpen u met het verkennen van de mogelijkheden van XR voor uw specifieke behoeften.",
+    tags: ["Rapid Prototyping", "Concepting", "Ideation", "Agile"],
+  },
+  {
+    title: "Unity consultancy / developer-as-a-service",
+    description: "Expertise en ondersteuning voor uw Unity-projecten. Huur onze ervaren Unity-ontwikkelaars in voor advies, code review, projectmanagement of als tijdelijke uitbreiding van uw team.",
+    tags: ["Unity", "C#", "Consultancy", "Development"],
+  },
+  {
+    title: "XR-trainingssimulaties",
+    description: "Ontwikkeling van realistische en effectieve XR-trainingssimulaties die medewerkers in een veilige omgeving complexe taken laten oefenen. Verhoog de retentie en verminder risico's.",
+    tags: ["Training", "Simulatie", "Educatie", "Serious Gaming"],
+  },
+  {
+    title: "Data logging & analyse in XR",
+    description: "Implementatie van systemen voor het loggen en analyseren van gebruikersgedrag binnen XR-applicaties. Verkrijg waardevolle inzichten om uw ervaringen te optimaliseren en beslissingen te onderbouwen.",
+    tags: ["Data Analytics", "Telemetry", "Insights", "Optimization"],
+  },
+];
