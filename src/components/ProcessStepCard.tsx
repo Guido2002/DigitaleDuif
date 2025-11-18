@@ -22,7 +22,7 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
   isLast,
 }) => {
   return (
-    <div className="relative flex flex-col items-center text-center md:items-start md:text-left">
+    <div className="relative flex flex-col items-center text-center md:items-start md:text-left h-full"> {/* Added h-full here */}
       {/* Enhanced Step Number */}
       <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md ring-2 ring-primary/50 ring-offset-2 ring-offset-background">
         <span className="text-2xl font-extrabold">{stepNumber}</span>
@@ -36,7 +36,7 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
         <CardTitle className="mb-2 text-xl font-semibold text-foreground">
           {title}
         </CardTitle>
-        <CardDescription asChild className="text-muted-foreground"> {/* Use asChild to pass props to ul */}
+        <CardDescription asChild className="text-muted-foreground flex-grow"> {/* Use asChild to pass props to ul, added flex-grow */}
           <ul className="list-disc pl-5 space-y-1">
             {description.map((item, i) => (
               <li key={i}>{item}</li>
