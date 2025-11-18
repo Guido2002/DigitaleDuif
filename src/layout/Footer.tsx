@@ -16,10 +16,10 @@ const Footer = () => {
         </div>
         <div className="flex flex-col items-center space-y-2 md:items-end">
           <a
-            href="mailto:info@digitaleduif.nl"
+            href="mailto:digitaleduif@outlook.com"
             className="flex items-center text-sm text-muted-foreground hover:text-primary"
           >
-            <Mail className="mr-2 h-4 w-4" /> info@digitaleduif.nl
+            <Mail className="mr-2 h-4 w-4" /> digitaleduif@outlook.com
           </a>
           <a
             href="https://www.linkedin.com/company/digitaleduif"
