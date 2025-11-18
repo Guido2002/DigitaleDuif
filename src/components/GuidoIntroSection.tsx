@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import profilePhoto from "/bas-van-toor.png"; // Corrected: direct reference from root
+import profilePhoto from "../../../public/bas-van-toor.png"; // Adjusted import path for module processing
 import { cn } from "@/lib/utils";
 
 const GuidoIntroSection = () => {
@@ -21,7 +21,7 @@ const GuidoIntroSection = () => {
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         <img
-          src={profilePhoto}
+          src={profilePhoto} // Using the imported module
           alt="Bas van Toor - Oprichter DigitaleDuif"
           className="w-full max-w-md rounded-xl object-cover shadow-2xl border-4 border-primary/20 transition-all duration-300 ease-in-out"
           style={{ aspectRatio: '4/5' }}
