@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import profilePhoto from "@/assets/bas-van-toor.png"; // Importing the image from src/assets
+import profilePhoto from "@/assets/bas-van-toor.png"; // Correct import path for assets processed by Vite
 import { cn } from "@/lib/utils";
 
 const GuidoIntroSection = () => {
