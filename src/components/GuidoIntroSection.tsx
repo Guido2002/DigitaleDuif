@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import profilePhoto from "../assets/1711446418839.jpeg"; // Import the image directly
 import { cn } from "@/lib/utils";
+import { CheckCircle2 } from "lucide-react"; // Import CheckCircle2 icon
 
 const GuidoIntroSection = () => {
   return (
@@ -45,15 +46,45 @@ const GuidoIntroSection = () => {
             Hallo, ik ben Guido
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-0 px-4 md:px-0"> {/* Added responsive padding */}
-          <ul className="list-disc pl-5 space-y-4 text-mobile-body md:text-body-lg text-muted-foreground"> {/* Updated text size and space-y */}
-            <li>Oprichter van DigitaleDuif, gedreven door digitale innovatie.</li>
-            <li>Creëert digitale ervaringen waar je écht 'in stapt', zowel in XR als op web/mobiel.</li>
-            <li>Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.</li>
-            <li>Passie voor het 'wauw-moment' bij klanten.</li>
-            <li>Perfectionist met oog voor detail en resultaat.</li>
-            <li>Nieuwsgierig naar jouw ideeën voor een kop koffie!</li>
-          </ul>
+        <CardContent className="p-0 px-4 md:px-0">
+          <div className="space-y-4"> {/* Changed from ul to div, removed list-disc and pl-5 */}
+            <div className="flex items-start space-x-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                Oprichter van DigitaleDuif, gedreven door digitale innovatie.
+              </p>
+            </div>
+            <div className="flex items-start space-x-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                Creëert digitale ervaringen waar je écht 'in stapt', zowel in XR als op web/mobiel.
+              </p>
+            </div>
+            <div className="flex items-start space-x-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.
+              </p>
+            </div>
+            <div className="flex items-start space-x-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                Passie voor het 'wauw-moment' bij klanten.
+              </p>
+            </div>
+            <div className="flex items-start space-x-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                Perfectionist met oog voor detail en resultaat.
+              </p>
+            </div>
+            <div className="flex items-start space-x-3">
+              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+              <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                Nieuwsgierig naar jouw ideeën voor een kop koffie!
+              </p>
+            </div>
+          </div>
         </CardContent>
       </div>
     </motion.div>
