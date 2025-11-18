@@ -7,17 +7,17 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom"; // Correct import for React Router
 
 interface HeroSectionProps {
-  children: React.ReactNode;
+  // children: React.ReactNode; // Removed as it's not used
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ children }) => {
+const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from props
   return (
     <section
       id="home"
       className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
-      {children} {/* Render children here */}
+      {/* children */} {/* Removed rendering of children */}
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1

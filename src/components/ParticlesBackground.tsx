@@ -4,6 +4,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  delay: number;
+  duration: number;
+  type: "circle" | "square" | "triangle";
+  color: string;
+  tempTranslateX?: number; // Added for mouse interaction
+  tempTranslateY?: number; // Added for mouse interaction
+  pushedAt?: number; // Added for mouse interaction reset
+}
+
 interface ParticlesBackgroundProps {
   particleCount?: number;
   className?: string;
@@ -14,28 +28,17 @@ const ParticlesBackground: React.FC<ParticlesBackgroundProps> = ({
   className,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [particles, setParticles] = useState<
-    {
-      id: number;
-      x: number;
-      y: number;
-      size: number;
-      delay: number;
-      duration: number;
-      type: "circle" | "square" | "triangle";
-      color: string;
-    }[]
-  >([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
     const generateParticles = () => {
-      const newParticles = Array.from({ length: particleCount }).map((_, i) => {
+      const newParticles: Particle[] = Array.from({ length: particleCount }).map((_, i) => {
         const size = Math.random() * 10 + 5; // 5-15px
         const x = Math.random() * 100; // 0-100vw
         const y = Math.random() * 100; // 0-100vh
         const delay = Math.random() * 5; // 0-5s delay
         const duration = Math.random() * 10 + 10; // 10-20s duration
-        const type =
+        const type: Particle['type'] =
           Math.random() < 0.33
             ? "circle"
             : Math.random() < 0.66

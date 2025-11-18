@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion"; // Import Variants
 import { cn } from "@/lib/utils";
 import ParticlesBackground from "./ParticlesBackground"; // Import the new ParticlesBackground
 
@@ -11,14 +11,14 @@ interface HeroBackgroundAnimationProps {
 }
 
 const HeroBackgroundAnimation: React.FC<HeroBackgroundAnimationProps> = ({ className, reducedMotion = false }) => {
-  const baseTransition = {
-    duration: reducedMotion ? 0 : 15,
-    ease: "easeInOut",
-    repeat: Infinity,
-    repeatType: "reverse",
-  };
+  // const baseTransition = { // This variable is not used
+  //   duration: reducedMotion ? 0 : 15,
+  //   ease: "easeInOut",
+  //   repeat: Infinity,
+  //   repeatType: "reverse",
+  // };
 
-  const pulseGlowVariants = {
+  const pulseGlowVariants: Variants = { // Explicitly type as Variants
     animate: {
       opacity: [0.4, 0.7, 0.4],
       scale: [1, 1.05, 1],
