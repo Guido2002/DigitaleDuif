@@ -31,7 +31,6 @@
     --electric-blue: 217 100% 50%; /* #2563eb */
     --cyan-accent: 190 100% 44%; /* #06b6d4 */
 
-
     --secondary: 210 20% 95%; /* Very light blue-gray for subtle backgrounds */
     --secondary-foreground: 0 0% 10%; /* Dark text */
 
@@ -49,6 +48,23 @@
     --ring: 217 100% 50%; /* Primary blue for focus ring */
 
     --radius: 0.5rem;
+
+    /* New colors for extended palette */
+    --success: 142 76% 36%; /* A vibrant green */
+    --success-foreground: 0 0% 100%;
+    --warm: 38 92% 50%; /* An orange/yellow accent */
+    --warm-foreground: 0 0% 10%;
+
+    --neutral-50: 210 20% 98%;
+    --neutral-100: 210 20% 95%;
+    --neutral-200: 210 15% 90%;
+    --neutral-300: 210 10% 80%;
+    --neutral-400: 210 8% 65%;
+    --neutral-500: 210 6% 50%;
+    --neutral-600: 210 5% 40%;
+    --neutral-700: 210 4% 30%;
+    --neutral-800: 210 3% 20%;
+    --neutral-900: 210 2% 10%;
   }
 }
 
@@ -75,4 +91,20 @@
   -webkit-background-clip: text;
   color: transparent;
   background-size: 200% auto;
+}
+
+/* Responsive typography */
+@media (max-width: 767px) {
+  .text-h1 {
+    font-size: var(--mobile-h1-font-size);
+    line-height: var(--mobile-h1-line-height);
+  }
+  .text-h3 {
+    font-size: var(--mobile-h3-font-size);
+    line-height: var(--mobile-h3-line-height);
+  }
+  .text-body-lg {
+    font-size: var(--mobile-body-font-size);
+    line-height: var(--mobile-body-line-height);
+  }
 }
