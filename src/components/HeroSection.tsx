@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom"; // Correct import for React Router
+import HeroBackgroundAnimation from "./HeroBackgroundAnimation"; // Import
+import VrHeadsetIllustration from "./VrHeadsetIllustration"; // Import
+import ScrollIndicator from "./ScrollIndicator"; // Import
 
 interface HeroSectionProps {
   // children: React.ReactNode; // Removed as it's not used
@@ -17,7 +20,8 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
       className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
-      {/* children */} {/* Removed rendering of children */}
+      <HeroBackgroundAnimation /> {/* Render the background animation */}
+      <VrHeadsetIllustration /> {/* Render the VR headset illustration */}
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
@@ -54,6 +58,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
           </Button>
         </motion.div>
       </div>
+      <ScrollIndicator /> {/* Render the scroll indicator */}
     </section>
   );
 };

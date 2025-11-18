@@ -13,11 +13,7 @@ import CallToActionSection from "@/components/CallToActionSection";
 const Index = () => {
   return (
     <>
-      <HeroSection>
-        {/* Removed HeroBackgroundAnimation */}
-        {/* Removed VrHeadsetIllustration */}
-        {/* Removed ScrollIndicator */}
-      </HeroSection>
+      <HeroSection />
       <AboutSection />
       <WhyChooseUsSection />
       <ProcessSection />
