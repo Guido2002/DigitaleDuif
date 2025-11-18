@@ -10,7 +10,7 @@ import FlyingBirdIllustration from "./FlyingBirdIllustration"; // Import FlyingB
 
 const GuidoIntroSection = () => {
   return (
-    <React.Fragment> {/* Added React.Fragment to wrap the main div */}
+    <React.Fragment>
       <div
         className="mb-16 grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16"
       >
@@ -33,17 +33,7 @@ const GuidoIntroSection = () => {
             style={{ aspectRatio: '4/5' }}
           />
           {/* Static bird near the image, adjusted to sit exactly in the middle on top */}
-          <FlyingBirdIllustration
-            className="absolute -top-12 md:-top-16 lg:-top-20 left-1/2 -translate-x-1/2"
-            size="medium"
-            initialX="0%"
-            initialY="0%"
-            animationDelay={0.5}
-            animationDuration={0} // Make it static
-            floatIntensity={0} // No floating
-            rotateIntensity={0} // No rotation
-            animateOpacity={0.8} // Slightly transparent
-          />
+          {/* Removed FlyingBirdIllustration */}
           {/* Optional: Add a subtle floating UI element near the image */}
           <motion.div
             className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
