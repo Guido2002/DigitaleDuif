@@ -33,8 +33,8 @@ const GuidoIntroSection = () => {
         />
         {/* Static bird near the image, adjusted to sit exactly in the middle on top */}
         <FlyingBirdIllustration
-          className="absolute -top-12 md:-top-16 lg:-top-20 left-1/2 -translate-x-1/2" // Aangepast voor responsieve top en centrering
-          size="small"
+          className="absolute -top-12 md:-top-16 lg:-top-20 left-1/2 -translate-x-1/2"
+          size="medium" {/* Aangepast van "small" naar "medium" */}
           initialX="0%"
           initialY="0%"
           animationDelay={0.5}
@@ -77,7 +77,7 @@ const GuidoIntroSection = () => {
               </p>
             </div>
             <div className="flex items-start space-x-3">
-              <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+              <CheckCircle2 className className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
               <p className="text-mobile-body md:text-body-lg text-muted-foreground">
                 Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.
               </p>
