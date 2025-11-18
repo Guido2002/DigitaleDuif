@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ModeToggle } from "@/components/ModeToggle"; // Import ModeToggle
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -62,6 +63,9 @@ const Navbar = () => {
                     <Button className="w-full">Plan een gesprek</Button>
                   </Link>
                 </SheetClose>
+                <div className="flex justify-center pt-4">
+                  <ModeToggle />
+                </div>
               </div>
             </SheetContent>
           </Sheet>
@@ -80,6 +84,7 @@ const Navbar = () => {
             <Link to="/contact">
               <Button>Plan een gesprek</Button>
             </Link>
+            <ModeToggle /> {/* Add ModeToggle here for desktop */}
           </div>
         )}
       </div>
