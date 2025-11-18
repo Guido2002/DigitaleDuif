@@ -1,17 +1,29 @@
 "use client";
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ModeToggle } from "@/components/ModeToggle";
 import { navLinks } from "@/data/mockData"; // Import navLinks from mockData
+import { cn } from "@/lib/utils"; // Import cn for conditional class names
 
 const Navbar = () => {
   const isMobile = useIsMobile();
-  // Removed useLocation and handleNavLinkClick as scrolling is now handled globally by useScrollToHash
+  const location = useLocation(); // Get current location
+
+  // Function to determine if a link is active
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return location.pathname === "/" && !location.hash;
+    }
+    if (path.startsWith("/#")) {
+      return location.pathname === "/" && location.hash === path;
+    }
+    return location.pathname === path;
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -33,8 +45,10 @@ const Navbar = () => {
                   <SheetClose asChild key={link.name}>
                     <Link
                       to={link.path}
-                      // onClick removed, scrolling handled by useScrollToHash
-                      className="text-lg font-medium text-foreground hover:text-primary"
+                      className={cn(
+                        "text-lg font-medium text-foreground hover:text-primary",
+                        isActive(link.path) && "text-primary font-bold", // Apply active styles
+                      )}
                     >
                       {link.name}
                     </Link>
@@ -57,8 +71,10 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                // onClick removed, scrolling handled by useScrollToHash
-                className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+                className={cn(
+                  "text-sm font-medium text-foreground transition-colors hover:text-primary",
+                  isActive(link.path) && "text-primary font-bold", // Apply active styles
+                )}
               >
                 {link.name}
               </Link>
