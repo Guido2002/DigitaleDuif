@@ -5,6 +5,9 @@ import SectionHeader from "./SectionHeader";
 import AbstractBackgroundAnimation from "@/components/AbstractBackgroundAnimation";
 import profilePhoto from "/public/1711446418839.jpeg"; // Direct import van de afbeelding
 import FadeInWhenVisible from "./FadeInWhenVisible"; // Import FadeInWhenVisible
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"; // Import Card components
+import { aboutExpertiseCards } from "@/data/mockData"; // Import new data
+import { cn } from "@/lib/utils"; // For conditional classes
 
 const AboutSection = () => {
   console.log("AboutSection rendering. Image path:", profilePhoto);
@@ -19,8 +22,9 @@ const AboutSection = () => {
         />
       </FadeInWhenVisible>
 
+      {/* Personal Introduction Card */}
       <FadeInWhenVisible delay={0.2}>
-        <div className="mb-16 flex flex-col items-center text-center md:flex-row md:items-start md:text-left md:gap-8">
+        <Card className="mb-16 flex flex-col items-center text-center md:flex-row md:items-start md:text-left md:gap-8 p-6 border border-border bg-card shadow-lg">
           <div className="mb-8 flex justify-center md:mb-0 md:w-1/3">
             <img
               src={profilePhoto} // Gebruik de geïmporteerde variabele
@@ -29,64 +33,47 @@ const AboutSection = () => {
             />
           </div>
           <div className="md:w-2/3">
-            <h3 className="mb-4 text-2xl font-semibold text-foreground">
-              Hallo, ik ben [Uw Naam]!
-            </h3>
-            <p className="mb-4 text-muted-foreground">
-              Als oprichter van DigitaleDuif ben ik gepassioneerd door de kracht van XR om complexe problemen op te lossen en nieuwe werelden te creëren. Mijn reis in de technologie begon met een fascinatie voor interactieve ervaringen, en dat heeft me geleid tot het bouwen van innovatieve VR- en MR-oplossingen.
-            </p>
-            <p className="text-muted-foreground">
-              Ik geloof sterk in een persoonlijke aanpak en werk graag nauw samen met klanten om hun visie te vertalen naar impactvolle digitale realiteiten. Laten we samen iets buitengewoons bouwen!
-            </p>
-          </div>
-        </div>
-      </FadeInWhenVisible>
-
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-        <FadeInWhenVisible delay={0.3}>
-          <div className="relative flex flex-col items-center justify-center rounded-lg border bg-card p-6 shadow-sm md:items-start md:text-left">
-            <AbstractBackgroundAnimation className="opacity-20" />
-            <div className="z-10">
-              <h3 className="mb-4 text-2xl font-semibold text-foreground">
-                Onze Expertise: XR & VR
-              </h3>
+            <CardHeader className="p-0 mb-4">
+              <CardTitle className="text-2xl font-semibold text-foreground">
+                Hallo, ik ben Guido Duif!
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
               <p className="mb-4 text-muted-foreground">
-                Met jarenlange ervaring in de XR-sector, zijn wij experts in het
-                ontwikkelen van zowel Virtual Reality als Mixed Reality
-                applicaties. Of het nu gaat om complexe simulaties, interactieve
-                trainingsmodules of innovatieve visualisatietools, wij leveren
-                oplossingen die de grenzen van het mogelijke verleggen.
+                Als oprichter van DigitaleDuif ben ik gepassioneerd door de kracht van XR om complexe problemen op te lossen en nieuwe werelden te creëren. Mijn reis in de technologie begon met een fascinatie voor interactieve ervaringen, en dat heeft me geleid tot het bouwen van innovatieve VR- en MR-oplossingen.
               </p>
               <p className="text-muted-foreground">
-                Onze focus ligt op het benutten van de kracht van XR om concrete
-                zakelijke uitdagingen op te lossen en nieuwe kansen te creëren.
+                Ik geloof sterk in een persoonlijke aanpak en werk graag nauw samen met klanten om hun visie te vertalen naar impactvolle digitale realiteiten. Laten we samen iets buitengewoons bouwen!
               </p>
-            </div>
+            </CardContent>
           </div>
-        </FadeInWhenVisible>
-        <FadeInWhenVisible delay={0.4}>
-          <div className="relative flex flex-col items-center justify-center rounded-lg border bg-card p-6 shadow-sm md:items-start md:text-left">
-            <AbstractBackgroundAnimation className="opacity-20" />
-            <div className="z-10">
-              <h3 className="mb-4 text-2xl font-semibold text-foreground">
-                Unity Development & Co-creatie
-              </h3>
-              <p className="mb-4 text-muted-foreground">
-                Unity is de kern van onze technische stack. Onze ontwikkelaars zijn
-                bedreven in het creëren van robuuste, schaalbare en
-                hoogwaardige applicaties binnen dit veelzijdige platform. Wij
-                geloven sterk in een iteratieve aanpak en co-creatie met onze
-                klanten.
-              </p>
-              <p className="mb-4 text-muted-foreground">
-                Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering
-                werken we nauw samen, waarbij we prototypes ontwikkelen en continu
-                feedback integreren om ervoor te zorgen dat het eindproduct
-                perfect aansluit bij uw visie en behoeften.
-              </p>
-            </div>
-          </div>
-        </FadeInWhenVisible>
+        </Card>
+      </FadeInWhenVisible>
+
+      {/* Expertise Grid */}
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {aboutExpertiseCards.map((item, index) => (
+          <FadeInWhenVisible key={index} delay={0.3 + index * 0.1}>
+            <Card 
+              className="group relative flex flex-col items-center justify-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border glassmorphism"
+            >
+              <AbstractBackgroundAnimation className="opacity-20" /> {/* Keep this for subtle background animation */}
+              <div className="z-10">
+                <CardHeader className="mb-4 p-0">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-light-accent/20 text-primary mx-auto">
+                    <item.icon className="h-8 w-8" />
+                  </div>
+                </CardHeader>
+                <CardTitle className="mb-2 text-xl font-semibold text-foreground">
+                  {item.title}
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  {item.description}
+                </CardDescription>
+              </div>
+            </Card>
+          </FadeInWhenVisible>
+        ))}
       </div>
     </section>
   );

@@ -235,3 +235,28 @@ export const faqItems: FAQItem[] = [
     answer: "De duur van de ontwikkeling hangt sterk af van de complexiteit en de scope van het project. Na een initiële behoefteanalyse en conceptfase kunnen we een realistische tijdslijn en budget inschatten. We werken vaak met agile methoden voor snelle iteraties.",
   },
 ];
+
+// About Section Expertise Data
+interface AboutExpertise {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+export const aboutExpertiseCards: AboutExpertise[] = [
+  {
+    icon: Brain,
+    title: "XR & VR Expertise",
+    description: "Met jarenlange ervaring in de XR-sector, zijn wij experts in het ontwikkelen van zowel Virtual Reality als Mixed Reality applicaties. Of het nu gaat om complexe simulaties, interactieve trainingsmodules of innovatieve visualisatietools, wij leveren oplossingen die de grenzen van het mogelijke verleggen. Onze focus ligt op het benutten van de kracht van XR om concrete zakelijke uitdagingen op te lossen en nieuwe kansen te creëren.",
+  },
+  {
+    icon: Code, // Using Code for Unity Development
+    title: "Unity Development",
+    description: "Unity is de kern van onze technische stack. Onze ontwikkelaars zijn bedreven in het creëren van robuuste, schaalbare en hoogwaardige applicaties binnen dit veelzijdige platform. Wij geloven sterk in een iteratieve aanpak en co-creatie met onze klanten. Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering werken we nauw samen, waarbij we prototypes ontwikkelen en continu feedback integreren om ervoor te zorgen dat het eindproduct perfect aansluit bij uw visie en behoeften.",
+  },
+  {
+    icon: Users, // Using Users for Co-creatie
+    title: "Co-creatie Aanpak",
+    description: "Wij geloven sterk in een iteratieve aanpak en co-creatie met onze klanten. Vanaf de eerste brainstormsessie tot de uiteindelijke oplevering werken we nauw samen, waarbij we prototypes ontwikkelen en continu feedback integreren om ervoor te zorgen dat het eindproduct perfect aansluit bij uw visie en behoeften. Uw visie is onze drijfveer, en samen bouwen we aan de toekomst.",
+  },
+];
