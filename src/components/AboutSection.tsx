@@ -17,7 +17,7 @@ const AboutSection = () => {
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Wie is DigitaleDuif?"
-          subtitle="DigitaleDuif is een gespecialiseerde studio die zich richt op de voorhoede van Extended Reality (XR) technologie. Wij combineren diepgaande technische kennis met een passie voor innovatie om impactvolle en meeslepende ervaringen te creëren."
+          subtitle="DigitaleDuif is ontstaan uit een diepe fascinatie voor wat Extended Reality (XR) voor mensen en bedrijven kan betekenen. Wij zijn geen groot bureau met eindeloze lagen - bij ons krijg je te maken met mensen die oprecht enthousiast worden van innovatieve technologie én begrijpen wat het in de praktijk moet opleveren."
           align="left" // Left align header for About section
         />
       </FadeInWhenVisible>
@@ -40,10 +40,16 @@ const AboutSection = () => {
             </CardHeader>
             <CardContent className="p-0">
               <p className="mb-4 text-muted-foreground">
-                Als oprichter van DigitaleDuif ben ik gepassioneerd door de kracht van XR om complexe problemen op te lossen en nieuwe werelden te creëren. Mijn reis in de technologie begon met een fascinatie voor interactieve ervaringen, en dat heeft me geleid tot het bouwen van innovatieve VR- en MR-oplossingen.
+                Als oprichter van DigitaleDuif mag ik elke dag werken aan wat mij het meest boeit: het creëren van digitale ervaringen waar je echt 'in stapt'.
+              </p>
+              <p className="mb-4 text-muted-foreground">
+                Mijn liefde voor technologie begon met simpele vraag: hoe kunnen we mensen écht laten ervaren wat anders alleen in hun verbeelding bestaat? Die vraag drijft me nog steeds - of het nu gaat om een VR-training die levensreddende vaardigheden overbrengt, of een MR-applicatie die complexe data plotseling glashelder maakt.
+              </p>
+              <p className="mb-4 text-muted-foreground">
+                Wat ik het allerleukste vind? Dat moment waarop een klant voor het eerst hun eigen project ziet en voelt in virtual reality. Die verwondering, dat 'wauw-moment' - daar doe ik het voor. En ja, ik ben een beetje een perfectionist als het om details gaat, maar dat betekent wel dat je een product krijgt waar je echt trots op kunt zijn.
               </p>
               <p className="text-muted-foreground">
-                Ik geloof sterk in een persoonlijke aanpak en werk graag nauw samen met klanten om hun visie te vertalen naar impactvolle digitale realiteiten. Laten we samen iets buitengewoons bouwen!
+                Zullen we een keer koffie drinken en sparren over jouw ideeën? Ik ben benieuwd!
               </p>
             </CardContent>
           </div>
@@ -54,7 +60,7 @@ const AboutSection = () => {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {aboutExpertiseCards.map((item, index) => (
           <FadeInWhenVisible key={index} delay={0.3 + index * 0.1}>
-            <Card 
+            <Card
               className="group relative flex flex-col items-center justify-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border glassmorphism"
             >
               <AbstractBackgroundAnimation className="opacity-20" /> {/* Keep this for subtle background animation */}

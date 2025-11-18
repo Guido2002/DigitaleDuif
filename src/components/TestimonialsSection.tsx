@@ -27,7 +27,7 @@ const TestimonialsSection = () => {
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Wat onze klanten zeggen"
-          subtitle="Lees hoe DigitaleDuif bedrijven heeft geholpen met innovatieve XR-oplossingen."
+          subtitle="Mooie verhalen vertellen over onszelf? Dat kunnen we. Maar we laten liever anderen aan het woord die al met ons hebben gewerkt."
         />
       </FadeInWhenVisible>
 

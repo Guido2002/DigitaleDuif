@@ -33,7 +33,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ children }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
         >
-          Wij creëren meeslepende Virtual en Mixed Reality ervaringen die uw bedrijf transformeren. Van concept tot implementatie, wij bouwen de toekomst van interactie.
+          Wij maken Virtual en Mixed Reality ervaringen die mensen écht raken en bedrijven vooruit helpen. Of je nu een eerste stap in XR wilt zetten of een ambitieus project voor ogen hebt - wij denken graag met je mee, van het allereerste idee tot de uiteindelijke lancering.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}

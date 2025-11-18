@@ -12,7 +12,7 @@ const WhyChooseUsSection = () => {
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Waarom DigitaleDuif?"
-          subtitle="Kies voor een partner die verder kijkt dan de technologie en zich richt op de impact die XR kan hebben op uw organisatie."
+          subtitle="Je kunt kiezen uit tientallen XR-bureaus. Waarom zou je met ons in zee gaan? Simpel: wij kijken verder dan het 'coole' van de technologie. Het gaat uiteindelijk om wat het voor jouw organisatie oplevert."
         />
       </FadeInWhenVisible>
 
