@@ -19,16 +19,16 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   subtitleClassName,
 }) => {
   return (
-    <div className={cn("mb-12 text-center md:text-left", className)}>
+    <div className={cn("mb-12 text-center", className)}> {/* Removed md:text-left */}
       <h2 className={cn("text-4xl font-bold text-primary", titleClassName)}>
         {title}
       </h2>
       {subtitle && (
-        <p className={cn("mt-4 text-lg text-muted-foreground max-w-3xl mx-auto md:mx-0", subtitleClassName)}>
+        <p className={cn("mt-4 text-lg text-muted-foreground max-w-3xl mx-auto", subtitleClassName)}> {/* Removed md:mx-0 */}
           {subtitle}
         </p>
       )}
-      <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-primary/20 md:mx-0" />
+      <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-primary/20" /> {/* Removed md:mx-0 */}
     </div>
   );
 };
