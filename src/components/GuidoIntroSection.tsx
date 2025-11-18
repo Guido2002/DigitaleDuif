@@ -33,7 +33,7 @@ const GuidoIntroSection = () => {
         />
         {/* Static bird near the image, adjusted to sit exactly in the middle on top */}
         <FlyingBirdIllustration
-          className="absolute -top-20 left-[43%] -translate-x-1/2" // Teruggezet naar -top-20
+          className="absolute -top-[79px] left-[43%] -translate-x-1/2" // Aangepast naar -top-[79px] (was -top-20, wat -80px is)
           size="small"
           initialX="0%"
           initialY="0%"
