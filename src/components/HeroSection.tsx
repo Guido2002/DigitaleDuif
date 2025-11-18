@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import FlyingBirdIllustration from "@/components/FlyingBirdIllustration";
+// Removed FlyingBirdIllustration import as it's no longer used in this component
 
 interface HeroSectionProps {
   // children: React.ReactNode; // Removed as it's not used
@@ -21,18 +21,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       {/* HeroBackgroundAnimation /> {/* Render the background animation */}
       {/* VrHeadsetIllustration /> {/* Render the VR headset illustration */}
 
-      {/* Single Flying Bird in bottom-left */}
-      <FlyingBirdIllustration
-        className="bottom-[10%] left-[10%]" // Positioned bottom-left
-        size="medium" // Medium size for better visibility
-        initialX="-10%"
-        initialY="10%"
-        animationDelay={2}
-        animationDuration={10}
-        floatIntensity={15}
-        rotateIntensity={3}
-        animateOpacity={1} // Fully visible
-      />
+      {/* Single Flying Bird in bottom-left - REMOVED */}
 
       {/* Flying Bird 2: top-right - REMOVED */}
 
