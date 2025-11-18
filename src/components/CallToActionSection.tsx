@@ -23,7 +23,7 @@ const CallToActionSection = () => {
           <Link to="/contact">
             <Button
               size="lg"
-              // className="bg-primary-foreground text-primary hover:bg-secondary transition-all duration-300 hover:scale-105" // Removed custom className
+              className="bg-primary-foreground text-primary hover:bg-secondary transition-all duration-300 hover:scale-105"
             >
               Neem Contact Op
             </Button>
