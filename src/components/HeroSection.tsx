@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom"; // Correct import for React Router
+import FlyingBirdIllustration from "@/components/FlyingBirdIllustration"; // New import
 // Removed HeroBackgroundAnimation, VrHeadsetIllustration, ScrollIndicator imports
 
 interface HeroSectionProps {
@@ -20,6 +21,30 @@ const HeroSection: React.FC<HeroSectionProps> = () => { // Removed children from
     >
       {/* HeroBackgroundAnimation /> {/* Render the background animation */}
       {/* VrHeadsetIllustration /> {/* Render the VR headset illustration */}
+
+      {/* Flying Birds */}
+      <FlyingBirdIllustration
+        className="top-1/4 left-1/4"
+        size="medium"
+        initialX="-10%"
+        initialY="10%"
+        animationDelay={2}
+        animationDuration={10}
+        floatIntensity={15}
+        rotateIntensity={3}
+        animateOpacity={0.8} // Slightly transparent
+      />
+      <FlyingBirdIllustration
+        className="bottom-1/4 right-1/4"
+        size="small"
+        initialX="10%"
+        initialY="-10%"
+        animationDelay={3.5}
+        animationDuration={12}
+        floatIntensity={10}
+        rotateIntensity={2}
+        animateOpacity={0.7} // Slightly more transparent
+      />
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
