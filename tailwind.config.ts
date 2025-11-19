@@ -99,7 +99,7 @@ export default {
         'body-base': ['16px', { lineHeight: '24px', fontWeight: '400' }],
         'body-sm': ['14px', { lineHeight: '20px', fontWeight: '400' }],
         'mobile-h1': ['48px', { lineHeight: '56px', fontWeight: '900', letterSpacing: '-0.02em' }], // Mobile H1
-        'mobile-h3': ['36px', { lineHeight: '44px', fontWeight: '500', letterSpacing: '-0.02em' }], // Mobile H3 (Increased from 32px to 36px)
+        'mobile-h3': ['40px', { lineHeight: '48px', fontWeight: '500', letterSpacing: '-0.02em' }], // Mobile H3 (Increased from 36px to 40px)
         'mobile-body': ['16px', { lineHeight: '1.7', fontWeight: '400' }], // Mobile Body
       },
       textShadow: { // Custom text shadow utility
@@ -163,7 +163,7 @@ export default {
         "particle-move": { // Keyframe for particle movement
           "0%": { transform: "translate(0, 0) scale(1)" },
           "25%": { transform: "translate(10vw, 5vh) scale(1.1)" },
-          "50%": { transform: "translate(0, 10vh) scale(0.9)" },
+          "50%": "translate(0, 10vh) scale(0.9)",
           "75%": { transform: "translate(-10vw, 5vh) scale(1.2)" },
           "100%": { transform: "translate(0, 0) scale(1)" },
         },
