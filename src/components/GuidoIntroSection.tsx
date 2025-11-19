@@ -73,7 +73,7 @@ const GuidoIntroSection = () => {
                 </p>
               </div>
               <div className="flex items-start space-x-3">
-                <CheckCircle2 className className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p className="text-mobile-body md:text-body-lg text-muted-foreground">
                   Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.
                 </p>

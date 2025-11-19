@@ -12,7 +12,7 @@ const AboutSection = () => {
         <FadeInWhenVisible delay={0.1}>
           <SectionHeader
             title="Wie is DigitaleDuif?"
-            subtitle="Maak kennis met de drijvende kracht achter DigitaleDuif en ontdek onze passie voor digitale innovatie."
+            subtitle="Maak kennis met de oprichter van DigitaleDuif, en ontdek zijn passie voor technologie en innovatie."
             align="center"
           />
         </FadeInWhenVisible>
