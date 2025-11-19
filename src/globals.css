@@ -65,6 +65,10 @@
     --neutral-700: 210 4% 30%;
     --neutral-800: 210 3% 20%;
     --neutral-900: 210 2% 10%;
+
+    /* Pigeon Colors */
+    --pigeon-body-color: hsl(var(--neutral-500));
+    --pigeon-beak-color: hsl(var(--warm));
   }
 }
 

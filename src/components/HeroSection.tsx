@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-// Removed FlyingBirdIllustration import as it's no longer used in this component
+import PigeonAnimation from "@/components/PigeonAnimation"; // New import
 
 interface HeroSectionProps {
   // children: React.ReactNode; // Removed as it's not used
@@ -18,12 +18,10 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
-      {/* HeroBackgroundAnimation /> {/* Render the background animation */}
-      {/* VrHeadsetIllustration /> {/* Render the VR headset illustration */}
-
-      {/* Single Flying Bird in bottom-left - REMOVED */}
-
-      {/* Flying Bird 2: top-right - REMOVED */}
+      {/* Pigeon Animations */}
+      <PigeonAnimation className="z-20" delay={0} duration={20} sizeScale={0.8} initialY="10%" finalY="15%" initialX="-20%" finalX="120%" />
+      <PigeonAnimation className="z-20" delay={5} duration={18} sizeScale={0.6} initialY="40%" finalY="35%" initialX="-10%" finalX="110%" />
+      <PigeonAnimation className="z-20" delay={10} duration={22} sizeScale={0.9} initialY="25%" finalY="20%" initialX="-30%" finalX="130%" />
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
@@ -60,7 +58,6 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           </Button>
         </motion.div>
       </div>
-      {/* ScrollIndicator /> {/* Render the scroll indicator */}
     </section>
   );
 };
