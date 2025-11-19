@@ -2,22 +2,12 @@
 
 import React from "react";
 import { Mail, Linkedin } from "lucide-react";
-import FlyingBirdIllustration from "@/components/FlyingBirdIllustration"; // Import FlyingBirdIllustration
+// Removed FlyingBirdIllustration import
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-background py-8 relative overflow-hidden"> {/* Added relative and overflow-hidden */}
-      {/* Static bird in the footer */}
-      <FlyingBirdIllustration
-        className="absolute top-8 right-8 h-16 w-16 hidden sm:block" // Hides on screens smaller than 'sm' (640px)
-        initialX="0%"
-        initialY="0%"
-        animationDelay={0.5}
-        animationDuration={0} // Make it static
-        floatIntensity={0} // No floating
-        rotateIntensity={0} // No rotation
-        animateOpacity={0.6} // Slightly transparent
-      />
+    <footer className="border-t border-border bg-background py-8 relative overflow-hidden">
+      {/* Removed FlyingBirdIllustration */}
       <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
         <div className="text-center md:text-left">
           <h3 className="text-lg font-bold text-primary">DigitaleDuif</h3>
