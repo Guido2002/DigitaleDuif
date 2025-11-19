@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import PigeonAnimation from "@/components/PigeonAnimation"; // New import
+// Removed PigeonAnimation import
 
 interface HeroSectionProps {
   // children: React.ReactNode; // Removed as it's not used
@@ -18,10 +18,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
-      {/* Pigeon Animations */}
-      <PigeonAnimation className="z-20" delay={0} duration={8} sizeScale={0.8} initialY="5%" finalY="8%" initialX="-20%" finalX="120%" />
-      <PigeonAnimation className="z-20" delay={2} duration={10} sizeScale={0.6} initialY="10%" finalY="13%" initialX="-10%" finalX="110%" />
-      <PigeonAnimation className="z-20" delay={4} duration={12} sizeScale={0.9} initialY="7%" finalY="10%" initialX="-30%" finalX="130%" />
+      {/* Removed Pigeon Animations */}
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
