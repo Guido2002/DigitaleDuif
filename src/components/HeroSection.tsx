@@ -19,9 +19,9 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
       {/* Pigeon Animations */}
-      <PigeonAnimation className="z-20" delay={0} duration={20} sizeScale={0.8} initialY="10%" finalY="15%" initialX="-20%" finalX="120%" />
-      <PigeonAnimation className="z-20" delay={5} duration={18} sizeScale={0.6} initialY="40%" finalY="35%" initialX="-10%" finalX="110%" />
-      <PigeonAnimation className="z-20" delay={10} duration={22} sizeScale={0.9} initialY="25%" finalY="20%" initialX="-30%" finalX="130%" />
+      <PigeonAnimation className="z-20" delay={0} duration={8} sizeScale={0.8} initialY="5%" finalY="8%" initialX="-20%" finalX="120%" />
+      <PigeonAnimation className="z-20" delay={2} duration={10} sizeScale={0.6} initialY="10%" finalY="13%" initialX="-10%" finalX="110%" />
+      <PigeonAnimation className="z-20" delay={4} duration={12} sizeScale={0.9} initialY="7%" finalY="10%" initialX="-30%" finalX="130%" />
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1

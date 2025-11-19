@@ -8,39 +8,37 @@ import styles from "./PigeonAnimation.module.css"; // Import CSS module
 interface PigeonAnimationProps {
   className?: string;
   delay?: number;
-  duration?: number;
+  duration?: number; // Duration for the horizontal flight
   sizeScale?: number; // To control overall size
   initialX?: string;
   finalX?: string;
-  initialY?: string;
-  finalY?: string;
+  initialY?: string; // Start Y position
+  finalY?: string; // End Y position (for subtle vertical movement)
 }
 
 const PigeonAnimation: React.FC<PigeonAnimationProps> = ({
   className,
   delay = 0,
-  duration = 15, // Longer duration for flight across screen
+  duration = 10, // Default faster duration for flight across screen
   sizeScale = 1,
   initialX = "-20%", // Start off-screen left
   finalX = "120%", // End off-screen right
-  initialY = "20%", // Start at 20% from top
-  finalY = "30%", // End at 30% from top (slight vertical movement)
+  initialY = "5%", // Default start at 5% from top (just below navbar)
+  finalY = "8%", // Default end at 8% from top (subtle vertical movement)
 }) => {
   return (
     <motion.div
       className={cn(styles.pigeon, className)}
-      initial={{ x: initialX, y: initialY, scale: sizeScale, opacity: 0 }}
+      initial={{ opacity: 0, x: initialX, y: initialY, scale: sizeScale }}
       animate={{
+        opacity: 1, // Fade in once and stay visible
         x: finalX,
         y: [initialY, finalY, initialY], // Gentle up and down motion
-        opacity: [0, 1, 1, 1, 0], // Fade in, stay visible, fade out
       }}
       transition={{
-        x: { duration: duration, ease: "linear", delay: delay },
-        y: { duration: duration / 3, repeat: Infinity, ease: "easeInOut", delay: delay, repeatType: "reverse" },
-        opacity: { duration: 2, delay: delay, ease: "easeOut" }, // Fade in/out duration
-        repeat: Infinity,
-        repeatDelay: 5, // Delay before repeating the entire flight
+        opacity: { duration: 1, delay: delay, ease: "easeOut" }, // Fade in duration
+        x: { duration: duration, ease: "linear", delay: delay, repeat: Infinity, repeatType: "reverse" }, // Continuous horizontal flight
+        y: { duration: duration / 3, repeat: Infinity, ease: "easeInOut", delay: delay, repeatType: "reverse" }, // Continuous vertical bobbing
       }}
       style={{
         // Apply scale directly to the pigeon container
