@@ -22,7 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
         <motion.h1
-          className="mb-6 text-4xl font-extrabold leading-tight tracking-tighter md:text-6xl lg:text-7xl text-shadow-hero-title"
+          className="mb-6 text-mobile-h1 md:text-h1 font-extrabold leading-tight tracking-tighter text-shadow-hero-title"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -31,7 +31,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           <span className="text-accent-foreground">Digitale Innovatie & XR</span>
         </motion.h1>
         <motion.p
-          className="mb-8 max-w-3xl text-lg md:text-xl text-primary-foreground/90 text-shadow-hero-body"
+          className="mb-8 max-w-3xl text-mobile-body md:text-body-lg text-primary-foreground/90 text-shadow-hero-body"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}

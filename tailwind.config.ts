@@ -93,13 +93,13 @@ export default {
       },
       fontSize: { // Custom typography hierarchy
         'h1': ['72px', { lineHeight: '80px', fontWeight: '900', letterSpacing: '-0.02em' }], // Extra bold for hero
-        'h2': ['40px', { lineHeight: '48px', fontWeight: '700', letterSpacing: '-0.02em' }], // Bold for section headers
-        'h3': ['36px', { lineHeight: '44px', fontWeight: '500', letterSpacing: '-0.02em' }], // Semibold for subsections (changed to 36px, medium)
+        'h2': ['48px', { lineHeight: '56px', fontWeight: '700', letterSpacing: '-0.02em' }], // Bold for section headers (Increased from 40px)
+        'h3': ['36px', { lineHeight: '44px', fontWeight: '500', letterSpacing: '-0.02em' }], // Semibold for subsections
         'body-lg': ['18px', { lineHeight: '1.8', fontWeight: '400' }], // Regular for body text (line-height 1.8)
         'body-base': ['16px', { lineHeight: '24px', fontWeight: '400' }],
         'body-sm': ['14px', { lineHeight: '20px', fontWeight: '400' }],
         'mobile-h1': ['48px', { lineHeight: '56px', fontWeight: '900', letterSpacing: '-0.02em' }], // Mobile H1
-        'mobile-h3': ['40px', { lineHeight: '48px', fontWeight: '500', letterSpacing: '-0.02em' }], // Mobile H3 (Increased from 36px to 40px)
+        'mobile-h3': ['44px', { lineHeight: '52px', fontWeight: '500', letterSpacing: '-0.02em' }], // Mobile H3 (Increased from 40px)
         'mobile-body': ['16px', { lineHeight: '1.7', fontWeight: '400' }], // Mobile Body
       },
       textShadow: { // Custom text shadow utility
@@ -163,7 +163,7 @@ export default {
         "particle-move": { // Keyframe for particle movement
           "0%": { transform: "translate(0, 0) scale(1)" },
           "25%": { transform: "translate(10vw, 5vh) scale(1.1)" },
-          "50%": "translate(0, 10vh) scale(0.9)",
+          "50%": { transform: "translate(0, 10vh) scale(0.9)" },
           "75%": { transform: "translate(-10vw, 5vh) scale(1.2)" },
           "100%": { transform: "translate(0, 0) scale(1)" },
         },
