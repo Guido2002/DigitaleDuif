@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useCycle } from "framer-motion"; // Import useCycle
 import { cn } from "@/lib/utils";
 import styles from "./PigeonAnimation.module.css"; // Import CSS module
 
@@ -26,25 +26,32 @@ const PigeonAnimation: React.FC<PigeonAnimationProps> = ({
   initialY = "5%", // Default start at 5% from top (just below navbar)
   finalY = "8%", // Default end at 8% from top (subtle vertical movement)
 }) => {
+  const [scaleX, cycleScaleX] = useCycle(1, -1); // State for horizontal flip
+
   return (
     <motion.div
       className={cn(styles.pigeon, className)}
-      initial={{ opacity: 0, x: initialX, y: initialY, scale: sizeScale }}
+      initial={{ opacity: 0, x: initialX, y: initialY, scale: sizeScale, scaleX: 1 }} // Initial scaleX: 1
       animate={{
         opacity: 1, // Fade in once and stay visible
         x: finalX,
         y: [initialY, finalY, initialY], // Gentle up and down motion
+        scale: sizeScale, // Apply overall scale here
+        scaleX: scaleX,   // Apply flip scale here
       }}
       transition={{
         opacity: { duration: 1, delay: delay, ease: "easeOut" }, // Fade in duration
-        x: { duration: duration, ease: "linear", delay: delay, repeat: Infinity, repeatType: "reverse" }, // Continuous horizontal flight
+        x: {
+          duration: duration,
+          ease: "linear",
+          delay: delay,
+          repeat: Infinity,
+          repeatType: "reverse",
+          onRepeat: () => cycleScaleX(), // Flip on each repeat of the x animation
+        },
         y: { duration: duration / 3, repeat: Infinity, ease: "easeInOut", delay: delay, repeatType: "reverse" }, // Continuous vertical bobbing
       }}
-      style={{
-        // Apply scale directly to the pigeon container
-        transform: `scale(${sizeScale})`,
-        transformOrigin: "center",
-      }}
+      style={{ transformOrigin: "center" }} // Keep transformOrigin here for correct flipping
     >
       <div className={styles.pHead}></div>
       <div className={styles.pEye}></div>
