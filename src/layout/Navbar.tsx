@@ -56,8 +56,8 @@ const Navbar = () => {
         {isMobile ? (
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" className="h-14 w-14"> {/* Increased size to h-14 w-14 */}
-                <Menu className="h-7 w-7 text-foreground" /> {/* Increased icon size to h-7 w-7 */}
+              <Button variant="ghost" className="h-14 w-14">
+                <Menu className="h-8 w-8 text-foreground" /> {/* Icon size increased to h-8 w-8 */}
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="bg-background">
