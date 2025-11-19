@@ -99,7 +99,7 @@ export default {
         'body-base': ['16px', { lineHeight: '24px', fontWeight: '400' }],
         'body-sm': ['14px', { lineHeight: '20px', fontWeight: '400' }],
         'mobile-h1': ['48px', { lineHeight: '56px', fontWeight: '900', letterSpacing: '-0.02em' }], // Mobile H1
-        'mobile-h3': ['32px', { lineHeight: '40px', fontWeight: '500', letterSpacing: '-0.02em' }], // Mobile H3 (Increased from 24px to 32px)
+        'mobile-h3': ['36px', { lineHeight: '44px', fontWeight: '500', letterSpacing: '-0.02em' }], // Mobile H3 (Increased from 32px to 36px)
         'mobile-body': ['16px', { lineHeight: '1.7', fontWeight: '400' }], // Mobile Body
       },
       textShadow: { // Custom text shadow utility
