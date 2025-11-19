@@ -4,7 +4,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, Bird } from "lucide-react"; // Import Bird icon
 import { useIsMobile } from "@/hooks/use-mobile";
 import { navLinks } from "@/data/mockData";
 import { cn } from "@/lib/utils";
@@ -44,6 +44,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between"> {/* Increased height to h-20 */}
         <Link to="/" className="flex items-center space-x-2">
+          <Bird className="h-7 w-7 text-primary" /> {/* Added Bird icon */}
           <motion.span
             className="text-xl font-bold text-primary"
             whileHover={{ scale: 1.05, rotate: 2 }}

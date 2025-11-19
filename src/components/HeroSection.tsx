@@ -27,8 +27,8 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          DigitaleDuif: Uw Partner in <br className="hidden sm:inline" />
-          <span className="text-accent-foreground">Digitale Innovatie & XR</span>
+          DigitaleDuif: We geven jouw<br className="hidden sm:inline" />
+          <span className="text-accent-foreground">idee vleugels</span>
         </motion.h1>
         <motion.p
           className="mb-8 max-w-3xl text-mobile-body md:text-body-lg text-primary-foreground/90 text-shadow-hero-body"
@@ -36,7 +36,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
         >
-          Wij creëren Virtual, Mixed Reality ervaringen, websites en apps die mensen écht raken en bedrijven vooruit helpen. Of je nu een eerste stap in digitale innovatie wilt zetten of een ambitieus project voor ogen hebt - wij denken graag met je mee, van het allereerste idee tot de uiteindelijke lancering.
+          Digitale Duif ontwikkelt Virtual, Mixed Reality ervaringen, websites en apps afgestemd op gebruikers en willen bedrijven vooruit helpen. Of je nu een eerste stap in digitale innovatie wilt zetten of een ambitieus project voor ogen hebt. Wij denken graag met je mee, vanaf de tekentafel tot het eindproduct.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -49,7 +49,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
             className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105"
           >
             <Link to="/contact">
-              Start uw Digitale Project
+              Begin vandaag
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>

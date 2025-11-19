@@ -19,7 +19,7 @@ const ProcessSection = () => {
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Hoe werkt DigitaleDuif?"
-          subtitle="Geen verrassingen, geen bureaucratie. Gewoon een helder proces waar je als klant precies weet waar je aan toe bent."
+          subtitle="Bij Digitale Duif vliegen we volgens een aanpak die werkt. Hieronder zie je hoe wij jouw idee stap voor stap laten landen."
         />
       </FadeInWhenVisible>
 

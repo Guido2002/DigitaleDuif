@@ -34,7 +34,7 @@ const GuidoIntroSection = () => {
           >
             <img
               src={profilePhoto}
-              alt="Bas van Toor - Oprichter DigitaleDuif"
+              alt="Guido van Duijvenvoorde - Oprichter DigitaleDuif"
               className="w-full h-auto object-cover rounded-xl"
               style={{ aspectRatio: '4/5' }}
             />
@@ -47,7 +47,7 @@ const GuidoIntroSection = () => {
             transition={{ delay: 0.8, duration: 0.6 }}
             style={{ animation: "float 5s ease-in-out infinite alternate 1s" }}
           >
-            Innovatie met impact!
+            Enthousiast over IT!
           </motion.div>
         </motion.div>
 
@@ -63,25 +63,25 @@ const GuidoIntroSection = () => {
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Oprichter van DigitaleDuif, gedreven door digitale innovatie.
+                  Oprichter van DigitaleDuif.
                 </p>
               </div>
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Creëert digitale ervaringen waar je écht 'in stapt', zowel in XR als op web/mobiel.
+                  Ontwikkelt digitale producten met passie voor IT.
                 </p>
               </div>
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Focus op VR-trainingen, MR-applicaties, webdevelopment, mobiele apps en data-visualisatie.
+                  Focus op VR en MR-applicaties, webdevelopment en mobiele apps.
                 </p>
               </div>
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Passie voor het 'wauw-moment' bij klanten.
+                  Harde werker in hart en nieren.
                 </p>
               </div>
               <div className="flex items-start space-x-3">
@@ -93,7 +93,7 @@ const GuidoIntroSection = () => {
               <div className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                 <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Nieuwsgierig naar jouw ideeën voor een kop koffie!
+                  Nieuwsgierig naar jouw ideeën en een goed gesprek!
                 </p>
               </div>
             </div>

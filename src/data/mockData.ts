@@ -319,10 +319,6 @@ export const faqItems: FAQItem[] = [
     answer: "Absoluut! Wij begeleiden u graag van de initiële brainstormfase tot een concreet concept en een werkend prototype, om de mogelijkheden van digitale innovatie voor uw specifieke behoeften te verkennen.",
   },
   {
-    question: "Wat zijn de voordelen van VR-trainingssimulaties?",
-    answer: "VR-trainingssimulaties bieden een veilige, kosteneffectieve en herhaalbare manier om medewerkers te trainen in complexe of gevaarlijke scenario's, wat leidt tot hogere retentie en betere prestaties in de praktijk.",
-  },
-  {
     question: "Hoe lang duurt het om een digitale applicatie te ontwikkelen?",
     answer: "De ontwikkeltijd varieert sterk afhankelijk van de complexiteit en de scope van het project. Na een kennismaking en behoefteanalyse kunnen we een realistische tijdsinschatting geven.",
   },
