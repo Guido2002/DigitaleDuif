@@ -1,15 +1,15 @@
 "use client";
 
 import React from "react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { projects } from "@/data/mockData";
 import SectionHeader from "@/components/SectionHeader";
 import FadeInWhenVisible from "@/components/FadeInWhenVisible";
-import ProjectCard3D from "@/components/ProjectCard3D"; // Import the new 3D card component
-import styles from "@/components/ProjectCard3D.module.css"; // Import the CSS module for the slideshow container
 
 const ProjectsPage = () => {
   return (
-    <div className="container bg-background py-12 flex flex-col items-center">
+    <div className="container bg-background py-12">
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Onze Projecten"
@@ -18,14 +18,27 @@ const ProjectsPage = () => {
         />
       </FadeInWhenVisible>
 
-      <div className={styles.slideshowContainer}>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
-          <ProjectCard3D
-            key={index}
-            project={project}
-            index={index}
-            totalProjects={projects.length}
-          />
+          <FadeInWhenVisible key={index} delay={0.1 + index * 0.1} className="h-full">
+            <Card className="group flex flex-col justify-between p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-card border border-border h-full">
+              <CardHeader className="px-0 pt-0">
+                <CardTitle className="mb-2 text-2xl font-semibold text-foreground">
+                  {project.title}
+                </CardTitle>
+                <CardDescription className="text-base text-muted-foreground">
+                  {project.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="mt-4 flex flex-wrap gap-2 p-0">
+                {project.techStack.map((tech, techIndex) => (
+                  <Badge key={techIndex} variant="outline" className="border-primary text-primary bg-primary/10">
+                    {tech}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
+          </FadeInWhenVisible>
         ))}
       </div>
     </div>

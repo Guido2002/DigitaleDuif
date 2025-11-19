@@ -138,7 +138,7 @@ export interface Project {
   title: string;
   description: string;
   techStack: string[];
-  imageUrl: string; // Added imageUrl
+  // Removed imageUrl
 }
 
 export const projects: Project[] = [
@@ -146,37 +146,37 @@ export const projects: Project[] = [
     title: "MR BIM 4D visualisatie voor ombouwplanning",
     description: "Een Mixed Reality applicatie die 3D BIM-modellen projecteert in de fysieke ruimte, inclusief tijdsdimensie (4D), voor efficiënte ombouwplanning en clashdetectie op locatie.",
     techStack: ["Unity", "C#", "HoloLens 2", "BIM Integration"],
-    imageUrl: "/public/placeholder.svg", // Placeholder image
+    // Removed imageUrl
   },
   {
     title: "XR sportanalyse: passing & positionering",
     description: "Een Virtual Reality trainingsmodule voor voetbalcoaches en spelers om passing en positionering te analyseren en te oefenen in gesimuleerde wedstrijdscenario's.",
     techStack: ["Unity", "C#", "Meta Quest 3", "Data Visualization"],
-    imageUrl: "/public/placeholder.svg", // Placeholder image
+    // Removed imageUrl
   },
   {
     title: "Interactieve VR-trainingsmodule voor complexe machines",
     description: "Een gedetailleerde VR-simulatie die operators traint in de veilige en efficiënte bediening van complexe industriële machines, inclusief noodprocedures.",
     techStack: ["Unity", "C#", "Meta Quest Pro", "Simulatie"],
-    imageUrl: "/public/placeholder.svg", // Placeholder image
+    // Removed imageUrl
   },
   {
     title: "Maatwerk E-commerce Platform",
     description: "Ontwikkeling van een schaalbaar e-commerce platform met geavanceerde productbeheerfuncties en een gepersonaliseerde gebruikerservaring.",
     techStack: ["React", "Node.js", "TypeScript", "PostgreSQL", "Stripe API"],
-    imageUrl: "/public/placeholder.svg", // Placeholder image
+    // Removed imageUrl
   },
   {
     title: "Mobiele Event App",
     description: "Een native mobiele applicatie voor evenementen met functies zoals agenda, sprekersinformatie, netwerkmogelijkheden en live polls.",
     techStack: ["React Native", "TypeScript", "Firebase", "Push Notifications"],
-    imageUrl: "/public/placeholder.svg", // Placeholder image
+    // Removed imageUrl
   },
   {
     title: "Bedrijfswebsite met CMS",
     description: "Een responsieve en SEO-vriendelijke bedrijfswebsite, gebouwd met een gebruiksvriendelijk Content Management Systeem voor eenvoudige updates.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Headless CMS"],
-    imageUrl: "/public/placeholder.svg", // Placeholder image
+    // Removed imageUrl
   },
 ];
 
