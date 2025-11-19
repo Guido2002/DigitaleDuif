@@ -26,12 +26,19 @@ const GuidoIntroSection = () => {
             animate={{ opacity: [0.5, 0.8, 0.5], scale: [0.95, 1.05, 0.95] }}
             transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
           />
-          <img
-            src={profilePhoto}
-            alt="Bas van Toor - Oprichter DigitaleDuif"
-            className="w-full max-w-md rounded-xl object-cover shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out"
-            style={{ aspectRatio: '4/5' }}
-          />
+          <a 
+            href="https://www.linkedin.com/in/guido-van-duijvenvoorde-531712162/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70" // Added hover effect for ring
+          >
+            <img
+              src={profilePhoto}
+              alt="Bas van Toor - Oprichter DigitaleDuif"
+              className="w-full h-auto object-cover rounded-xl"
+              style={{ aspectRatio: '4/5' }}
+            />
+          </a>
           {/* Optional: Add a subtle floating UI element near the image */}
           <motion.div
             className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
