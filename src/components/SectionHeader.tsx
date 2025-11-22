@@ -22,7 +22,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
 }) => {
   return (
     <div className={cn("mb-12", align === "center" ? "text-center" : "text-center md:text-left", className)}>
-      <h2 className={cn("text-mobile-h3 md:text-h2 font-bold text-primary", titleClassName)}>
+      <h2 className={cn("text-3xl md:text-5xl font-bold text-primary", titleClassName)}>
         {title}
       </h2>
       {subtitle && (

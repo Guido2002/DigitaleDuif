@@ -138,7 +138,7 @@ export interface Project {
   title: string;
   description: string;
   techStack: string[];
-  // Removed imageUrl
+  images: string[];
 }
 
 export const projects: Project[] = [
@@ -146,37 +146,61 @@ export const projects: Project[] = [
     title: "MR BIM 4D visualisatie voor ombouwplanning",
     description: "Een Mixed Reality applicatie die 3D BIM-modellen projecteert in de fysieke ruimte, inclusief tijdsdimensie (4D), voor efficiënte ombouwplanning en clashdetectie op locatie.",
     techStack: ["Unity", "C#", "HoloLens 2", "BIM Integration"],
-    // Removed imageUrl
+    images: [
+      "https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1563206767-5b101f883dcc?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+    ],
   },
   {
     title: "XR sportanalyse: passing & positionering",
     description: "Een Virtual Reality trainingsmodule voor voetbalcoaches en spelers om passing en positionering te analyseren en te oefenen in gesimuleerde wedstrijdscenario's.",
     techStack: ["Unity", "C#", "Meta Quest 3", "Data Visualization"],
-    // Removed imageUrl
+    images: [
+      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1516937941344-00b4b0ba30c0?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1512430291840-2e0a9bf2a9ae?w=800&h=600&fit=crop",
+    ],
   },
   {
     title: "Interactieve VR-trainingsmodule voor complexe machines",
     description: "Een gedetailleerde VR-simulatie die operators traint in de veilige en efficiënte bediening van complexe industriële machines, inclusief noodprocedures.",
     techStack: ["Unity", "C#", "Meta Quest Pro", "Simulatie"],
-    // Removed imageUrl
+    images: [
+      "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop",
+    ],
   },
   {
     title: "Maatwerk E-commerce Platform",
     description: "Ontwikkeling van een schaalbaar e-commerce platform met geavanceerde productbeheerfuncties en een gepersonaliseerde gebruikerservaring.",
     techStack: ["React", "Node.js", "TypeScript", "PostgreSQL", "Stripe API"],
-    // Removed imageUrl
+    images: [
+      "https://images.unsplash.com/photo-1661288588506-88c4280ca4d1?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1523875335684-f267bc527d7f?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-adf4e565db18?w=800&h=600&fit=crop",
+    ],
   },
   {
     title: "Mobiele Event App",
     description: "Een native mobiele applicatie voor evenementen met functies zoals agenda, sprekersinformatie, netwerkmogelijkheden en live polls.",
     techStack: ["React Native", "TypeScript", "Firebase", "Push Notifications"],
-    // Removed imageUrl
+    images: [
+      "https://images.unsplash.com/photo-1555099962-4199f1a8abd5?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1512941691920-25bea6cc7653?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&h=600&fit=crop",
+    ],
   },
   {
     title: "Bedrijfswebsite met CMS",
     description: "Een responsieve en SEO-vriendelijke bedrijfswebsite, gebouwd met een gebruiksvriendelijk Content Management Systeem voor eenvoudige updates.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Headless CMS"],
-    // Removed imageUrl
+    images: [
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1461749280684-ddefd3083d60?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=600&fit=crop",
+    ],
   },
 ];
 

@@ -53,7 +53,6 @@ const TestimonialsSection = () => {
                       avatar={testimonial.avatar}
                       rating={testimonial.rating} // Pass the new rating prop
                       companyLogo={testimonial.companyLogo} // Pass the new companyLogo prop
-                      isDarkBackground={true} // Indicate that the card is on a dark background
                     />
                   </FadeInWhenVisible>
                 </div>
@@ -65,6 +64,12 @@ const TestimonialsSection = () => {
               <CarouselPrevious />
               <CarouselNext />
             </>
+          )}
+
+          {isMobile && (
+            <div className="flex justify-center mt-6">
+              <span className="text-sm text-neutral-600 font-medium">Swipe</span>
+            </div>
           )}
         </Carousel>
       </div>

@@ -28,7 +28,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           DigitaleDuif: We geven jouw<br className="hidden sm:inline" />
-          <span className="text-accent-foreground">idee vleugels</span>
+          <span className="text-accent-foreground"> idee vleugels</span>
         </motion.h1>
         <motion.p
           className="mb-8 max-w-3xl text-mobile-body md:text-body-lg text-primary-foreground/90 text-shadow-hero-body"
