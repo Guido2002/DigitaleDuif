@@ -106,7 +106,7 @@ export default function App() {
             </div>
           )}
 
-          <p className="tagline-main">We geven jouw idee vleugels</p>
+          <p className="tagline-main">Momenteel wordt er gewerkt aan de website</p>
         </section>
       </main>
     </div>
