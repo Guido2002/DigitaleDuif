@@ -2,7 +2,7 @@
   "name": "digitaleduif",
   "private": true,
   "version": "1.0.0",
-  "homepage": "https://Guido2002.github.io/DigitaleDuif/",
+  "homepage": "https://digitale-duif.nl",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
