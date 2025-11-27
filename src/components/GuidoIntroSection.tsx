@@ -11,6 +11,32 @@ import FlyingBirdIllustration from "./FlyingBirdIllustration"; // Import FlyingB
 
 const GuidoIntroSection = () => {
   const [isHovered, setIsHovered] = React.useState(false);
+  const imageRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Trigger on all devices
+        setTimeout(() => {
+          setIsHovered(entry.isIntersecting);
+        }, 100);
+      },
+      {
+        threshold: 0.95, // Trigger when 95% of the image is visible
+      }
+    );
+
+    if (imageRef.current) {
+      observer.observe(imageRef.current);
+    }
+
+    return () => {
+      if (imageRef.current) {
+        observer.unobserve(imageRef.current);
+      }
+    };
+  }, []);
+
   return (
     <React.Fragment>
       <div
@@ -18,11 +44,10 @@ const GuidoIntroSection = () => {
       >
         {/* Image Section */}
         <motion.div
+          ref={imageRef}
           className="relative flex justify-center md:justify-end"
           whileHover={{ scale: 1.03, rotate: 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
           {/* Subtle background glow behind the image */}
           <motion.div
@@ -34,13 +59,25 @@ const GuidoIntroSection = () => {
             href="https://www.linkedin.com/in/guido-van-duijvenvoorde-531712162/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70"
+            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70 relative overflow-hidden"
           >
             <img
-              src={isHovered ? profilePhotoHover : profilePhoto}
+              src={profilePhoto}
               alt="Guido van Duijvenvoorde - Oprichter DigitaleDuif"
-              className="w-full h-auto object-cover rounded-xl transition-opacity duration-300"
-              style={{ aspectRatio: '4/5' }}
+              className="w-full h-auto object-cover rounded-xl transition-opacity duration-700 ease-in-out"
+              style={{ 
+                aspectRatio: '4/5',
+                opacity: isHovered ? 0 : 1
+              }}
+            />
+            <img
+              src={profilePhotoHover}
+              alt="Guido van Duijvenvoorde - Oprichter DigitaleDuif"
+              className="w-full h-auto object-cover rounded-xl transition-opacity duration-700 ease-in-out absolute top-0 left-0"
+              style={{ 
+                aspectRatio: '4/5',
+                opacity: isHovered ? 1 : 0
+              }}
             />
           </a>
           {/* Optional: Add a subtle floating UI element near the image */}
