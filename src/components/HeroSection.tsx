@@ -11,13 +11,48 @@ interface HeroSectionProps {
   // children: React.ReactNode; // Removed as it's not used
 }
 
+const heroImages = [
+  '/xr.jpeg',
+  '/webapp.jpeg',
+  '/ux1.jpeg'
+];
+
 const HeroSection: React.FC<HeroSectionProps> = () => {
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 10000); // Change image every 10 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="home"
-      className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end py-20 text-primary-foreground overflow-hidden"
+      className="relative flex w-full min-h-[calc(100vh-4rem)] items-center justify-center py-20 text-primary-foreground overflow-hidden"
       aria-label="Welkomstsectie - DigitaleDuif Digitale Innovatie & XR oplossingen"
     >
+      {/* Background image carousel */}
+      {heroImages.map((image, index) => (
+        <div
+          key={image}
+          className="absolute inset-0 transition-opacity duration-1000"
+          style={{
+            backgroundImage: `url('${image}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            opacity: index === currentImageIndex ? 1 : 0,
+            zIndex: 0
+          }}
+        />
+      ))}
+      
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end opacity-80 z-0"></div>
+      
       {/* Removed Pigeon Animations */}
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
