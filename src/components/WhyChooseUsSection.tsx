@@ -29,6 +29,7 @@ const WhyChooseUsSection = () => {
                 stepNumber={index < 3 ? index + 1 : undefined} // Pass step number only for highlighted cards
                 learnMoreLink={index === 0 ? "/diensten#vr-app-dev" : index === 1 ? "/diensten#web-development" : index === 2 ? "/#about" : undefined} // Example links
                 isDarkBackground={true} // Indicate that the card is on a dark background
+                backgroundImage={usp.backgroundImage}
               />
             </FadeInWhenVisible>
           ))}

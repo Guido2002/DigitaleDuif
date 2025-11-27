@@ -7,6 +7,7 @@ interface USP {
   icon: LucideIcon;
   title: string;
   description: string;
+  backgroundImage?: string;
 }
 
 export const uspCards: USP[] = [
@@ -14,16 +15,19 @@ export const uspCards: USP[] = [
     icon: Brain,
     title: "XR Specialist",
     description: "Diepgaande XR kennis voor innovatieve ervaringen.",
+    backgroundImage: "/xr.jpeg",
   },
   {
     icon: Globe,
     title: "Web & App Development",
     description: "Van concept tot lancering, robuuste websites en apps.",
+    backgroundImage: "/webapp.jpeg",
   },
   {
     icon: Lightbulb,
     title: "Techniek & UX in Balans",
     description: "Solide techniek gecombineerd met een fijne gebruikservaring.",
+    backgroundImage: "/ux1.jpeg",
   },
   {
     icon: Users,

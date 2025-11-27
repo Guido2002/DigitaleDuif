@@ -3,12 +3,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import profilePhoto from "../assets/1711446418839.jpeg";
+import profilePhoto from "../assets/IMG_9948.jpg";
+import profilePhotoHover from "../assets/IMG_9949.jpg";
 import { cn } from "@/lib/utils";
 import { CheckCircle2 } from "lucide-react";
 import FlyingBirdIllustration from "./FlyingBirdIllustration"; // Import FlyingBirdIllustration
 
 const GuidoIntroSection = () => {
+  const [isHovered, setIsHovered] = React.useState(false);
   return (
     <React.Fragment>
       <div
@@ -19,6 +21,8 @@ const GuidoIntroSection = () => {
           className="relative flex justify-center md:justify-end"
           whileHover={{ scale: 1.03, rotate: 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           {/* Subtle background glow behind the image */}
           <motion.div
@@ -30,12 +34,12 @@ const GuidoIntroSection = () => {
             href="https://www.linkedin.com/in/guido-van-duijvenvoorde-531712162/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70" // Added hover effect for ring
+            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70"
           >
             <img
-              src={profilePhoto}
+              src={isHovered ? profilePhotoHover : profilePhoto}
               alt="Guido van Duijvenvoorde - Oprichter DigitaleDuif"
-              className="w-full h-auto object-cover rounded-xl"
+              className="w-full h-auto object-cover rounded-xl transition-opacity duration-300"
               style={{ aspectRatio: '4/5' }}
             />
           </a>
