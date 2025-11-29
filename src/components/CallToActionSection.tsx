@@ -38,7 +38,7 @@ const CallToActionSection = () => {
           <FadeInWhenVisible delay={0.4}>
             <div className="relative w-full sm:w-[250px] md:w-[300px] lg:w-[350px] aspect-[3/4] sm:aspect-auto sm:h-[300px] md:h-[350px] lg:h-[400px] rounded-xl overflow-hidden shadow-2xl mx-auto md:ml-auto md:mr-0">
               <img
-                src="/IMG_0005.JPG"
+                src="/IMG_0005.jpg"
                 alt="DigitaleDuif XR Innovation"
                 className="w-full h-full object-cover"
               />
