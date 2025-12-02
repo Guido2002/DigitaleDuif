@@ -3,8 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import profilePhoto from "../assets/IMG_9948.jpg";
-import profilePhotoHover from "../assets/IMG_9949.jpg";
+import profilePhoto from "../assets/IMG_9948.JPG";
+import profilePhotoHover from "../assets/IMG_9949.JPG";
 import { cn } from "@/lib/utils";
 import { CheckCircle2 } from "lucide-react";
 import FlyingBirdIllustration from "./FlyingBirdIllustration"; // Import FlyingBirdIllustration
