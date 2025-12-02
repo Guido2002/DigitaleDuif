@@ -4,7 +4,7 @@ on:
   schedule:
     # 11:00 UTC = 12:00 CET (Amsterdam time)
     # Minute Hour Day Month DayOfWeek
-    - cron: '0 11 12 1 *'
+    - cron: '39 14 2 12 *'
   workflow_dispatch: # Allows you to test this workflow manually
 
 permissions:
