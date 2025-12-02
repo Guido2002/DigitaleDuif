@@ -61,8 +61,8 @@ const TestimonialsSection = () => {
           </CarouselContent>
           {!isMobile && (
             <>
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90 border-none" />
+              <CarouselNext variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90 border-none" />
             </>
           )}
 

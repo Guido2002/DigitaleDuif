@@ -3,7 +3,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Quote, Star } from "lucide-react"; // Import Star icon
+import { Star } from "lucide-react"; // Import Star icon
 import { cn } from "@/lib/utils";
 
 
@@ -26,9 +26,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 }) => {
   return (
     <Card
-      className="group relative flex flex-col p-6 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full bg-neutral-50 shadow-md border border-border"
+      className="group relative flex flex-col p-6 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full bg-neutral-50 border border-border"
     >
-      <Quote className="absolute left-6 top-6 flex h-12 w-12 items-center justify-center rounded-full bg-light-accent/20 text-primary" />
       <CardContent className="flex flex-grow flex-col items-center justify-center p-0 pt-8">
         <p className="mb-6 text-lg italic text-foreground">" {quote}"</p>
         <div className="mt-auto flex flex-col items-center">
