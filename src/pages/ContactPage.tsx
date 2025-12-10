@@ -26,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2, Send } from "lucide-react";
+import { Loader2, Send, CheckCircle2 } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { services } from "@/data/mockData";
 
@@ -49,6 +49,7 @@ const formSchema = z.object({
 
 const ContactPage = () => {
   const [searchParams] = useSearchParams();
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -74,7 +75,7 @@ const ContactPage = () => {
     
     await new Promise(resolve => setTimeout(resolve, 2000)); 
 
-    showSuccess("Uw bericht is succesvol verzonden!");
+    setIsSubmitted(true);
     form.reset();
   };
 
@@ -94,22 +95,49 @@ const ContactPage = () => {
           {/* Geometric decorative line */}
           <div className="absolute top-0 left-0 w-full h-1 bg-primary opacity-80" />
           
-          <CardHeader className="text-center pb-2">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <CardTitle className="mb-2 text-4xl font-bold text-primary">
-                Neem Contact Op
-              </CardTitle>
-              <p className="text-lg text-muted-foreground">
-                Heeft u een vraag, een idee of wilt u de mogelijkheden bespreken?
-                Neem gerust contact met ons op.
-              </p>
-            </motion.div>
-          </CardHeader>
+          {!isSubmitted && (
+            <CardHeader className="text-center pb-2">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <CardTitle className="mb-2 text-4xl font-bold text-primary">
+                  Neem Contact Op
+                </CardTitle>
+                <p className="text-lg text-muted-foreground">
+                  Heeft u een vraag, een idee of wilt u de mogelijkheden bespreken?
+                  Neem gerust contact met ons op.
+                </p>
+              </motion.div>
+            </CardHeader>
+          )}
           <CardContent className="pt-6">
+            {isSubmitted ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}
+                className="flex flex-col items-center justify-center py-12 text-center space-y-6"
+              >
+                <div className="rounded-full bg-primary/10 p-4 shadow-inner">
+                  <CheckCircle2 className="h-16 w-16 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold text-foreground">Bedankt voor uw bericht!</h3>
+                  <p className="text-muted-foreground max-w-xs mx-auto text-lg">
+                    We hebben uw bericht goed ontvangen en nemen zo snel mogelijk contact met u op.
+                  </p>
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setIsSubmitted(false)}
+                  className="mt-4 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                >
+                  Nog een bericht sturen
+                </Button>
+              </motion.div>
+            ) : (
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -222,6 +250,7 @@ const ContactPage = () => {
                 </motion.div>
               </form>
             </Form>
+            )}
           </CardContent>
         </Card>
       </motion.div>
