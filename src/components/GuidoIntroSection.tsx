@@ -8,7 +8,8 @@ import profilePhoto from "../assets/IMG_9948.JPG";
 import profilePhotoHover from "../assets/IMG_9949.JPG";
 import { cn } from "@/lib/utils";
 import { CheckCircle2 } from "lucide-react";
-import FlyingBirdIllustration from "./FlyingBirdIllustration"; // Import FlyingBirdIllustration
+import FlyingBirdIllustration from "./FlyingBirdIllustration";
+import CvModal from "./CvModal";
 
 const GuidoIntroSection = () => {
   const [isHovered, setIsHovered] = React.useState(false);
@@ -141,16 +142,17 @@ const GuidoIntroSection = () => {
             </div>
 
             <div className="mt-8">
-              <Button 
-                asChild 
-                size="lg" 
-                variant="outline"
-                className="gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white shadow-sm hover:shadow-md transition-all duration-300 group h-14 px-10 text-lg"
-              >
-                <a href="/cv.pdf" target="_blank" rel="noopener noreferrer">
-                  Bekijk mijn CV
-                </a>
-              </Button>
+              <CvModal 
+                trigger={
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white shadow-sm hover:shadow-md transition-all duration-300 group h-14 px-10 text-lg"
+                  >
+                    Bekijk mijn CV
+                  </Button>
+                }
+              />
             </div>
           </CardContent>
         </div>
