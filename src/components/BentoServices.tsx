@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { services } from "@/data/mockData";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight, Code, Smartphone, Glasses, Layers, Palette, Lightbulb, Database, Terminal } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 // Map service IDs to specific icons for better visual representation
 const iconMap: Record<string, React.ElementType> = {
@@ -20,6 +21,16 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const BentoServices = () => {
+  const navigate = useNavigate();
+
+  const handleServiceClick = (projectId?: string) => {
+    if (projectId) {
+      navigate(`/projecten?project=${projectId}`);
+    } else {
+      navigate('/projecten');
+    }
+  };
+
   return (
     <section className="py-24 bg-background relative overflow-hidden">
       {/* Background Gradients */}
@@ -76,8 +87,9 @@ const BentoServices = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                onClick={() => handleServiceClick(service.relatedProjectId)}
                 className={cn(
-                  "group relative overflow-hidden rounded-3xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1",
+                  "group relative overflow-hidden rounded-3xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1 cursor-pointer",
                   colSpan
                 )}
               >

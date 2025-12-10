@@ -139,81 +139,131 @@ export const testimonials: Testimonial[] = [
 
 // Project Data
 export interface Project {
+  id: string;
   title: string;
+  tagline: string;
+  client: string;
   description: string;
+  challenge: string;
+  solution: string;
+  impact: string;
   techStack: string[];
   images: string[];
+  serviceId?: string; // New field
 }
 
 export const projects: Project[] = [
   {
-    title: "MR BIM 4D visualisatie voor ombouwplanning",
+    id: "mr-bim-4d",
+    title: "MR BIM 4D visualisatie",
+    tagline: "Efficiënte ombouwplanning met Mixed Reality",
+    client: "Bouwbedrijf X",
     description: "Een Mixed Reality applicatie die 3D BIM-modellen projecteert in de fysieke ruimte, inclusief tijdsdimensie (4D), voor efficiënte ombouwplanning en clashdetectie op locatie.",
+    challenge: "Complexe ombouwprojecten liepen vaak vertraging op door onvoorziene clashes tussen nieuwe ontwerpen en bestaande situaties, wat leidde tot hoge faalkosten.",
+    solution: "Een HoloLens 2 applicatie die het BIM-model 1-op-1 over de werkelijkheid projecteert, waardoor monteurs direct kunnen zien waar leidingen en constructies moeten komen.",
+    impact: "20% reductie in bouwtijd en 15% minder faalkosten door vroegtijdige detectie van clashes.",
     techStack: ["Unity", "C#", "HoloLens 2", "BIM Integration"],
     images: [
       "https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1563206767-5b101f883dcc?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
     ],
+    serviceId: "mr-interfaces",
   },
   {
-    title: "XR sportanalyse: passing & positionering",
+    id: "xr-sportanalyse",
+    title: "XR sportanalyse",
+    tagline: "Next-level training voor profvoetballers",
+    client: "FC Topclub",
     description: "Een Virtual Reality trainingsmodule voor voetbalcoaches en spelers om passing en positionering te analyseren en te oefenen in gesimuleerde wedstrijdscenario's.",
+    challenge: "Traditionele video-analyse mist de diepte en het perspectief van de speler op het veld, waardoor tactische beslissingen lastig te trainen zijn zonder fysieke belasting.",
+    solution: "Een VR-simulatie waarin spelers wedstrijdfragmenten kunnen herbeleven vanuit hun eigen perspectief en alternatieve keuzes kunnen maken.",
+    impact: "Verbeterd tactisch inzicht bij jeugdspelers en snellere revalidatie van geblesseerde spelers door cognitieve training zonder fysieke impact.",
     techStack: ["Unity", "C#", "Meta Quest 3", "Data Visualization"],
     images: [
       "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1516937941344-00b4b0ba30c0?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1512430291840-2e0a9bf2a9ae?w=800&h=600&fit=crop",
     ],
+    serviceId: "data-analytics",
   },
   {
-    title: "Interactieve VR-trainingsmodule voor complexe machines",
+    id: "vr-machine-training",
+    title: "VR Machine Training",
+    tagline: "Veilig trainen met complexe machines",
+    client: "Industrie Reus",
     description: "Een gedetailleerde VR-simulatie die operators traint in de veilige en efficiënte bediening van complexe industriële machines, inclusief noodprocedures.",
+    challenge: "Het trainen van nieuwe operators op echte machines is duur, risicovol en haalt machines uit productie.",
+    solution: "Een hyperrealistische VR-tweeling van de machine waarop operators onbeperkt kunnen oefenen, inclusief zeldzame noodscenario's.",
+    impact: "30% kortere inwerktijd en 0 incidenten tijdens de eerste werkmaand van nieuwe operators.",
     techStack: ["Unity", "C#", "Meta Quest Pro", "Simulatie"],
     images: [
       "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop",
     ],
+    serviceId: "vr-app-dev",
   },
   {
-    title: "Maatwerk E-commerce Platform",
+    id: "ecommerce-platform",
+    title: "Maatwerk E-commerce",
+    tagline: "Schaalbaar platform voor miljoenen bezoekers",
+    client: "Retail Brand",
     description: "Ontwikkeling van een schaalbaar e-commerce platform met geavanceerde productbeheerfuncties en een gepersonaliseerde gebruikerservaring.",
+    challenge: "Het bestaande platform kon de piekbelasting tijdens sales niet aan en bood te weinig flexibiliteit voor marketingcampagnes.",
+    solution: "Een headless e-commerce architectuur met een razendsnelle frontend en een flexibel CMS.",
+    impact: "50% snellere laadtijden en een verdubbeling van de conversie op mobiele apparaten.",
     techStack: ["React", "Node.js", "TypeScript", "PostgreSQL", "Stripe API"],
     images: [
       "https://images.unsplash.com/photo-1661288588506-88c4280ca4d1?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1523875335684-f267bc527d7f?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1460925895917-adf4e565db18?w=800&h=600&fit=crop",
     ],
+    serviceId: "ui-ux-design",
   },
   {
+    id: "event-app",
     title: "Mobiele Event App",
+    tagline: "De ultieme gids voor festivalbezoekers",
+    client: "Event Org",
     description: "Een native mobiele applicatie voor evenementen met functies zoals agenda, sprekersinformatie, netwerkmogelijkheden en live polls.",
+    challenge: "Bezoekers raakten het overzicht kwijt in het papieren programmaboekje en misten last-minute wijzigingen.",
+    solution: "Een interactieve app met real-time pushnotificaties, een persoonlijke agenda en een interactieve plattegrond.",
+    impact: "90% downloadgraad onder bezoekers en een hogere waardering voor de event-organisatie.",
     techStack: ["React Native", "TypeScript", "Firebase", "Push Notifications"],
     images: [
       "https://images.unsplash.com/photo-1555099962-4199f1a8abd5?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1512941691920-25bea6cc7653?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&h=600&fit=crop",
     ],
+    serviceId: "mobile-app-development",
   },
   {
+    id: "corporate-website",
     title: "Bedrijfswebsite met CMS",
+    tagline: "Modern visitekaartje met eenvoudige content beheer",
+    client: "MKB Bedrijf",
     description: "Een responsieve en SEO-vriendelijke bedrijfswebsite, gebouwd met een gebruiksvriendelijk Content Management Systeem voor eenvoudige updates.",
+    challenge: "De oude website was traag, niet mobielvriendelijk en moeilijk aan te passen door de marketingafdeling.",
+    solution: "Een moderne Next.js website gekoppeld aan een headless CMS voor maximale snelheid en beheergemak.",
+    impact: "40% meer organisch verkeer en een professionele uitstraling die past bij de groei van het bedrijf.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Headless CMS"],
     images: [
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1461749280684-ddefd3083d60?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=600&fit=crop",
     ],
+    serviceId: "web-development",
   },
 ];
 
 // Service Data
 export interface Service {
-  id: string; // Added ID for hash linking
+  id: string;
   title: string;
   description: string;
   tags: string[];
+  relatedProjectId?: string; // New field
 }
 
 export const services: Service[] = [
@@ -222,48 +272,56 @@ export const services: Service[] = [
     title: "Web Development",
     description: "Ontwikkeling van responsieve en krachtige websites en webapplicaties, van marketingwebsites tot complexe SaaS-oplossingen. Wij bouwen met moderne frameworks zoals React en Next.js.",
     tags: ["React", "Next.js", "TypeScript", "Frontend", "Backend", "CMS"],
+    relatedProjectId: "corporate-website",
   },
   {
     id: "mobile-app-development",
     title: "Mobiele App Ontwikkeling",
     description: "Native en cross-platform mobiele applicaties voor iOS en Android. Wij creëren intuïtieve en performante apps die uw gebruikers zullen waarderen.",
     tags: ["React Native", "iOS", "Android", "UI/UX", "API Integration"],
+    relatedProjectId: "event-app",
   },
   {
-    id: "vr-app-dev", // Corresponding ID
+    id: "vr-app-dev",
     title: "VR-applicatieontwikkeling",
     description: "Ontwikkeling van op maat gemaakte Virtual Reality applicaties voor training, simulatie, visualisatie en entertainment. Van concept tot implementatie, wij brengen uw ideeën tot leven in VR.",
     tags: ["Unity", "Meta Quest", "C#", "VR Design"],
+    relatedProjectId: "vr-machine-training",
   },
   {
-    id: "mr-interfaces", // Corresponding ID
+    id: "mr-interfaces",
     title: "Mixed Reality interfaces",
     description: "Creëren van intuïtieve en functionele Mixed Reality interfaces die digitale informatie naadloos integreren met de fysieke wereld. Ideaal voor industriële toepassingen en interactieve ervaringen.",
     tags: ["Unity", "HoloLens", "MR Design", "UX"],
+    relatedProjectId: "mr-bim-4d",
   },
   {
     id: "ui-ux-design",
     title: "UI/UX Design",
     description: "Gebruikersgerichte ontwerpen die niet alleen mooi zijn, maar ook functioneel en intuïtief. Wij zorgen voor een optimale gebruikerservaring voor al uw digitale producten.",
     tags: ["UI Design", "UX Research", "Wireframing", "Prototyping", "Figma"],
+    relatedProjectId: "ecommerce-platform",
   },
   {
-    id: "prototyping", // Corresponding ID
+    id: "prototyping",
     title: "Prototyping & conceptontwikkeling",
     description: "Snelle ontwikkeling van prototypes en proof-of-concepts om ideeën te valideren en te visualiseren. Wij helpen u met het verkennen van de mogelijkheden van digitale innovatie.",
     tags: ["Rapid Prototyping", "Concepting", "Ideation", "Agile"],
+    relatedProjectId: "xr-sportanalyse",
   },
   {
-    id: "unity-consultancy", // Corresponding ID
+    id: "unity-consultancy",
     title: "Unity consultancy / developer-as-a-service",
     description: "Expertise en ondersteuning voor uw Unity-projecten. Huur onze ervaren Unity-ontwikkelaars in voor advies, code review, projectmanagement of als tijdelijke uitbreiding van uw team.",
     tags: ["Unity", "C#", "Consultancy", "Development"],
+    relatedProjectId: "mr-bim-4d",
   },
   {
-    id: "data-analytics", // Corresponding ID
+    id: "data-analytics",
     title: "Data logging & analyse in XR & Web",
     description: "Implementatie van systemen voor het loggen en analyseren van gebruikersgedrag binnen XR-applicaties en webplatforms. Verkrijg waardevolle inzichten om uw ervaringen te optimaliseren.",
-    tags: ["Data Analytics", "Telemetry", "Insights", "Optimization", "Google Analytics"],
+    tags: ["Analytics", "Data Visualization", "User Behavior", "Optimization"],
+    relatedProjectId: "xr-sportanalyse",
   },
 ];
 

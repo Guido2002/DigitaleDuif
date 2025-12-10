@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,7 +19,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Loader2, Send } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
+import { services } from "@/data/mockData";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -30,6 +39,7 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Voer een geldig e-mailadres in.",
   }),
+  service: z.string().optional(),
   message: z.string().min(10, {
     message: "Bericht moet minimaal 10 karakters bevatten.",
   }).max(500, {
@@ -38,14 +48,26 @@ const formSchema = z.object({
 });
 
 const ContactPage = () => {
+  const [searchParams] = useSearchParams();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
+      service: "",
       message: "",
     },
   });
+
+  useEffect(() => {
+    const serviceId = searchParams.get("service");
+    if (serviceId) {
+      const serviceExists = services.some((s) => s.id === serviceId);
+      if (serviceExists) {
+        form.setValue("service", serviceId);
+      }
+    }
+  }, [searchParams, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log("Formulier verzonden:", values);
@@ -129,6 +151,33 @@ const ContactPage = () => {
                     </FormItem>
                   )}
                 />
+
+                <FormField
+                  control={form.control}
+                  name="service"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-foreground font-medium">Onderwerp / Dienst</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="border-input bg-background/50 text-foreground transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20 h-12">
+                            <SelectValue placeholder="Selecteer een onderwerp" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {services.map((service) => (
+                            <SelectItem key={service.id} value={service.id}>
+                              {service.title}
+                            </SelectItem>
+                          ))}
+                          <SelectItem value="other">Anders</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <FormField
                   control={form.control}
                   name="message"
