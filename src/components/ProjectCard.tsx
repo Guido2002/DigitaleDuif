@@ -10,9 +10,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   const divRef = useRef<HTMLDivElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current) return;
@@ -23,40 +21,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
-  const handleFocus = () => {
-    setIsFocused(true);
-    setOpacity(1);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-    setOpacity(0);
-  };
-
-  const handleMouseEnter = () => {
-    setOpacity(1);
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0);
-  };
-
   return (
     <motion.div
       ref={divRef}
       onMouseMove={handleMouseMove}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className="relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 cursor-pointer group transition-all duration-300 hover:border-blue-500/30"
+      className="relative overflow-hidden rounded-xl border border-gray-200 bg-white p-6 cursor-pointer group transition-all duration-300 hover:border-blue-500/30 shadow-sm hover:shadow-md"
       whileHover={{ y: -5 }}
     >
       <div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(59, 130, 246, 0.15), transparent 40%)`,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(59, 130, 246, 0.05), transparent 40%)`,
         }}
       />
       
@@ -70,10 +46,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
         </div>
 
         <div className="flex-1">
-          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
             {project.title}
           </h3>
-          <p className="text-gray-400 mb-4 text-sm line-clamp-2">
+          <p className="text-gray-600 mb-4 text-sm line-clamp-2">
             {project.tagline}
           </p>
           
@@ -81,20 +57,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             {project.techStack.slice(0, 3).map((tech, index) => (
               <span
                 key={index}
-                className="px-2 py-1 text-xs rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20"
+                className="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-600 border border-blue-100"
               >
                 {tech}
               </span>
             ))}
             {project.techStack.length > 3 && (
-              <span className="px-2 py-1 text-xs rounded-full bg-white/5 text-gray-400 border border-white/10">
+              <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-600 border border-gray-200">
                 +{project.techStack.length - 3}
               </span>
             )}
           </div>
         </div>
 
-        <div className="flex items-center text-blue-400 text-sm font-medium group-hover:text-blue-300">
+        <div className="flex items-center text-blue-600 text-sm font-medium group-hover:text-blue-700">
           Bekijk Case <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
         </div>
       </div>

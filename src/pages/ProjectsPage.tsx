@@ -7,7 +7,7 @@ import ImpactCasesSection from "@/components/ImpactCasesSection";
 
 const ProjectsPage = () => {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] py-12">
+    <div className="min-h-screen bg-white py-12">
       <FadeInWhenVisible delay={0.1}>
         <SectionHeader
           title="Impact Cases"

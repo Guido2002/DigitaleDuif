@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight, Calendar, CheckCircle2, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, Calendar, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 import { Project } from '../data/mockData';
 import { Link } from 'react-router-dom';
 
@@ -10,9 +10,9 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const contentRef = React.useRef<HTMLDivElement>(null);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isHeaderHovered, setIsHeaderHovered] = useState(false);
   const [headerImageIndex, setHeaderImageIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -96,40 +96,38 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.3 }}
-        className="relative w-full max-w-4xl lg:max-w-7xl max-h-[90vh] bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+        className="relative w-full max-w-4xl lg:max-w-7xl max-h-[90vh] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
       >
         {/* Fixed Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/50 text-white/70 hover:text-white hover:bg-black/80 transition-colors backdrop-blur-sm border border-white/10"
+          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm"
         >
           <X className="w-6 h-6" />
         </button>
 
         {/* Desktop Header (Visible only on lg screens) */}
-        <div className="hidden lg:block p-8 border-b border-white/10 shrink-0 bg-[#0a0a0a] z-10">
+        <div className="hidden lg:block p-8 border-b border-gray-200 shrink-0 bg-white z-10">
           <div className="flex items-center gap-3 mb-3">
-            <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+            <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-50 text-blue-600 border border-blue-100">
               {project.client}
             </span>
           </div>
-          <h2 className="text-4xl font-bold text-white mb-2">
+          <h2 className="text-4xl font-bold text-gray-900 mb-2">
             {project.title}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl">
+          <p className="text-xl text-gray-600 max-w-3xl">
             {project.tagline}
           </p>
         </div>
 
         {/* Main Body - Flex Row on Desktop, Col on Mobile */}
-        <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
+        <div className="flex flex-col lg:flex-row flex-1 overflow-y-auto lg:overflow-hidden pb-24 lg:pb-0">
           
           {/* Image Section */}
           <div 
-            className="relative w-full lg:w-1/2 h-64 sm:h-80 md:h-96 lg:h-auto group cursor-pointer overflow-hidden shrink-0"
+            className="relative w-full lg:w-1/2 h-[450px] lg:h-auto group cursor-pointer overflow-hidden shrink-0 touch-pan-y"
             onClick={() => setIsGalleryOpen(true)}
-            onMouseEnter={() => setIsHeaderHovered(true)}
-            onMouseLeave={() => setIsHeaderHovered(false)}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -147,10 +145,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               />
             </AnimatePresence>
             
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
             
-            {/* Carousel Indicators */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2 pointer-events-none">
+            {/* Carousel Indicators (Desktop) */}
+            <div className="hidden min-[645px]:flex absolute bottom-6 left-1/2 -translate-x-1/2 z-20 gap-2 pointer-events-none">
               {project.images.map((_, idx) => (
                 <div 
                   key={idx} 
@@ -161,55 +159,79 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               ))}
             </div>
 
+            {/* Mobile Counter (Creative Replacement) */}
+            <div className="min-[645px]:hidden absolute top-6 left-6 z-20 pointer-events-none">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white/90 text-xs font-medium shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                <span>{headerImageIndex + 1}</span>
+                <span className="text-white/40">/</span>
+                <span>{project.images.length}</span>
+              </div>
+            </div>
+
             {/* Mobile Title Overlay (Hidden on Desktop) */}
             <div className="absolute bottom-0 left-0 p-6 sm:p-10 w-full pointer-events-none lg:hidden">
               <div className="flex items-center gap-3 mb-3">
-                <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
                   {project.client}
                 </span>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
                 {project.title}
               </h2>
-              <p className="text-xl text-gray-300 max-w-2xl">
+              <p className="text-xl text-gray-200 max-w-2xl">
                 {project.tagline}
               </p>
             </div>
+
+            {/* Mobile Scroll Arrow */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 1, repeat: Infinity, repeatType: "reverse" }}
+              className="absolute bottom-4 right-4 z-30 lg:hidden p-2 bg-black/20 backdrop-blur-sm rounded-full border border-white/10 text-white cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                contentRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <ChevronDown className="w-6 h-6" />
+            </motion.div>
           </div>
 
           {/* Content Section */}
-          <div className="w-full lg:w-1/2 flex flex-col bg-[#0a0a0a]">
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-6 sm:p-10 space-y-10">
+          <div ref={contentRef} className="w-full lg:w-1/2 flex flex-col bg-white">
+            <div className="flex-1 lg:overflow-y-auto custom-scrollbar p-6 sm:p-10 space-y-10">
 
               {/* Main Content */}
               <div className="grid grid-cols-1 gap-10">
                 <section>
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-red-500 rounded-full" />
                     De Uitdaging
                   </h3>
-                  <p className="text-gray-400 leading-relaxed text-lg">
+                  <p className="text-gray-600 leading-relaxed text-lg">
                     {project.challenge}
                   </p>
                 </section>
 
                 <section>
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-blue-500 rounded-full" />
                     De Oplossing
                   </h3>
-                  <p className="text-gray-400 leading-relaxed text-lg">
+                  <p className="text-gray-600 leading-relaxed text-lg">
                     {project.solution}
                   </p>
                 </section>
 
                 <section>
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-green-500 rounded-full" />
                     De Impact
                   </h3>
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                    <p className="text-gray-300 font-medium leading-relaxed text-lg">
+                  <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
+                    <p className="text-gray-700 font-medium leading-relaxed text-lg">
                       {project.impact}
                     </p>
                   </div>
@@ -223,7 +245,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     {project.techStack.map((tech, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1.5 text-sm rounded-lg bg-white/5 text-gray-300 border border-white/10"
+                        className="px-3 py-1.5 text-sm rounded-lg bg-gray-100 text-gray-700 border border-gray-200"
                       >
                         {tech}
                       </span>
@@ -234,8 +256,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-blue-500 bg-blue-600 shrink-0 z-10">
-               <div className="flex flex-col xl:flex-row items-center justify-between gap-4">
+            <div className="absolute bottom-0 left-0 right-0 lg:static p-6 border-t shrink-0 z-40 bg-white border-gray-200 lg:bg-blue-600 lg:border-blue-500">
+               {/* Desktop Footer Content */}
+               <div className="hidden lg:flex flex-col xl:flex-row items-center justify-between gap-4">
                  <span className="text-white font-medium text-lg">Interesse in een soortgelijk project?</span>
                  <div className="flex items-center gap-4 w-full xl:w-auto justify-end">
                     <button
@@ -252,6 +275,17 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                       Plan gesprek
                     </Link>
                  </div>
+               </div>
+
+               {/* Mobile Footer Content */}
+               <div className="lg:hidden w-full">
+                  <Link
+                    to={`/contact${project.serviceId ? `?service=${project.serviceId}` : ''}`}
+                    className="flex items-center justify-center w-full px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors text-base shadow-lg shadow-blue-900/20"
+                  >
+                    <Calendar className="w-5 h-5 mr-2" />
+                    Interesse? Plan gesprek
+                  </Link>
                </div>
             </div>
           </div>
@@ -270,24 +304,27 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           >
             <button
               onClick={() => setIsGalleryOpen(false)}
-              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors border border-white/10"
             >
-              <X className="w-8 h-8" />
+              <X className="w-6 h-6 sm:w-8 sm:h-8" />
             </button>
 
-            <button
-              onClick={handlePrevImage}
-              className="absolute left-4 z-20 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors hidden sm:block"
-            >
-              <ChevronLeft className="w-8 h-8" />
-            </button>
+            {/* Navigation Arrows */}
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-between px-4 sm:px-12 md:px-24 mx-auto max-w-7xl w-full z-20">
+              <button
+                onClick={handlePrevImage}
+                className="pointer-events-auto p-2 sm:p-3 rounded-full bg-blue-600/90 text-white hover:bg-blue-700 transition-colors shadow-lg border border-white/10 backdrop-blur-sm"
+              >
+                <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+              </button>
 
-            <button
-              onClick={handleNextImage}
-              className="absolute right-4 z-20 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors hidden sm:block"
-            >
-              <ChevronRight className="w-8 h-8" />
-            </button>
+              <button
+                onClick={handleNextImage}
+                className="pointer-events-auto p-2 sm:p-3 rounded-full bg-blue-600/90 text-white hover:bg-blue-700 transition-colors shadow-lg border border-white/10 backdrop-blur-sm"
+              >
+                <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
+              </button>
+            </div>
 
             <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-10">
               <motion.img
