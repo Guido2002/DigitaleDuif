@@ -14,6 +14,31 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHeaderHovered, setIsHeaderHovered] = useState(false);
   const [headerImageIndex, setHeaderImageIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      setHeaderImageIndex((prev) => (prev + 1) % project.images.length);
+    }
+    if (isRightSwipe) {
+      setHeaderImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
+    }
+  };
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -25,15 +50,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   // Header Carousel Logic
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (isHeaderHovered && project.images.length > 1) {
+    if (project.images.length > 1) {
       interval = setInterval(() => {
         setHeaderImageIndex((prev) => (prev + 1) % project.images.length);
-      }, 1500);
-    } else {
-      setHeaderImageIndex(0);
+      }, 3500);
     }
     return () => clearInterval(interval);
-  }, [isHeaderHovered, project.images.length]);
+  }, [project.images.length]);
 
   // Gallery Logic
   const handleNextImage = useCallback((e?: React.MouseEvent) => {
@@ -73,7 +96,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 0.3 }}
-        className="relative w-full max-w-4xl max-h-[90vh] bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+        className="relative w-full max-w-4xl lg:max-w-7xl max-h-[90vh] bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
       >
         {/* Fixed Close Button */}
         <button
@@ -83,14 +106,33 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           <X className="w-6 h-6" />
         </button>
 
-        {/* Scrollable Content */}
-        <div className="overflow-y-auto flex-1 custom-scrollbar">
-          {/* Header Image Area */}
+        {/* Desktop Header (Visible only on lg screens) */}
+        <div className="hidden lg:block p-8 border-b border-white/10 shrink-0 bg-[#0a0a0a] z-10">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+              {project.client}
+            </span>
+          </div>
+          <h2 className="text-4xl font-bold text-white mb-2">
+            {project.title}
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl">
+            {project.tagline}
+          </p>
+        </div>
+
+        {/* Main Body - Flex Row on Desktop, Col on Mobile */}
+        <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
+          
+          {/* Image Section */}
           <div 
-            className="relative h-64 sm:h-80 md:h-96 w-full group cursor-pointer overflow-hidden"
+            className="relative w-full lg:w-1/2 h-64 sm:h-80 md:h-96 lg:h-auto group cursor-pointer overflow-hidden shrink-0"
             onClick={() => setIsGalleryOpen(true)}
             onMouseEnter={() => setIsHeaderHovered(true)}
             onMouseLeave={() => setIsHeaderHovered(false)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             <AnimatePresence mode="wait">
               <motion.img
@@ -107,15 +149,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
             
-            {/* Indicator */}
-            <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 z-20 pointer-events-none">
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 shadow-lg animate-pulse">
-                <Maximize2 className="w-3 h-3" />
-                <span className="text-xs font-medium tracking-wide uppercase">Wil je meer weten?</span>
-              </div>
+            {/* Carousel Indicators */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2 pointer-events-none">
+              {project.images.map((_, idx) => (
+                <div 
+                  key={idx} 
+                  className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${
+                    idx === headerImageIndex ? 'w-6 bg-white' : 'w-1.5 bg-white/50'
+                  }`} 
+                />
+              ))}
             </div>
 
-            <div className="absolute bottom-0 left-0 p-6 sm:p-10 w-full pointer-events-none">
+            {/* Mobile Title Overlay (Hidden on Desktop) */}
+            <div className="absolute bottom-0 left-0 p-6 sm:p-10 w-full pointer-events-none lg:hidden">
               <div className="flex items-center gap-3 mb-3">
                 <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
                   {project.client}
@@ -130,100 +177,82 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </div>
           </div>
 
-          <div className="p-6 sm:p-10 space-y-10">
-            {/* Highlights Row (Moved from Sidebar) */}
-            <div className="flex flex-wrap gap-4 sm:gap-8 pb-6 border-b border-white/10">
-              <div className="flex items-center gap-2 text-sm text-gray-400">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span>Custom development</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-gray-400">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span>Schaalbare architectuur</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-gray-400">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span>Focus op ROI</span>
-              </div>
-            </div>
+          {/* Content Section */}
+          <div className="w-full lg:w-1/2 flex flex-col bg-[#0a0a0a]">
+            <div className="flex-1 overflow-y-auto custom-scrollbar p-6 sm:p-10 space-y-10">
 
-            {/* Main Content */}
-            <div className="grid grid-cols-1 gap-10">
-              <section>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="w-1 h-6 bg-red-500 rounded-full" />
-                  De Uitdaging
-                </h3>
-                <p className="text-gray-400 leading-relaxed text-lg">
-                  {project.challenge}
-                </p>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="w-1 h-6 bg-blue-500 rounded-full" />
-                  De Oplossing
-                </h3>
-                <p className="text-gray-400 leading-relaxed text-lg">
-                  {project.solution}
-                </p>
-              </section>
-
-              <section>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="w-1 h-6 bg-green-500 rounded-full" />
-                  De Impact
-                </h3>
-                <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                  <p className="text-gray-300 font-medium leading-relaxed text-lg">
-                    {project.impact}
+              {/* Main Content */}
+              <div className="grid grid-cols-1 gap-10">
+                <section>
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span className="w-1 h-6 bg-red-500 rounded-full" />
+                    De Uitdaging
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed text-lg">
+                    {project.challenge}
                   </p>
-                </div>
-              </section>
+                </section>
 
-              <div>
-                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
-                  Tech Stack
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1.5 text-sm rounded-lg bg-white/5 text-gray-300 border border-white/10"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                <section>
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span className="w-1 h-6 bg-blue-500 rounded-full" />
+                    De Oplossing
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed text-lg">
+                    {project.solution}
+                  </p>
+                </section>
+
+                <section>
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span className="w-1 h-6 bg-green-500 rounded-full" />
+                    De Impact
+                  </h3>
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <p className="text-gray-300 font-medium leading-relaxed text-lg">
+                      {project.impact}
+                    </p>
+                  </div>
+                </section>
+
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
+                    Tech Stack
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.techStack.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1.5 text-sm rounded-lg bg-white/5 text-gray-300 border border-white/10"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* CTA Section (Moved from Sidebar) */}
-            <div className="mt-10 pt-10 border-t border-white/10">
-              <div className="bg-blue-600/10 border border-blue-500/20 rounded-xl p-8 text-center">
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  Interesse in een soortgelijk project?
-                </h3>
-                <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-                  Laten we bespreken hoe we jouw bedrijf kunnen helpen met innovatieve digitale oplossingen.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link
-                    to={`/contact${project.serviceId ? `?service=${project.serviceId}` : ''}`}
-                    className="flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-colors group w-full sm:w-auto"
-                  >
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Plan een gesprek
-                  </Link>
-                  <button
-                    onClick={onClose}
-                    className="flex items-center justify-center px-6 py-3 bg-transparent hover:bg-white/5 text-gray-400 hover:text-white border border-white/10 hover:border-white/20 rounded-lg font-medium transition-all w-full sm:w-auto"
-                  >
-                    Bekijk meer cases
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </button>
-                </div>
-              </div>
+            {/* Footer */}
+            <div className="p-6 border-t border-blue-500 bg-blue-600 shrink-0 z-10">
+               <div className="flex flex-col xl:flex-row items-center justify-between gap-4">
+                 <span className="text-white font-medium text-lg">Interesse in een soortgelijk project?</span>
+                 <div className="flex items-center gap-4 w-full xl:w-auto justify-end">
+                    <button
+                      onClick={onClose}
+                      className="text-blue-100 hover:text-white transition-colors text-sm font-medium whitespace-nowrap"
+                    >
+                      Bekijk meer cases
+                    </button>
+                    <Link
+                      to={`/contact${project.serviceId ? `?service=${project.serviceId}` : ''}`}
+                      className="flex items-center justify-center px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-600 rounded-lg font-bold transition-colors text-sm whitespace-nowrap shadow-lg shadow-blue-900/20"
+                    >
+                      <Calendar className="w-4 h-4 mr-2" />
+                      Plan gesprek
+                    </Link>
+                 </div>
+               </div>
             </div>
           </div>
         </div>
