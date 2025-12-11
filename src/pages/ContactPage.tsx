@@ -80,7 +80,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="relative min-h-[80vh] flex items-center justify-center py-12 overflow-hidden bg-background">
+    <div className="relative min-h-[80vh] flex items-center justify-center py-8 md:py-12 overflow-hidden bg-background">
       {/* Abstract Background Elements for Immersive Visuals */}
       <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] animate-pulse pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[100px] animate-pulse delay-1000 pointer-events-none" />
@@ -96,43 +96,43 @@ const ContactPage = () => {
           <div className="absolute top-0 left-0 w-full h-1 bg-primary opacity-80" />
           
           {!isSubmitted && (
-            <CardHeader className="text-center pb-2">
+            <CardHeader className="text-center pb-2 px-6 pt-8 md:pt-6">
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                <CardTitle className="mb-2 text-4xl font-bold text-primary">
+                <CardTitle className="mb-2 text-3xl md:text-4xl font-bold text-primary">
                   Neem Contact Op
                 </CardTitle>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-base md:text-lg text-muted-foreground">
                   Heeft u een vraag, een idee of wilt u de mogelijkheden bespreken?
                   Neem gerust contact met ons op.
                 </p>
               </motion.div>
             </CardHeader>
           )}
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 md:pt-6 px-6 pb-8">
             {isSubmitted ? (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4 }}
-                className="flex flex-col items-center justify-center py-12 text-center space-y-6"
+                className="flex flex-col items-center justify-center py-8 md:py-12 text-center space-y-6"
               >
                 <div className="rounded-full bg-primary/10 p-4 shadow-inner">
-                  <CheckCircle2 className="h-16 w-16 text-primary" />
+                  <CheckCircle2 className="h-12 w-12 md:h-16 md:w-16 text-primary" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-2xl font-bold text-foreground">Bedankt voor uw bericht!</h3>
-                  <p className="text-muted-foreground max-w-xs mx-auto text-lg">
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground">Bedankt voor uw bericht!</h3>
+                  <p className="text-muted-foreground max-w-xs mx-auto text-base md:text-lg">
                     We hebben uw bericht goed ontvangen en nemen zo snel mogelijk contact met u op.
                   </p>
                 </div>
                 <Button 
                   variant="outline" 
                   onClick={() => setIsSubmitted(false)}
-                  className="mt-4 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  className="mt-4 border-primary text-primary hover:bg-primary hover:text-primary-foreground w-full sm:w-auto"
                 >
                   Nog een bericht sturen
                 </Button>
@@ -217,7 +217,7 @@ const ContactPage = () => {
                           <Textarea 
                             placeholder="Waar kunnen we u mee helpen?" 
                             {...field} 
-                            className="min-h-[150px] border-input bg-background/50 text-foreground transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none" 
+                            className="min-h-[120px] md:min-h-[150px] border-input bg-background/50 text-foreground transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none" 
                           />
                         </motion.div>
                       </FormControl>

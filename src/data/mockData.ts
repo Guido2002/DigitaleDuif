@@ -169,7 +169,6 @@ export const projects: Project[] = [
       "https://images.unsplash.com/photo-1563206767-5b101f883dcc?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
     ],
-    videoUrl: "https://www.youtube.com/embed/LXb3EKWsInQ", // Example video
     serviceId: "mr-interfaces",
   },
   {

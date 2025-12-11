@@ -74,13 +74,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, colSpan, onCl
 
         <div className="flex flex-wrap gap-2 mt-auto">
           {service.tags.map((tag, i) => (
-            <Badge 
+            <span 
               key={i} 
-              variant="secondary" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-3 py-1 text-xs font-medium transition-colors border-none"
+              className="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-600 border border-blue-100"
             >
               {tag}
-            </Badge>
+            </span>
           ))}
         </div>
       </div>

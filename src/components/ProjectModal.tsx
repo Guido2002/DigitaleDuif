@@ -20,7 +20,21 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const mediaItems = React.useMemo(() => {
     const items = project.images.map(img => ({ type: 'image' as const, url: img }));
     if (project.videoUrl) {
-      items.unshift({ type: 'video' as const, url: project.videoUrl });
+      // Helper to convert YouTube watch URLs to embed URLs
+      let videoUrl = project.videoUrl;
+      if (videoUrl.includes('youtube.com/watch?v=')) {
+        const videoId = videoUrl.split('v=')[1]?.split('&')[0];
+        if (videoId) {
+          videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        }
+      } else if (videoUrl.includes('youtu.be/')) {
+        const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
+        if (videoId) {
+          videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+      
+      items.unshift({ type: 'video' as const, url: videoUrl });
     }
     return items;
   }, [project]);
@@ -95,7 +109,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={onClose}
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
       />
       
@@ -257,7 +270,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 <section>
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-red-500 rounded-full" />
-                    De Uitdaging
+                    Uitdaging
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
                     {project.challenge}
@@ -267,7 +280,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 <section>
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-blue-500 rounded-full" />
-                    De Oplossing
+                    Oplossing
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
                     {project.solution}
@@ -277,7 +290,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 <section>
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-green-500 rounded-full" />
-                    De Impact
+                    Impact
                   </h3>
                   <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
                     <p className="text-gray-700 font-medium leading-relaxed text-lg">
@@ -307,15 +320,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             {/* Footer */}
             <div className="absolute bottom-0 left-0 right-0 lg:static p-6 border-t shrink-0 z-40 bg-white border-gray-200 lg:bg-blue-600 lg:border-blue-500">
                {/* Desktop Footer Content */}
-               <div className="hidden lg:flex flex-col xl:flex-row items-center justify-between gap-4">
+               <div className="hidden lg:flex flex-col xl:flex-row items-center justify-between gap-4 text-center xl:text-left">
                  <span className="text-white font-medium text-lg">Interesse in een soortgelijk project?</span>
-                 <div className="flex items-center gap-4 w-full xl:w-auto justify-end">
-                    <button
-                      onClick={onClose}
-                      className="text-blue-100 hover:text-white transition-colors text-sm font-medium whitespace-nowrap"
-                    >
-                      Bekijk meer cases
-                    </button>
+                 <div className="flex items-center gap-4">
                     <Link
                       to={`/contact${project.serviceId ? `?service=${project.serviceId}` : ''}`}
                       className="flex items-center justify-center px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-600 rounded-lg font-bold transition-colors text-sm whitespace-nowrap shadow-lg shadow-blue-900/20"
