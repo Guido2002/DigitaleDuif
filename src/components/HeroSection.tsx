@@ -77,14 +77,25 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row gap-4"
         >
           <Button
             asChild
             size="lg"
             className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105"
           >
-            <Link to="/contact">
-              Begin vandaag
+            <Link to="/diensten">
+              Onze diensten
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            className="group px-8 py-6 text-lg bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
+          >
+            <Link to="/projecten">
+              Projecten
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
