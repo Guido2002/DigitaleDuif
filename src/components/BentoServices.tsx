@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { services } from "@/data/mockData";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight, Code, Smartphone, Glasses, Layers, Palette, Lightbulb, Database, Terminal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Map service IDs to specific icons for better visual representation
 const iconMap: Record<string, React.ElementType> = {
@@ -18,6 +19,73 @@ const iconMap: Record<string, React.ElementType> = {
   "prototyping": Lightbulb,
   "unity-consultancy": Terminal,
   "data-analytics": Database,
+};
+
+interface ServiceCardProps {
+  service: typeof services[0];
+  index: number;
+  colSpan: string;
+  onClick: () => void;
+  Icon: React.ElementType;
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, colSpan, onClick, Icon }) => {
+  const ref = useRef(null);
+  const isMobile = useIsMobile();
+  // Trigger when 50% of the card is in view
+  const isInView = useInView(ref, { margin: "-10% 0px -10% 0px", amount: 0.4 });
+  
+  const isActive = isMobile && isInView;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      onClick={onClick}
+      className={cn(
+        "group relative overflow-hidden rounded-3xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 transition-all duration-300 ease-out cursor-pointer",
+        "hover:shadow-2xl hover:border-primary/20 hover:-translate-y-2",
+        isActive && "shadow-2xl border-primary/20 -translate-y-2 is-active",
+        colSpan
+      )}
+    >
+      {/* Hover Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-[.is-active]:opacity-100" />
+
+      <div className="relative z-10 flex flex-col h-full justify-between">
+        <div>
+          <div className="flex justify-between items-start mb-6">
+            <div className="p-3 rounded-2xl bg-primary/10 text-primary transition-transform duration-300 ease-out group-hover:scale-110 group-[.is-active]:scale-110">
+              <Icon className="w-8 h-8" />
+            </div>
+            <ArrowUpRight className="w-6 h-6 text-muted-foreground opacity-0 -translate-x-2 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 group-[.is-active]:opacity-100 group-[.is-active]:translate-x-0 group-[.is-active]:translate-y-0" />
+          </div>
+
+          <h3 className="text-2xl font-bold mb-3 transition-colors duration-300 group-hover:text-primary group-[.is-active]:text-primary">
+            {service.title}
+          </h3>
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            {service.description}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mt-auto">
+          {service.tags.map((tag, i) => (
+            <Badge 
+              key={i} 
+              variant="secondary" 
+              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-3 py-1 text-xs font-medium transition-colors border-none"
+            >
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
 };
 
 const BentoServices = () => {
@@ -81,51 +149,14 @@ const BentoServices = () => {
                 : "md:col-span-1";
 
             return (
-              <motion.div
+              <ServiceCard
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                service={service}
+                index={index}
+                colSpan={colSpan}
                 onClick={() => handleServiceClick(service.relatedProjectId)}
-                className={cn(
-                  "group relative overflow-hidden rounded-3xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 transition-all duration-500 hover:shadow-2xl hover:border-primary/20 hover:-translate-y-1 cursor-pointer",
-                  colSpan
-                )}
-              >
-                {/* Hover Gradient Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                <div className="relative z-10 flex flex-col h-full justify-between">
-                  <div>
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-500">
-                        <Icon className="w-8 h-8" />
-                      </div>
-                      <ArrowUpRight className="w-6 h-6 text-muted-foreground opacity-0 -translate-x-2 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed mb-6">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {service.tags.map((tag, i) => (
-                      <Badge 
-                        key={i} 
-                        variant="secondary" 
-                        className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-3 py-1 text-xs font-medium transition-colors border-none"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+                Icon={Icon}
+              />
             );
           })}
         </div>

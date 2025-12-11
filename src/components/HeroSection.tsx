@@ -5,11 +5,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-// Removed PigeonAnimation import
-
-interface HeroSectionProps {
-  // children: React.ReactNode; // Removed as it's not used
-}
 
 const heroImages = [
   '/xr.jpeg',
@@ -17,7 +12,7 @@ const heroImages = [
   '/ux1.jpeg'
 ];
 
-const HeroSection: React.FC<HeroSectionProps> = () => {
+const HeroSection: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
   React.useEffect(() => {
@@ -36,17 +31,18 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
     >
       {/* Background image carousel */}
       {heroImages.map((image, index) => (
-        <div
+        <img
           key={image}
-          className="absolute inset-0 transition-opacity duration-1000"
+          src={image}
+          alt={`Hero background ${index + 1}`}
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
           style={{
-            backgroundImage: `url('${image}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
             opacity: index === currentImageIndex ? 1 : 0,
             zIndex: 0
           }}
+          loading={index === 0 ? "eager" : "lazy"}
+          decoding="async"
+          {...(index === 0 ? { fetchPriority: "high" } : {})}
         />
       ))}
       

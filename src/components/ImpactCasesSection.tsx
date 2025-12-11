@@ -21,8 +21,12 @@ const ImpactCasesSection: React.FC = () => {
 
   const handleClose = () => {
     setSelectedProject(null);
-    // Optional: Clear the search param when closing
     setSearchParams({});
+  };
+
+  const handleProjectClick = (project: Project) => {
+    setSearchParams({ project: project.id });
+    setSelectedProject(project);
   };
 
   return (
@@ -33,7 +37,7 @@ const ImpactCasesSection: React.FC = () => {
             <ProjectCard
               key={index}
               project={project}
-              onClick={() => setSelectedProject(project)}
+              onClick={() => handleProjectClick(project)}
             />
           ))}
         </div>
