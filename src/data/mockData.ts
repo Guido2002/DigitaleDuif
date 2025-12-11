@@ -155,14 +155,14 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "mr-bim-4d",
-    title: "MR BIM 4D visualisatie",
-    tagline: "Efficiënte ombouwplanning met Mixed Reality",
-    client: "Bouwbedrijf X",
+    title: "Mixed Reality met BIM 4D",
+    tagline: "Visualisatie van bouwprojecten in de echte wereld",
+    client: "Sweco Nederland",
     description: "Een Mixed Reality applicatie die 3D BIM-modellen projecteert in de fysieke ruimte, inclusief tijdsdimensie (4D), voor efficiënte ombouwplanning en clashdetectie op locatie.",
     challenge: "Complexe ombouwprojecten liepen vaak vertraging op door onvoorziene clashes tussen nieuwe ontwerpen en bestaande situaties, wat leidde tot hoge faalkosten.",
-    solution: "Een HoloLens 2 applicatie die het BIM-model 1-op-1 over de werkelijkheid projecteert, waardoor monteurs direct kunnen zien waar leidingen en constructies moeten komen.",
-    impact: "20% reductie in bouwtijd en 15% minder faalkosten door vroegtijdige detectie van clashes.",
-    techStack: ["Unity", "C#", "HoloLens 2", "BIM Integration"],
+    solution: "Een Quest 3 applicatie die het BIM-model 1-op-1 over de werkelijkheid projecteert, waardoor betrokkenen direct kunnen zien waar leidingen en constructies moeten komen.",
+    impact: "Vroegtijdig inzicht over ontwerpfouten, waardoor gerichter en sneller ontworpen kan worden.",
+    techStack: ["Unity", "C#", "Quest 3", "Autodesk Revit", "BIM 4D"],
     images: [
       "https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1563206767-5b101f883dcc?w=800&h=600&fit=crop",
