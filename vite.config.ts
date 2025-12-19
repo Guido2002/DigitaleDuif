@@ -14,6 +14,17 @@ export default defineConfig(() => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    exclude: ['pdfjs-dist', 'react-pdf'],
+    esbuildOptions: {
+      supported: {
+        bigint: true
+      }
+    }
+  },
+  ssr: {
+    noExternal: ['pdfjs-dist']
+  },
   build: {
     rollupOptions: {
       output: {
