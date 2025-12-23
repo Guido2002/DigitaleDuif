@@ -34,6 +34,8 @@ const VrHeadsetIllustration: React.FC<VrHeadsetIllustrationProps> = ({
         src={headsetImage}
         alt="3D VR Headset Illustration"
         className="w-full h-auto object-contain drop-shadow-lg"
+        loading="lazy"
+        decoding="async"
       />
       {/* Subtle glow around lenses - simulated */}
       <div className="absolute inset-0 flex items-center justify-center">

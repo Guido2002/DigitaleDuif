@@ -80,10 +80,14 @@ const HeroSection: React.FC = () => {
             size="lg"
             className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105"
           >
-            <Link to="/diensten">
-              Onze diensten
+            <a
+              href="https://app.cal.eu/digitale-duif/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Plan een vrijblijvend gesprek
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Link>
+            </a>
           </Button>
           <Button
             asChild

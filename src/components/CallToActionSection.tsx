@@ -13,24 +13,28 @@ const CallToActionSection = () => {
           {/* Text Content */}
           <div className="text-center md:text-left">
             <FadeInWhenVisible delay={0.1}>
-              <h2 className="text-h2 font-bold mb-6">
+              <h2 className="text-h2 font-bold mb-6 text-primary-foreground">
                 Klaar om samen jouw idee aan te vliegen?
               </h2>
             </FadeInWhenVisible>
             <FadeInWhenVisible delay={0.2}>
-              <p className="text-body-lg mb-8 max-w-3xl mx-auto md:mx-0">
+              <p className="text-body-lg mb-8 max-w-3xl mx-auto md:mx-0 text-primary-foreground">
                 Laten we kennismaken en ontdekken wat Digitale Duif voor u kan betekenen. Ik kijk ernaar uit!
               </p>
             </FadeInWhenVisible>
             <FadeInWhenVisible delay={0.3}>
-              <Link to="/contact">
+              <a
+                href="https://app.cal.eu/digitale-duif/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button
                   size="lg"
                   className="h-14 text-xl bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105"
                 >
                   Plan een vrijblijvend gesprek
                 </Button>
-              </Link>
+              </a>
             </FadeInWhenVisible>
           </div>
 
@@ -41,6 +45,8 @@ const CallToActionSection = () => {
                 src="/IMG_0005.JPG"
                 alt="DigitaleDuif XR Innovation"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </FadeInWhenVisible>

@@ -32,7 +32,13 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         <p className="mb-6 text-lg italic text-foreground">" {quote}"</p>
         <div className="mt-auto flex flex-col items-center">
           {companyLogo && (
-            <img src={companyLogo} alt="Company Logo" className="mb-3 h-10 w-10 object-contain" />
+            <img
+              src={companyLogo}
+              alt="Company Logo"
+              className="mb-3 h-10 w-10 object-contain"
+              loading="lazy"
+              decoding="async"
+            />
           )}
           <Avatar className="mb-3 h-16 w-16">
             <AvatarImage src={avatar} alt={author} />

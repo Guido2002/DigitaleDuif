@@ -111,6 +111,8 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
                       src={image}
                       alt={`Thumbnail ${index + 1}`}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </button>
                 ))}

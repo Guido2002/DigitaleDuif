@@ -4,8 +4,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import profilePhoto from "../assets/IMG_9948.JPG";
-import profilePhotoHover from "../assets/IMG_9949.JPG";
+import profilePhoto from "../assets/IMG_9948.png";
+import profilePhotoHover from "../assets/IMG_9949.png";
 import { cn } from "@/lib/utils";
 import { CheckCircle2 } from "lucide-react";
 import FlyingBirdIllustration from "./FlyingBirdIllustration";
@@ -67,6 +67,7 @@ const GuidoIntroSection = () => {
               src={profilePhoto}
               alt="Guido van Duijvenvoorde - Oprichter DigitaleDuif"
               className="w-full h-auto object-cover rounded-xl transition-opacity duration-700 ease-in-out"
+              decoding="async"
               style={{ 
                 aspectRatio: '4/5',
                 opacity: isHovered ? 0 : 1
@@ -76,6 +77,7 @@ const GuidoIntroSection = () => {
               src={profilePhotoHover}
               alt="Guido van Duijvenvoorde - Oprichter DigitaleDuif"
               className="w-full h-auto object-cover rounded-xl transition-opacity duration-700 ease-in-out absolute top-0 left-0"
+              decoding="async"
               style={{ 
                 aspectRatio: '4/5',
                 opacity: isHovered ? 1 : 0

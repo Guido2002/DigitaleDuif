@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b border-border bg-white">
       <div className="container flex h-20 items-center justify-between"> {/* Increased height to h-20 */}
         <Link to="/" className="flex items-center space-x-2">
           <Bird className="h-7 w-7 text-primary" /> {/* Added Bird icon */}
@@ -117,9 +117,13 @@ const Navbar = () => {
                   )
                 ))}
                 <SheetClose asChild>
-                  <Link to="/contact">
+                  <a
+                    href="https://app.cal.eu/digitale-duif/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Button className="w-full h-12 text-lg bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button>
-                  </Link>
+                  </a>
                 </SheetClose>
               </div>
             </SheetContent>
@@ -181,9 +185,13 @@ const Navbar = () => {
                 </Link>
               )
             ))}
-            <Link to="/contact">
+            <a
+              href="https://app.cal.eu/digitale-duif/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button>
-            </Link>
+            </a>
           </div>
         )}
       </div>
