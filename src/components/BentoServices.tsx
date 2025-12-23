@@ -27,9 +27,10 @@ interface ServiceCardProps {
   colSpan: string;
   onClick: () => void;
   Icon: React.ElementType;
+  hasRelatedProject: boolean;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, colSpan, onClick, Icon }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, colSpan, onClick, Icon, hasRelatedProject }) => {
   const ref = useRef(null);
   const isMobile = useIsMobile();
   // Trigger when 50% of the card is in view
@@ -40,15 +41,20 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, colSpan, onCl
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
+      id={service.id}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
       onClick={onClick}
+      onKeyDown={(e) => e.key === 'Enter' && onClick()}
+      role="button"
+      tabIndex={0}
+      aria-label={`${service.title} - ${hasRelatedProject ? 'Bekijk gerelateerd project' : 'Bekijk alle projecten'}`}
       className={cn(
-        "group relative overflow-hidden rounded-3xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 transition-all duration-300 ease-out cursor-pointer",
-        "hover:shadow-2xl hover:border-primary/20 hover:-translate-y-2",
-        isActive && "shadow-2xl border-primary/20 -translate-y-2 is-active",
+        "group relative overflow-hidden rounded-3xl border border-border/70 bg-card/90 backdrop-blur-sm p-8 transition-all duration-200 ease-out cursor-pointer shadow-lg",
+        "hover:shadow-2xl hover:border-primary/25 hover:-translate-y-2 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2",
+        isActive && "shadow-2xl border-primary/25 -translate-y-2 is-active",
         colSpan
       )}
     >
@@ -57,30 +63,34 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, colSpan, onCl
 
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div>
-          <div className="flex justify-between items-start mb-6">
-            <div className="p-3 rounded-2xl bg-primary/10 text-primary transition-transform duration-300 ease-out group-hover:scale-110 group-[.is-active]:scale-110">
-              <Icon className="w-8 h-8" />
-            </div>
-            <ArrowUpRight className="w-6 h-6 text-muted-foreground opacity-0 -translate-x-2 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 group-[.is-active]:opacity-100 group-[.is-active]:translate-x-0 group-[.is-active]:translate-y-0" />
+          <div className="w-14 h-14 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6 transition-transform duration-300 ease-out group-hover:scale-110 group-[.is-active]:scale-110">
+            <Icon className="w-7 h-7" />
           </div>
 
           <h3 className="text-2xl font-bold mb-3 transition-colors duration-300 group-hover:text-primary group-[.is-active]:text-primary">
             {service.title}
           </h3>
-          <p className="text-muted-foreground leading-relaxed mb-6">
+          <p className="text-muted-foreground leading-relaxed mb-4 line-clamp-3">
             {service.description}
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {service.tags.map((tag, i) => (
-            <span 
-              key={i} 
-              className="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-600 border border-blue-100"
-            >
-              {tag}
-            </span>
-          ))}
+        <div className="mt-auto space-y-4">
+          <div className="flex flex-wrap gap-2">
+            {service.tags.map((tag, i) => (
+              <span 
+                key={i} 
+                className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          <div className="flex items-center text-sm font-medium text-primary pt-2 border-t border-border/50">
+            {hasRelatedProject ? 'Bekijk gerelateerd project' : 'Bekijk projecten'}
+            <ArrowUpRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </div>
         </div>
       </div>
     </motion.div>
@@ -103,7 +113,7 @@ const BentoServices = () => {
       {/* Background Gradients */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-primary/3 rounded-full blur-[120px]" />
       </div>
 
       <div className="container relative z-10">
@@ -155,6 +165,7 @@ const BentoServices = () => {
                 colSpan={colSpan}
                 onClick={() => handleServiceClick(service.relatedProjectId)}
                 Icon={Icon}
+                hasRelatedProject={!!service.relatedProjectId}
               />
             );
           })}

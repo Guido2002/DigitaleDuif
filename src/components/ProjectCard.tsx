@@ -32,10 +32,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       ref={divRef}
       onMouseMove={handleMouseMove}
       onClick={onClick}
+      onKeyDown={(e) => e.key === 'Enter' && onClick()}
+      role="button"
+      tabIndex={0}
+      aria-label={`Bekijk project: ${project.title}`}
       className={cn(
-        "relative overflow-hidden rounded-xl border border-gray-300 bg-white p-6 cursor-pointer group transition-all duration-300 shadow-md",
-        "hover:border-blue-500/40 hover:shadow-xl",
-        isActive && "border-blue-500/40 shadow-xl is-active"
+        "relative overflow-hidden rounded-xl border border-border bg-card p-6 cursor-pointer group transition-all duration-300 shadow-md",
+        "hover:border-primary/40 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2",
+        isActive && "border-primary/40 shadow-xl is-active"
       )}
       whileHover={{ y: -5 }}
       animate={isActive ? { y: -5 } : { y: 0 }}
@@ -44,8 +48,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 group-[.is-active]:opacity-100"
         style={{
           background: isActive 
-            ? `radial-gradient(600px circle at 50% 50%, rgba(59, 130, 246, 0.05), transparent 40%)`
-            : `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(59, 130, 246, 0.05), transparent 40%)`,
+            ? `radial-gradient(600px circle at 50% 50%, hsl(var(--primary) / 0.05), transparent 40%)`
+            : `radial-gradient(600px circle at ${position.x}px ${position.y}px, hsl(var(--primary) / 0.05), transparent 40%)`,
         }}
       />
       
@@ -60,32 +64,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
           />
         </div>
 
-        <div className="flex-1">
-          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 group-[.is-active]:text-blue-600 transition-colors">
+        <div className="flex-1 flex flex-col">
+          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary group-[.is-active]:text-primary transition-colors">
             {project.title}
           </h3>
-          <p className="text-gray-600 mb-4 text-sm line-clamp-2">
+          <p className="text-muted-foreground mb-4 text-sm line-clamp-2 flex-1">
             {project.tagline}
           </p>
           
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex flex-wrap gap-2">
             {project.techStack.slice(0, 3).map((tech, index) => (
               <span
                 key={index}
-                className="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-600 border border-blue-100"
+                className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
               >
                 {tech}
               </span>
             ))}
             {project.techStack.length > 3 && (
-              <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-600 border border-gray-200">
+              <span className="px-2 py-1 text-xs rounded-full bg-muted text-muted-foreground border border-border">
                 +{project.techStack.length - 3}
               </span>
             )}
           </div>
         </div>
 
-        <div className="flex items-center text-blue-600 text-sm font-medium group-hover:text-blue-700 group-[.is-active]:text-blue-700">
+        <div className="flex items-center text-primary text-sm font-medium group-hover:text-primary/80 group-[.is-active]:text-primary/80 mt-6 pt-4 border-t border-border">
           Bekijk Case <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1 group-[.is-active]:translate-x-1" />
         </div>
       </div>
