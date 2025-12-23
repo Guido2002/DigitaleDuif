@@ -33,9 +33,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       onMouseMove={handleMouseMove}
       onClick={onClick}
       className={cn(
-        "relative overflow-hidden rounded-xl border border-gray-200 bg-white p-6 cursor-pointer group transition-all duration-300 shadow-sm",
-        "hover:border-blue-500/30 hover:shadow-md",
-        isActive && "border-blue-500/30 shadow-md is-active"
+        "relative overflow-hidden rounded-xl border border-gray-300 bg-white p-6 cursor-pointer group transition-all duration-300 shadow-md",
+        "hover:border-blue-500/40 hover:shadow-xl",
+        isActive && "border-blue-500/40 shadow-xl is-active"
       )}
       whileHover={{ y: -5 }}
       animate={isActive ? { y: -5 } : { y: 0 }}
