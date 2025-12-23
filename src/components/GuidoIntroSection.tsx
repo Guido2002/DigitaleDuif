@@ -61,7 +61,7 @@ const GuidoIntroSection = () => {
             href="https://www.linkedin.com/in/guido-van-duijvenvoorde-531712162/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary/50 ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70 relative overflow-hidden"
+            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70 relative overflow-hidden bg-primary"
           >
             <img
               src={profilePhoto}
@@ -84,16 +84,6 @@ const GuidoIntroSection = () => {
               }}
             />
           </a>
-          {/* Optional: Add a subtle floating UI element near the image */}
-          <motion.div
-            className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg md:left-auto md:right-0 md:translate-x-1/2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            style={{ animation: "float 5s ease-in-out infinite alternate 1s" }}
-          >
-            Enthousiast over IT!
-          </motion.div>
         </motion.div>
 
         {/* Text Content Section */}

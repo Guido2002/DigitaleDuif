@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
-    }, 10000); // Change image every 10 seconds
+    }, 5000); // Change image every 5 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -69,6 +69,7 @@ const HeroSection: React.FC = () => {
         >
           Digitale Duif ontwikkelt Virtual, Mixed Reality ervaringen, websites en apps afgestemd op gebruikers en willen bedrijven vooruit helpen. Of je nu een eerste stap in digitale innovatie wilt zetten of een ambitieus project voor ogen hebt. Wij denken graag met je mee, vanaf de tekentafel tot het eindproduct.
         </motion.p>
+
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,6 +102,23 @@ const HeroSection: React.FC = () => {
           </Button>
         </motion.div>
       </div>
+
+      {/* Carousel Indicators - positioned at bottom of section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex justify-center gap-2"
+      >
+        {heroImages.map((_, index) => (
+          <button
+            key={`slide-${index}`}
+            onClick={() => setCurrentImageIndex(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/70'}`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </motion.div>
     </section>
   );
 };

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import GuidoIntroSection from "./GuidoIntroSection"; // Import the GuidoIntroSection
-import SectionHeader from "./SectionHeader"; // Import SectionHeader
-import FadeInWhenVisible from "./FadeInWhenVisible"; // Import FadeInWhenVisible
+import GuidoIntroSection from "./GuidoIntroSection";
+import SectionHeader from "./SectionHeader";
+import FadeInWhenVisible from "./FadeInWhenVisible";
 
 const AboutSection = () => {
   return (
@@ -16,6 +16,7 @@ const AboutSection = () => {
             align="center"
           />
         </FadeInWhenVisible>
+        
         <GuidoIntroSection />
       </div>
     </section>
