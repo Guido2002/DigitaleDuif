@@ -1,18 +1,16 @@
-"use client";
-
 import React from "react";
 import SectionHeader from "./SectionHeader";
 import { processSteps } from "@/data/mockData";
 import FadeInWhenVisible from "./FadeInWhenVisible";
 import ProcessStepCard from "./ProcessStepCard";
 import StepsMobile from "./StepsMobile";
-import { motion } from "framer-motion"; // Import motion
-import { useInView } from "react-intersection-observer"; // Import useInView
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const ProcessSection = () => {
   const [lineRef, inView] = useInView({
-    triggerOnce: true, // Only trigger the animation once
-    threshold: 0.5, // Trigger when 50% of the line is visible
+    triggerOnce: true,
+    threshold: 0.5,
   });
 
   return (

@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import GuidoIntroSection from "./GuidoIntroSection";
 import SectionHeader from "./SectionHeader";

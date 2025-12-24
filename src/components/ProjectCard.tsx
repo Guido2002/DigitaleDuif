@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { ArrowRight, Eye } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Project } from '../data/mockData';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
@@ -12,8 +12,8 @@ interface ProjectCardProps {
 
 // Skeleton loader component
 const ProjectCardSkeleton: React.FC = () => (
-  <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6">
-    <div className="mb-6 rounded-xl aspect-video bg-muted animate-pulse" />
+  <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card p-4">
+    <div className="mb-4 rounded-xl aspect-video bg-muted animate-pulse" />
     <div className="space-y-3">
       <div className="h-6 bg-muted rounded-lg w-3/4 animate-pulse" />
       <div className="h-4 bg-muted rounded-lg w-full animate-pulse" />
@@ -31,7 +31,6 @@ export { ProjectCardSkeleton };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   const divRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   
@@ -39,19 +38,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   const isInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4 });
   const isActive = isMobile && isInView;
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current) return;
-
-    const div = divRef.current;
-    const rect = div.getBoundingClientRect();
-
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
   return (
     <motion.div
       ref={divRef}
-      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
@@ -60,30 +49,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       tabIndex={0}
       aria-label={`Bekijk project: ${project.title}`}
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 backdrop-blur-md p-6 cursor-pointer group transition-all duration-500 shadow-lg",
-        "hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2",
-        isActive && "border-primary/40 shadow-2xl shadow-primary/5 is-active"
+        "relative overflow-hidden rounded-2xl border border-border/50 bg-card p-4 cursor-pointer group transition-all duration-300",
+        "hover:border-primary/50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2",
+        isActive && "border-primary/50 shadow-lg is-active"
       )}
-      whileHover={{ y: -8, scale: 1.01 }}
-      animate={isActive ? { y: -8, scale: 1.01 } : { y: 0, scale: 1 }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      whileHover={{ y: -4 }}
+      animate={isActive ? { y: -4 } : { y: 0 }}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
     >
-      {/* Animated gradient border effect */}
-      <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-opacity duration-500 -z-10" />
-      
-      {/* Cursor glow effect */}
-      <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 group-[.is-active]:opacity-100"
-        style={{
-          background: isActive 
-            ? `radial-gradient(600px circle at 50% 50%, hsl(var(--primary) / 0.08), transparent 40%)`
-            : `radial-gradient(600px circle at ${position.x}px ${position.y}px, hsl(var(--primary) / 0.08), transparent 40%)`,
-        }}
-      />
-      
-      <div className="relative z-10 flex flex-col h-full">
-        {/* Image container with enhanced effects */}
-        <div className="relative mb-6 overflow-hidden rounded-xl aspect-video bg-muted">
+      <div className="relative flex flex-col h-full">
+        {/* Image container */}
+        <div className="relative mb-4 overflow-hidden rounded-xl aspect-video bg-muted">
           {/* Skeleton while loading */}
           {!imageLoaded && (
             <div className="absolute inset-0 bg-muted animate-pulse" />
@@ -96,69 +72,71 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             decoding="async"
             onLoad={() => setImageLoaded(true)}
             className={cn(
-              "h-full w-full object-cover transition-all duration-700",
-              "group-hover:scale-110 group-[.is-active]:scale-110",
+              "h-full w-full object-cover transition-transform duration-500 ease-out",
+              "group-hover:scale-105 group-[.is-active]:scale-105",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}
           />
           
-          {/* Image overlay with view icon */}
+          {/* Subtle dark gradient overlay on hover */}
           <div className={cn(
-            "absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end justify-center pb-4 transition-opacity duration-300",
+            "absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300",
             (isHovered || isActive) ? "opacity-100" : "opacity-0"
-          )}>
-            <motion.div 
-              initial={{ y: 20, opacity: 0 }}
-              animate={(isHovered || isActive) ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-medium"
-            >
-              <Eye className="w-3.5 h-3.5" />
-              Bekijk project
-            </motion.div>
-          </div>
+          )} />
           
           {/* Client badge */}
           <div className="absolute top-3 left-3">
-            <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-black/40 backdrop-blur-sm text-white border border-white/10">
+            <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-white text-primary group-hover:bg-primary group-hover:text-white group-[.is-active]:bg-primary group-[.is-active]:text-white transition-all duration-300 shadow-sm">
               {project.client}
             </span>
           </div>
         </div>
 
         <div className="flex-1 flex flex-col">
-          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary group-[.is-active]:text-primary transition-colors duration-300">
+          <h3 className="text-lg font-semibold text-foreground mb-1.5 group-hover:text-primary group-[.is-active]:text-primary transition-colors duration-300 line-clamp-1">
             {project.title}
           </h3>
-          <p className="text-muted-foreground mb-4 text-sm line-clamp-2 flex-1 leading-relaxed">
+          <p className="text-muted-foreground text-sm line-clamp-2 mb-3 leading-relaxed">
             {project.tagline}
           </p>
           
-          <div className="flex flex-wrap gap-2">
+          {/* Tech stack */}
+          <div className="flex flex-wrap gap-1.5 mt-auto">
             {project.techStack.slice(0, 3).map((tech, index) => (
-              <motion.span
+              <span
                 key={index}
-                whileHover={{ scale: 1.05 }}
-                className="px-2.5 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors cursor-default"
+                className="px-2 py-1 text-xs rounded-md bg-muted text-muted-foreground"
               >
                 {tech}
-              </motion.span>
+              </span>
             ))}
             {project.techStack.length > 3 && (
-              <span className="px-2.5 py-1 text-xs rounded-full bg-muted text-muted-foreground border border-border">
+              <span className="px-2 py-1 text-xs rounded-md bg-primary/10 text-primary font-medium">
                 +{project.techStack.length - 3}
               </span>
             )}
           </div>
         </div>
 
-        <div className="flex items-center justify-between text-primary text-sm font-medium mt-6 pt-4 border-t border-border/50">
-          <span className="group-hover:text-primary/80 group-[.is-active]:text-primary/80 transition-colors">Bekijk Case</span>
+        {/* CTA footer */}
+        <div className="flex items-center justify-end mt-4 pt-3 border-t border-border/50">
           <motion.div 
-            className="p-2 rounded-full bg-primary/10 group-hover:bg-primary group-[.is-active]:bg-primary transition-colors"
-            animate={(isHovered || isActive) ? { x: 4 } : { x: 0 }}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+              "bg-primary/15 text-primary",
+              "group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-lg group-hover:shadow-primary/25",
+              "group-[.is-active]:bg-primary group-[.is-active]:text-primary-foreground group-[.is-active]:shadow-lg group-[.is-active]:shadow-primary/25"
+            )}
+            animate={(isHovered || isActive) ? { scale: 1.03 } : { scale: 1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
-            <ArrowRight className="w-4 h-4 group-hover:text-primary-foreground group-[.is-active]:text-primary-foreground transition-colors" />
+            Bekijk project
+            <motion.span
+              animate={(isHovered || isActive) ? { x: 3 } : { x: 0 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            >
+              <ArrowRight className="w-4 h-4" />
+            </motion.span>
           </motion.div>
         </div>
       </div>

@@ -107,33 +107,33 @@ export const testimonials: Testimonial[] = [
     quote: "DigitaleDuif heeft onze verwachtingen overtroffen met hun VR-trainingssimulatie. De kwaliteit en het realisme zijn ongeëvenaard, en onze medewerkers zijn er enorm door geholpen.",
     author: "Jan de Vries",
     title: "CEO, Innovatie B.V.",
-    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Jan",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
     rating: 5,
-    companyLogo: "https://via.placeholder.com/40x40/0074FF/FFFFFF?text=IB", // Dummy logo
+    companyLogo: "https://ui-avatars.com/api/?name=Innovatie+BV&background=0074FF&color=fff&size=80&bold=true&format=svg",
   },
   {
     quote: "De Mixed Reality oplossing die DigitaleDuif voor ons ontwikkelde, heeft onze operationele efficiëntie aanzienlijk verbeterd. Hun expertise in Unity is indrukwekkend.",
     author: "Sophie Bakker",
     title: "Projectmanager, Tech Solutions",
-    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Sophie",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
     rating: 4,
-    companyLogo: "https://via.placeholder.com/40x40/3AA7FF/FFFFFF?text=TS", // Dummy logo
+    companyLogo: "https://ui-avatars.com/api/?name=Tech+Solutions&background=3AA7FF&color=fff&size=80&bold=true&format=svg",
   },
   {
     quote: "Vanaf het eerste concept tot de uiteindelijke oplevering was de samenwerking met DigitaleDuif uitstekend. Ze luisteren echt naar de klant en leveren maatwerk van topkwaliteit.",
     author: "Mark Jansen",
     title: "Hoofd R&D, Future Systems",
-    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Mark",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
     rating: 5,
-    companyLogo: "https://via.placeholder.com/40x40/0074FF/FFFFFF?text=FS", // Dummy logo
+    companyLogo: "https://ui-avatars.com/api/?name=Future+Systems&background=0074FF&color=fff&size=80&bold=true&format=svg",
   },
   {
     quote: "De flexibiliteit en technische kennis van DigitaleDuif waren cruciaal voor het succes van ons project. Een echte aanrader voor iedereen die met XR aan de slag wil.",
     author: "Lisa Vermeer",
     title: "Innovatie Specialist, Global Corp",
-    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=Lisa",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
     rating: 5,
-    companyLogo: "https://via.placeholder.com/40x40/3AA7FF/FFFFFF?text=GC", // Dummy logo
+    companyLogo: "https://ui-avatars.com/api/?name=Global+Corp&background=3AA7FF&color=fff&size=80&bold=true&format=svg",
   },
 ];
 

@@ -1,9 +1,7 @@
-"use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const heroImages = [
@@ -79,7 +77,7 @@ const HeroSection: React.FC = () => {
           <Button
             asChild
             size="lg"
-            className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-neutral-100 transition-all duration-300 hover:scale-105"
+            className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-all duration-300 hover:scale-105"
           >
             <a
               href="https://app.cal.eu/digitale-duif/30min"
@@ -93,7 +91,7 @@ const HeroSection: React.FC = () => {
           <Button
             asChild
             size="lg"
-            className="group px-8 py-6 text-lg bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
+            className="group px-8 py-6 text-lg bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/20 transition-all duration-300 hover:scale-105"
           >
             <Link to="/projecten">
               Projecten
@@ -103,22 +101,32 @@ const HeroSection: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Carousel Indicators - positioned at bottom of section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex justify-center gap-2"
+      {/* Scroll Down Arrow - white on dark background */}
+      <motion.button
+        onClick={() => {
+          const nextSection = document.getElementById('about');
+          if (nextSection) {
+            nextSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/80 hover:text-white cursor-pointer transition-colors duration-300"
+        aria-label="Scroll naar volgende sectie"
       >
-        {heroImages.map((_, index) => (
-          <button
-            key={`slide-${index}`}
-            onClick={() => setCurrentImageIndex(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/70'}`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </motion.div>
+        <span className="text-sm font-medium">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <ChevronDown className="h-6 w-6" />
+        </motion.div>
+      </motion.button>
     </section>
   );
 };

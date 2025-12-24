@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import profilePhoto from "../assets/IMG_9948.png";
-import profilePhotoHover from "../assets/IMG_9949.png";
+import profilePhoto from "../assets/IMG_9948_OLD.jpg";
+import profilePhotoHover from "../assets/IMG_9949_OLD.jpg";
 import { cn } from "@/lib/utils";
 import { CheckCircle2 } from "lucide-react";
 import FlyingBirdIllustration from "./FlyingBirdIllustration";
@@ -40,10 +38,9 @@ const GuidoIntroSection = () => {
   }, []);
 
   return (
-    <React.Fragment>
-      <div
-        className="mb-16 grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16"
-      >
+    <div
+      className="mb-16 grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16"
+    >
         {/* Image Section */}
         <motion.div
           ref={imageRef}
@@ -89,67 +86,65 @@ const GuidoIntroSection = () => {
         {/* Text Content Section */}
         <div className="text-left md:text-left">
           <CardHeader className="p-0 mb-6">
-            <CardTitle className="text-mobile-h1 md:text-h1 font-extrabold text-primary">
-              Hallo, ik ben Guido
-            </CardTitle>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <CardTitle className="text-mobile-h1 md:text-h1 font-extrabold text-primary">
+                Hallo, ik ben Guido
+              </CardTitle>
+            </motion.div>
           </CardHeader>
-          <CardContent className="p-0"> {/* Removed px-4 to align with parent container padding */}
+          <CardContent className="p-0">
             <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Oprichter van DigitaleDuif.
-                </p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Ontwikkelt digitale producten met passie voor IT.
-                </p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Focus op VR en MR-applicaties, webdevelopment en mobiele apps.
-                </p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Harde werker in hart en nieren.
-                </p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Perfectionist met oog voor detail en resultaat.
-                </p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                <p className="text-mobile-body md:text-body-lg text-muted-foreground">
-                  Nieuwsgierig naar jouw ideeën en een goed gesprek!
-                </p>
-              </div>
+              {[
+                "Oprichter van DigitaleDuif.",
+                "Ontwikkelt digitale producten met passie voor IT.",
+                "Focus op VR en MR-applicaties, webdevelopment en mobiele apps.",
+                "Harde werker in hart en nieren.",
+                "Perfectionist met oog voor detail en resultaat.",
+                "Nieuwsgierig naar jouw ideeën en een goed gesprek!"
+              ].map((text, index) => (
+                <motion.div 
+                  key={index}
+                  className="flex items-start space-x-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.1 + index * 0.08 }}
+                >
+                  <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                  <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                    {text}
+                  </p>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="mt-8">
+            <motion.div 
+              className="mt-8"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
               <CvModal 
                 trigger={
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white shadow-sm hover:shadow-md transition-all duration-300 group h-14 px-10 text-lg"
+                    className="gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-sm hover:shadow-md transition-all duration-300 group h-14 px-10 text-lg"
                   >
                     Bekijk mijn CV
                   </Button>
                 }
               />
-            </div>
+            </motion.div>
           </CardContent>
         </div>
       </div>
-    </React.Fragment>
   );
 };
 

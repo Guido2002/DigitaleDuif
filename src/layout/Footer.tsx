@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Mail, Linkedin } from "lucide-react";
 // Removed FlyingBirdIllustration import

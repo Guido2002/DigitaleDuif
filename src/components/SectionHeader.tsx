@@ -1,6 +1,5 @@
-"use client";
-
 import React from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface SectionHeaderProps {
@@ -9,7 +8,7 @@ interface SectionHeaderProps {
   className?: string;
   titleClassName?: string;
   subtitleClassName?: string;
-  align?: "left" | "center"; // Added align prop
+  align?: "left" | "center";
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({
@@ -18,7 +17,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   className,
   titleClassName,
   subtitleClassName,
-  align = "center", // Default to center
+  align = "center",
 }) => {
   return (
     <div className={cn("mb-12", align === "center" ? "text-center" : "text-center md:text-left", className)}>
@@ -30,7 +29,13 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
           {subtitle}
         </p>
       )}
-      <div className={cn("mt-6 h-1 w-24 rounded-full bg-primary/20", align === "center" ? "mx-auto" : "mx-auto md:mx-0")} />
+      <motion.div 
+        className={cn("mt-6 h-1 w-24 rounded-full bg-primary/20", align === "center" ? "mx-auto" : "mx-auto md:mx-0")}
+        initial={{ scaleX: 0, originX: align === "center" ? 0.5 : 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+      />
     </div>
   );
 };

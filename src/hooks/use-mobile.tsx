@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 
 const MOBILE_BREAKPOINT = 1024; // Changed from 768 to 1024

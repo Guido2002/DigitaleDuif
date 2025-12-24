@@ -222,10 +222,10 @@ const ImpactCasesSection: React.FC = () => {
   const remainingProjects = filteredProjects.filter((_, i) => i !== featuredIndex);
 
   return (
-    <section className="py-20 relative">
+    <section className="pt-4 pb-20 relative">
       <div className="container mx-auto px-4">
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12" role="tablist" aria-label="Filter projecten op categorie">
+        <div className="flex flex-wrap justify-center gap-2 mb-6" role="tablist" aria-label="Filter projecten op categorie">
           {categories.map((category) => {
             const count = category.id === 'all' 
               ? projects.length 
