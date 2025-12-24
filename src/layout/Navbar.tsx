@@ -7,6 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { navLinks } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { useActiveSection, homeSections } from "@/hooks/use-active-section";
 import {
   Accordion,
   AccordionContent,
@@ -17,11 +18,27 @@ import {
 const Navbar = () => {
   const isMobile = useIsMobile();
   const location = useLocation();
+  const activeSection = useActiveSection(homeSections);
 
   const linkFocus =
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
 
+  // Check if a nav link is active based on scroll position or route
   const isActive = (path: string) => {
+    // On homepage, use scroll-based active detection
+    if (location.pathname === "/") {
+      if (path === "/") {
+        return activeSection === "home";
+      }
+      if (path === "/#about") {
+        return activeSection === "about" || activeSection === "why-us";
+      }
+      if (path === "/#process") {
+        return activeSection === "process" || activeSection === "testimonials" || activeSection === "faq" || activeSection === "cta";
+      }
+    }
+    
+    // For other pages, use route-based detection
     if (path === "/") {
       return location.pathname === "/" && !location.hash;
     }
@@ -36,10 +53,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
+    <nav 
+      className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur"
+      role="navigation"
+      aria-label="Hoofdnavigatie"
+    >
       <div className="container flex h-20 items-center justify-between"> {/* Increased height to h-20 */}
-        <Link to="/" className="flex items-center space-x-2">
-          <Bird className="h-7 w-7 text-primary" />
+        <Link to="/" className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md" aria-label="DigitaleDuif - Ga naar homepage">
+          <Bird className="h-7 w-7 text-primary" aria-hidden="true" />
           <span className="text-xl font-bold text-primary">
             DigitaleDuif
           </span>
@@ -48,11 +69,15 @@ const Navbar = () => {
         {isMobile ? (
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" className="h-12 w-12" aria-label="Open menu">
-                <Menu className="h-6 w-6 text-foreground" />
+              <Button 
+                variant="ghost" 
+                className="h-12 w-12 min-h-[48px] min-w-[48px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" 
+                aria-label="Open navigatiemenu"
+              >
+                <Menu className="h-6 w-6 text-foreground" aria-hidden="true" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-background">
+            <SheetContent side="right" className="bg-background" aria-label="Navigatiemenu">
               <div className="flex flex-col space-y-4 pt-8">
                 {navLinks.map((link) => (
                   link.children ? (
@@ -112,15 +137,6 @@ const Navbar = () => {
                     </SheetClose>
                   )
                 ))}
-                <SheetClose asChild>
-                  <a
-                    href="https://app.cal.eu/digitale-duif/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="w-full h-12 text-lg bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button>
-                  </a>
-                </SheetClose>
               </div>
             </SheetContent>
           </Sheet>
@@ -187,13 +203,6 @@ const Navbar = () => {
                 </Link>
               )
             ))}
-            <a
-              href="https://app.cal.eu/digitale-duif/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">Plan een gesprek</Button>
-            </a>
           </div>
         )}
       </div>

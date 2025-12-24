@@ -5,17 +5,22 @@ import { Button } from "@/components/ui/button";
 import profilePhoto from "../assets/IMG_9948_OLD.jpg";
 import profilePhotoHover from "../assets/IMG_9949_OLD.jpg";
 import { cn } from "@/lib/utils";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Linkedin } from "lucide-react";
 import FlyingBirdIllustration from "./FlyingBirdIllustration";
 import CvModal from "./CvModal";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const GuidoIntroSection = () => {
   const [isHovered, setIsHovered] = React.useState(false);
   const imageRef = React.useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   React.useEffect(() => {
     const element = imageRef.current;
     if (!element) return;
+
+    // Lower threshold on mobile for better trigger experience
+    const threshold = isMobile ? 0.7 : 0.95;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -25,7 +30,7 @@ const GuidoIntroSection = () => {
         }, 100);
       },
       {
-        threshold: 0.95, // Trigger when 95% of the image is visible
+        threshold, // Trigger when threshold % of the image is visible
       }
     );
 
@@ -34,7 +39,7 @@ const GuidoIntroSection = () => {
     return () => {
       observer.unobserve(element);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div
@@ -57,11 +62,12 @@ const GuidoIntroSection = () => {
             href="https://www.linkedin.com/in/guido-van-duijvenvoorde-531712162/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70 relative overflow-hidden bg-primary"
+            aria-label="Bekijk Guido's LinkedIn profiel (opent in nieuw tabblad)"
+            className="block w-full max-w-md rounded-xl shadow-2xl ring-4 ring-primary ring-offset-4 ring-offset-background transition-all duration-300 ease-in-out hover:ring-primary/70 focus:outline-none focus:ring-4 focus:ring-primary focus:ring-offset-4 relative overflow-hidden bg-primary group"
           >
             <img
               src={profilePhoto}
-              alt="Guido van Duijvenvoorde - Oprichter DigitaleDuif"
+              alt="Portretfoto van Guido van Duijvenvoorde, lachend in een professionele setting"
               className="w-full h-auto object-cover rounded-xl transition-opacity duration-700 ease-in-out"
               decoding="async"
               style={{ 
@@ -71,7 +77,8 @@ const GuidoIntroSection = () => {
             />
             <img
               src={profilePhotoHover}
-              alt="Guido van Duijvenvoorde - Oprichter DigitaleDuif"
+              alt=""
+              aria-hidden="true"
               className="w-full h-auto object-cover rounded-xl transition-opacity duration-700 ease-in-out absolute top-0 left-0"
               decoding="async"
               style={{ 
@@ -79,6 +86,11 @@ const GuidoIntroSection = () => {
                 opacity: isHovered ? 1 : 0
               }}
             />
+            {/* LinkedIn indicator overlay */}
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+              <Linkedin className="h-5 w-5 text-[#0077B5] group-hover:text-white" aria-hidden="true" />
+              <span className="text-sm font-medium text-[#0077B5] group-hover:text-white">LinkedIn</span>
+            </div>
           </a>
         </motion.div>
 
@@ -99,12 +111,10 @@ const GuidoIntroSection = () => {
           <CardContent className="p-0">
             <div className="space-y-4">
               {[
-                "Oprichter van DigitaleDuif.",
-                "Ontwikkelt digitale producten met passie voor IT.",
-                "Focus op VR en MR-applicaties, webdevelopment en mobiele apps.",
-                "Harde werker in hart en nieren.",
-                "Perfectionist met oog voor detail en resultaat.",
-                "Nieuwsgierig naar jouw ideeën en een goed gesprek!"
+                "Oprichter van DigitaleDuif met passie voor digitale innovatie.",
+                "Specialist in VR, MR, webdevelopment en mobiele apps.",
+                "Perfectionist met oog voor detail én resultaat.",
+                "Nieuwsgierig naar jouw ideeën en klaar voor een goed gesprek!"
               ].map((text, index) => (
                 <motion.div 
                   key={index}

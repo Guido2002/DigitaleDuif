@@ -23,7 +23,7 @@ const TestimonialsSection = () => {
   );
 
   return (
-    <section id="testimonials" className="bg-neutral-900 py-16 md:py-24">
+    <section id="testimonials" className="bg-neutral-900 py-16 md:py-24" aria-labelledby="testimonials-heading">
       <div className="container">
         <FadeInWhenVisible delay={0.05}>
           <SectionHeader
@@ -40,6 +40,7 @@ const TestimonialsSection = () => {
           }}
           plugins={isMobile ? [autoplayPlugin.current] : []}
           className="w-full max-w-4xl mx-auto"
+          aria-label="Klantbeoordelingen carousel"
         >
           <CarouselContent>
             {testimonials.map((testimonial, index) => (
@@ -62,8 +63,16 @@ const TestimonialsSection = () => {
           </CarouselContent>
           {!isMobile && (
             <>
-              <CarouselPrevious variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90 border-none" />
-              <CarouselNext variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90 border-none" />
+              <CarouselPrevious 
+                variant="default" 
+                className="bg-primary text-primary-foreground hover:bg-primary/90 border-none focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 min-h-[44px] min-w-[44px]" 
+                aria-label="Vorige testimonial"
+              />
+              <CarouselNext 
+                variant="default" 
+                className="bg-primary text-primary-foreground hover:bg-primary/90 border-none focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 min-h-[44px] min-w-[44px]" 
+                aria-label="Volgende testimonial"
+              />
             </>
           )}
 

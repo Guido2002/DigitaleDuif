@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { services } from "@/data/mockData";
 import { ArrowUpRight, Code, Smartphone, Glasses, Layers, Palette, Lightbulb, Database, Terminal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Button } from "@/components/ui/button";
 
 // Map service IDs to specific icons for better visual representation
 const iconMap: Record<string, React.ElementType> = {
@@ -17,6 +18,14 @@ const iconMap: Record<string, React.ElementType> = {
   "unity-consultancy": Terminal,
   "data-analytics": Database,
 };
+
+// Service categories for filtering
+const serviceCategories = [
+  { id: "all", label: "Alles", description: "Bekijk al onze diensten" },
+  { id: "xr", label: "XR & Immersive", description: "VR, MR en immersive ervaringen", serviceIds: ["vr-app-dev", "mr-interfaces", "unity-consultancy"] },
+  { id: "web-mobile", label: "Web & Mobile", description: "Websites en apps", serviceIds: ["web-development", "mobile-app-development"] },
+  { id: "design", label: "Design & Strategie", description: "UX, prototyping en analyse", serviceIds: ["ui-ux-design", "prototyping", "data-analytics"] },
+];
 
 interface ServiceCardProps {
   service: typeof services[0];
@@ -96,6 +105,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, colSpan, onCl
 
 const BentoServices = () => {
   const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState("all");
 
   const handleServiceClick = (projectId?: string) => {
     if (projectId) {
@@ -104,6 +114,14 @@ const BentoServices = () => {
       navigate('/projecten');
     }
   };
+
+  // Filter services based on active category
+  const filteredServices = activeCategory === "all" 
+    ? services 
+    : services.filter(service => {
+        const category = serviceCategories.find(c => c.id === activeCategory);
+        return category?.serviceIds?.includes(service.id);
+      });
 
   return (
     <section className="py-24 bg-background relative overflow-hidden">
@@ -114,7 +132,7 @@ const BentoServices = () => {
       </div>
 
       <div className="container relative z-10">
-        <div className="mb-16 max-w-3xl">
+        <div className="mb-12 max-w-3xl">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -134,38 +152,74 @@ const BentoServices = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(250px,auto)]">
-          {services.map((service, index) => {
-            const Icon = iconMap[service.id] || Code;
-            // Determine span based on index to create bento layout
-            // 0: span 2 (Web Dev)
-            // 1: span 1 (Mobile)
-            // 2: span 1 (VR)
-            // 3: span 2 (MR)
-            // 4, 5, 6: span 1
-            // 7: span 3 (Data - full width)
-            
-            const isLarge = index === 0 || index === 3;
-            const isFull = index === 7;
-            
-            const colSpan = isFull 
-              ? "md:col-span-3" 
-              : isLarge 
-                ? "md:col-span-2" 
-                : "md:col-span-1";
+        {/* Category Filter Tabs */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15 }}
+          className="mb-10"
+          role="tablist"
+          aria-label="Filter diensten op categorie"
+        >
+          <div className="flex flex-wrap gap-2 md:gap-3">
+            {serviceCategories.map((category) => (
+              <Button
+                key={category.id}
+                variant={activeCategory === category.id ? "default" : "outline"}
+                size="lg"
+                onClick={() => setActiveCategory(category.id)}
+                role="tab"
+                aria-selected={activeCategory === category.id}
+                aria-controls="services-grid"
+                className={cn(
+                  "rounded-full px-6 py-2 h-auto transition-all duration-200",
+                  activeCategory === category.id 
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20" 
+                    : "border-border hover:border-primary hover:bg-white hover:text-primary"
+                )}
+              >
+                {category.label}
+              </Button>
+            ))}
+          </div>
+          {/* Category description */}
+          <p className="mt-4 text-sm text-muted-foreground">
+            {serviceCategories.find(c => c.id === activeCategory)?.description}
+          </p>
+        </motion.div>
 
-            return (
-              <ServiceCard
-                key={service.id}
-                service={service}
-                index={index}
-                colSpan={colSpan}
-                onClick={() => handleServiceClick(service.relatedProjectId)}
-                Icon={Icon}
-                hasRelatedProject={!!service.relatedProjectId}
-              />
-            );
-          })}
+        <div 
+          id="services-grid"
+          role="tabpanel"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(250px,auto)]"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredServices.map((service, index) => {
+              const Icon = iconMap[service.id] || Code;
+              // Determine span based on filtered index to create bento layout
+              const isLarge = index === 0 || index === 3;
+              const isFull = filteredServices.length > 6 && index === filteredServices.length - 1;
+              
+              const colSpan = isFull 
+                ? "md:col-span-3" 
+                : isLarge 
+                  ? "md:col-span-2" 
+                  : "md:col-span-1";
+
+              return (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  index={index}
+                  colSpan={colSpan}
+                  onClick={() => handleServiceClick(service.relatedProjectId)}
+                  Icon={Icon}
+                  hasRelatedProject={!!service.relatedProjectId}
+                />
+              );
+            })}
+          </AnimatePresence>
         </div>
       </div>
     </section>

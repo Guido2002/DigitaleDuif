@@ -44,13 +44,13 @@ const BackToTopButton = () => {
     <Button
       onClick={scrollToTop}
       className={cn(
-        "fixed bottom-8 right-8 z-50 rounded-full p-3 shadow-lg transition-opacity duration-300",
+        "fixed bottom-8 right-8 z-50 rounded-full p-3 shadow-lg transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 min-h-[44px] min-w-[44px]",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       size="icon"
+      aria-label="Scroll naar boven"
     >
-      <ArrowUp className="h-5 w-5" />
-      <span className="sr-only">Scroll to top</span>
+      <ArrowUp className="h-5 w-5" aria-hidden="true" />
     </Button>
   );
 };

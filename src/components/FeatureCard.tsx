@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,21 +32,27 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   };
 
   return (
-    <Card 
-      className={cn(
-        "group flex flex-col items-center text-center border h-full transition-all duration-300 relative overflow-hidden",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-        getCardStyles()
-      )}
-      style={highlight && backgroundImage ? {
-        backgroundImage: `url('${backgroundImage}')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center"
-      } : undefined}
-      tabIndex={0}
-      role="article"
-      aria-label={`${title}: ${description}`}
+    <motion.div
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="h-full"
     >
+      <Card 
+        className={cn(
+          "group flex flex-col items-center text-center border h-full transition-all duration-300 relative overflow-hidden",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+          "hover:shadow-2xl hover:shadow-primary/10",
+          getCardStyles()
+        )}
+        style={highlight && backgroundImage ? {
+          backgroundImage: `url('${backgroundImage}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        } : undefined}
+        tabIndex={0}
+        role="article"
+        aria-label={`${title}: ${description}`}
+      >
       {highlight ? (
         <>
           {/* Gradient overlay for better text readability */}
@@ -99,6 +106,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
         </>
       )}
     </Card>
+    </motion.div>
   );
 };
 

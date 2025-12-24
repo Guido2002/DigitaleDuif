@@ -73,28 +73,31 @@ const FloatingCTA = () => {
             exit={{ y: 100, opacity: 0, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className="fixed bottom-4 inset-x-4 z-50"
+            role="navigation"
+            aria-label="Snelle acties"
           >
             <div className="flex gap-2 p-2 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
               <Button
                 asChild
-                className="flex-1 h-12 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 font-semibold"
+                className="flex-[2] h-12 min-h-[48px] rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
                 <a
                   href="https://app.cal.eu/digitale-duif/30min"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Plan een gesprek (opent in nieuw tabblad)"
                 >
-                  <Calendar className="h-5 w-5 mr-2" />
-                  Gesprek
+                  <Calendar className="h-5 w-5 mr-2" aria-hidden="true" />
+                  Gesprek plannen
                 </a>
               </Button>
               <Button
                 asChild
-                variant="outline"
-                className="flex-1 h-12 rounded-xl border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold"
+                variant="ghost"
+                className="flex-1 h-12 min-h-[48px] rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/10 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
-                <Link to="/projecten">
-                  <FolderOpen className="h-5 w-5 mr-2" />
+                <Link to="/projecten" aria-label="Bekijk onze projecten">
+                  <FolderOpen className="h-5 w-5 mr-2" aria-hidden="true" />
                   Projecten
                 </Link>
               </Button>
@@ -115,35 +118,38 @@ const FloatingCTA = () => {
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="fixed bottom-6 inset-x-0 z-50 flex justify-center pointer-events-none"
+          role="navigation"
+          aria-label="Snelle acties"
         >
           {/* CTA Buttons */}
           <motion.div
-            className="flex items-center gap-3 p-3 rounded-full bg-card/95 backdrop-blur-md border border-border shadow-2xl pointer-events-auto"
+            className="flex items-center gap-2 p-2 rounded-full bg-card/95 backdrop-blur-md border border-border shadow-2xl pointer-events-auto"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
             <Button
               asChild
               size="lg"
-              className="h-11 px-6 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 group"
+              className="h-11 min-h-[44px] px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-semibold"
             >
               <a
                 href="https://app.cal.eu/digitale-duif/30min"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Plan een gesprek (opent in nieuw tabblad)"
               >
-                <Calendar className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" />
+                <Calendar className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" aria-hidden="true" />
                 Plan een gesprek
               </a>
             </Button>
             <Button
               asChild
-              variant="outline"
+              variant="ghost"
               size="lg"
-              className="h-11 px-6 rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground group"
+              className="h-11 min-h-[44px] px-5 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
-              <Link to="/projecten">
-                <FolderOpen className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" />
+              <Link to="/projecten" aria-label="Bekijk onze projecten">
+                <FolderOpen className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" aria-hidden="true" />
                 Projecten
               </Link>
             </Button>

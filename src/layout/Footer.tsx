@@ -6,7 +6,7 @@ const Footer = () => {
   const linkFocus = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
 
   return (
-    <footer className="border-t border-border bg-background py-10 relative overflow-hidden">
+    <footer className="border-t border-border bg-background py-10 relative overflow-hidden" role="contentinfo" aria-label="Site footer">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
@@ -20,7 +20,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="text-sm font-semibold text-foreground mb-3">Navigatie</h4>
-            <nav className="flex flex-col space-y-2">
+            <nav className="flex flex-col space-y-2" aria-label="Footer navigatie">
               <Link to="/diensten" className={"text-sm text-muted-foreground hover:text-primary transition-colors " + linkFocus}>
                 Diensten
               </Link>
@@ -40,16 +40,18 @@ const Footer = () => {
               <a
                 href="mailto:digitaleduif@outlook.com"
                 className={"flex items-center text-sm text-muted-foreground hover:text-primary transition-colors " + linkFocus}
+                aria-label="Stuur een e-mail naar digitaleduif@outlook.com"
               >
-                <Mail className="mr-2 h-4 w-4" /> digitaleduif@outlook.com
+                <Mail className="mr-2 h-4 w-4" aria-hidden="true" /> digitaleduif@outlook.com
               </a>
               <a
                 href="https://www.linkedin.com/company/digitaleduif"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={"flex items-center text-sm text-muted-foreground hover:text-primary transition-colors " + linkFocus}
+                aria-label="Bezoek DigitaleDuif op LinkedIn (opent in nieuw tabblad)"
               >
-                <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
+                <Linkedin className="mr-2 h-4 w-4" aria-hidden="true" /> LinkedIn
               </a>
             </div>
           </div>
