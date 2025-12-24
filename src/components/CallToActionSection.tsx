@@ -18,12 +18,12 @@ const CallToActionSection = () => {
           {/* Text Content */}
           <div className="text-center md:text-left">
             <FadeInWhenVisible delay={0.05}>
-              <h2 className="text-h2 font-bold mb-6 text-primary-foreground">
+              <h2 className="text-3xl md:text-h2 font-bold mb-6 text-primary-foreground">
                 Klaar om samen jouw idee aan te vliegen?
               </h2>
             </FadeInWhenVisible>
             <FadeInWhenVisible delay={0.1}>
-              <p className="text-body-lg mb-8 max-w-3xl mx-auto md:mx-0 text-primary-foreground/90">
+              <p className="text-base md:text-body-lg mb-8 max-w-3xl mx-auto md:mx-0 text-primary-foreground/90">
                 Laten we kennismaken en ontdekken wat Digitale Duif voor u kan betekenen. Ik kijk ernaar uit!
               </p>
             </FadeInWhenVisible>

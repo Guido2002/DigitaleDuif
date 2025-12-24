@@ -76,7 +76,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, index, colSpan, onCl
           <div className="flex flex-wrap gap-2">
             {service.tags.map((tag, i) => (
               <span 
-                key={i} 
+                key={`${service.id}-tag-${tag}`} 
                 className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary border border-primary/20"
               >
                 {tag}
@@ -119,7 +119,7 @@ const BentoServices = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-cyan-500"
+            className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-cyan-accent"
           >
             Onze Diensten
           </motion.h2>

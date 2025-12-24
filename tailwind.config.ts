@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   // Removed darkMode: ["class"],
@@ -183,8 +184,14 @@ export default {
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
-    function ({ addUtilities, theme }: { addUtilities: Function, theme: Function }) {
+    tailwindcssAnimate,
+    function ({
+      addUtilities,
+      theme,
+    }: {
+      addUtilities: (utilities: Record<string, Record<string, unknown>>, variants?: string[]) => void;
+      theme: (path: string) => unknown;
+    }) {
       const newUtilities = {
         '.text-shadow-hero-title': {
           'text-shadow': theme('textShadow.hero-title'),

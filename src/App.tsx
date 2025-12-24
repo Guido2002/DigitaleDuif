@@ -19,7 +19,16 @@ const App = () => (
       <Sonner /> {/* This is for the sonner toast library */}
       <BrowserRouter>
         <Layout>
-          <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-background text-foreground">Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="flex min-h-screen items-center justify-center bg-background px-4">
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <span className="h-3 w-3 rounded-full bg-muted animate-pulse" aria-hidden="true" />
+                  <span className="text-sm">Pagina laden…</span>
+                </div>
+              </div>
+            }
+          >
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/diensten" element={<ServicesPage />} />

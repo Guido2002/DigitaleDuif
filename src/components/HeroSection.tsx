@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -12,14 +12,17 @@ const heroImages = [
 
 const HeroSection: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   React.useEffect(() => {
+    if (shouldReduceMotion) return;
+
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
     }, 5000); // Change image every 5 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [shouldReduceMotion]);
 
   return (
     <section
@@ -33,7 +36,10 @@ const HeroSection: React.FC = () => {
           key={image}
           src={image}
           alt={`Hero background ${index + 1}`}
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+          className={
+            "absolute inset-0 w-full h-full object-cover " +
+            (shouldReduceMotion ? "" : "transition-opacity duration-1000")
+          }
           style={{
             opacity: index === currentImageIndex ? 1 : 0,
             zIndex: 0
@@ -60,12 +66,12 @@ const HeroSection: React.FC = () => {
           <span className="text-accent-foreground"> idee vleugels</span>
         </motion.h1>
         <motion.p
-          className="mb-8 max-w-3xl text-mobile-body md:text-body-lg text-primary-foreground/90 text-shadow-hero-body"
+          className="mb-8 max-w-2xl text-mobile-body md:text-body-lg text-primary-foreground/90 text-shadow-hero-body"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
         >
-          Digitale Duif ontwikkelt Virtual, Mixed Reality ervaringen, websites en apps afgestemd op gebruikers en willen bedrijven vooruit helpen. Of je nu een eerste stap in digitale innovatie wilt zetten of een ambitieus project voor ogen hebt. Wij denken graag met je mee, vanaf de tekentafel tot het eindproduct.
+          Wij bouwen VR, MR, websites en apps die écht werken. Van idee tot lancering, samen met jou.
         </motion.p>
 
         <motion.div
@@ -112,19 +118,18 @@ const HeroSection: React.FC = () => {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-white/80 hover:text-white cursor-pointer transition-colors duration-300"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-white/80 hover:text-white cursor-pointer transition-colors duration-300"
         aria-label="Scroll naar volgende sectie"
       >
-        <span className="text-sm font-medium">Scroll</span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
+          animate={shouldReduceMotion ? undefined : { y: [0, 8, 0] }}
           transition={{
             duration: 1.5,
             repeat: Infinity,
             ease: "easeInOut"
           }}
         >
-          <ChevronDown className="h-6 w-6" />
+          <ChevronDown className="h-8 w-8" />
         </motion.div>
       </motion.button>
     </section>

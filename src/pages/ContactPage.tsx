@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { showSuccess, showError } from "@/utils/toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -69,8 +67,6 @@ const ContactPage = () => {
   }, [searchParams, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log("Formulier verzonden:", values);
-    
     await new Promise(resolve => setTimeout(resolve, 2000)); 
 
     setIsSubmitted(true);
@@ -81,7 +77,7 @@ const ContactPage = () => {
     <div className="relative min-h-[80vh] flex items-center justify-center py-8 md:py-12 overflow-hidden bg-background">
       {/* Abstract Background Elements for Immersive Visuals */}
       <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] animate-pulse pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[100px] animate-pulse delay-1000 pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-accent/5 rounded-full blur-[100px] animate-pulse delay-1000 pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -148,6 +144,7 @@ const ContactPage = () => {
                         <motion.div whileFocus={{ scale: 1.01 }}>
                           <Input 
                             placeholder="Uw naam" 
+                            autoComplete="name"
                             {...field} 
                             className="border-input bg-background/50 text-foreground transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20 h-12" 
                           />
@@ -168,6 +165,7 @@ const ContactPage = () => {
                           <Input 
                             type="email" 
                             placeholder="uw.email@voorbeeld.nl" 
+                            autoComplete="email"
                             {...field} 
                             className="border-input bg-background/50 text-foreground transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary/20 h-12" 
                           />

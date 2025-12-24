@@ -7,7 +7,7 @@ import FadeInWhenVisible from "./FadeInWhenVisible";
 const WhyChooseUsSection = () => {
   return (
     <section id="why-us" className="bg-neutral-900 py-16 md:py-24">
-      <div className="container">
+      <div className="container px-4 md:px-6">
         <FadeInWhenVisible delay={0.05}>
           <SectionHeader
             title="Waarom DigitaleDuif?"
@@ -18,7 +18,7 @@ const WhyChooseUsSection = () => {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {uspCards.map((usp, index) => (
-            <FadeInWhenVisible key={index} delay={0.05 + index * 0.05}>
+            <FadeInWhenVisible key={usp.title} delay={0.05 + index * 0.05}>
               <FeatureCard
                 icon={usp.icon}
                 title={usp.title}

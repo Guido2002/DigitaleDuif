@@ -36,7 +36,7 @@ const BackToTopButton = () => {
     const hasProjectParam = new URLSearchParams(location.search).has('project');
     const isOverflowHidden = document.body.style.overflow === 'hidden';
     return hasProjectParam || isOverflowHidden;
-  }, [location.search, isVisible]); // Re-check when location or visibility changes
+  }, [location.search]);
 
   if (isModalOpen) return null;
 

@@ -2,17 +2,11 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { Menu, Bird } from "lucide-react"; // Import Bird icon
+import { Menu, Bird } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { navLinks } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Accordion,
   AccordionContent,
@@ -23,6 +17,9 @@ import {
 const Navbar = () => {
   const isMobile = useIsMobile();
   const location = useLocation();
+
+  const linkFocus =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
 
   const isActive = (path: string) => {
     if (path === "/") {
@@ -39,24 +36,20 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-white">
+    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur">
       <div className="container flex h-20 items-center justify-between"> {/* Increased height to h-20 */}
         <Link to="/" className="flex items-center space-x-2">
-          <Bird className="h-7 w-7 text-primary" /> {/* Added Bird icon */}
-          <motion.span
-            className="text-xl font-bold text-primary"
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
+          <Bird className="h-7 w-7 text-primary" />
+          <span className="text-xl font-bold text-primary">
             DigitaleDuif
-          </motion.span>
+          </span>
         </Link>
 
         {isMobile ? (
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" className="h-14 w-14">
-                <Menu className="h-8 w-8 text-foreground" /> {/* Icon size increased to h-8 w-8 */}
+              <Button variant="ghost" className="h-12 w-12" aria-label="Open menu">
+                <Menu className="h-6 w-6 text-foreground" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="bg-background">
@@ -67,6 +60,7 @@ const Navbar = () => {
                       <AccordionItem value={link.name} className="border-b-0">
                         <AccordionTrigger className={cn(
                           "relative text-lg font-medium text-foreground hover:text-primary hover:no-underline",
+                          linkFocus,
                           isActive(link.path) && "text-primary font-bold",
                         )}>
                           {link.name}
@@ -82,8 +76,10 @@ const Navbar = () => {
                             <SheetClose asChild key={childLink.name}>
                               <Link
                                 to={childLink.path}
+                                aria-current={isActive(childLink.path) ? "page" : undefined}
                                 className={cn(
                                   "block text-base text-muted-foreground hover:text-primary",
+                                  linkFocus,
                                   isActive(childLink.path) && "text-primary font-semibold",
                                 )}
                               >
@@ -98,8 +94,10 @@ const Navbar = () => {
                     <SheetClose asChild key={link.name}>
                       <Link
                         to={link.path}
+                        aria-current={isActive(link.path) ? "page" : undefined}
                         className={cn(
                           "relative text-lg font-medium text-foreground hover:text-primary",
+                          linkFocus,
                           isActive(link.path) && "text-primary font-bold",
                         )}
                       >
@@ -130,46 +128,52 @@ const Navbar = () => {
           <div className="flex items-center space-x-6">
             {navLinks.map((link) => (
               link.children ? (
-                <DropdownMenu key={link.name}>
-                  <DropdownMenuTrigger asChild>
-                    <Link
-                      to={link.path} // Link to the main services page
-                      className={cn(
-                        "relative text-base font-medium text-foreground transition-colors hover:text-primary", // Increased text size to text-base
-                        isActive(link.path) && "text-primary font-bold",
-                      )}
-                    >
-                      {link.name}
-                      {isActive(link.path) && (
-                        <motion.span
-                          layoutId="underline"
-                          className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
-                        />
-                      )}
-                    </Link>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56 bg-card border border-border shadow-lg">
-                    {link.children.map((childLink) => (
-                      <DropdownMenuItem key={childLink.name} asChild>
+                <div key={link.name} className="relative group">
+                  <Link
+                    to={link.path}
+                    aria-current={isActive(link.path) ? "page" : undefined}
+                    className={cn(
+                      "relative text-base font-medium text-foreground transition-colors hover:text-primary",
+                      linkFocus,
+                      isActive(link.path) && "text-primary font-bold",
+                    )}
+                  >
+                    {link.name}
+                    {isActive(link.path) && (
+                      <motion.span
+                        layoutId="underline"
+                        className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
+                      />
+                    )}
+                  </Link>
+                  {/* Dropdown on hover */}
+                  <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    <div className="w-56 bg-card border border-border shadow-lg rounded-md py-1">
+                      {link.children.map((childLink) => (
                         <Link
+                          key={childLink.name}
                           to={childLink.path}
+                          aria-current={isActive(childLink.path) ? "page" : undefined}
                           className={cn(
-                            "block px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer",
+                            "block px-4 py-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground",
+                            linkFocus,
                             isActive(childLink.path) && "text-primary font-semibold",
                           )}
                         >
                           {childLink.name}
                         </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <Link
                   key={link.name}
                   to={link.path}
+                  aria-current={isActive(link.path) ? "page" : undefined}
                   className={cn(
-                    "relative text-base font-medium text-foreground transition-colors hover:text-primary", // Increased text size to text-base
+                    "relative text-base font-medium text-foreground transition-colors hover:text-primary",
+                    linkFocus,
                     isActive(link.path) && "text-primary font-bold",
                   )}
                 >
@@ -188,7 +192,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">Plan een gesprek</Button>
+              <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">Plan een gesprek</Button>
             </a>
           </div>
         )}

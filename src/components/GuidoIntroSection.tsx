@@ -14,6 +14,9 @@ const GuidoIntroSection = () => {
   const imageRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
+    const element = imageRef.current;
+    if (!element) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         // Trigger on all devices
@@ -26,14 +29,10 @@ const GuidoIntroSection = () => {
       }
     );
 
-    if (imageRef.current) {
-      observer.observe(imageRef.current);
-    }
+    observer.observe(element);
 
     return () => {
-      if (imageRef.current) {
-        observer.unobserve(imageRef.current);
-      }
+      observer.unobserve(element);
     };
   }, []);
 
