@@ -12,7 +12,7 @@ const Footer = () => {
 
   return (
     <footer className="border-t border-border bg-background py-10 relative overflow-hidden" role="contentinfo" aria-label="Site footer">
-      <div className="container">
+      <div className="container py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
