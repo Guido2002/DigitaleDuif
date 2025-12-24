@@ -77,7 +77,7 @@ const HeroSection: React.FC = () => {
           className="mb-6 text-mobile-h1 md:text-h1 font-extrabold leading-tight tracking-tighter text-shadow-hero-title"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
           DigitaleDuif: We geven jouw<br className="hidden sm:inline" />
           <span className="text-accent-foreground"> idee vleugels</span>
@@ -86,7 +86,7 @@ const HeroSection: React.FC = () => {
           className="mb-8 max-w-2xl text-mobile-body md:text-body-lg text-primary-foreground/90 text-shadow-hero-body"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+          transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
         >
           Wij bouwen VR, MR, websites en apps die écht werken. Van idee tot lancering, samen met jou.
         </motion.p>
@@ -94,41 +94,45 @@ const HeroSection: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row gap-4 items-center"
+          transition={{ delay: 0.4, duration: 0.4, ease: "easeOut" }}
+          className="flex flex-col items-center"
         >
-          <Button
-            asChild
-            size="lg"
-            className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-transparent min-h-[48px]"
-          >
-            <a
-              href="https://app.cal.eu/digitale-duif/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Plan een vrijblijvend gesprek (opent in nieuw tabblad)"
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
+            <Button
+              asChild
+              size="lg"
+              className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-all duration-150 hover:scale-[1.02] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-transparent min-h-[48px]"
             >
-              Plan een vrijblijvend gesprek
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </a>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            className="group px-8 py-6 text-lg bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/20 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-transparent min-h-[48px]"
-          >
-            <Link to="/projecten" aria-label="Bekijk onze projecten">
-              Projecten
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </Link>
-          </Button>
+              <a
+                href="https://app.cal.eu/digitale-duif/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Plan een gratis 30-minuten gesprek (opent in nieuw tabblad)"
+              >
+                Plan gratis 30-min gesprek
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-150 group-hover:translate-x-1" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              className="group px-6 py-5 text-base bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/20 transition-all duration-150 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-transparent min-h-[48px]"
+            >
+              <Link to="/projecten" aria-label="Bekijk onze projecten">
+                Bekijk projecten
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
+          {/* Helper text under CTA */}
+          <p className="mt-3 text-sm text-primary-foreground/60">Vrijblijvend · 30 minuten · Online of op locatie</p>
         </motion.div>
         
         {/* Alternative contact option */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
+          transition={{ delay: 0.6, duration: 0.3 }}
           className="mt-6"
         >
           <Link 
@@ -152,20 +156,13 @@ const HeroSection: React.FC = () => {
         }}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-white/80 hover:text-white cursor-pointer transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent rounded-full p-2 min-h-[44px] min-w-[44px]"
+        transition={{ delay: shouldReduceMotion ? 0 : 0.5, duration: shouldReduceMotion ? 0 : 0.3 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-white/80 hover:text-white cursor-pointer transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent rounded-full p-2 min-h-[44px] min-w-[44px]"
         aria-label="Scroll naar de over ons sectie"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <motion.div
-          animate={shouldReduceMotion ? undefined : { y: [0, 8, 0] }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <ChevronDown className="h-8 w-8" />
-        </motion.div>
+        <ChevronDown className="h-8 w-8" />
       </motion.button>
     </section>
   );

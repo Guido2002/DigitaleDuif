@@ -3,17 +3,21 @@ import { Button } from "@/components/ui/button";
 import FadeInWhenVisible from "./FadeInWhenVisible";
 import { Calendar, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import WaveDivider from "./WaveDivider";
 
 const CallToActionSection = () => {
   return (
-    <section id="cta" className="bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground py-16 md:py-24 relative overflow-hidden">
+    <section id="cta" className="bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground relative overflow-hidden">
+      {/* Wave divider at top */}
+      <WaveDivider className="-mt-[60px] md:-mt-[80px]" fillColor="fill-primary" />
+      
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary-foreground/10 rounded-full blur-3xl" />
       </div>
       
-      <div className="container relative z-10">
+      <div className="container relative z-10 py-16 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Text Content */}
           <div className="text-center md:text-left">
@@ -28,20 +32,23 @@ const CallToActionSection = () => {
               </p>
             </FadeInWhenVisible>
             <FadeInWhenVisible delay={0.15}>
-              <a
-                href="https://app.cal.eu/digitale-duif/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  size="lg"
-                  className="h-14 text-xl bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-all duration-300 hover:scale-105 group gap-2"
+              <div className="flex flex-col items-center md:items-start">
+                <a
+                  href="https://app.cal.eu/digitale-duif/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Calendar className="h-5 w-5" />
-                  Plan een vrijblijvend gesprek
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </a>
+                  <Button
+                    size="lg"
+                    className="h-14 text-xl bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-all duration-150 hover:scale-[1.02] hover:shadow-xl group gap-2"
+                  >
+                    <Calendar className="h-5 w-5" />
+                    Plan gratis 30-min gesprek
+                    <ArrowRight className="h-5 w-5 transition-transform duration-150 group-hover:translate-x-1" />
+                  </Button>
+                </a>
+                <p className="mt-3 text-sm text-primary-foreground/70">Vrijblijvend · Online of op locatie</p>
+              </div>
             </FadeInWhenVisible>
           </div>
 

@@ -1,9 +1,8 @@
 import React from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { LucideIcon, ArrowDown } from "lucide-react"; // Import ArrowDown icon
+import { LucideIcon, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion"; // Import motion for animations
-import { useIsMobile } from "@/hooks/use-mobile"; // Import useIsMobile
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ProcessStepCardProps {
   icon: LucideIcon;
@@ -77,14 +76,12 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
 
       {!isLast && (
         <>
-          {/* Mobile arrow indicator (hidden on desktop) - outside card padding */}
-          <motion.div
+          {/* Mobile arrow indicator (hidden on desktop) - outside card padding - Static */}
+          <div
             className="my-4 flex items-center justify-center text-primary md:hidden"
-            animate={{ y: [0, 5, 0] }} // Subtle bounce animation
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
             <ArrowDown className="h-8 w-8" />
-          </motion.div>
+          </div>
         </>
       )}
     </>

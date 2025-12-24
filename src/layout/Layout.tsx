@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import BackToTopButton from "@/components/BackToTopButton";
 import FloatingCTA from "@/components/FloatingCTA";
+import AccessibilityPanel from "@/components/AccessibilityPanel";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
@@ -28,6 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Footer />
       <BackToTopButton />
       <FloatingCTA />
+      <AccessibilityPanel />
     </div>
   );
 };

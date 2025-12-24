@@ -76,7 +76,16 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans leading-relaxed;
+  }
+  
+  /* Improved typography defaults */
+  p {
+    @apply leading-[1.7];
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply leading-tight tracking-tight;
   }
 }
 
@@ -113,4 +122,46 @@
   -webkit-background-clip: text;
   color: transparent;
   background-size: 200% auto;
+}
+
+/* Soft skeleton pulse animation - 2026 UX: less aggressive loading indicators */
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.skeleton-pulse {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* Accessibility: Font size adjustments */
+.text-size-large {
+  font-size: 112.5%; /* 18px base */
+}
+
+.text-size-xlarge {
+  font-size: 125%; /* 20px base */
+}
+
+/* Accessibility: High contrast mode */
+.high-contrast {
+  --foreground: 0 0% 0%;
+  --muted-foreground: 0 0% 20%;
+  --border: 0 0% 0%;
+}
+
+.high-contrast .text-muted-foreground {
+  @apply text-foreground;
+}
+
+/* Accessibility: Reduce motion */
+.reduce-motion,
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
 }

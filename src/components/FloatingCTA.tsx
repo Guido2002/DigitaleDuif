@@ -79,26 +79,25 @@ const FloatingCTA = () => {
             <div className="flex gap-2 p-2 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
               <Button
                 asChild
-                className="flex-[2] h-12 min-h-[48px] rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className="flex-[3] h-12 min-h-[48px] rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
                 <a
                   href="https://app.cal.eu/digitale-duif/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Plan een gesprek (opent in nieuw tabblad)"
+                  aria-label="Plan een gratis gesprek (opent in nieuw tabblad)"
                 >
                   <Calendar className="h-5 w-5 mr-2" aria-hidden="true" />
-                  Gesprek plannen
+                  Gratis gesprek
                 </a>
               </Button>
               <Button
                 asChild
                 variant="ghost"
-                className="flex-1 h-12 min-h-[48px] rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/10 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className="flex-1 h-12 min-h-[48px] rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/10 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 px-3"
               >
                 <Link to="/projecten" aria-label="Bekijk onze projecten">
-                  <FolderOpen className="h-5 w-5 mr-2" aria-hidden="true" />
-                  Projecten
+                  <FolderOpen className="h-5 w-5" aria-hidden="true" />
                 </Link>
               </Button>
             </div>
@@ -136,20 +135,20 @@ const FloatingCTA = () => {
                 href="https://app.cal.eu/digitale-duif/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Plan een gesprek (opent in nieuw tabblad)"
+                aria-label="Plan een gratis gesprek (opent in nieuw tabblad)"
               >
-                <Calendar className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" aria-hidden="true" />
-                Plan een gesprek
+                <Calendar className="h-5 w-5 mr-2 transition-transform duration-150 group-hover:scale-110" aria-hidden="true" />
+                Gratis gesprek
               </a>
             </Button>
             <Button
               asChild
               variant="ghost"
-              size="lg"
-              className="h-11 min-h-[44px] px-5 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              size="sm"
+              className="h-9 min-h-[36px] px-4 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               <Link to="/projecten" aria-label="Bekijk onze projecten">
-                <FolderOpen className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" aria-hidden="true" />
+                <FolderOpen className="h-4 w-4 mr-1.5 transition-transform duration-150 group-hover:scale-110" aria-hidden="true" />
                 Projecten
               </Link>
             </Button>

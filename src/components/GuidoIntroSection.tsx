@@ -53,10 +53,8 @@ const GuidoIntroSection = () => {
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
           {/* Subtle background glow behind the image */}
-          <motion.div
-            className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-primary/50 to-purple-accent/50 blur-xl"
-            animate={{ opacity: [0.5, 0.8, 0.5], scale: [0.95, 1.05, 0.95] }}
-            transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
+          <div
+            className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-primary/40 to-purple-accent/40 blur-xl opacity-60"
           />
           <a 
             href="https://www.linkedin.com/in/guido-van-duijvenvoorde-531712162/" 
@@ -101,7 +99,7 @@ const GuidoIntroSection = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
             >
               <CardTitle className="text-mobile-h1 md:text-h1 font-extrabold text-primary">
                 Hallo, ik ben Guido
@@ -122,7 +120,7 @@ const GuidoIntroSection = () => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.1 + index * 0.08 }}
+                  transition={{ duration: 0.25, delay: 0.05 + index * 0.05 }}
                 >
                   <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                   <p className="text-mobile-body md:text-body-lg text-muted-foreground">
@@ -137,16 +135,16 @@ const GuidoIntroSection = () => {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
             >
               <CvModal 
                 trigger={
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-sm hover:shadow-md transition-all duration-300 group h-14 px-10 text-lg"
+                    className="gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-sm hover:shadow-md transition-all duration-150 group h-14 px-10 text-lg"
                   >
-                    Bekijk mijn CV
+                    Download CV (PDF)
                   </Button>
                 }
               />

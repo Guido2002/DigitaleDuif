@@ -13,6 +13,7 @@ import {
 import { useIsMobile } from "@/hooks/use-mobile";
 import Autoplay from "embla-carousel-autoplay";
 import { useReducedMotion } from "framer-motion";
+import WaveDivider from "./WaveDivider";
 
 const TestimonialsSection = () => {
   const isMobile = useIsMobile();
@@ -23,8 +24,11 @@ const TestimonialsSection = () => {
   );
 
   return (
-    <section id="testimonials" className="bg-neutral-900 py-16 md:py-24" aria-labelledby="testimonials-heading">
-      <div className="container">
+    <section id="testimonials" className="bg-neutral-900 relative" aria-labelledby="testimonials-heading">
+      {/* Wave divider at top */}
+      <WaveDivider className="-mt-[60px] md:-mt-[80px]" fillColor="fill-neutral-900" />
+      
+      <div className="container py-16 md:py-24">
         <FadeInWhenVisible delay={0.05}>
           <SectionHeader
             title="Wat onze klanten zeggen"

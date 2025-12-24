@@ -55,10 +55,10 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
               key={currentImageIndex}
               src={project.images[currentImageIndex]}
               alt={project.title}
-              initial={{ opacity: 0, scale: 1.1 }}
+              initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
               className="absolute inset-0 w-full h-full object-cover"
             />
           </AnimatePresence>
@@ -66,15 +66,15 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
           {/* Overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-black/5 lg:to-black/30" />
           
-          {/* Featured Badge with pulse animation */}
+          {/* Featured Badge - Static (no ping) */}
           <div className="absolute top-4 left-4 z-10">
             <motion.span
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
+              transition={{ duration: 0.2 }}
               className="relative px-4 py-2 text-xs font-bold rounded-full bg-primary text-primary-foreground shadow-lg flex items-center gap-2"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-foreground opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-foreground" />
               </span>
               Uitgelicht

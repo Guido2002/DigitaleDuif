@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Project } from '../data/mockData';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -10,18 +10,18 @@ interface ProjectCardProps {
   onClick: () => void;
 }
 
-// Skeleton loader component
+// Skeleton loader component with softer animation
 const ProjectCardSkeleton: React.FC = () => (
   <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card p-4">
-    <div className="mb-4 rounded-xl aspect-video bg-muted animate-pulse" />
+    <div className="mb-4 rounded-xl aspect-video bg-muted skeleton-pulse" />
     <div className="space-y-3">
-      <div className="h-6 bg-muted rounded-lg w-3/4 animate-pulse" />
-      <div className="h-4 bg-muted rounded-lg w-full animate-pulse" />
-      <div className="h-4 bg-muted rounded-lg w-2/3 animate-pulse" />
+      <div className="h-6 bg-muted rounded-lg w-3/4 skeleton-pulse" style={{ animationDelay: '0.1s' }} />
+      <div className="h-4 bg-muted rounded-lg w-full skeleton-pulse" style={{ animationDelay: '0.2s' }} />
+      <div className="h-4 bg-muted rounded-lg w-2/3 skeleton-pulse" style={{ animationDelay: '0.3s' }} />
       <div className="flex gap-2 mt-4">
-        <div className="h-6 w-16 bg-muted rounded-full animate-pulse" />
-        <div className="h-6 w-20 bg-muted rounded-full animate-pulse" />
-        <div className="h-6 w-14 bg-muted rounded-full animate-pulse" />
+        <div className="h-6 w-16 bg-muted rounded-full skeleton-pulse" style={{ animationDelay: '0.4s' }} />
+        <div className="h-6 w-20 bg-muted rounded-full skeleton-pulse" style={{ animationDelay: '0.5s' }} />
+        <div className="h-6 w-14 bg-muted rounded-full skeleton-pulse" style={{ animationDelay: '0.6s' }} />
       </div>
     </div>
   </div>
@@ -33,36 +33,49 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
   
   const isMobile = useIsMobile();
   const isInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4 });
   const isActive = isMobile && isInView;
 
+  // Helper function to avoid nested ternary
+  const getAnimateState = () => {
+    if (shouldReduceMotion) return undefined;
+    return isActive ? { y: -4 } : { y: 0 };
+  };
+
   return (
     <motion.div
       ref={divRef}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onTouchStart={() => setIsPressed(true)}
+      onTouchEnd={() => setIsPressed(false)}
       onClick={onClick}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
       role="button"
       tabIndex={0}
       aria-label={`Bekijk project: ${project.title}`}
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-border/50 bg-card p-4 cursor-pointer group transition-all duration-300",
+        "relative overflow-hidden rounded-2xl border border-border/50 bg-card p-4 cursor-pointer group transition-all duration-150",
         "hover:border-primary/50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2",
-        isActive && "border-primary/50 shadow-lg is-active"
+        isActive && "border-primary/50 shadow-lg is-active",
+        isPressed && "scale-[0.98] shadow-inner"
       )}
-      whileHover={{ y: -4 }}
-      animate={isActive ? { y: -4 } : { y: 0 }}
+      whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+      animate={getAnimateState()}
       transition={{ type: "spring", stiffness: 400, damping: 30 }}
     >
       <div className="relative flex flex-col h-full">
         {/* Image container */}
         <div className="relative mb-4 overflow-hidden rounded-xl aspect-video bg-muted">
-          {/* Skeleton while loading */}
+          {/* Skeleton while loading - softer pulse */}
           {!imageLoaded && (
-            <div className="absolute inset-0 bg-muted animate-pulse" />
+            <div className="absolute inset-0 bg-muted skeleton-pulse" />
           )}
           
           <img
@@ -72,7 +85,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             decoding="async"
             onLoad={() => setImageLoaded(true)}
             className={cn(
-              "h-full w-full object-cover transition-transform duration-500 ease-out",
+              "h-full w-full object-cover transition-transform duration-300 ease-out",
               "group-hover:scale-105 group-[.is-active]:scale-105",
               imageLoaded ? "opacity-100" : "opacity-0"
             )}

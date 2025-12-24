@@ -12,7 +12,7 @@ interface FadeInWhenVisibleProps {
 const FadeInWhenVisible: React.FC<FadeInWhenVisibleProps> = ({
   children,
   delay = 0,
-  duration = 0.6,
+  duration = 0.3,
   className,
 }) => {
   const { ref, inView } = useInView({
