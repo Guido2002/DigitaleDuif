@@ -323,25 +323,29 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                <div className="hidden lg:flex flex-col xl:flex-row items-center justify-between gap-4 text-center xl:text-left">
                  <span className="text-white font-medium text-lg">Interesse in een soortgelijk project?</span>
                  <div className="flex items-center gap-4">
-                    <Link
-                      to={`/contact${project.serviceId ? `?service=${project.serviceId}` : ''}`}
+                    <a
+                      href="https://app.cal.eu/digitale-duif/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center justify-center px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-600 rounded-lg font-bold transition-colors text-sm whitespace-nowrap shadow-lg shadow-blue-900/20"
                     >
                       <Calendar className="w-4 h-4 mr-2" />
                       Plan gesprek
-                    </Link>
+                    </a>
                  </div>
                </div>
 
                {/* Mobile Footer Content */}
                <div className="lg:hidden w-full">
-                  <Link
-                    to={`/contact${project.serviceId ? `?service=${project.serviceId}` : ''}`}
+                  <a
+                    href="https://app.cal.eu/digitale-duif/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center justify-center w-full px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-colors text-base shadow-lg shadow-blue-900/20"
                   >
                     <Calendar className="w-5 h-5 mr-2" />
                     Interesse? Plan gesprek
-                  </Link>
+                  </a>
                </div>
             </div>
           </div>
