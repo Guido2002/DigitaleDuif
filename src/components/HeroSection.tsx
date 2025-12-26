@@ -157,7 +157,7 @@ const HeroSection: React.FC = () => {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: shouldReduceMotion ? 0 : 0.5, duration: shouldReduceMotion ? 0 : 0.3 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-white/80 hover:text-white cursor-pointer transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent rounded-full p-2 min-h-[44px] min-w-[44px]"
+        className="absolute bottom-6 left-0 right-0 mx-auto w-fit z-10 flex flex-col items-center justify-center text-white/80 hover:text-white cursor-pointer transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent rounded-full p-2 min-h-[44px] min-w-[44px]"
         aria-label="Scroll naar de over ons sectie"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
