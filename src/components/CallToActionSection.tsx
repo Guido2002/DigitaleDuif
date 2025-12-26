@@ -3,21 +3,17 @@ import { Button } from "@/components/ui/button";
 import FadeInWhenVisible from "./FadeInWhenVisible";
 import { Calendar, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import WaveDivider from "./WaveDivider";
 
 const CallToActionSection = () => {
   return (
     <section id="cta" className="bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground relative overflow-hidden">
-      {/* Wave divider at top */}
-      <WaveDivider className="-mt-[60px] md:-mt-[80px]" fillColor="fill-primary" />
-      
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary-foreground/10 rounded-full blur-3xl" />
       </div>
       
-      <div className="container relative z-10 py-16 md:py-24">
+      <div className="container relative z-10 px-4 md:px-6 py-16 md:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Text Content */}
           <div className="text-center md:text-left">

@@ -8,16 +8,13 @@ import {
 } from "@/components/ui/accordion";
 import { faqItems } from "@/data/mockData";
 import FadeInWhenVisible from "./FadeInWhenVisible";
-import WaveDivider from "./WaveDivider";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const FAQSection = () => {
   return (
     <section id="faq" className="bg-background relative">
-      {/* Wave divider at top */}
-      <WaveDivider className="-mt-[60px] md:-mt-[80px]" fillColor="fill-background" />
-      
       <div className="container px-4 md:px-6 py-16 md:py-24">
         <FadeInWhenVisible delay={0.1}>
           <SectionHeader
@@ -44,15 +41,25 @@ const FAQSection = () => {
           
           {/* CTA after FAQ */}
           <FadeInWhenVisible delay={0.3}>
-            <div className="mt-12 text-center p-8 rounded-2xl bg-muted/50 border border-border">
-              <p className="text-muted-foreground mb-4">Staat jouw vraag er niet bij?</p>
-              <Link 
-                to="/contact" 
-                className="inline-flex items-center gap-2 text-primary font-semibold hover:underline group"
-              >
-                Stuur ons een bericht
-                <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" />
-              </Link>
+            <div className="mt-12 p-6 md:p-8 rounded-2xl border border-border bg-card text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+                <MessageCircle className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-2">
+                Staat jouw vraag er niet bij?
+              </h3>
+              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                Geen probleem! Neem gerust contact op, we helpen je graag verder.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <Button asChild size="lg" className="group">
+                  <Link to="/contact">
+                    <Mail className="h-4 w-4" />
+                    Stel je vraag
+                    <ArrowRight className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </FadeInWhenVisible>
         </div>

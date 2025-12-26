@@ -6,7 +6,6 @@ import ProcessStepCard from "./ProcessStepCard";
 import StepsMobile from "./StepsMobile";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import WaveDivider from "./WaveDivider";
 
 const ProcessSection = () => {
   const [lineRef, inView] = useInView({
@@ -16,9 +15,6 @@ const ProcessSection = () => {
 
   return (
     <section id="process" className="bg-background relative">
-      {/* Wave divider at top */}
-      <WaveDivider className="-mt-[60px] md:-mt-[80px]" fillColor="fill-background" />
-      
       <div className="container px-4 md:px-6 py-16 md:py-24">
         <FadeInWhenVisible delay={0.1}>
           <SectionHeader

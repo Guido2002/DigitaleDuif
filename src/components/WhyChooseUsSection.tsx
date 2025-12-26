@@ -3,14 +3,10 @@ import SectionHeader from "./SectionHeader";
 import FeatureCard from "./FeatureCard";
 import { uspCards } from "@/data/mockData";
 import FadeInWhenVisible from "./FadeInWhenVisible";
-import WaveDivider from "./WaveDivider";
 
 const WhyChooseUsSection = () => {
   return (
     <section id="why-us" className="bg-neutral-900 relative">
-      {/* Wave divider at top */}
-      <WaveDivider className="-mt-[60px] md:-mt-[80px]" fillColor="fill-neutral-900" />
-      
       <div className="container px-4 md:px-6 py-16 md:py-24">
         <FadeInWhenVisible delay={0.05}>
           <SectionHeader
