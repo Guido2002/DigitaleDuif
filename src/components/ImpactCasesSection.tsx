@@ -121,7 +121,7 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
               </span>
             </div>
             
-            <h3 className="text-2xl lg:text-4xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
+            <h3 className="text-2xl lg:text-4xl font-black text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
               {project.title}
             </h3>
             
@@ -288,7 +288,7 @@ const ImpactCasesSection: React.FC = () => {
               id="projects-grid"
               role="tabpanel"
               aria-label={`Projecten in categorie: ${categories.find(c => c.id === activeFilter)?.label}`}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
             >
               <AnimatePresence mode="popLayout">
                 {remainingProjects.map((project, index) => (

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, memo, useCallback } from 'react';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Project } from '../data/mockData';
@@ -29,7 +29,7 @@ const ProjectCardSkeleton: React.FC = () => (
 
 export { ProjectCardSkeleton };
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
+const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ project, onClick }) {
   const divRef = useRef<HTMLDivElement>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -40,6 +40,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   const isInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4 });
   const isActive = isMobile && isInView;
 
+  const handleImageLoad = useCallback(() => setImageLoaded(true), []);
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => { setIsHovered(false); setIsPressed(false); }, []);
+  const handlePressStart = useCallback(() => setIsPressed(true), []);
+  const handlePressEnd = useCallback(() => setIsPressed(false), []);
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => e.key === 'Enter' && onClick(), [onClick]);
+
   // Helper function to avoid nested ternary
   const getAnimateState = () => {
     if (shouldReduceMotion) return undefined;
@@ -49,17 +56,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
   return (
     <motion.div
       ref={divRef}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setIsHovered(false); setIsPressed(false); }}
-      onMouseDown={() => setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
-      onTouchStart={() => setIsPressed(true)}
-      onTouchEnd={() => setIsPressed(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseDown={handlePressStart}
+      onMouseUp={handlePressEnd}
+      onTouchStart={handlePressStart}
+      onTouchEnd={handlePressEnd}
       onClick={onClick}
-      onKeyDown={(e) => e.key === 'Enter' && onClick()}
+      onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
       aria-label={`Bekijk project: ${project.title}`}
+      style={{ willChange: "transform" }}
       className={cn(
         "relative overflow-hidden rounded-2xl border border-border/50 bg-card p-4 cursor-pointer group transition-all duration-150",
         "hover:border-primary/50 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2",
@@ -83,7 +91,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
             alt={project.title}
             loading="lazy"
             decoding="async"
-            onLoad={() => setImageLoaded(true)}
+            onLoad={handleImageLoad}
             className={cn(
               "h-full w-full object-cover transition-transform duration-300 ease-out",
               "group-hover:scale-105 group-[.is-active]:scale-105",
@@ -155,6 +163,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
       </div>
     </motion.div>
   );
-};
+});
 
 export default ProjectCard;

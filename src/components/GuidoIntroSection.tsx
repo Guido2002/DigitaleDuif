@@ -101,8 +101,8 @@ const GuidoIntroSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}
             >
-              <CardTitle className="text-mobile-h1 md:text-h1 font-extrabold text-primary">
-                Hallo, ik ben Guido
+              <CardTitle className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground tracking-tight">
+                Hallo, ik ben <span className="text-primary">Guido</span>
               </CardTitle>
             </motion.div>
           </CardHeader>
@@ -122,8 +122,8 @@ const GuidoIntroSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.25, delay: 0.05 + index * 0.05 }}
                 >
-                  <CheckCircle2 className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                  <p className="text-mobile-body md:text-body-lg text-muted-foreground">
+                  <CheckCircle2 className="h-5 w-5 text-primary mt-1.5 flex-shrink-0" />
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                     {text}
                   </p>
                 </motion.div>
@@ -142,7 +142,7 @@ const GuidoIntroSection = () => {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-sm hover:shadow-md transition-all duration-150 group h-14 px-10 text-lg"
+                    className="gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white shadow-sm hover:shadow-md hover:shadow-primary/25 transition-all duration-200 group h-14 px-10 text-lg rounded-full font-bold"
                   >
                     Download CV (PDF)
                   </Button>

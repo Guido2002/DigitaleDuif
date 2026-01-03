@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion"; // Ensure motion is used
+import { useSpring, animated } from "@react-spring/web";
 
 interface FadeInWhenVisibleProps {
   children: React.ReactNode;
@@ -9,31 +9,36 @@ interface FadeInWhenVisibleProps {
   className?: string;
 }
 
-const FadeInWhenVisible: React.FC<FadeInWhenVisibleProps> = ({
+const FadeInWhenVisible: React.FC<FadeInWhenVisibleProps> = memo(function FadeInWhenVisible({
   children,
   delay = 0,
-  duration = 0.3,
+  duration = 300,
   className,
-}) => {
+}) {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Only trigger the animation once
-    threshold: 0.1, // Trigger when 10% of the component is visible
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const springProps = useSpring({
+    opacity: inView ? 1 : 0,
+    y: inView ? 0 : 20,
+    delay: delay * 1000,
+    config: { tension: 280, friction: 60, duration },
   });
 
   return (
-    <motion.div // Changed to motion.div
+    <animated.div
       ref={ref}
       className={className}
-      initial={{ opacity: 0, y: 20 }} // Initial state for animation
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} // Animate based on inView status
-      transition={{
-        opacity: { duration: duration, ease: "easeOut", delay: delay },
-        y: { duration: duration, ease: "easeOut", delay: delay },
+      style={{
+        opacity: springProps.opacity,
+        transform: springProps.y.to(y => `translateY(${y}px)`),
       }}
     >
       {children}
-    </motion.div>
+    </animated.div>
   );
-};
+});
 
 export default FadeInWhenVisible;

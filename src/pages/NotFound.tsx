@@ -50,7 +50,7 @@ const NotFound = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ ...animConfig, delay: shouldReduceMotion ? 0 : 0.1 }}
         >
-          <h1 className="text-7xl md:text-8xl font-extrabold text-primary mb-2">404</h1>
+          <h1 className="text-7xl md:text-8xl font-black text-primary mb-2">404</h1>
         </motion.div>
         
         <motion.p
@@ -84,12 +84,6 @@ const NotFound = () => {
             Misschien zocht je naar:
           </p>
           <div className="flex flex-wrap gap-2 justify-center">
-            <Link 
-              to="/diensten" 
-              className="px-3 py-1.5 text-sm rounded-full bg-background border border-border hover:border-primary hover:text-primary transition-all duration-150"
-            >
-              Onze diensten
-            </Link>
             <Link 
               to="/projecten" 
               className="px-3 py-1.5 text-sm rounded-full bg-background border border-border hover:border-primary hover:text-primary transition-all duration-150"

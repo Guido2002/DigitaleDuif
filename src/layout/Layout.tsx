@@ -5,6 +5,8 @@ import BackToTopButton from "@/components/BackToTopButton";
 import FloatingCTA from "@/components/FloatingCTA";
 import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import CategorySelectionModal from "@/components/CategorySelectionModal";
+import { useCategory } from "@/context/CategoryContext";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,9 +14,16 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   useScrollToHash();
+  const { showCategoryModal, isFirstVisit } = useCategory();
+  
+  // Hide content completely on first visit when modal is open
+  const hideContent = showCategoryModal && isFirstVisit;
 
   return (
     <div className="flex min-h-screen flex-col">
+      {/* Category selection modal - shown first on initial visit */}
+      <CategorySelectionModal />
+      
       {/* Skip to content link for accessibility */}
       <a 
         href="#main-content" 
@@ -22,12 +31,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       >
         Ga naar hoofdinhoud
       </a>
-      <ScrollProgressBar />
-      <Navbar />
-      <main id="main-content" className="flex-grow" tabIndex={-1}>{children}</main>
-      <Footer />
-      <BackToTopButton />
-      <FloatingCTA />
+      
+      {/* Hide all content when showing category modal on first visit */}
+      {!hideContent && (
+        <>
+          <ScrollProgressBar />
+          <Navbar />
+          <main id="main-content" className="flex-grow" tabIndex={-1}>{children}</main>
+          <Footer />
+          <BackToTopButton />
+          <FloatingCTA />
+        </>
+      )}
     </div>
   );
 };

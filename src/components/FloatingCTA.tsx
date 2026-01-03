@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Calendar, FolderOpen } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Calendar, Brain, Globe, Smartphone } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useCategory, CATEGORIES, type CategoryId } from "@/context/CategoryContext";
+import { cn } from "@/lib/utils";
+
+const categoryIcons: Record<CategoryId, React.ElementType> = {
+  xr: Brain,
+  websites: Globe,
+  "mobile-apps": Smartphone,
+};
 
 const FloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const { selectedCategory, setCategory } = useCategory();
+  
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +91,10 @@ const FloatingCTA = () => {
             <div className="flex gap-2 p-2 rounded-2xl bg-card/95 backdrop-blur-xl border border-border/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
               <Button
                 asChild
-                className="flex-[3] h-12 min-h-[48px] rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className={cn(
+                  "h-12 min-h-[48px] rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 font-semibold focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+                  isHomePage ? "flex-1" : "flex-1"
+                )}
               >
                 <a
                   href="https://app.cal.eu/digitale-duif/30min"
@@ -91,15 +106,31 @@ const FloatingCTA = () => {
                   Gratis gesprek
                 </a>
               </Button>
-              <Button
-                asChild
-                variant="ghost"
-                className="flex-1 h-12 min-h-[48px] rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/10 font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 px-3"
-              >
-                <Link to="/projecten" aria-label="Bekijk onze projecten">
-                  <FolderOpen className="h-5 w-5" aria-hidden="true" />
-                </Link>
-              </Button>
+              {isHomePage && (
+                <div className="flex gap-1">
+                  {(Object.keys(CATEGORIES) as CategoryId[]).map((categoryId) => {
+                    const Icon = categoryIcons[categoryId];
+                    const isActive = selectedCategory === categoryId;
+                    return (
+                      <Button
+                        key={categoryId}
+                        variant="ghost"
+                        onClick={() => setCategory(categoryId)}
+                        className={cn(
+                          "h-12 min-h-[48px] w-12 rounded-xl p-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+                          isActive 
+                            ? "bg-primary/15 text-primary" 
+                            : "text-muted-foreground hover:text-primary hover:bg-primary/10"
+                        )}
+                        aria-label={`Selecteer ${CATEGORIES[categoryId].label}`}
+                        aria-pressed={isActive}
+                      >
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </Button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </motion.div>
         )}
@@ -141,17 +172,41 @@ const FloatingCTA = () => {
                 Gratis gesprek
               </a>
             </Button>
-            <Button
-              asChild
-              variant="ghost"
-              size="sm"
-              className="h-9 min-h-[36px] px-4 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            >
-              <Link to="/projecten" aria-label="Bekijk onze projecten">
-                <FolderOpen className="h-4 w-4 mr-1.5 transition-transform duration-150 group-hover:scale-110" aria-hidden="true" />
-                Projecten
-              </Link>
-            </Button>
+            
+            {isHomePage && (
+              <>
+                <div className="w-px h-6 bg-border" />
+                <div className="flex items-center gap-1">
+                  {(Object.keys(CATEGORIES) as CategoryId[]).map((categoryId) => {
+                    const Icon = categoryIcons[categoryId];
+                    const category = CATEGORIES[categoryId];
+                    const isActive = selectedCategory === categoryId;
+                    return (
+                      <Button
+                        key={categoryId}
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setCategory(categoryId)}
+                        className={cn(
+                          "h-9 min-h-[36px] px-3 rounded-full group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200",
+                          isActive 
+                            ? "bg-primary/15 text-primary" 
+                            : "text-muted-foreground hover:text-primary hover:bg-primary/10"
+                        )}
+                        aria-label={`Selecteer ${category.label}`}
+                        aria-pressed={isActive}
+                      >
+                        <Icon className={cn(
+                          "h-4 w-4 mr-1.5 transition-transform duration-150",
+                          isActive ? "scale-110" : "group-hover:scale-110"
+                        )} aria-hidden="true" />
+                        {category.shortLabel}
+                      </Button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </motion.div>
         </motion.div>
       )}

@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { memo, useMemo } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -13,42 +13,49 @@ interface FeatureCardProps {
   backgroundImage?: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ 
+const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({ 
   icon: Icon, 
   title, 
   description, 
   highlight = false, 
   isDarkBackground = false, 
   backgroundImage 
-}) => {
-  const getCardStyles = () => {
+}) {
+  const shouldReduceMotion = useReducedMotion();
+  
+  const cardStyles = useMemo(() => {
     if (highlight) {
       return "text-primary-foreground shadow-xl p-0 border-primary/50 min-h-[320px] hover:shadow-2xl hover:border-primary";
     }
     if (isDarkBackground) {
-      return "bg-neutral-800 border-neutral-700 p-6 hover:-translate-y-1 hover:shadow-lg hover:border-primary/50";
+      return "bg-foreground border-foreground/80 p-6 hover:shadow-lg hover:border-primary/50";
     }
-    return "bg-card text-foreground glassmorphism p-6 border-border hover:-translate-y-1 hover:shadow-lg hover:border-primary/50";
-  };
+    return "bg-card text-foreground glassmorphism p-6 border-border hover:shadow-lg hover:border-primary/50";
+  }, [highlight, isDarkBackground]);
+
+  const backgroundStyle = useMemo(() => 
+    highlight && backgroundImage ? {
+      backgroundImage: `url('${backgroundImage}')`,
+      backgroundSize: "cover",
+      backgroundPosition: "center"
+    } : undefined
+  , [highlight, backgroundImage]);
 
   return (
     <motion.div
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={shouldReduceMotion ? {} : { y: -8, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="h-full"
+      style={{ willChange: "transform" }}
     >
       <Card 
         className={cn(
-          "group flex flex-col items-center text-center border h-full transition-all duration-300 relative overflow-hidden",
+          "group flex flex-col items-center text-center border h-full transition-shadow duration-300 relative overflow-hidden",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
           "hover:shadow-2xl hover:shadow-primary/10",
-          getCardStyles()
+          cardStyles
         )}
-        style={highlight && backgroundImage ? {
-          backgroundImage: `url('${backgroundImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center"
-        } : undefined}
+        style={backgroundStyle}
         tabIndex={0}
         role="article"
         aria-label={`${title}: ${description}`}
@@ -93,13 +100,13 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
           </CardHeader>
           <CardTitle className={cn(
             "mb-2 text-xl font-semibold",
-            isDarkBackground ? "text-neutral-100" : "text-foreground"
+            isDarkBackground ? "text-white" : "text-foreground"
           )}>
             {title}
           </CardTitle>
           <CardDescription className={cn(
             "flex-grow",
-            isDarkBackground ? "text-neutral-300" : "text-muted-foreground"
+            isDarkBackground ? "text-white/70" : "text-muted-foreground"
           )}>
             {description}
           </CardDescription>
@@ -108,6 +115,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
     </Card>
     </motion.div>
   );
-};
+});
 
 export default FeatureCard;

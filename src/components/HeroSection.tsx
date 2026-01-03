@@ -1,16 +1,19 @@
-import React from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import React, { memo, useCallback, useMemo } from "react";
+import { motion, useReducedMotion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCategory } from "@/context/CategoryContext";
+import { getCategoryConfig, defaultConfig } from "@/data/categoryConfig";
+import { DoodleStar, DoodleScribble, FloatingDoodle } from "@/components/ui/doodles";
 
-const heroImages = [
-  '/xr.jpeg',
-  '/webapp.jpeg',
-  '/ux1.jpeg'
-];
-
-const HeroSection: React.FC = () => {
+const HeroSection: React.FC = memo(function HeroSection() {
+  const { selectedCategory } = useCategory();
+  const config = useMemo(() => 
+    selectedCategory ? getCategoryConfig(selectedCategory) : defaultConfig
+  , [selectedCategory]);
+  const heroContent = config.hero;
+  
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = React.useRef<HTMLElement>(null);
@@ -24,15 +27,28 @@ const HeroSection: React.FC = () => {
   const parallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const parallaxScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
+  // Memoized scroll handler
+  const scrollToAbout = useCallback(() => {
+    const nextSection = document.getElementById('about');
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
+  // Reset image index when category changes
+  React.useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [selectedCategory]);
+
   React.useEffect(() => {
     if (shouldReduceMotion) return;
 
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroContent.backgroundImages.length);
     }, 5000); // Change image every 5 seconds
 
     return () => clearInterval(interval);
-  }, [shouldReduceMotion]);
+  }, [shouldReduceMotion, heroContent.backgroundImages.length]);
 
   return (
     <section
@@ -46,50 +62,68 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 w-full h-full"
         style={shouldReduceMotion ? undefined : { y: parallaxY, scale: parallaxScale }}
       >
-        {heroImages.map((image, index) => (
-          <img
-            key={image}
-            src={image}
-            alt=""
-            aria-hidden="true"
-            className={
-              "absolute inset-0 w-full h-full object-cover " +
-              (shouldReduceMotion ? "" : "transition-opacity duration-1000")
-            }
-            style={{
-              opacity: index === currentImageIndex ? 1 : 0,
-              zIndex: 0
-            }}
-            loading={index === 0 ? "eager" : "lazy"}
-            decoding="async"
-            {...(index === 0 ? { fetchPriority: "high" } : {})}
-          />
-        ))}
+        <AnimatePresence mode="wait">
+          {heroContent.backgroundImages.map((image, index) => (
+            <motion.img
+              key={`${selectedCategory}-${image}`}
+              src={image}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 1 }}
+              style={{ zIndex: 0 }}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
+              {...(index === 0 ? { fetchPriority: "high" } : {})}
+            />
+          ))}
+        </AnimatePresence>
       </motion.div>
       
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end opacity-80 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-hero-gradient-start via-hero-gradient-mid to-hero-gradient-end opacity-85 z-0"></div>
       
-      {/* Removed Pigeon Animations */}
+      {/* Floating doodles */}
+      <FloatingDoodle className="top-[15%] right-[8%] text-white/20 z-[5]" duration={6}>
+        <DoodleStar className="w-10 h-10" />
+      </FloatingDoodle>
+      <FloatingDoodle className="bottom-[25%] left-[5%] text-white/15 z-[5]" duration={7} delay={1}>
+        <DoodleStar className="w-6 h-6" />
+      </FloatingDoodle>
 
       <div className="container relative z-10 flex flex-col items-center justify-center px-4 text-center md:px-6">
-        <motion.h1
-          className="mb-6 text-mobile-h1 md:text-h1 font-extrabold leading-tight tracking-tighter text-shadow-hero-title"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        >
-          DigitaleDuif: We geven jouw<br className="hidden sm:inline" />
-          <span className="text-accent-foreground"> idee vleugels</span>
-        </motion.h1>
-        <motion.p
-          className="mb-8 max-w-2xl text-mobile-body md:text-body-lg text-primary-foreground/90 text-shadow-hero-body"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
-        >
-          Wij bouwen VR, MR, websites en apps die écht werken. Van idee tot lancering, samen met jou.
-        </motion.p>
+        <AnimatePresence mode="wait">
+          <motion.h1
+            key={`title-${selectedCategory}`}
+            className="mb-6 text-4xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight text-shadow-hero-title"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            {heroContent.title}<br className="hidden sm:inline" />
+            <span className="relative inline-block text-accent-foreground">
+              {heroContent.titleHighlight}
+              <span className="absolute -bottom-1 left-0 w-full text-white/30">
+                <DoodleScribble className="w-full" />
+              </span>
+            </span>
+          </motion.h1>
+        </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={`subtitle-${selectedCategory}`}
+            className="mb-10 max-w-2xl text-lg md:text-xl text-primary-foreground/85 text-shadow-hero-body leading-relaxed"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
+          >
+            {heroContent.subtitle}
+          </motion.p>
+        </AnimatePresence>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -101,7 +135,7 @@ const HeroSection: React.FC = () => {
             <Button
               asChild
               size="lg"
-              className="group px-8 py-6 text-lg bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-all duration-150 hover:scale-[1.02] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-transparent min-h-[48px]"
+              className="group px-8 py-6 text-lg rounded-full bg-white text-primary hover:bg-white/95 transition-all duration-200 hover:scale-[1.02] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent min-h-[52px] font-bold"
             >
               <a
                 href="https://app.cal.eu/digitale-duif/30min"
@@ -109,14 +143,14 @@ const HeroSection: React.FC = () => {
                 rel="noopener noreferrer"
                 aria-label="Plan een gratis 30-minuten gesprek (opent in nieuw tabblad)"
               >
-                Plan gratis 30-min gesprek
+                Plan gratis gesprek
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-150 group-hover:translate-x-1" aria-hidden="true" />
               </a>
             </Button>
             <Button
               asChild
               size="lg"
-              className="group px-6 py-5 text-base bg-primary-foreground/10 backdrop-blur-md border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/20 transition-all duration-150 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-transparent min-h-[48px]"
+              className="group px-6 py-5 text-base rounded-full bg-white/10 backdrop-blur-md border-2 border-white/20 text-primary-foreground hover:bg-white/20 transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent min-h-[52px] font-semibold"
             >
               <Link to="/projecten" aria-label="Bekijk onze projecten">
                 Bekijk projecten
@@ -125,7 +159,7 @@ const HeroSection: React.FC = () => {
             </Button>
           </div>
           {/* Helper text under CTA */}
-          <p className="mt-3 text-sm text-primary-foreground/60">Vrijblijvend · 30 minuten · Online of op locatie</p>
+          <p className="mt-4 text-sm text-primary-foreground/60">Vrijblijvend · 30 minuten · Online of op locatie</p>
         </motion.div>
         
         {/* Alternative contact option */}
@@ -148,12 +182,7 @@ const HeroSection: React.FC = () => {
 
       {/* Scroll Down Arrow - white on dark background */}
       <motion.button
-        onClick={() => {
-          const nextSection = document.getElementById('about');
-          if (nextSection) {
-            nextSection.scrollIntoView({ behavior: 'smooth' });
-          }
-        }}
+        onClick={scrollToAbout}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: shouldReduceMotion ? 0 : 0.5, duration: shouldReduceMotion ? 0 : 0.3 }}
@@ -166,6 +195,6 @@ const HeroSection: React.FC = () => {
       </motion.button>
     </section>
   );
-};
+});
 
 export default HeroSection;

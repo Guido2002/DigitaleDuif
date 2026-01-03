@@ -8,14 +8,14 @@
   }
 
   :root {
-    --background: 0 0% 100%; /* White */
-    --foreground: 0 0% 10%; /* #1A1A1A - Dark text */
+    --background: 45 30% 97%; /* Warm off-white #F8F7F4 */
+    --foreground: 220 10% 12%; /* Warm dark #1a1c20 */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 0 0% 10%; /* Dark text */
+    --card: 45 30% 98%; /* Slightly warm white */
+    --card-foreground: 220 10% 12%; /* Dark text */
 
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 0 0% 10%; /* Dark text */
+    --popover: 45 30% 98%; /* Warm white */
+    --popover-foreground: 220 10% 12%; /* Dark text */
 
     --primary: 217 100% 50%; /* #0074FF - Digitale Duif Blauw */
     --primary-foreground: 0 0% 100%; /* White */
@@ -109,6 +109,19 @@
   animation: bounce-x 1s ease-in-out infinite;
 }
 
+/* Subtle float animation for cards */
+@keyframes subtle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+.animate-subtle-float {
+  animation: subtle-float 3s ease-in-out infinite;
+}
+
 /* Dark Glassmorphism effect for dark backgrounds */
 .dark-glassmorphism {
   background-color: rgba(0, 0, 0, 0.2); /* Slightly transparent black */
@@ -122,6 +135,21 @@
   -webkit-background-clip: text;
   color: transparent;
   background-size: 200% auto;
+}
+
+/* Warm section backgrounds */
+.bg-warm {
+  background-color: hsl(45 30% 97%);
+}
+
+.bg-warm-alt {
+  background-color: hsl(45 20% 94%);
+}
+
+/* Hand-drawn border style */
+.border-sketch {
+  border-radius: 2rem;
+  border: 2px solid hsl(var(--border));
 }
 
 /* Soft skeleton pulse animation - 2026 UX: less aggressive loading indicators */
@@ -164,4 +192,117 @@
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
+}
+
+/* ===========================================
+   DESIGN SYSTEM UTILITY CLASSES
+   =========================================== */
+
+/* Animation Duration Tokens */
+@layer utilities {
+  .duration-instant { transition-duration: 150ms; }
+  .duration-fast { transition-duration: 200ms; }
+  .duration-normal { transition-duration: 300ms; }
+  .duration-slow { transition-duration: 500ms; }
+}
+
+/* Interactive Card - standard hover behavior */
+.card-interactive {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-primary/50;
+}
+
+/* Focus Ring - consistent focus state */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+}
+
+/* Focus Ring Visible - only show on keyboard navigation */
+.focus-ring-visible {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+}
+
+/* Section Padding - standard section spacing */
+.section-padding {
+  @apply py-20 md:py-28;
+}
+
+/* Container Padding - standard container padding */
+.container-padding {
+  @apply px-4 md:px-6;
+}
+
+/* Dark Section Text Colors */
+.dark-section-title {
+  @apply text-white;
+}
+
+.dark-section-subtitle {
+  @apply text-white/70;
+}
+
+.dark-section-body {
+  @apply text-white/60;
+}
+
+.dark-section-muted {
+  @apply text-white/40;
+}
+
+/* Border Radius Tokens */
+.radius-card {
+  @apply rounded-2xl;
+}
+
+.radius-section {
+  @apply rounded-[2rem];
+}
+
+.radius-button {
+  @apply rounded-full;
+}
+
+/* ===========================================
+   PERFORMANCE OPTIMIZATIONS
+   =========================================== */
+
+/* Content-visibility for off-screen sections - improves initial paint */
+.section-lazy {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* GPU-accelerated transforms */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimized image rendering */
+img {
+  content-visibility: auto;
+}
+
+/* Reduce paint for fixed elements */
+.fixed-optimized {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Smooth scrolling with better performance */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Optimize animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

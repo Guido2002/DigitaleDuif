@@ -336,7 +336,6 @@ interface NavLink {
 export const navLinks: NavLink[] = [
   { name: "Home", path: "/" },
   { name: "Over ons", path: "/#about" },
-  { name: "Diensten", path: "/diensten" },
   { name: "Projecten", path: "/projecten" },
   { name: "Hoe wij werken", path: "/#process" },
   { name: "Contact", path: "/contact" },

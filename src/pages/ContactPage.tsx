@@ -118,9 +118,9 @@ const ContactPage = () => {
         transition={{ ...animConfig }}
         className="z-10 w-full max-w-lg px-4"
       >
-        <Card className="backdrop-blur-md bg-card/80 border-primary/10 shadow-2xl overflow-hidden relative group">
+        <Card className="backdrop-blur-md bg-white/90 border-2 border-border/50 shadow-xl rounded-[2rem] overflow-hidden relative group">
           {/* Geometric decorative line */}
-          <div className="absolute top-0 left-0 w-full h-1 bg-primary opacity-80" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-primary opacity-80 rounded-t-[2rem]" />
           
           {!isSubmitted && (
             <CardHeader className="text-center pb-2 px-6 pt-8 md:pt-6">
@@ -129,10 +129,10 @@ const ContactPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...animConfig, delay: shouldReduceMotion ? 0 : 0.1 }}
               >
-                <CardTitle className="mb-2 text-3xl md:text-4xl font-bold text-primary">
+                <CardTitle className="mb-2 text-3xl md:text-4xl font-black text-foreground tracking-tight">
                   Neem Contact Op
                 </CardTitle>
-                <p className="text-base md:text-lg text-muted-foreground">
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                   Heeft u een vraag, een idee of wilt u de mogelijkheden bespreken?
                   Neem gerust contact met ons op.
                 </p>

@@ -1,6 +1,7 @@
 import React from "react";
-import { Mail, Linkedin, ExternalLink } from "lucide-react";
+import { Mail, Linkedin, ExternalLink, Bird } from "lucide-react";
 import { Link } from "react-router-dom";
+import { DoodleScribble, DoodleStar, FloatingDoodle } from "@/components/ui/doodles";
 
 const Footer = () => {
   const linkFocus = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
@@ -12,23 +13,34 @@ const Footer = () => {
 
   return (
     <footer className="border-t border-border bg-background py-10 relative overflow-hidden" role="contentinfo" aria-label="Site footer">
-      <div className="container py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* Background doodles */}
+      <FloatingDoodle className="top-8 right-[10%] text-primary/10" duration={7} rotateAmount={8}>
+        <DoodleStar className="w-10 h-10" />
+      </FloatingDoodle>
+      <FloatingDoodle className="bottom-12 left-[5%] text-primary/10" duration={8} delay={1}>
+        <DoodleStar className="w-6 h-6" />
+      </FloatingDoodle>
+      
+      <div className="container py-10 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Company Info */}
           <div>
-            <h3 className="text-lg font-bold text-primary mb-3">DigitaleDuif</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <div className="flex items-center gap-2.5 mb-4">
+              <Bird className="h-7 w-7 text-primary" />
+              <h3 className="text-xl font-black text-foreground tracking-tight">DigitaleDuif</h3>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               Innovatieve digitale oplossingen die écht vliegen. Uw partner in Virtual Reality, Mixed Reality, Web Development en Mobiele Apps.
             </p>
+            <div className="mt-4 w-20 text-primary/30">
+              <DoodleScribble className="w-16" />
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-semibold text-foreground mb-3">Navigatie</h4>
-            <nav className="flex flex-col space-y-2.5" aria-label="Footer navigatie">
-              <Link to="/diensten" className={animatedLink}>
-                Diensten
-              </Link>
+            <h4 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wide">Navigatie</h4>
+            <nav className="flex flex-col space-y-3" aria-label="Footer navigatie">
               <Link to="/projecten" className={animatedLink}>
                 Projecten
               </Link>
@@ -40,8 +52,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-sm font-semibold text-foreground mb-3">Contact</h4>
-            <div className="flex flex-col space-y-2.5">
+            <h4 className="text-sm font-bold text-foreground mb-4 uppercase tracking-wide">Contact</h4>
+            <div className="flex flex-col space-y-3">
               <a
                 href="mailto:digitaleduif@outlook.com"
                 className={`flex items-center gap-2 ${animatedLink}`}
@@ -65,7 +77,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-10 pt-6 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} DigitaleDuif. Alle rechten voorbehouden.
           </p>

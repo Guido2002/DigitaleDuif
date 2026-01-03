@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import SectionHeader from "./SectionHeader";
 import {
   Accordion,
@@ -11,11 +11,21 @@ import FadeInWhenVisible from "./FadeInWhenVisible";
 import { Link } from "react-router-dom";
 import { ArrowRight, MessageCircle, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DoodleCircle, DoodleStar, GridPattern } from "@/components/ui/doodles";
 
-const FAQSection = () => {
+const FAQSection = memo(function FAQSection() {
   return (
-    <section id="faq" className="bg-background relative">
-      <div className="container px-4 md:px-6 py-16 md:py-24">
+    <section id="faq" className="bg-background relative overflow-hidden">
+      {/* Static background decorations - no infinite animations */}
+      <GridPattern className="text-foreground" />
+      <div className="absolute top-24 right-[12%] text-primary/15 pointer-events-none">
+        <DoodleStar className="w-8 h-8" />
+      </div>
+      <div className="absolute bottom-40 left-[8%] text-primary/10 pointer-events-none">
+        <DoodleCircle className="w-14 h-14" />
+      </div>
+      
+      <div className="container px-4 md:px-6 py-20 md:py-28 relative z-10">
         <FadeInWhenVisible delay={0.1}>
           <SectionHeader
             title="Veelgestelde Vragen"
@@ -24,35 +34,40 @@ const FAQSection = () => {
         </FadeInWhenVisible>
 
         <div className="mx-auto max-w-3xl">
-          <Accordion type="single" collapsible className="w-full">
-            {faqItems.map((item, index) => (
-              <FadeInWhenVisible key={item.question} delay={0.05 + index * 0.03}>
-                <AccordionItem value={`item-${index + 1}`} className="border-b border-border">
-                  <AccordionTrigger className="text-left text-lg font-semibold text-foreground hover:no-underline hover:text-primary transition-colors py-5">
+          {/* Single FadeInWhenVisible for entire accordion - fewer observers */}
+          <FadeInWhenVisible delay={0.15}>
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, index) => (
+                <AccordionItem 
+                  key={item.question} 
+                  value={`item-${index + 1}`} 
+                  className="border-b border-border/60 bg-white/50 mb-3 rounded-2xl px-5 overflow-hidden"
+                >
+                  <AccordionTrigger className="text-left text-lg font-bold text-foreground hover:no-underline hover:text-primary transition-colors py-5">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-base text-muted-foreground pb-5 leading-relaxed">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
-              </FadeInWhenVisible>
-            ))}
-          </Accordion>
+              ))}
+            </Accordion>
+          </FadeInWhenVisible>
           
           {/* CTA after FAQ */}
-          <FadeInWhenVisible delay={0.3}>
-            <div className="mt-12 p-6 md:p-8 rounded-2xl border border-border bg-card text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                <MessageCircle className="w-6 h-6 text-primary" />
+          <FadeInWhenVisible delay={0.25}>
+            <div className="mt-14 p-8 md:p-10 rounded-[2rem] border-2 border-border/60 bg-white/80 text-center shadow-sm">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 mb-5">
+                <MessageCircle className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">
+              <h3 className="text-2xl font-black text-foreground mb-3">
                 Staat jouw vraag er niet bij?
               </h3>
-              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+              <p className="text-muted-foreground mb-7 max-w-md mx-auto leading-relaxed">
                 Geen probleem! Neem gerust contact op, we helpen je graag verder.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Button asChild size="lg" className="group">
+                <Button asChild size="lg" className="group rounded-full px-8 h-12">
                   <Link to="/contact">
                     <Mail className="h-4 w-4" />
                     Stel je vraag
@@ -66,6 +81,6 @@ const FAQSection = () => {
       </div>
     </section>
   );
-};
+});
 
 export default FAQSection;

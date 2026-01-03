@@ -1,9 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 
 interface TestimonialCardProps {
   quote: string;
@@ -15,7 +14,7 @@ interface TestimonialCardProps {
   isDarkBackground?: boolean;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({
+const TestimonialCard: React.FC<TestimonialCardProps> = memo(function TestimonialCard({
   quote,
   author,
   title,
@@ -23,14 +22,14 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   rating,
   companyLogo,
   isDarkBackground = false,
-}) => {
+}) {
   return (
     <Card
       className={cn(
         "group relative flex flex-col p-6 text-center shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full border",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         isDarkBackground
-          ? "bg-neutral-800 border-neutral-700 hover:border-primary/50"
+          ? "bg-foreground border-foreground/80 hover:border-primary/50"
           : "bg-card border-border hover:border-primary/50"
       )}
       tabIndex={0}
@@ -40,7 +39,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <CardContent className="flex flex-grow flex-col items-center justify-center p-0 pt-8">
         <p className={cn(
           "mb-6 text-lg italic",
-          isDarkBackground ? "text-neutral-100" : "text-foreground"
+          isDarkBackground ? "text-white" : "text-foreground"
         )}>"{quote}"</p>
         <div className="mt-auto flex flex-col items-center">
           {companyLogo && (
@@ -59,7 +58,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           <p className="text-xl font-semibold text-primary">{author}</p>
           <p className={cn(
             "text-sm",
-            isDarkBackground ? "text-neutral-400" : "text-muted-foreground"
+            isDarkBackground ? "text-white/60" : "text-muted-foreground"
           )}>{title}</p>
           <div className="mt-2 flex">
             {[...Array(5)].map((_, i) => (
@@ -76,6 +75,6 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       </CardContent>
     </Card>
   );
-};
+});
 
 export default TestimonialCard;

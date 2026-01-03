@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { LucideIcon, ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,13 +12,13 @@ interface ProcessStepCardProps {
   isLast: boolean;
 }
 
-const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
+const ProcessStepCard: React.FC<ProcessStepCardProps> = memo(function ProcessStepCard({
   icon: Icon,
   title,
   description,
   stepNumber,
   isLast,
-}) => {
+}) {
   const isMobile = useIsMobile(); // Determine if it's a mobile device
 
   return (
@@ -57,7 +57,7 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
               </div>
             )}
           </CardHeader>
-          <CardTitle className="mb-4 text-xl font-bold text-slate-800 group-hover:text-primary transition-colors">
+          <CardTitle className="mb-4 text-xl font-black text-foreground group-hover:text-primary transition-colors">
             {title}
           </CardTitle>
           {/* Replaced CardDescription with a div to fix DOM nesting warning */}
@@ -86,6 +86,6 @@ const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       )}
     </>
   );
-};
+});
 
 export default ProcessStepCard;
