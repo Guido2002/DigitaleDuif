@@ -43,29 +43,14 @@ const SpringCard: React.FC<SpringCardProps> = ({
   onClick, 
   children 
 }) => {
-  // Hover animation
-  const springProps = useSpring({
-    scale: isHovered ? 1.02 : 0.97,
-    y: isHovered ? -2 : 3,
-    rotateX: isHovered ? 0 : 3,
-    config: { tension: 200, friction: 20 },
-  });
-
-  // Subtle floating animation using CSS instead
-  const floatClass = isHovered ? "" : "animate-subtle-float";
-
   return (
-    <animated.div
-      style={{
-        scale: springProps.scale,
-        y: springProps.y,
-        rotateX: springProps.rotateX.to(v => `${v}deg`),
-        transformStyle: 'preserve-3d',
-      }}
+    <div
       className={cn(
         isLarge ? "sm:row-span-2 min-h-[200px] sm:min-h-0" : "min-h-[180px] sm:min-h-0",
-        floatClass
+        "transition-transform duration-500 ease-out",
+        !isHovered && "lg:[transform:perspective(1000px)_rotateX(10deg)_rotateY(4deg)_scale(0.95)]"
       )}
+      style={{ transformStyle: 'preserve-3d' }}
     >
       <button
         onMouseEnter={() => onHover(categoryId)}
@@ -73,17 +58,12 @@ const SpringCard: React.FC<SpringCardProps> = ({
         onClick={onClick}
         className={cn(
           "relative w-full h-full rounded-[2rem] overflow-hidden cursor-pointer group",
-          "focus:outline-none focus:ring-4 focus:ring-primary/30",
-          "transform-gpu"
+          "focus:outline-none focus:ring-4 focus:ring-primary/30"
         )}
-        style={{ 
-          backfaceVisibility: 'hidden',
-          WebkitBackfaceVisibility: 'hidden',
-        }}
       >
         {children}
       </button>
-    </animated.div>
+    </div>
   );
 };
 
@@ -198,8 +178,8 @@ const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({ onClose
             {/* Right panel - Bento Cards */}
             <div className="lg:w-[52%] xl:w-[55%] p-6 lg:p-8 xl:p-10 flex items-center">
               <div 
-                className="w-full h-full lg:max-h-[700px] grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-4 lg:gap-5"
-                style={{ perspective: "1000px" }}
+                className="w-full h-full lg:max-h-[700px] grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-4 lg:gap-6"
+                style={{ perspective: "1200px", perspectiveOrigin: "center center" }}
               >
                 
                 {/* XR Card - Large */}
@@ -229,7 +209,13 @@ const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({ onClose
                   
                   <div className="absolute inset-0 flex flex-col justify-between p-6 lg:p-8">
                     <div className="flex justify-between items-start">
-                      <span className="px-3 py-1 rounded-full bg-white/90 text-foreground text-xs font-semibold">
+                      <span
+                        className={cn(
+                          "inline-block px-3 py-1 rounded-full bg-white/90 text-foreground text-xs font-semibold",
+                          "lg:[transform:translateZ(40px)_rotateX(-18deg)]"
+                        )}
+                        style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}
+                      >
                         Populair ★
                       </span>
                       <div
