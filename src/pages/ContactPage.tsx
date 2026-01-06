@@ -134,7 +134,7 @@ const ContactPage = () => {
                 </CardTitle>
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                   Heeft u een vraag, een idee of wilt u de mogelijkheden bespreken?
-                  Neem gerust contact met ons op.
+                  Neem gerust contact met mij op.
                 </p>
                 {/* Expected response time - sets expectations */}
                 <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
@@ -158,7 +158,7 @@ const ContactPage = () => {
                 <div className="space-y-2">
                   <h3 className="text-xl md:text-2xl font-bold text-foreground">Bedankt voor uw bericht!</h3>
                   <p className="text-muted-foreground max-w-xs mx-auto text-base md:text-lg">
-                    We hebben uw bericht goed ontvangen en nemen zo snel mogelijk contact met u op.
+                    Ik heb uw bericht goed ontvangen en neem zo snel mogelijk contact met u op.
                   </p>
                   <p className="text-sm text-muted-foreground flex items-center justify-center gap-2 mt-4">
                     <Clock className="w-4 h-4" />
@@ -282,7 +282,7 @@ const ContactPage = () => {
                       </div>
                       <FormControl>
                         <Textarea 
-                          placeholder="Waar kunnen we u mee helpen?" 
+                          placeholder="Waar kan ik u mee helpen?" 
                           {...field} 
                           className={cn(
                             "min-h-[120px] md:min-h-[150px] border-input bg-background/50 text-foreground transition-all duration-150 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none",

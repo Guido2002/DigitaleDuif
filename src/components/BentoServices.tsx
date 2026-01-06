@@ -24,7 +24,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 // Service categories for filtering
 const serviceCategories = [
-  { id: "all", label: "Alles", description: "Bekijk al onze diensten" },
+  { id: "all", label: "Alles", description: "Bekijk al mijn diensten" },
   { id: "xr", label: "XR & Immersive", description: "VR, MR en immersive ervaringen", serviceIds: ["vr-app-dev", "mr-interfaces", "unity-consultancy"] },
   { id: "web-mobile", label: "Web & Mobile", description: "Websites en apps", serviceIds: ["web-development", "mobile-app-development"] },
   { id: "design", label: "Design & Strategie", description: "UX, prototyping en analyse", serviceIds: ["ui-ux-design", "prototyping", "data-analytics"] },
@@ -152,7 +152,7 @@ const BentoServices = () => {
         <div className="mb-14 max-w-3xl">
           <FadeInWhenVisible>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-foreground tracking-tight">
-              Onze{" "}
+              Mijn{" "}
               <span className="relative inline-block text-primary">
                 Diensten
                 <span className="absolute -bottom-1 left-0 w-full text-primary/40">
@@ -163,7 +163,7 @@ const BentoServices = () => {
           </FadeInWhenVisible>
           <FadeInWhenVisible delay={0.1}>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Wij combineren creativiteit met technologie om impactvolle digitale oplossingen te creëren. Van immersive XR ervaringen tot robuuste webplatforms.
+              Ik combineer creativiteit met technologie om impactvolle digitale oplossingen te creëren. Van immersive XR ervaringen tot robuuste webplatforms.
             </p>
           </FadeInWhenVisible>
         </div>

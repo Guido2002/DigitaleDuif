@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Calendar, Brain, Globe, Smartphone } from "lucide-react";
+import { Calendar, Glasses, Globe, Smartphone } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCategory, CATEGORIES, type CategoryId } from "@/context/CategoryContext";
 import { cn } from "@/lib/utils";
 
 const categoryIcons: Record<CategoryId, React.ElementType> = {
-  xr: Brain,
+  xr: Glasses,
   websites: Globe,
   "mobile-apps": Smartphone,
 };

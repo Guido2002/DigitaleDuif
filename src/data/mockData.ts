@@ -1,6 +1,6 @@
 // This file will contain mock data for various sections of the website.
 
-import { LucideIcon, Brain, Rocket, Lightbulb, Users, TrendingUp, Code, Star, Globe, Smartphone, LayoutDashboard, Cloud } from "lucide-react"; // Import new icons
+import { LucideIcon, Glasses, Rocket, Lightbulb, Users, TrendingUp, Code, Star, Globe, Smartphone, LayoutDashboard, Cloud, Search, Settings } from "lucide-react";
 
 // USP Card Data
 interface USP {
@@ -12,7 +12,7 @@ interface USP {
 
 export const uspCards: USP[] = [
   {
-    icon: Brain,
+    icon: Glasses,
     title: "XR Specialist",
     description: "Diepgaande XR kennis voor innovatieve ervaringen.",
     backgroundImage: "/xr.jpeg",
@@ -55,7 +55,7 @@ interface ProcessStep {
 
 export const processSteps: ProcessStep[] = [
   {
-    icon: Users,
+    icon: Search,
     title: "Kennismaking & Behoefteanalyse",
     description: [
       "Diepgaand gesprek over jouw visie en doelen.",
@@ -73,7 +73,7 @@ export const processSteps: ProcessStep[] = [
     ],
   },
   {
-    icon: Brain,
+    icon: Settings,
     title: "Testen & Itereren",
     description: [
       "Uitgebreid testen van de applicatie.",
@@ -271,21 +271,21 @@ export const services: Service[] = [
   {
     id: "web-development",
     title: "Web Development",
-    description: "Ontwikkeling van responsieve en krachtige websites en webapplicaties, van marketingwebsites tot complexe SaaS-oplossingen. Wij bouwen met moderne frameworks zoals React en Next.js.",
+    description: "Ontwikkeling van responsieve en krachtige websites en webapplicaties, van marketingwebsites tot complexe SaaS-oplossingen. Ik bouw met moderne frameworks zoals React en Next.js.",
     tags: ["React", "Next.js", "TypeScript", "Frontend", "Backend", "CMS"],
     relatedProjectId: "corporate-website",
   },
   {
     id: "mobile-app-development",
     title: "Mobiele App Ontwikkeling",
-    description: "Native en cross-platform mobiele applicaties voor iOS en Android. Wij creëren intuïtieve en performante apps die uw gebruikers zullen waarderen.",
+    description: "Native en cross-platform mobiele applicaties voor iOS en Android. Ik creëer intuïtieve en performante apps die uw gebruikers zullen waarderen.",
     tags: ["React Native", "iOS", "Android", "UI/UX", "API Integration"],
     relatedProjectId: "event-app",
   },
   {
     id: "vr-app-dev",
     title: "VR-applicatieontwikkeling",
-    description: "Ontwikkeling van op maat gemaakte Virtual Reality applicaties voor training, simulatie, visualisatie en entertainment. Van concept tot implementatie, wij brengen uw ideeën tot leven in VR.",
+    description: "Ontwikkeling van op maat gemaakte Virtual Reality applicaties voor training, simulatie, visualisatie en entertainment. Van concept tot implementatie, ik breng uw ideeën tot leven in VR.",
     tags: ["Unity", "Meta Quest", "C#", "VR Design"],
     relatedProjectId: "vr-machine-training",
   },
@@ -299,21 +299,21 @@ export const services: Service[] = [
   {
     id: "ui-ux-design",
     title: "UI/UX Design",
-    description: "Gebruikersgerichte ontwerpen die niet alleen mooi zijn, maar ook functioneel en intuïtief. Wij zorgen voor een optimale gebruikerservaring voor al uw digitale producten.",
+    description: "Gebruikersgerichte ontwerpen die niet alleen mooi zijn, maar ook functioneel en intuïtief. Ik zorg voor een optimale gebruikerservaring voor al uw digitale producten.",
     tags: ["UI Design", "UX Research", "Wireframing", "Prototyping", "Figma"],
     relatedProjectId: "ecommerce-platform",
   },
   {
     id: "prototyping",
     title: "Prototyping & conceptontwikkeling",
-    description: "Snelle ontwikkeling van prototypes en proof-of-concepts om ideeën te valideren en te visualiseren. Wij helpen u met het verkennen van de mogelijkheden van digitale innovatie.",
+    description: "Snelle ontwikkeling van prototypes en proof-of-concepts om ideeën te valideren en te visualiseren. Ik help u met het verkennen van de mogelijkheden van digitale innovatie.",
     tags: ["Rapid Prototyping", "Concepting", "Ideation", "Agile"],
     relatedProjectId: "xr-sportanalyse",
   },
   {
     id: "unity-consultancy",
     title: "Unity consultancy / developer-as-a-service",
-    description: "Expertise en ondersteuning voor uw Unity-projecten. Huur onze ervaren Unity-ontwikkelaars in voor advies, code review, projectmanagement of als tijdelijke uitbreiding van uw team.",
+    description: "Expertise en ondersteuning voor uw Unity-projecten. Huur mijn ervaring in als Unity-ontwikkelaar voor advies, code review, projectmanagement of als tijdelijke uitbreiding van uw team.",
     tags: ["Unity", "C#", "Consultancy", "Development"],
     relatedProjectId: "mr-bim-4d",
   },
@@ -335,9 +335,9 @@ interface NavLink {
 
 export const navLinks: NavLink[] = [
   { name: "Home", path: "/" },
-  { name: "Over ons", path: "/#about" },
+  { name: "Over mij", path: "/#about" },
   { name: "Projecten", path: "/projecten" },
-  { name: "Hoe wij werken", path: "/#process" },
+  { name: "Hoe ik werk", path: "/#process" },
   { name: "Contact", path: "/contact" },
 ];
 
@@ -351,13 +351,13 @@ interface AboutExpertise {
 export const aboutExpertiseCards: AboutExpertise[] = [
   {
     icon: Globe,
-    title: "Full-stack Web Development",
-    description: "Van frontend tot backend, wij bouwen robuuste en schaalbare webapplicaties met moderne technologieën.",
+    title: "Web Development",
+    description: "Ik bouw moderne, snelle websites en webapplicaties met React, Next.js en TypeScript.",
   },
   {
     icon: Smartphone,
     title: "Mobiele App Ontwikkeling",
-    description: "Creëren van intuïtieve en performante mobiele apps voor iOS en Android die uw gebruikers zullen boeien.",
+    description: "Ik creëer intuïtieve en performante mobiele apps voor iOS en Android die uw gebruikers zullen boeien.",
   },
   {
     icon: LayoutDashboard,
@@ -365,7 +365,7 @@ export const aboutExpertiseCards: AboutExpertise[] = [
     description: "Focus op gebruikersgerichte ontwerpen die niet alleen mooi zijn, maar ook een optimale ervaring bieden.",
   },
   {
-    icon: Brain,
+    icon: Glasses,
     title: "XR & VR Expertise",
     description: "Diepgaande kennis van Virtual en Mixed Reality voor innovatieve en meeslepende ervaringen.",
   },
@@ -393,19 +393,19 @@ export const faqItems: FAQItem[] = [
     answer: "Extended Reality (XR) is een overkoepelende term die alle real-and-virtual gecombineerde omgevingen en mens-machine-interacties omvat, inclusief Virtual Reality (VR), Augmented Reality (AR) en Mixed Reality (MR).",
   },
   {
-    question: "Bouwen jullie ook reguliere websites en apps?",
-    answer: "Jazeker! Naast onze expertise in XR, ontwikkelen wij ook maatwerk websites en mobiele applicaties. Van complexe webplatforms tot intuïtieve mobiele apps, wij leveren complete digitale oplossingen.",
+    question: "Bouw je ook reguliere websites en apps?",
+    answer: "Jazeker! Naast mijn expertise in XR, ontwikkel ik ook maatwerk websites en mobiele applicaties. Van complexe webplatforms tot intuïtieve mobiele apps, ik lever complete digitale oplossingen.",
   },
   {
-    question: "Welke technologieën gebruiken jullie voor web- en app-ontwikkeling?",
-    answer: "Voor webontwikkeling werken we voornamelijk met React, Next.js, TypeScript en Node.js. Voor mobiele apps gebruiken we React Native voor cross-platform ontwikkeling, of native technologieën indien nodig.",
+    question: "Welke technologieën gebruik je voor web- en app-ontwikkeling?",
+    answer: "Voor webontwikkeling werk ik voornamelijk met React, Next.js, TypeScript en Node.js. Voor mobiele apps gebruik ik React Native voor cross-platform ontwikkeling, of native technologieën indien nodig.",
   },
   {
-    question: "Kunnen jullie helpen met conceptontwikkeling als we nog geen concreet idee hebben?",
-    answer: "Absoluut! Wij begeleiden u graag van de initiële brainstormfase tot een concreet concept en een werkend prototype, om de mogelijkheden van digitale innovatie voor uw specifieke behoeften te verkennen.",
+    question: "Kun je helpen met conceptontwikkeling als ik nog geen concreet idee heb?",
+    answer: "Absoluut! Ik begeleid u graag van de initiële brainstormfase tot een concreet concept en een werkend prototype, om de mogelijkheden van digitale innovatie voor uw specifieke behoeften te verkennen.",
   },
   {
     question: "Hoe lang duurt het om een digitale applicatie te ontwikkelen?",
-    answer: "De ontwikkeltijd varieert sterk afhankelijk van de complexiteit en de scope van het project. Na een kennismaking en behoefteanalyse kunnen we een realistische tijdsinschatting geven.",
+    answer: "De ontwikkeltijd varieert sterk afhankelijk van de complexiteit en de scope van het project. Na een kennismaking en behoefteanalyse kan ik een realistische tijdsinschatting geven.",
   },
 ];

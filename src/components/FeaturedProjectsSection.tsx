@@ -110,7 +110,7 @@ const FeaturedProjectsSection: React.FC = () => {
         <FadeInWhenVisible delay={0.05}>
           <SectionHeader
             title="Uitgelichte projecten"
-            subtitle="Bekijk een selectie van ons werk in deze categorie."
+            subtitle="Bekijk een selectie van mijn werk in deze categorie."
           />
         </FadeInWhenVisible>
 

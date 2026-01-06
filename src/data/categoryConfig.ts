@@ -1,4 +1,4 @@
-import { LucideIcon, Brain, Globe, Smartphone, Rocket, Lightbulb, Users, TrendingUp, Code, Layers, Palette, Zap, Shield, HeartHandshake, Eye, Gamepad2 } from "lucide-react";
+import { LucideIcon, Glasses, Smartphone, Rocket, Lightbulb, Users, Code, Layers, Palette, Zap, Target, HeartHandshake, Eye, Gamepad2, Search, MessageCircle, Sparkles, PenTool } from "lucide-react";
 import type { CategoryId } from "@/context/CategoryContext";
 
 // ============================================
@@ -52,6 +52,11 @@ export interface FeaturedProjectContent {
   image: string;
 }
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 export interface CategoryConfig {
   hero: HeroContent;
   usps: USPContent[];
@@ -59,11 +64,13 @@ export interface CategoryConfig {
   processSteps: ProcessStepContent[];
   offerings: OfferingContent[];
   featuredProjects: FeaturedProjectContent[];
+  faqItems: FAQItem[];
   sectionTitles: {
     whyChooseUs: { title: string; subtitle: string };
     process: { title: string; subtitle: string };
     testimonials: { title: string; subtitle: string };
     offerings: { title: string; subtitle: string };
+    faq: { title: string; subtitle: string };
   };
 }
 
@@ -75,26 +82,27 @@ const xrConfig: CategoryConfig = {
   hero: {
     title: "Transformeer jouw bedrijf met",
     titleHighlight: "XR-technologie",
-    subtitle: "Wij bouwen immersieve VR, AR en MR ervaringen die trainen, simuleren en inspireren. Van concept tot implementatie, samen met jou.",
+    subtitle: "Ik bouw immersieve VR, AR en MR ervaringen die trainen, simuleren en inspireren. Van concept tot implementatie, samen met jou.",
     backgroundImages: ["/xr.jpeg", "/ux1.jpeg"],
   },
   usps: [
     {
-      icon: Brain,
-      title: "XR Specialisten",
+      icon: Glasses,
+      title: "XR Specialist",
       description: "Jarenlange ervaring met VR, AR en MR projecten in diverse sectoren.",
       backgroundImage: "/xr.jpeg",
     },
     {
       icon: Gamepad2,
-      title: "Unity Experts",
+      title: "Unity Expert",
       description: "Diepgaande Unity kennis voor complexe simulaties en interactieve ervaringen.",
-      backgroundImage: "/ux1.jpeg",
+      backgroundImage: "/unity-modified.jpg",
     },
     {
       icon: Eye,
       title: "Immersief Design",
       description: "Ontwerp dat de gebruiker volledig onderdompelt en engageert.",
+      backgroundImage: "/ux1.jpeg",
     },
     {
       icon: Users,
@@ -102,14 +110,14 @@ const xrConfig: CategoryConfig = {
       description: "Samenwerking staat centraal, jouw inspraak in elke fase.",
     },
     {
-      icon: TrendingUp,
-      title: "Meetbare Impact",
-      description: "XR-oplossingen met aantoonbare ROI en resultaten.",
+      icon: Layers,
+      title: "Interactieve Visualisatie",
+      description: "Complexe data en processen direct begrijpelijk gemaakt in 3D.",
     },
     {
-      icon: Shield,
-      title: "Veilig Trainen",
-      description: "Risicovrije omgevingen voor training en simulatie.",
+      icon: Target,
+      title: "Prototyping & PoC",
+      description: "Snelle XR-prototypes om ideeën en use-cases te valideren.",
     },
   ],
   testimonials: [
@@ -140,7 +148,7 @@ const xrConfig: CategoryConfig = {
   ],
   processSteps: [
     {
-      icon: Users,
+      icon: Search,
       title: "XR Discovery",
       description: [
         "Analyse van jouw XR use case en doelstellingen.",
@@ -158,7 +166,7 @@ const xrConfig: CategoryConfig = {
       ],
     },
     {
-      icon: Brain,
+      icon: Glasses,
       title: "XR Development",
       description: [
         "Volledige ontwikkeling in Unity met optimale performance.",
@@ -253,22 +261,52 @@ const xrConfig: CategoryConfig = {
       image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&h=600&fit=crop",
     },
   ],
+  faqItems: [
+    {
+      question: "Wat is het verschil tussen VR, AR en MR?",
+      answer: "Virtual Reality (VR) plaatst je volledig in een digitale wereld via een headset. Augmented Reality (AR) projecteert digitale elementen over de echte wereld (denk aan Pokémon GO). Mixed Reality (MR) combineert beide: digitale objecten interageren met je fysieke omgeving en blijven op hun plek staan.",
+    },
+    {
+      question: "Welke VR/AR hardware gebruik je voor projecten?",
+      answer: "Ik werk voornamelijk met Meta Quest 2, Quest 3 en Quest Pro voor standalone VR/MR. Voor enterprise toepassingen gebruik ik ook HoloLens 2. De hardware keuze hangt af van jouw use case, budget en of de applicatie standalone of PC-gebonden moet zijn.",
+    },
+    {
+      question: "Hoe lang duurt het ontwikkelen van een VR-applicatie?",
+      answer: "Een eenvoudig VR prototype kan in 4-6 weken. Een volledige VR-training of simulatie duurt meestal 3-6 maanden, afhankelijk van complexiteit, interacties en integraties. Na een kennismaking geef ik een realistische tijdsinschatting.",
+    },
+    {
+      question: "Kan een XR-applicatie geïntegreerd worden met bestaande systemen?",
+      answer: "Ja, ik bouw XR-applicaties die koppelen met bestaande systemen zoals ERP, LMS (leerplatformen), BIM-software of eigen databases. Denk aan VR-training die voortgang wegschrijft naar jullie LMS, of een AR-app die live data uit jullie ERP toont.",
+    },
+    {
+      question: "Is VR geschikt voor training binnen mijn organisatie?",
+      answer: "VR-training is bijzonder effectief voor situaties die in het echt gevaarlijk, duur of moeilijk te oefenen zijn. Denk aan machine-bediening, noodprocedures, soft skills of medische handelingen. Medewerkers leren door te doen in een veilige omgeving.",
+    },
+    {
+      question: "Wat kost een XR-project gemiddeld?",
+      answer: "XR-projecten variëren sterk: een AR-visualisatie start rond €8.000, VR-trainingen vanaf €15.000 en complexe MR-oplossingen vanaf €20.000. De prijs hangt af van 3D-assets, interacties, platformen en integraties. Ik denk graag mee over een MVP-aanpak om binnen budget te starten.",
+    },
+  ],
   sectionTitles: {
     whyChooseUs: {
       title: "Waarom DigitaleDuif voor XR?",
-      subtitle: "Wij zijn geen standaard ontwikkelbureau. XR zit in ons DNA. We combineren technische expertise met creatief denken om XR-ervaringen te bouwen die écht impact maken.",
+      subtitle: "Ik ben geen standaard ontwikkelaar. XR zit in mijn DNA. Ik combineer technische expertise met creatief denken om XR-ervaringen te bouwen die écht impact maken.",
     },
     process: {
-      title: "Hoe we jouw XR-project aanpakken",
-      subtitle: "Van eerste idee tot succesvolle implementatie: onze bewezen aanpak voor XR-projecten zorgt voor resultaat.",
+      title: "Hoe ik jouw XR-project aanpak",
+      subtitle: "Van eerste idee tot succesvolle implementatie: mijn bewezen aanpak voor XR-projecten zorgt voor resultaat.",
     },
     testimonials: {
-      title: "Wat onze XR-klanten zeggen",
-      subtitle: "Bedrijven die met ons XR-projecten hebben gerealiseerd delen hun ervaringen.",
+      title: "Wat mijn XR-klanten zeggen",
+      subtitle: "Bedrijven waarmee ik XR-projecten heb gerealiseerd delen hun ervaringen.",
     },
     offerings: {
-      title: "Onze XR-diensten",
-      subtitle: "Van training tot visualisatie, wij bieden complete XR-oplossingen die aansluiten bij jouw doelen.",
+      title: "Mijn XR-diensten",
+      subtitle: "Van training tot visualisatie, ik bied complete XR-oplossingen die aansluiten bij jouw doelen.",
+    },
+    faq: {
+      title: "Veelgestelde vragen over XR",
+      subtitle: "Alles wat je wilt weten over Virtual Reality, Augmented Reality en Mixed Reality projecten.",
     },
   },
 };
@@ -281,26 +319,27 @@ const websitesConfig: CategoryConfig = {
   hero: {
     title: "Jouw digitale visitekaartje,",
     titleHighlight: "professioneel gebouwd",
-    subtitle: "Wij bouwen snelle, schaalbare websites en webapplicaties die converteren. Van startup landing page tot enterprise platform.",
+    subtitle: "Ik bouw snelle, schaalbare websites en webapplicaties die converteren. Van startup landing page tot enterprise platform.",
     backgroundImages: ["/webapp.jpeg", "/ux1.jpeg"],
   },
   usps: [
     {
-      icon: Globe,
-      title: "Full-stack Expertise",
-      description: "Van frontend tot backend, wij beheersen de volledige stack.",
+      icon: PenTool,
+      title: "Strategie & UX Design",
+      description: "Ik ontwerp websites met een logische structuur en sterke gebruikerservaring die bezoekers gericht naar actie leiden.",
       backgroundImage: "/webapp.jpeg",
     },
     {
       icon: Zap,
-      title: "Razendsnelle Performance",
-      description: "Geoptimaliseerde websites die scoren op Core Web Vitals.",
-      backgroundImage: "/ux1.jpeg",
+      title: "Techniek & Performance",
+      description: "Ik bouw snelle, veilige en toekomstbestendige websites die op elk apparaat optimaal presteren.",
+      backgroundImage: "/website_performance.png",
     },
     {
       icon: Palette,
-      title: "Modern Design",
-      description: "Strakke, gebruiksvriendelijke interfaces die converteren.",
+      title: "Design & Branding",
+      description: "Ik vertaal jouw merk naar een modern, consistent en visueel aantrekkelijk webdesign.",
+      backgroundImage: "/ux1.jpeg"
     },
     {
       icon: Code,
@@ -308,7 +347,7 @@ const websitesConfig: CategoryConfig = {
       description: "Onderhoudbare, schaalbare codebase voor de lange termijn.",
     },
     {
-      icon: TrendingUp,
+      icon: Search,
       title: "SEO-ready",
       description: "Technisch geoptimaliseerd voor zoekmachines vanaf dag één.",
     },
@@ -336,7 +375,7 @@ const websitesConfig: CategoryConfig = {
       companyLogo: "https://ui-avatars.com/api/?name=MKB&background=3AA7FF&color=fff&size=80&bold=true&format=svg",
     },
     {
-      quote: "Het development team denkt écht mee. Ze kwamen met suggesties die we zelf nooit hadden bedacht.",
+      quote: "Guido denkt écht mee. Hij kwam met suggesties die we zelf nooit hadden bedacht.",
       author: "Emma de Groot",
       title: "Product Owner, SaaS Startup",
       avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face",
@@ -346,7 +385,7 @@ const websitesConfig: CategoryConfig = {
   ],
   processSteps: [
     {
-      icon: Users,
+      icon: Search,
       title: "Strategie & Planning",
       description: [
         "Diepgaand gesprek over jouw doelen en doelgroep.",
@@ -355,7 +394,7 @@ const websitesConfig: CategoryConfig = {
       ],
     },
     {
-      icon: Palette,
+      icon: PenTool,
       title: "Design & Prototype",
       description: [
         "Wireframes en interactieve mockups.",
@@ -462,14 +501,40 @@ const websitesConfig: CategoryConfig = {
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
     },
   ],
+  faqItems: [
+    {
+      question: "Welke technologieën gebruik je voor websites?",
+      answer: "Ik werk voornamelijk met React en Next.js voor de frontend, gecombineerd met TypeScript voor betrouwbare code. Voor styling gebruik ik Tailwind CSS. Voor eenvoudige backend-functionaliteit werk ik met Node.js en databases zoals PostgreSQL of MongoDB.",
+    },
+    {
+      question: "Kan ik de website zelf beheren na oplevering?",
+      answer: "Absoluut! Ik koppel een gebruiksvriendelijk CMS (Content Management System) aan je website. Hiermee kun je zelf teksten, afbeeldingen en pagina's aanpassen zonder technische kennis. Ik geef ook een korte training bij oplevering.",
+    },
+    {
+      question: "Hoe zit het met SEO en vindbaarheid?",
+      answer: "SEO zit standaard ingebakken in elke website die ik bouw. Dit betekent: snelle laadtijden, correcte HTML-structuur, meta-tags, sitemap en schema markup. Voor uitgebreide SEO-strategieën werk ik samen met gespecialiseerde partners.",
+    },
+    {
+      question: "Wat als mijn website veel bezoekers moet aankunnen?",
+      answer: "Ik bouw schaalbare architectuur die meegroeit met je succes. Door moderne technieken zoals edge caching, CDN's en serverless functies kan je website duizenden gelijktijdige bezoekers aan zonder problemen.",
+    },
+    {
+      question: "Bied je ook onderhoud en hosting aan?",
+      answer: "Ja, ik bied onderhoudscontracten aan voor updates, security patches en kleine aanpassingen. Voor hosting adviseer ik platforms zoals Vercel of Netlify die snel, veilig en betaalbaar zijn. Ik kan dit volledig voor je regelen.",
+    },
+    {
+      question: "Hoe lang duurt het bouwen van een website?",
+      answer: "Een eenvoudige bedrijfswebsite is in 3-4 weken live. Een webshop of complexere applicatie duurt 6-12 weken. Na onze kennismaking geef ik een concrete planning met tussentijdse opleveringen zodat je de voortgang kunt volgen.",
+    },
+  ],
   sectionTitles: {
     whyChooseUs: {
       title: "Waarom DigitaleDuif voor jouw website?",
-      subtitle: "Wij bouwen geen templates, wij bouwen oplossingen. Elke website is maatwerk, geoptimaliseerd voor jouw specifieke doelen.",
+      subtitle: "Ik bouw geen templates, ik bouw oplossingen. Elke website is maatwerk, geoptimaliseerd voor jouw specifieke doelen.",
     },
     process: {
       title: "Van idee naar live website",
-      subtitle: "Onze bewezen aanpak zorgt voor een website die niet alleen mooi is, maar ook presteert.",
+      subtitle: "Mijn bewezen aanpak zorgt voor een website die niet alleen mooi is, maar ook presteert.",
     },
     testimonials: {
       title: "Tevreden website-klanten",
@@ -477,7 +542,11 @@ const websitesConfig: CategoryConfig = {
     },
     offerings: {
       title: "Website pakketten",
-      subtitle: "Van eenvoudige bedrijfssite tot complexe webapplicatie, wij hebben een passende oplossing.",
+      subtitle: "Van eenvoudige bedrijfssite tot complexe webapplicatie, ik heb een passende oplossing.",
+    },
+    faq: {
+      title: "Veelgestelde vragen over websites",
+      subtitle: "Antwoorden op de meest gestelde vragen over webontwikkeling en wat je kunt verwachten.",
     },
   },
 };
@@ -490,41 +559,42 @@ const mobileAppsConfig: CategoryConfig = {
   hero: {
     title: "Jouw idee, altijd binnen",
     titleHighlight: "handbereik",
-    subtitle: "Wij ontwikkelen native en cross-platform mobiele apps die gebruikers willen blijven gebruiken. Van concept tot App Store.",
+    subtitle: "Ik ontwikkel mobiele apps in Flutter voor MVP's, prototypes en compacte producties. Focus op UX, performance en een duidelijke scope.",
     backgroundImages: ["/webapp.jpeg", "/ux1.jpeg"],
   },
   usps: [
     {
       icon: Smartphone,
       title: "iOS & Android",
-      description: "Native performance op beide platformen met één codebase.",
+      description: "Eén codebase voor beide platformen met Flutter. Kostenefficiënt en snel naar de markt.",
       backgroundImage: "/webapp.jpeg",
     },
     {
-      icon: Zap,
-      title: "React Native Experts",
-      description: "Snelle ontwikkeling zonder in te leveren op kwaliteit.",
+      icon: PenTool,
+      title: "UX & Interactieontwerp",
+      description: "Sterke focus op gebruiksvriendelijkheid, intuïtieve flows en een fijne gebruikservaring.",
       backgroundImage: "/ux1.jpeg",
     },
     {
-      icon: Palette,
+      icon: Rocket,
       title: "App Store Ready",
-      description: "We begeleiden je door het volledige publicatieproces.",
+      description: "Volledige begeleiding bij publicatie in de App Store en Play Store.",
+      backgroundImage: "/appstore-modified.jpg",
     },
     {
-      icon: Layers,
-      title: "Offline First",
-      description: "Apps die werken, ook zonder internetverbinding.",
+      icon: Target,
+      title: "Bewust Compact",
+      description: "Heldere scope en duidelijke afspraken over functionaliteit. Geen feature creep.",
     },
     {
-      icon: TrendingUp,
-      title: "Analytics & Push",
-      description: "Ingebouwde tracking en pushnotificaties voor engagement.",
+      icon: Sparkles,
+      title: "Snel Valideren",
+      description: "Ideaal voor het testen van ideeën en verzamelen van gebruikersfeedback.",
     },
     {
-      icon: HeartHandshake,
-      title: "Lange Termijn Partner",
-      description: "Onderhoud en doorontwikkeling na lancering.",
+      icon: MessageCircle,
+      title: "Transparant Traject",
+      description: "Duidelijke communicatie over wat ik lever en wat binnen mijn expertise valt.",
     },
   ],
   testimonials: [
@@ -555,7 +625,7 @@ const mobileAppsConfig: CategoryConfig = {
   ],
   processSteps: [
     {
-      icon: Users,
+      icon: Search,
       title: "Discovery & Concept",
       description: [
         "User research en doelgroep analyse.",
@@ -564,7 +634,7 @@ const mobileAppsConfig: CategoryConfig = {
       ],
     },
     {
-      icon: Palette,
+      icon: PenTool,
       title: "UX/UI Design",
       description: [
         "Wireframes en user flows.",
@@ -578,7 +648,7 @@ const mobileAppsConfig: CategoryConfig = {
       description: [
         "Agile development in 2-wekelijkse sprints.",
         "Regelmatige builds voor feedback.",
-        "Backend en API development indien nodig.",
+        "Koppeling met bestaande API's indien nodig.",
       ],
     },
     {
@@ -594,52 +664,52 @@ const mobileAppsConfig: CategoryConfig = {
   offerings: [
     {
       id: "mvp-app",
-      title: "MVP App",
-      description: "Valideer je idee met een Minimum Viable Product.",
+      title: "MVP / Prototype App",
+      description: "Valideer je idee snel met een werkende app. Ideaal voor startups en nieuwe concepten.",
       features: [
-        "Kernfunctionaliteit",
-        "Eén platform (iOS of Android)",
-        "Basis UI/UX",
-        "Snelle marktintroductie",
+        "Kernfunctionaliteit gefocust",
+        "iOS én Android (Flutter)",
+        "Gebruiksvriendelijk design",
+        "Snel naar de markt",
       ],
-      priceIndication: "Vanaf €12.000",
-    },
-    {
-      id: "cross-platform-app",
-      title: "Cross-platform App",
-      description: "Eén app voor iOS én Android met React Native.",
-      features: [
-        "Native performance",
-        "Gedeelde codebase (80%+)",
-        "Push notificaties",
-        "Offline functionaliteit",
-      ],
-      priceIndication: "Vanaf €20.000",
+      priceIndication: "Vanaf €10.000",
       popular: true,
     },
     {
-      id: "enterprise-app",
-      title: "Enterprise App",
-      description: "Maatwerk app voor interne bedrijfsprocessen.",
+      id: "compact-app",
+      title: "Compacte Productie-app",
+      description: "Functionele app voor MKB en organisaties. Bewust compact, zonder onnodige complexiteit.",
       features: [
-        "SSO & security",
-        "Systeem integraties",
-        "Admin dashboard",
-        "Schaalbare architectuur",
+        "Duidelijke scope",
+        "Content-gedreven of interne tool",
+        "Push notificaties",
+        "Basis analytics",
       ],
-      priceIndication: "Vanaf €35.000",
+      priceIndication: "Vanaf €15.000",
+    },
+    {
+      id: "app-consult",
+      title: "App Advies & Concept",
+      description: "Weet je nog niet zeker of een app de juiste oplossing is? Ik help je met een helder advies.",
+      features: [
+        "Haalbaarheidsanalyse",
+        "Concept & wireframes",
+        "Technisch advies",
+        "Kosteninschatting",
+      ],
+      priceIndication: "Vanaf €500",
     },
     {
       id: "app-maintenance",
       title: "App Onderhoud",
-      description: "Houd je app up-to-date en veilig.",
+      description: "Houd je app up-to-date en compatible met nieuwe OS-versies.",
       features: [
-        "OS updates compatibiliteit",
+        "iOS/Android updates",
         "Bug fixes",
+        "Kleine aanpassingen",
         "Performance monitoring",
-        "Kleine feature updates",
       ],
-      priceIndication: "Vanaf €500/maand",
+      priceIndication: "Vanaf €400/maand",
     },
   ],
   featuredProjects: [
@@ -668,22 +738,52 @@ const mobileAppsConfig: CategoryConfig = {
       image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&h=600&fit=crop",
     },
   ],
+  faqItems: [
+    {
+      question: "Voor welk type apps is dit geschikt?",
+      answer: "Mijn app development is ideaal voor MVP's, proof-of-concepts, interne tools, content-gedreven apps en apps zonder zware backend-logica. Denk aan event apps, informatieve apps, eenvoudige bestel-apps of tools voor in het veld. Minder geschikt voor grote enterprise-apps of zeer complexe real-time systemen.",
+    },
+    {
+      question: "Waarom Flutter en niet native development?",
+      answer: "Flutter biedt één codebase voor iOS én Android, wat kostenefficiënt is en de ontwikkeltijd verkort. De performance is uitstekend voor de meeste use cases. Voor apps waar maximale platform-specifieke integratie nodig is, adviseer ik transparant over de beste aanpak.",
+    },
+    {
+      question: "Wat als mijn app complexe backend-logica nodig heeft?",
+      answer: "Apps met zware server-architectuur of complexe real-time systemen vallen buiten mijn scope. Ik richt me op frontend en apps met eenvoudige backend-behoeften. Voor complexere projecten verwijs ik je graag door naar gespecialiseerde partijen.",
+    },
+    {
+      question: "Wat is een MVP en waarom zou ik daarmee starten?",
+      answer: "Een MVP (Minimum Viable Product) is een eerste versie met alleen de kernfunctionaliteit. Hiermee valideer je snel of je idee aanslaat bij gebruikers, voordat je investeert in uitgebreide features. Dit bespaart tijd, geld en risico.",
+    },
+    {
+      question: "Hoe verloopt het publiceren in de App Stores?",
+      answer: "Ik begeleid je volledig: van developer accounts aanmaken tot screenshots, beschrijvingen en de daadwerkelijke submission. Apple's review duurt 1-3 dagen, Google vaak binnen 24 uur. Na publicatie help ik met de eerste updates.",
+    },
+    {
+      question: "Wat gebeurt er na de lancering?",
+      answer: "Apps vereisen onderhoud: OS-updates, security patches en bug fixes. Ik bied onderhoudscontracten voor continuïteit. Ook help ik met het analyseren van gebruikersfeedback om de app door te ontwikkelen op basis van echte data.",
+    },
+  ],
   sectionTitles: {
     whyChooseUs: {
-      title: "Waarom DigitaleDuif voor jouw app?",
-      subtitle: "App development is meer dan code schrijven. Wij denken mee over UX, techniek én business model.",
+      title: "Praktijkgerichte app development",
+      subtitle: "Sterke focus op UX, interactieontwerp en een solide technische basis. Duidelijke scope, heldere afspraken.",
     },
     process: {
       title: "Van idee naar App Store",
-      subtitle: "Onze aanpak voor mobiele apps combineert snelheid met kwaliteit.",
+      subtitle: "Een hands-on aanpak die snelheid combineert met kwaliteit en duidelijke communicatie.",
     },
     testimonials: {
       title: "Succesvolle app-lanceringen",
-      subtitle: "Onze klanten vertellen over hun ervaring met app development bij DigitaleDuif.",
+      subtitle: "Klanten vertellen over hun ervaring met app development bij DigitaleDuif.",
     },
     offerings: {
       title: "App development pakketten",
-      subtitle: "Van MVP tot enterprise oplossing, wij bouwen apps die gebruikers waarderen.",
+      subtitle: "Van MVP tot compacte productie-app. Voor complexere projecten werk ik samen met specialisten.",
+    },
+    faq: {
+      title: "Veelgestelde vragen over apps",
+      subtitle: "Eerlijke antwoorden over wat ik lever, voor wie het geschikt is, en hoe het traject eruitziet.",
     },
   },
 };
@@ -737,9 +837,9 @@ export const getSectionTitles = (categoryId: CategoryId) => {
 // Default content for when no category is selected (uses general/mixed content)
 export const defaultConfig: CategoryConfig = {
   hero: {
-    title: "DigitaleDuif: We geven jouw",
+    title: "DigitaleDuif: Ik geef jouw",
     titleHighlight: "idee vleugels",
-    subtitle: "Wij bouwen VR, MR, websites en apps die écht werken. Van idee tot lancering, samen met jou.",
+    subtitle: "Ik bouw VR, MR, websites en apps die écht werken. Van idee tot lancering, samen met jou.",
     backgroundImages: ["/xr.jpeg", "/webapp.jpeg", "/ux1.jpeg"],
   },
   usps: xrConfig.usps, // Use XR as default since it was original
@@ -751,22 +851,52 @@ export const defaultConfig: CategoryConfig = {
     ...websitesConfig.featuredProjects.slice(0, 1),
     ...mobileAppsConfig.featuredProjects.slice(0, 1),
   ],
+  faqItems: [
+    {
+      question: "Wat voor projecten kan ik bij DigitaleDuif laten maken?",
+      answer: "Ik specialiseer me in drie gebieden: XR (Virtual Reality, Augmented Reality, Mixed Reality), websites & webapplicaties, en mobiele apps. Van VR-trainingen tot e-commerce platforms tot iOS/Android apps - ik help je van idee tot lancering.",
+    },
+    {
+      question: "Werk je alleen of heb je een team?",
+      answer: "Ik werk als zelfstandige, wat betekent dat je altijd direct contact hebt met degene die jouw project bouwt. Voor grotere projecten werk ik samen met een netwerk van betrouwbare specialisten op het gebied van design, 3D-modeling of specifieke technologieën.",
+    },
+    {
+      question: "Hoe ziet een typisch traject eruit?",
+      answer: "Elk project start met een vrijblijvende kennismaking waarin we jouw idee en doelen bespreken. Daarna volgt een voorstel met aanpak, planning en kosten. Na akkoord werken we in korte iteraties, met regelmatige updates en feedbackmomenten tot aan de oplevering.",
+    },
+    {
+      question: "Kun je ook helpen als ik nog geen concreet idee heb?",
+      answer: "Absoluut! Ik help graag bij het verkennen van mogelijkheden en het concretiseren van vage ideeën. Via een discovery sessie brengen we samen in kaart wat de beste digitale oplossing is voor jouw uitdaging of kans.",
+    },
+    {
+      question: "Wat kost een project gemiddeld?",
+      answer: "Dat hangt sterk af van het type project. Een eenvoudige website start rond €3.500, een mobiele app rond €12.000, en XR-projecten vanaf €8.000. Ik denk graag mee over een gefaseerde aanpak die past bij jouw budget.",
+    },
+    {
+      question: "Waar ben je gevestigd en werk je ook remote?",
+      answer: "Ik ben gevestigd in Nederland en werk zowel op locatie als volledig remote. Kennismakingen doe ik graag persoonlijk of via videocall. Tijdens het project communiceren we via de kanalen die voor jou het beste werken.",
+    },
+  ],
   sectionTitles: {
     whyChooseUs: {
       title: "Waarom DigitaleDuif?",
-      subtitle: "Je kunt kiezen uit tientallen digitale bureaus. Waarom zou je met ons in zee gaan? Simpel: wij kijken verder dan de technologie.",
+      subtitle: "Je kunt kiezen uit tientallen digitale bureaus. Waarom zou je met mij in zee gaan? Simpel: ik kijk verder dan de technologie.",
     },
     process: {
       title: "Hoe werkt DigitaleDuif?",
-      subtitle: "Bij Digitale Duif vliegen we volgens een aanpak die werkt. Hieronder zie je hoe wij jouw idee stap voor stap laten landen.",
+      subtitle: "Bij Digitale Duif vlieg ik volgens een aanpak die werkt. Hieronder zie je hoe ik jouw idee stap voor stap laat landen.",
     },
     testimonials: {
-      title: "Wat onze klanten zeggen",
-      subtitle: "Mooie verhalen vertellen over onszelf? Dat kunnen we. Maar we laten liever anderen aan het woord.",
+      title: "Wat mijn klanten zeggen",
+      subtitle: "Mooie verhalen vertellen over mezelf? Dat kan ik. Maar ik laat liever anderen aan het woord.",
     },
     offerings: {
-      title: "Onze diensten",
-      subtitle: "Van XR tot web tot mobiel, wij bieden complete digitale oplossingen.",
+      title: "Mijn diensten",
+      subtitle: "Van XR tot web tot mobiel, ik bied complete digitale oplossingen.",
+    },
+    faq: {
+      title: "Veelgestelde vragen",
+      subtitle: "Antwoorden op de meest gestelde vragen over samenwerken met DigitaleDuif.",
     },
   },
 };

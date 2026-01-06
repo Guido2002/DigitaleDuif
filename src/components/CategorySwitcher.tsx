@@ -1,7 +1,7 @@
 import React from "react";
 import { useCategory, CATEGORIES, type CategoryId } from "@/context/CategoryContext";
 import { cn } from "@/lib/utils";
-import { Brain, Globe, Smartphone, ChevronDown } from "lucide-react";
+import { Glasses, Globe, Smartphone, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 const categoryIcons: Record<CategoryId, React.ElementType> = {
-  xr: Brain,
+  xr: Glasses,
   websites: Globe,
   "mobile-apps": Smartphone,
 };

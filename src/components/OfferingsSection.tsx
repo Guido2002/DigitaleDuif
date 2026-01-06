@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { useCategory } from "@/context/CategoryContext";
 import { getCategoryConfig, defaultConfig, type OfferingContent } from "@/data/categoryConfig";
 import { cn } from "@/lib/utils";
-import { Check, Star, ArrowRight } from "lucide-react";
+import { Check, Star, ArrowRight, Euro } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -74,11 +74,6 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
         <p className="text-muted-foreground text-sm leading-relaxed">{offering.description}</p>
       </div>
 
-      {/* Price indication */}
-      <div className="mb-6 relative z-10">
-        <span className="text-2xl font-black text-primary">{offering.priceIndication}</span>
-      </div>
-
       {/* Features list - simple CSS transitions */}
       <ul className="flex-1 space-y-3 mb-6 relative z-10">
         {offering.features.map((feature, i) => (
@@ -92,6 +87,13 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
             <span>{feature}</span>
           </li>
         ))}
+        {/* Price indication - styled like features */}
+        <li className="flex items-start gap-2.5 text-sm text-foreground pt-2 border-t border-border/50">
+          <div className="mt-0.5 flex-shrink-0">
+            <Euro className="w-4 h-4 text-primary" />
+          </div>
+          <span className="font-medium">{offering.priceIndication}</span>
+        </li>
       </ul>
 
       {/* CTA Button */}
@@ -153,7 +155,7 @@ const OfferingsSection: React.FC = () => {
         <FadeInWhenVisible delay={0.3}>
           <div className="mt-12 text-center">
             <p className="text-muted-foreground mb-4">
-              Niet gevonden wat je zoekt? We maken graag een offerte op maat.
+              Niet gevonden wat je zoekt? Ik maak graag een offerte op maat.
             </p>
             <Button asChild variant="outline" size="lg" className="group">
               <a

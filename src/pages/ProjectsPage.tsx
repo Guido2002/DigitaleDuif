@@ -25,7 +25,7 @@ const ProjectsPage = () => {
           <FadeInWhenVisible delay={shouldReduceMotion ? 0 : 0.1}>
             <SectionHeader
               title="Impact Cases"
-              subtitle="Ontdek hoe wij complexe uitdagingen vertalen naar innovatieve digitale oplossingen. Van XR-training tot schaalbare platforms."
+              subtitle="Ontdek hoe ik complexe uitdagingen vertaal naar innovatieve digitale oplossingen. Van XR-training tot schaalbare platforms."
               align="center"
             />
           </FadeInWhenVisible>

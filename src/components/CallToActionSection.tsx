@@ -39,7 +39,7 @@ const CallToActionSection = () => {
             </FadeInWhenVisible>
             <FadeInWhenVisible delay={0.1}>
               <p className="text-lg md:text-xl mb-10 max-w-lg mx-auto md:mx-0 text-primary-foreground/80 leading-relaxed">
-                Laten we kennismaken en ontdekken wat Digitale Duif voor u kan betekenen. Ik kijk ernaar uit!
+                Laten we kennismaken en ontdekken wat ik voor u kan betekenen. Ik kijk ernaar uit!
               </p>
             </FadeInWhenVisible>
             <FadeInWhenVisible delay={0.15}>

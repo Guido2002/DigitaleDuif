@@ -161,7 +161,7 @@ const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({ onClose
                 </h1>
 
                 <p className="mt-8 text-muted-foreground text-lg lg:text-xl max-w-md leading-relaxed">
-                  Selecteer je focus en ontdek wat we voor jou kunnen betekenen.
+                  Selecteer je focus en ontdek wat ik voor jou kan betekenen.
                 </p>
 
                 <div className="mt-8 text-primary/60 hidden lg:block">

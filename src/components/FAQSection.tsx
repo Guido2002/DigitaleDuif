@@ -6,7 +6,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { faqItems } from "@/data/mockData";
+import { useCategory } from "@/context/CategoryContext";
+import { getCategoryConfig, defaultConfig } from "@/data/categoryConfig";
 import FadeInWhenVisible from "./FadeInWhenVisible";
 import { Link } from "react-router-dom";
 import { ArrowRight, MessageCircle, Mail } from "lucide-react";
@@ -14,6 +15,11 @@ import { Button } from "@/components/ui/button";
 import { DoodleCircle, DoodleStar, GridPattern } from "@/components/ui/doodles";
 
 const FAQSection = memo(function FAQSection() {
+  const { selectedCategory } = useCategory();
+  const config = selectedCategory ? getCategoryConfig(selectedCategory) : defaultConfig;
+  const { faqItems } = config;
+  const { faq: sectionTitles } = config.sectionTitles;
+
   return (
     <section id="faq" className="bg-background relative overflow-hidden">
       {/* Static background decorations - no infinite animations */}
@@ -28,8 +34,8 @@ const FAQSection = memo(function FAQSection() {
       <div className="container px-4 md:px-6 py-20 md:py-28 relative z-10">
         <FadeInWhenVisible delay={0.1}>
           <SectionHeader
-            title="Veelgestelde Vragen"
-            subtitle="Vragen? Natuurlijk! Digitale innovatie en XR zijn voor veel mensen nog redelijk nieuw terrein. Hier vind je antwoorden op de vragen die we het vaakst krijgen."
+            title={sectionTitles.title}
+            subtitle={sectionTitles.subtitle}
           />
         </FadeInWhenVisible>
 
@@ -64,7 +70,7 @@ const FAQSection = memo(function FAQSection() {
                 Staat jouw vraag er niet bij?
               </h3>
               <p className="text-muted-foreground mb-7 max-w-md mx-auto leading-relaxed">
-                Geen probleem! Neem gerust contact op, we helpen je graag verder.
+                Geen probleem! Neem gerust contact op, ik help je graag verder.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Button asChild size="lg" className="group rounded-full px-8 h-12">

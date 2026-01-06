@@ -152,7 +152,7 @@ const HeroSection: React.FC = memo(function HeroSection() {
               size="lg"
               className="group px-6 py-5 text-base rounded-full bg-white/10 backdrop-blur-md border-2 border-white/20 text-primary-foreground hover:bg-white/20 transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent min-h-[52px] font-semibold"
             >
-              <Link to="/projecten" aria-label="Bekijk onze projecten">
+              <Link to="/projecten" aria-label="Bekijk mijn projecten">
                 Bekijk projecten
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-150 group-hover:translate-x-1" aria-hidden="true" />
               </Link>
@@ -187,7 +187,7 @@ const HeroSection: React.FC = memo(function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: shouldReduceMotion ? 0 : 0.5, duration: shouldReduceMotion ? 0 : 0.3 }}
         className="absolute bottom-6 left-0 right-0 mx-auto w-fit z-10 flex flex-col items-center justify-center text-white/80 hover:text-white cursor-pointer transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent rounded-full p-2 min-h-[44px] min-w-[44px]"
-        aria-label="Scroll naar de over ons sectie"
+        aria-label="Scroll naar de over mij sectie"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >

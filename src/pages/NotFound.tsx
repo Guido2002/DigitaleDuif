@@ -69,7 +69,7 @@ const NotFound = () => {
           className="text-muted-foreground mb-8 leading-relaxed"
         >
           Geen zorgen, dit overkomt de beste duiven. De pagina is misschien verplaatst of verwijderd. 
-          Laten we je weer op de juiste koers brengen.
+          Laat mij je weer op de juiste koers brengen.
         </motion.p>
 
         {/* Quick suggestions */}
@@ -126,7 +126,7 @@ const NotFound = () => {
           transition={{ ...animConfig, delay: shouldReduceMotion ? 0 : 0.35 }}
           className="mt-8 text-xs text-muted-foreground"
         >
-          Zocht je een specifieke pagina? <Link to="/contact" className="text-primary hover:underline">Laat het ons weten</Link>
+          Zocht je een specifieke pagina? <Link to="/contact" className="text-primary hover:underline">Laat het mij weten</Link>
         </motion.p>
       </div>
     </div>
