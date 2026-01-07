@@ -10,8 +10,20 @@ interface TestimonialCardProps {
   avatar?: string;
   rating: number;
   companyLogo?: string;
+  linkedinUrl?: string;
   isDarkBackground?: boolean;
 }
+
+const LinkedInMark = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.94v5.666H9.083V9h3.112v1.561h.044c.434-.823 1.494-1.69 3.073-1.69 3.286 0 3.893 2.164 3.893 4.98v6.601zM5.337 7.433a1.81 1.81 0 1 1 0-3.62 1.81 1.81 0 0 1 0 3.62zM6.956 20.452H3.717V9h3.239v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.727v20.545C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.273V1.727C24 .774 23.2 0 22.222 0h.003z" />
+  </svg>
+);
 
 const TestimonialCard: React.FC<TestimonialCardProps> = memo(function TestimonialCard({
   quote,
@@ -20,12 +32,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = memo(function Testimonia
   avatar,
   rating,
   companyLogo,
+  linkedinUrl,
   isDarkBackground = false,
 }) {
   return (
     <article
-      className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4"
-      tabIndex={0}
+      className="w-full"
       aria-label={`Testimonial van ${author}`}
     >
       {/* Main card */}
@@ -56,7 +68,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = memo(function Testimonia
               {/* Quote text */}
               <blockquote>
                 <p className={cn(
-                  "text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light text-center lg:text-left",
+                  "text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-light text-center lg:text-left",
                   isDarkBackground ? "text-primary-foreground" : "text-foreground"
                 )}>
                   "{quote}"
@@ -88,6 +100,17 @@ const TestimonialCard: React.FC<TestimonialCardProps> = memo(function Testimonia
                         className="h-5 w-5 sm:h-6 sm:w-6 object-contain rounded-full"
                         loading="lazy"
                       />
+                    )}
+                    {linkedinUrl && (
+                      <a
+                        href={linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open LinkedIn van ${author} in een nieuw tabblad`}
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/90 hover:bg-white/20 hover:text-white transition-colors"
+                      >
+                        <LinkedInMark className="h-4 w-4" />
+                      </a>
                     )}
                   </div>
                   <p className={cn(
@@ -124,12 +147,25 @@ const TestimonialCard: React.FC<TestimonialCardProps> = memo(function Testimonia
               
               {/* Name & title */}
               <div className="space-y-1">
-                <p className={cn(
-                  "font-bold text-xl",
-                  isDarkBackground ? "text-primary-foreground" : "text-foreground"
-                )}>
-                  {author}
-                </p>
+                <div className="flex items-center justify-center gap-2">
+                  <p className={cn(
+                    "font-bold text-xl",
+                    isDarkBackground ? "text-primary-foreground" : "text-foreground"
+                  )}>
+                    {author}
+                  </p>
+                  {linkedinUrl && (
+                    <a
+                      href={linkedinUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open LinkedIn van ${author} in een nieuw tabblad`}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white/90 hover:bg-white/20 hover:text-white transition-colors"
+                    >
+                      <LinkedInMark className="h-4 w-4" />
+                    </a>
+                  )}
+                </div>
                 <p className={cn(
                   "text-sm max-w-[200px]",
                   isDarkBackground ? "text-primary-foreground/70" : "text-muted-foreground"

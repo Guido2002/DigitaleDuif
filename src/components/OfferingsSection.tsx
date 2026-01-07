@@ -36,10 +36,11 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
 
   // Enhanced spring animation with scale and stagger
   // Remove scale on mobile for better performance
+  const initialScale = isMobile ? 1 : 0.92;
   const springProps = useSpring({
     opacity: inView ? 1 : 0,
     y: inView ? 0 : 40,
-    scale: inView ? 1 : (isMobile ? 1 : 0.92),
+    scale: inView ? 1 : initialScale,
     delay: index * 100,
     config: { 
       tension: 220, 
@@ -56,20 +57,21 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
     config: { tension: 300, friction: 25 }
   });
 
+  // Combine transforms in useMemo to avoid nested callbacks (performance optimization)
+  const combinedTransform = React.useMemo(() => {
+    const entryY = springProps.y.get();
+    const entryScale = springProps.scale.get();
+    const hoverY = hoverSpring.y.get();
+    const hoverScale = hoverSpring.scale.get();
+    return `translateY(${entryY + hoverY}px) scale(${entryScale * hoverScale})`;
+  }, [springProps.y, springProps.scale, hoverSpring.y, hoverSpring.scale]);
+
   return (
     <animated.div
       ref={ref}
       style={{
         opacity: springProps.opacity,
-        transform: springProps.y.to(y => 
-          springProps.scale.to(s =>
-            hoverSpring.y.to(hy =>
-              hoverSpring.scale.to(hs =>
-                `translateY(${y + hy}px) scale(${s * hs})`
-              )
-            )
-          )
-        ),
+        transform: combinedTransform,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -112,7 +114,7 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
           opacity: springProps.opacity.to(o => o * 0.95),
         }}
       >
-        <h3 className="text-xl font-black text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-xl font-black text-foreground mb-2 transition-colors duration-300">
           {offering.title}
         </h3>
         <p className="text-muted-foreground text-sm leading-relaxed">{offering.description}</p>
@@ -125,12 +127,12 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
           opacity: springProps.opacity.to(o => o * 0.98),
         }}
       >
-        {offering.features.map((feature, i) => (
+        {offering.features.map((feature, idx) => (
           <li 
-            key={i} 
+            key={`${feature}-${idx}`} 
             className="flex items-start gap-2.5 text-sm text-foreground transition-all duration-200 hover:translate-x-1"
             style={{
-              transitionDelay: `${i * 30}ms`
+              transitionDelay: `${idx * 30}ms`
             }}
           >
             <div className="mt-0.5 flex-shrink-0">

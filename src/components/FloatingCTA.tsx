@@ -50,8 +50,9 @@ const FloatingCTA = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling 500px (after hero section)
-      const shouldShow = window.scrollY > 500;
+      // Show after hero section is out of view (more than viewport height)
+      const viewportHeight = window.innerHeight;
+      const shouldShow = window.scrollY > viewportHeight * 0.9;
       setIsVisible(shouldShow && !isDismissed);
     };
 
@@ -62,7 +63,7 @@ const FloatingCTA = () => {
   // Reset dismissed state when user scrolls back to top
   useEffect(() => {
     const handleScrollTop = () => {
-      if (window.scrollY < 500) {
+      if (window.scrollY < window.innerHeight * 0.9) {
         setIsDismissed(false);
       }
     };
@@ -110,30 +111,31 @@ const FloatingCTA = () => {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className={cn(
             "fixed z-50 flex justify-center pointer-events-none",
-            isMobile ? "bottom-4 inset-x-0 px-3" : isTablet ? "bottom-4 inset-x-0" : "bottom-6 inset-x-0"
+            "inset-x-0",
+            isMobile && "bottom-4 px-3",
+            isTablet && !isMobile && "bottom-4",
+            !isMobile && !isTablet && "bottom-6"
           )}
           role="navigation"
           aria-label="Snelle acties"
         >
           <motion.div
             className={cn(
-              "flex items-center rounded-full bg-card/95 backdrop-blur-md border border-border shadow-2xl pointer-events-auto",
-              isMobile ? "gap-2 p-1.5" : isTablet ? "gap-2 p-1.5" : "gap-2 p-2"
+              "flex items-center rounded-full bg-card/95 backdrop-blur-md border border-border shadow-2xl pointer-events-auto gap-2",
+              isMobile || isTablet ? "p-1.5" : "p-2"
             )}
-            whileHover={!isMobile ? { scale: 1.02 } : undefined}
+            whileHover={isMobile ? undefined : { scale: 1.02 }}
             whileTap={isMobile ? { scale: 0.98 } : undefined}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
             <Button
               asChild
-              size={isMobile ? "default" : isTablet ? "default" : "lg"}
+              size={isMobile || isTablet ? "default" : "lg"}
               className={cn(
                 "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-semibold",
-                isMobile 
-                  ? "h-10 min-h-[40px] px-6 text-sm"
-                  : isTablet 
-                    ? "h-10 min-h-[40px] px-5 text-sm" 
-                    : "h-11 min-h-[44px] px-8"
+                isMobile && "h-10 min-h-[40px] px-6 text-sm",
+                isTablet && !isMobile && "h-10 min-h-[40px] px-5 text-sm",
+                !isMobile && !isTablet && "h-11 min-h-[44px] px-8"
               )}
             >
               <a
@@ -144,7 +146,7 @@ const FloatingCTA = () => {
               >
                 <Calendar className={cn(
                   "mr-1.5 transition-transform duration-150 group-hover:scale-110",
-                  isMobile ? "h-4 w-4" : isTablet ? "h-4 w-4" : "h-5 w-5"
+                  isMobile || isTablet ? "h-4 w-4" : "h-5 w-5"
                 )} aria-hidden="true" />
                 {isMobile ? "Plan gesprek" : "Gratis gesprek"}
               </a>
@@ -154,7 +156,7 @@ const FloatingCTA = () => {
               <>
                 <div className={cn(
                   "w-px bg-border/50",
-                  isMobile ? "h-5" : isTablet ? "h-5" : "h-6"
+                  isMobile || isTablet ? "h-5" : "h-6"
                 )} />
                 <div className={cn("flex items-center", isMobile ? "gap-1" : "gap-0.5")}>
                   {(Object.keys(CATEGORIES) as CategoryId[]).map((categoryId) => {
@@ -172,11 +174,9 @@ const FloatingCTA = () => {
                         }}
                         className={cn(
                           "rounded-full group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200",
-                          isMobile
-                            ? "h-10 min-h-[40px] w-10 p-0"
-                            : isTablet
-                              ? "h-8 min-h-[32px] px-2.5"
-                              : "h-9 min-h-[36px] px-3",
+                          isMobile && "h-10 min-h-[40px] w-10 p-0",
+                          isTablet && !isMobile && "h-8 min-h-[32px] px-2.5",
+                          !isMobile && !isTablet && "h-9 min-h-[36px] px-3",
                           isActive 
                             ? "bg-primary/15 text-primary" 
                             : "text-muted-foreground hover:text-primary hover:bg-primary/10"
@@ -186,8 +186,9 @@ const FloatingCTA = () => {
                       >
                         <Icon className={cn(
                           "transition-transform duration-150",
-                          isMobile ? "h-4 w-4" : isTablet ? "h-3.5 w-3.5" : "h-4 w-4",
-                          !isMobile && (isTablet ? "mr-1" : "mr-1.5"),
+                          isTablet && !isMobile ? "h-3.5 w-3.5" : "h-4 w-4",
+                          !isMobile && isTablet && "mr-1",
+                          !isMobile && !isTablet && "mr-1.5",
                           isActive ? "scale-110" : "group-hover:scale-110"
                         )} aria-hidden="true" />
                         {!isMobile && (

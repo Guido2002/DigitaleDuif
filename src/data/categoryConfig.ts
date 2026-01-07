@@ -26,6 +26,7 @@ export interface TestimonialContent {
   avatar?: string;
   rating: number;
   companyLogo?: string;
+  linkedinUrl?: string;
 }
 
 export interface ProcessStepContent {
@@ -128,22 +129,25 @@ const xrConfig: CategoryConfig = {
       avatar: "woutervanhulst.jpg",
       rating: 5,
       companyLogo: "sweco_logo.png",
+      linkedinUrl: "https://www.linkedin.com/in/wouter-van-hulst-6a3254100/",
     },
     {
-      quote: "De Mixed Reality oplossing die DigitaleDuif voor ons ontwikkelde, heeft onze operationele efficiëntie aanzienlijk verbeterd. Hun expertise in Unity is indrukwekkend.",
-      author: "Sophie Bakker",
-      title: "Projectmanager, Tech Solutions",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
+      quote: "Tijdens zijn afstudeerstage in ons team heeft Guido laten zien hoe krachtig AR/VR kan zijn voor het ontwerpen en realiseren van drinkwaterzuiveringen, door complexe installaties en bouwfases op ware schaal inzichtelijk te maken. Met zijn aanstekelijke enthousiasme wist hij ons moeiteloos mee te nemen in deze wereld, zonder technische drempels op te werpen. Guido combineert creativiteit met oprechte betrokkenheid en werkt sterk samen, waarbij hij actief zoekt naar input uit de praktijk. Dat maakt hem niet alleen prettig om mee te werken, maar ook iemand die oplossingen ontwikkelt die écht aansluiten bij de gebruiker.",
+      author: "Marc de Graaf",
+      title: "Werktuigbouwkundig Ingenieur Watertechniek, Sweco Nederland",
+      avatar: "marcdegraaf.jpg",
       rating: 5,
-      companyLogo: "https://ui-avatars.com/api/?name=Tech+Solutions&background=3AA7FF&color=fff&size=80&bold=true&format=svg",
+      companyLogo: "sweco_logo.png",
+      linkedinUrl: "https://www.linkedin.com/in/marc-de-graaf-23246a144/",
     },
     {
-      quote: "De VR-training heeft onze onboarding tijd met 40% verkort. Nieuwe medewerkers zijn sneller productief en voelen zich beter voorbereid.",
-      author: "Mark Jansen",
-      title: "HR Director, Industrial Corp",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      quote: "Guido was tijdens zijn stageperiode opvallend nieuwsgierig, leergierig en deed alles met een aanstekelijke glimlach. Tijdens zijn praktische experiment viel het mij vooral op dat hij kritisch was op zijn eigen concept en perfectionistisch nadacht over zijn eigen einddoel. Al met al een fijne periode.",
+      author: "Quinten Mollema",
+      title: "Projectleider, Sweco Nederland",
+      avatar: "quintenmollema.jpg",
       rating: 5,
-      companyLogo: "https://ui-avatars.com/api/?name=Industrial+Corp&background=0074FF&color=fff&size=80&bold=true&format=svg",
+      companyLogo: "sweco_logo.png",
+      linkedinUrl: "https://www.linkedin.com/in/quinten-mollema-78b20495/",
     },
   ],
   processSteps: [

@@ -139,9 +139,9 @@ const AccessibilityPanel: React.FC = () => {
                   onClick={cycleFontSize}
                   className={cn(
                     "w-full flex items-center gap-3 p-3 rounded-xl border transition-all duration-150",
-                    settings.fontSize !== "normal"
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border hover:border-primary/50 hover:bg-muted"
+                    settings.fontSize === "normal"
+                      ? "border-border hover:border-primary/50 hover:bg-muted"
+                      : "border-primary bg-primary/10 text-primary"
                   )}
                 >
                   <Type className="h-5 w-5" />

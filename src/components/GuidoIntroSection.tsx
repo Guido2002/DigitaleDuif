@@ -5,10 +5,24 @@ import { Button } from "@/components/ui/button";
 import profilePhoto from "../assets/IMG_9948_OLD.jpg";
 import profilePhotoHover from "../assets/IMG_9949_OLD.jpg";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, Linkedin } from "lucide-react";
+import { CheckCircle2, ExternalLink } from "lucide-react";
 import FlyingBirdIllustration from "./FlyingBirdIllustration";
 import CvModal from "./CvModal";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+const LinkedInMark = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    focusable="false"
+    className={className}
+  >
+    <path
+      fill="currentColor"
+      d="M4.98 3.5C4.98 4.88 3.87 6 2.49 6S0 4.88 0 3.5 1.12 1 2.49 1s2.49 1.12 2.49 2.5ZM.5 23.5h4V7.98h-4V23.5Zm7.5-15.52h3.84v2.12h.05c.54-1.02 1.86-2.12 3.83-2.12 4.1 0 4.86 2.7 4.86 6.21v9.31h-4v-8.26c0-1.97-.04-4.5-2.74-4.5-2.74 0-3.16 2.14-3.16 4.36v8.4h-4V7.98Z"
+    />
+  </svg>
+);
 
 const GuidoIntroSection = () => {
   const [isHovered, setIsHovered] = React.useState(false);
@@ -86,8 +100,9 @@ const GuidoIntroSection = () => {
             />
             {/* LinkedIn indicator overlay */}
             <div className="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg transition-all duration-300 group-hover:bg-primary group-hover:text-white">
-              <Linkedin className="h-5 w-5 text-[#0077B5] group-hover:text-white" aria-hidden="true" />
-              <span className="text-sm font-medium text-[#0077B5] group-hover:text-white">LinkedIn</span>
+              <LinkedInMark className="h-5 w-5 text-blue-600 group-hover:text-white" />
+              <span className="text-sm font-medium text-blue-600 group-hover:text-white">LinkedIn</span>
+              <ExternalLink className="h-3 w-3 text-blue-600 group-hover:text-white opacity-60" aria-hidden="true" />
             </div>
           </a>
         </motion.div>
@@ -113,14 +128,14 @@ const GuidoIntroSection = () => {
                 "Specialist in VR, MR, webdevelopment en mobiele apps.",
                 "Perfectionist met oog voor detail én resultaat.",
                 "Nieuwsgierig naar jouw ideeën en klaar voor een goed gesprek!"
-              ].map((text, index) => (
+              ].map((text, idx) => (
                 <motion.div 
-                  key={index}
+                  key={text}
                   className="flex items-start space-x-3"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.25, delay: 0.05 + index * 0.05 }}
+                  transition={{ duration: 0.25, delay: 0.05 + idx * 0.05 }}
                 >
                   <CheckCircle2 className="h-5 w-5 text-primary mt-1.5 flex-shrink-0" />
                   <p className="text-base md:text-lg text-muted-foreground leading-relaxed">

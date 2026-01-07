@@ -117,16 +117,24 @@ const TestimonialsSection = () => {
                 key={`${selectedCategory}-testimonial-${index}`}
                 className={cn(
                   "flex items-center justify-center",
-                  index === 0 ? "relative" : "absolute inset-0"
+                  index === activeIndex
+                    ? "relative"
+                    : "absolute inset-0 pointer-events-none"
                 )}
                 aria-hidden={index !== activeIndex}
               >
                 <motion.div
                   initial={false}
-                  animate={{
-                    opacity: index === activeIndex ? 1 : 0,
-                    x: index === activeIndex ? 0 : (index < activeIndex ? -30 : 30),
-                    scale: index === activeIndex ? 1 : 0.98,
+                  animate={() => {
+                    let xOffset = 0;
+                    if (index !== activeIndex) {
+                      xOffset = index < activeIndex ? -30 : 30;
+                    }
+                    return {
+                      opacity: index === activeIndex ? 1 : 0,
+                      x: xOffset,
+                      scale: index === activeIndex ? 1 : 0.98,
+                    };
                   }}
                   transition={{ 
                     duration: shouldReduceMotion ? 0 : 0.5, 
@@ -144,6 +152,7 @@ const TestimonialsSection = () => {
                     avatar={testimonial.avatar}
                     rating={testimonial.rating}
                     companyLogo={testimonial.companyLogo}
+                    linkedinUrl={testimonial.linkedinUrl}
                     isDarkBackground={true}
                   />
                 </motion.div>
@@ -157,7 +166,7 @@ const TestimonialsSection = () => {
               {/* Previous button */}
               <button
                 onClick={goToPrevious}
-                className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground"
+                className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-foreground"
                 aria-label="Vorige testimonial"
               >
                 <ArrowLeft className="h-5 w-5 text-white/70 group-hover:text-white transition-colors" />
@@ -170,19 +179,18 @@ const TestimonialsSection = () => {
                     key={index}
                     onClick={() => setActiveIndex(index)}
                     className={cn(
-                      "rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground min-h-[44px] min-w-[44px] flex items-center justify-center sm:min-h-0 sm:min-w-0",
-                      index === activeIndex
-                        ? "sm:w-8 sm:h-2.5 bg-primary"
-                        : "sm:w-2.5 sm:h-2.5 bg-white/20 hover:bg-white/40 active:bg-white/50"
+                      "group rounded-full transition-all duration-300",
+                      "min-h-[44px] min-w-[44px] flex items-center justify-center sm:min-h-0 sm:min-w-0",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-foreground"
                     )}
                     aria-label={`Ga naar testimonial ${index + 1}`}
                     aria-current={index === activeIndex ? "true" : "false"}
                   >
                     <span className={cn(
-                      "rounded-full",
+                      "rounded-full transition-colors duration-200",
                       index === activeIndex
-                        ? "w-8 h-2.5 bg-primary sm:w-full sm:h-full"
-                        : "w-2.5 h-2.5 bg-white/20 sm:w-full sm:h-full"
+                        ? "w-3.5 h-3.5 bg-white"
+                        : "w-2.5 h-2.5 bg-white/40 group-hover:bg-white/60 active:bg-white/70"
                     )} />
                   </button>
                 ))}
@@ -194,7 +202,7 @@ const TestimonialsSection = () => {
                   onClick={() => setIsPaused(!isPaused)}
                   variant="ghost"
                   size="icon"
-                  className="w-11 h-11 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-white/5 hover:bg-primary hover:border-primary text-white/70 hover:text-white transition-all duration-300"
+                  className="w-11 h-11 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-foreground"
                   aria-label={isPaused ? "Hervatten automatisch wisselen" : "Pauzeren automatisch wisselen"}
                 >
                   {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
@@ -204,7 +212,7 @@ const TestimonialsSection = () => {
               {/* Next button */}
               <button
                 onClick={goToNext}
-                className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground"
+                className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-foreground"
                 aria-label="Volgende testimonial"
               >
                 <ArrowRight className="h-5 w-5 text-white/70 group-hover:text-white transition-colors" />
