@@ -122,12 +122,12 @@ const xrConfig: CategoryConfig = {
   ],
   testimonials: [
     {
-      quote: "DigitaleDuif heeft onze verwachtingen overtroffen met hun VR-trainingssimulatie. De kwaliteit en het realisme zijn ongeëvenaard, en onze medewerkers zijn er enorm door geholpen.",
-      author: "Jan de Vries",
-      title: "CEO, Innovatie B.V.",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      quote: "Voor een ombouwproject heeft Guido ons uitstekend geholpen met het vervaardigen van een mixed reality applicatie. De applicatie had als doel om inzicht te krijgen in het bouwterrein en de daarbij horende vervoersbewegingen. Tevens hebben we hiermee nieuwe manieren ontdekt om ontwerp op locatie te kunnen beoordelen. De samenwerking was erg fijn.",
+      author: "Wouter van Hulst",
+      title: "Werktuigbouwkundig Ingenieur Watertechniek, Sweco Nederland",
+      avatar: "woutervanhulst.jpg",
       rating: 5,
-      companyLogo: "https://ui-avatars.com/api/?name=Innovatie+BV&background=0074FF&color=fff&size=80&bold=true&format=svg",
+      companyLogo: "sweco_logo.png",
     },
     {
       quote: "De Mixed Reality oplossing die DigitaleDuif voor ons ontwikkelde, heeft onze operationele efficiëntie aanzienlijk verbeterd. Hun expertise in Unity is indrukwekkend.",

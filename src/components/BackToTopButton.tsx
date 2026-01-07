@@ -44,7 +44,7 @@ const BackToTopButton = () => {
     <Button
       onClick={scrollToTop}
       className={cn(
-        "fixed bottom-8 right-8 z-50 rounded-full p-3 shadow-lg transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 min-h-[44px] min-w-[44px]",
+        "fixed bottom-8 right-8 z-50 rounded-full p-3 shadow-lg transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 min-h-[44px] min-w-[44px] hidden lg:inline-flex",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       size="icon"

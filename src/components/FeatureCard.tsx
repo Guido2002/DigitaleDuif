@@ -77,8 +77,8 @@ const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({
               {title}
             </CardTitle>
             
-            {/* Description - visible on hover (desktop) or always (mobile) */}
-            <CardDescription className="text-white/90 text-left text-sm leading-relaxed max-h-0 overflow-hidden opacity-0 group-hover:max-h-24 group-hover:opacity-100 transition-all duration-300 md:max-h-0 md:opacity-0 md:group-hover:max-h-24 md:group-hover:opacity-100 max-md:max-h-24 max-md:opacity-100">
+            {/* Description - Always visible */}
+            <CardDescription className="text-white/90 text-left text-sm leading-relaxed transition-all duration-300 ease-in-out">
               {description}
             </CardDescription>
           </div>

@@ -6,6 +6,7 @@ import { useCategory } from "@/context/CategoryContext";
 import { getCategoryConfig, defaultConfig } from "@/data/categoryConfig";
 import { AnimatePresence, motion } from "framer-motion";
 import { DoodleStar, DoodleSpiral, FloatingDoodle } from "@/components/ui/doodles";
+import { cn } from "@/lib/utils";
 
 const WhyChooseUsSection = () => {
   const { selectedCategory } = useCategory();
@@ -55,32 +56,44 @@ const WhyChooseUsSection = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {usps.slice(0, 3).map((usp, index) => (
-                <FadeInWhenVisible key={`${selectedCategory}-${usp.title}`} delay={0.05 + index * 0.05}>
-                  <FeatureCard
-                    icon={usp.icon}
-                    title={usp.title}
-                    description={usp.description}
-                    highlight={true}
-                    isDarkBackground={true}
-                    backgroundImage={usp.backgroundImage}
-                  />
+                <FadeInWhenVisible 
+                  key={`${selectedCategory}-${usp.title}`} 
+                  delay={0.05 + index * 0.05}
+                  className={cn(index === 2 ? "md:col-span-2 lg:col-span-1" : "")}
+                >
+                  <div className={cn("h-full", index === 2 ? "md:w-[calc(50%-0.75rem)] md:mx-auto lg:w-full lg:mx-0" : "")}>
+                    <FeatureCard
+                      icon={usp.icon}
+                      title={usp.title}
+                      description={usp.description}
+                      highlight={true}
+                      isDarkBackground={true}
+                      backgroundImage={usp.backgroundImage}
+                    />
+                  </div>
                 </FadeInWhenVisible>
               ))}
             </div>
             
             {/* Second row with offset */}
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6 lg:px-8">
               {usps.slice(3, 6).map((usp, index) => (
-                <FadeInWhenVisible key={`${selectedCategory}-${usp.title}`} delay={0.15 + index * 0.05}>
-                  <FeatureCard
-                    icon={usp.icon}
-                    title={usp.title}
-                    description={usp.description}
-                    highlight={false}
-                    isDarkBackground={true}
-                  />
+                <FadeInWhenVisible 
+                  key={`${selectedCategory}-${usp.title}`} 
+                  delay={0.15 + index * 0.05}
+                  className={cn(index === 2 ? "md:col-span-2 lg:col-span-1" : "")}
+                >
+                  <div className={cn("h-full", index === 2 ? "md:w-[calc(50%-0.75rem)] md:mx-auto lg:w-full lg:mx-0" : "")}>
+                    <FeatureCard
+                      icon={usp.icon}
+                      title={usp.title}
+                      description={usp.description}
+                      highlight={false}
+                      isDarkBackground={true}
+                    />
+                  </div>
                 </FadeInWhenVisible>
               ))}
             </div>
