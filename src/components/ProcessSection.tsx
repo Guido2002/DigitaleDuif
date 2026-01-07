@@ -57,12 +57,12 @@ const ProcessSection = () => {
           </AnimatePresence>
         </FadeInWhenVisible>
 
-        {/* Mobile & Tablet View */}
-        <div className="block lg:hidden w-full md:max-w-[800px] md:mx-auto">
+        {/* Mobile and Tablet View - Single column (up to 1023px) */}
+        <div className="block lg:hidden w-full">
           <StepsMobile processSteps={processSteps} categoryKey={selectedCategory} />
         </div>
 
-        {/* Desktop View */}
+        {/* Desktop View - 4 column grid (1024px and up) */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`process-desktop-${selectedCategory}`}

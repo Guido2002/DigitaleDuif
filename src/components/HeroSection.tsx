@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useMemo } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown, Mail } from "lucide-react";
+import { ArrowRight, ChevronDown, Mail, Pause, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCategory } from "@/context/CategoryContext";
 import { getCategoryConfig, defaultConfig } from "@/data/categoryConfig";
@@ -15,6 +15,7 @@ const HeroSection: React.FC = memo(function HeroSection() {
   const heroContent = config.hero;
   
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const [isPaused, setIsPaused] = React.useState(false);
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = React.useRef<HTMLElement>(null);
   
@@ -41,14 +42,14 @@ const HeroSection: React.FC = memo(function HeroSection() {
   }, [selectedCategory]);
 
   React.useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion || isPaused) return;
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroContent.backgroundImages.length);
     }, 5000); // Change image every 5 seconds
 
     return () => clearInterval(interval);
-  }, [shouldReduceMotion, heroContent.backgroundImages.length]);
+  }, [shouldReduceMotion, isPaused, heroContent.backgroundImages.length]);
 
   return (
     <section

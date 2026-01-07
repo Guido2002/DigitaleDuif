@@ -92,16 +92,13 @@ export default {
         sm: "calc(var(--radius) - 4px)",
         xl: "12px", // Custom for buttons
       },
-      fontSize: { // Custom typography hierarchy
-        'h1': ['72px', { lineHeight: '80px', fontWeight: '900', letterSpacing: '-0.02em' }], // Extra bold for hero
-        'h2': ['48px', { lineHeight: '56px', fontWeight: '700', letterSpacing: '-0.02em' }], // Bold for section headers (Increased from 40px)
-        'h3': ['36px', { lineHeight: '44px', fontWeight: '500', letterSpacing: '-0.02em' }], // Semibold for subsections
-        'body-lg': ['18px', { lineHeight: '1.8', fontWeight: '400' }], // Regular for body text (line-height 1.8)
-        'body-base': ['16px', { lineHeight: '24px', fontWeight: '400' }],
-        'body-sm': ['14px', { lineHeight: '20px', fontWeight: '400' }],
-        'mobile-h1': ['48px', { lineHeight: '56px', fontWeight: '900', letterSpacing: '-0.02em' }], // Mobile H1
-        'mobile-h3': ['44px', { lineHeight: '52px', fontWeight: '500', letterSpacing: '-0.02em' }], // Mobile H3 (Increased from 40px)
-        'mobile-body': ['16px', { lineHeight: '1.7', fontWeight: '400' }], // Mobile Body
+      fontSize: { // Custom typography hierarchy with better mobile scaling
+        'h1': ['clamp(2.5rem, 8vw, 4.5rem)', { lineHeight: '1.1', fontWeight: '900', letterSpacing: '-0.02em' }], // Responsive 40-72px
+        'h2': ['clamp(1.75rem, 5vw, 3rem)', { lineHeight: '1.2', fontWeight: '700', letterSpacing: '-0.02em' }], // Responsive 28-48px
+        'h3': ['clamp(1.5rem, 4vw, 2.25rem)', { lineHeight: '1.3', fontWeight: '600', letterSpacing: '-0.02em' }], // Responsive 24-36px
+        'body-lg': ['clamp(1rem, 2vw, 1.125rem)', { lineHeight: '1.7', fontWeight: '400' }], // Responsive 16-18px
+        'body-base': ['1rem', { lineHeight: '1.6', fontWeight: '400' }], // Fixed 16px
+        'body-sm': ['0.875rem', { lineHeight: '1.5', fontWeight: '400' }], // Fixed 14px
       },
       textShadow: { // Custom text shadow utility
         sm: '0 1px 2px var(--tw-shadow-color)',

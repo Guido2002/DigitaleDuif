@@ -86,7 +86,7 @@ const AccessibilityPanel: React.FC = () => {
         onClick={() => setIsOpen(true)}
         variant="outline"
         size="icon"
-        className="fixed bottom-6 left-6 z-40 h-12 w-12 rounded-full shadow-lg bg-card border-border hover:bg-accent hover:scale-105 transition-all duration-150 hidden lg:flex"
+        className="fixed bottom-6 left-6 z-40 h-12 w-12 rounded-full shadow-lg bg-card border-border hover:bg-accent hover:scale-105 transition-all duration-150 flex"
         aria-label="Toegankelijkheidsinstellingen openen"
       >
         <Accessibility className="h-5 w-5" />

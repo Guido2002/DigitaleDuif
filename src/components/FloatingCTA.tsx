@@ -50,8 +50,8 @@ const FloatingCTA = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling 400px
-      const shouldShow = window.scrollY > 400;
+      // Show after scrolling 500px (after hero section)
+      const shouldShow = window.scrollY > 500;
       setIsVisible(shouldShow && !isDismissed);
     };
 
@@ -62,7 +62,7 @@ const FloatingCTA = () => {
   // Reset dismissed state when user scrolls back to top
   useEffect(() => {
     const handleScrollTop = () => {
-      if (window.scrollY < 100) {
+      if (window.scrollY < 500) {
         setIsDismissed(false);
       }
     };

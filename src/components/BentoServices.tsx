@@ -43,17 +43,24 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ service, index, colSpan,
   const isMobile = useIsMobile();
   const { ref, inView } = useInView({ 
     triggerOnce: true, 
-    threshold: 0.1,
-    rootMargin: "-50px"
+    threshold: 0.15,
+    rootMargin: "-80px"
   });
   
   const isActive = isMobile && inView;
 
+  // Enhanced spring animation with stagger effect
+  // Remove scale on mobile for better performance
   const springProps = useSpring({
     opacity: inView ? 1 : 0,
-    y: inView ? 0 : 15,
-    delay: index * 50,
-    config: { tension: 280, friction: 60 },
+    y: inView ? 0 : 30,
+    scale: inView ? 1 : (isMobile ? 1 : 0.95),
+    delay: index * 80,
+    config: { 
+      tension: 200, 
+      friction: 30,
+      mass: 1
+    },
   });
 
   return (
@@ -62,7 +69,9 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ service, index, colSpan,
       id={service.id}
       style={{
         opacity: springProps.opacity,
-        transform: springProps.y.to(y => `translateY(${y}px)`),
+        transform: springProps.y.to(y => 
+          springProps.scale.to(s => `translateY(${y}px) scale(${s})`)
+        ),
       }}
       onClick={onClick}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
@@ -70,7 +79,7 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ service, index, colSpan,
       tabIndex={0}
       aria-label={`${service.title} - ${hasRelatedProject ? 'Bekijk gerelateerd project' : 'Bekijk alle projecten'}`}
       className={cn(
-        "group relative overflow-hidden rounded-[2rem] border-2 border-border/50 bg-white/90 backdrop-blur-sm p-8 transition-all duration-200 ease-out cursor-pointer shadow-sm",
+        "group relative overflow-hidden rounded-[2rem] border-2 border-border/50 bg-white/90 backdrop-blur-sm p-8 transition-all duration-300 ease-out cursor-pointer shadow-sm",
         "hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2",
         isActive && "shadow-xl border-primary/30 -translate-y-1 is-active",
         colSpan
@@ -81,24 +90,46 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ service, index, colSpan,
 
       <div className="relative z-10 flex flex-col h-full justify-between">
         <div>
-          <div className="w-14 h-14 rounded-2xl bg-foreground/5 text-foreground flex items-center justify-center mb-6 transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-primary/10 group-hover:text-primary group-[.is-active]:scale-110 group-[.is-active]:bg-primary/10 group-[.is-active]:text-primary">
+          <animated.div 
+            className="w-14 h-14 rounded-2xl bg-foreground/5 text-foreground flex items-center justify-center mb-6 transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-primary/10 group-hover:text-primary group-[.is-active]:scale-110 group-[.is-active]:bg-primary/10 group-[.is-active]:text-primary"
+            style={{
+              opacity: springProps.opacity,
+              // Only apply scale transform on desktop for performance
+              transform: isMobile ? 'none' : springProps.scale.to(s => `scale(${s})`),
+            }}
+          >
             <Icon className="w-7 h-7" />
-          </div>
+          </animated.div>
 
-          <h3 className="text-2xl font-black mb-3 transition-colors duration-300 group-hover:text-primary group-[.is-active]:text-primary tracking-tight">
+          <animated.h3 
+            className="text-2xl font-black mb-3 transition-colors duration-300 group-hover:text-primary group-[.is-active]:text-primary tracking-tight"
+            style={{
+              opacity: springProps.opacity,
+            }}
+          >
             {service.title}
-          </h3>
-          <p className="text-muted-foreground leading-relaxed mb-4 line-clamp-3">
+          </animated.h3>
+          <animated.p 
+            className="text-muted-foreground leading-relaxed mb-4 line-clamp-3"
+            style={{
+              opacity: springProps.opacity.to(o => o * 0.9),
+            }}
+          >
             {service.description}
-          </p>
+          </animated.p>
         </div>
 
-        <div className="mt-auto space-y-4">
+        <animated.div 
+          className="mt-auto space-y-4"
+          style={{
+            opacity: springProps.opacity,
+          }}
+        >
           <div className="flex flex-wrap gap-2">
             {service.tags.map((tag, i) => (
               <span 
                 key={`${service.id}-tag-${tag}`} 
-                className="px-3 py-1 text-xs font-medium rounded-full bg-foreground/5 text-foreground/70 border border-border/50"
+                className="px-3 py-1 text-xs font-medium rounded-full bg-foreground/5 text-foreground/70 border border-border/50 transition-all duration-200 hover:bg-primary/10 hover:border-primary/30"
               >
                 {tag}
               </span>
@@ -109,7 +140,7 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ service, index, colSpan,
             {hasRelatedProject ? 'Bekijk project' : 'Bekijk projecten'}
             <ArrowUpRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </div>
-        </div>
+        </animated.div>
       </div>
     </animated.div>
   );
@@ -205,7 +236,7 @@ const BentoServices = () => {
         <div 
           id="services-grid"
           role="tabpanel"
-          className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[minmax(260px,auto)]"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-[minmax(260px,auto)]"
         >
           {filteredServices.map((service, index) => {
               const Icon = iconMap[service.id] || Code;
@@ -213,11 +244,12 @@ const BentoServices = () => {
               const isLarge = index === 0 || index === 3;
               const isFull = filteredServices.length > 6 && index === filteredServices.length - 1;
               
+              // Responsive column spans: mobile (1), tablet (2), desktop (varies)
               const colSpan = isFull 
-                ? "md:col-span-3" 
+                ? "sm:col-span-2 lg:col-span-3" 
                 : isLarge 
-                  ? "md:col-span-2" 
-                  : "md:col-span-1";
+                  ? "sm:col-span-2 lg:col-span-2" 
+                  : "sm:col-span-1 lg:col-span-1";
 
               return (
                 <ServiceCard

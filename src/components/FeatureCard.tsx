@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useInView } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,6 +22,12 @@ const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({
   backgroundImage 
 }) {
   const shouldReduceMotion = useReducedMotion();
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { 
+    once: true, 
+    margin: "-100px",
+    amount: 0.3
+  });
   
   const cardStyles = useMemo(() => {
     if (highlight) {
@@ -41,8 +47,46 @@ const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({
     } : undefined
   , [highlight, backgroundImage]);
 
+  // Enhanced animation variants
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 40,
+      scale: 0.9
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        scale: {
+          duration: 0.4
+        }
+      }
+    }
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (custom: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: custom * 0.1,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    })
+  };
+
   return (
     <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={cardVariants}
       whileHover={shouldReduceMotion ? {} : { y: -8, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="h-full"
@@ -66,27 +110,45 @@ const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
           
           {/* Content container - always visible at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
+          <motion.div 
+            className="absolute bottom-0 left-0 right-0 p-5 z-10"
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
             {/* Icon */}
-            <div className="flex items-center justify-center rounded-full h-12 w-12 bg-primary/90 text-primary-foreground mb-3 transition-transform duration-300 group-hover:scale-110">
+            <motion.div 
+              className="flex items-center justify-center rounded-full h-12 w-12 bg-primary/90 text-primary-foreground mb-3 transition-transform duration-300 group-hover:scale-110"
+              variants={contentVariants}
+              custom={0}
+            >
               <Icon className="h-6 w-6" />
-            </div>
+            </motion.div>
             
             {/* Title */}
-            <CardTitle className="text-lg font-bold text-white mb-2 text-left">
-              {title}
-            </CardTitle>
+            <motion.div
+              variants={contentVariants}
+              custom={1}
+            >
+              <CardTitle className="text-lg font-bold text-white mb-2 text-left">
+                {title}
+              </CardTitle>
+            </motion.div>
             
             {/* Description - Always visible */}
-            <CardDescription className="text-white/90 text-left text-sm leading-relaxed transition-all duration-300 ease-in-out">
-              {description}
-            </CardDescription>
-          </div>
+            <motion.div
+              variants={contentVariants}
+              custom={2}
+            >
+              <CardDescription className="text-white/90 text-left text-sm leading-relaxed transition-all duration-300 ease-in-out">
+                {description}
+              </CardDescription>
+            </motion.div>
+          </motion.div>
         </>
       ) : (
         <>
           <CardHeader className="mb-4 p-0">
-            <div 
+            <motion.div 
               className={cn(
                 "flex items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110",
                 "h-16 w-16",
@@ -94,22 +156,44 @@ const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({
                   ? "bg-primary-foreground/10 text-primary-foreground"
                   : "bg-primary/10 text-primary"
               )}
+              variants={contentVariants}
+              custom={0}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
             >
               <Icon className="h-8 w-8" />
-            </div>
+            </motion.div>
           </CardHeader>
-          <CardTitle className={cn(
-            "mb-2 text-xl font-semibold",
-            isDarkBackground ? "text-primary-foreground" : "text-foreground"
-          )}>
-            {title}
-          </CardTitle>
-          <CardDescription className={cn(
-            "flex-grow",
-            isDarkBackground ? "text-primary-foreground/80" : "text-muted-foreground"
-          )}>
-            {description}
-          </CardDescription>
+          <motion.div
+            variants={contentVariants}
+            custom={1}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            <CardTitle 
+              className={cn(
+                "text-xl font-bold mb-3 transition-colors duration-300 group-hover:text-primary",
+                isDarkBackground ? "text-primary-foreground" : "text-foreground"
+              )}
+            >
+              {title}
+            </CardTitle>
+          </motion.div>
+          <motion.div
+            variants={contentVariants}
+            custom={2}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            <CardDescription 
+              className={cn(
+                "leading-relaxed",
+                isDarkBackground ? "text-primary-foreground/80" : "text-muted-foreground"
+              )}
+            >
+              {description}
+            </CardDescription>
+          </motion.div>
         </>
       )}
     </Card>

@@ -2,11 +2,12 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import SectionHeader from "./SectionHeader";
 import TestimonialCard from "./TestimonialCard";
 import FadeInWhenVisible from "./FadeInWhenVisible";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
 import { useReducedMotion, AnimatePresence, motion } from "framer-motion";
 import { useCategory } from "@/context/CategoryContext";
 import { getCategoryConfig, defaultConfig } from "@/data/categoryConfig";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const TestimonialsSection = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -16,6 +17,7 @@ const TestimonialsSection = () => {
   const { testimonials: sectionTitles } = config.sectionTitles;
   
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   
   // Swipe handling for mobile
   const touchStartX = useRef<number | null>(null);
@@ -58,12 +60,12 @@ const TestimonialsSection = () => {
   
   // Auto-advance testimonials
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion || isPaused) return;
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, 8000);
     return () => clearInterval(timer);
-  }, [testimonials.length, shouldReduceMotion]);
+  }, [testimonials.length, shouldReduceMotion, isPaused]);
   
   const goToPrevious = useCallback(() => {
     setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
@@ -168,16 +170,36 @@ const TestimonialsSection = () => {
                     key={index}
                     onClick={() => setActiveIndex(index)}
                     className={cn(
-                      "rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground",
+                      "rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground min-h-[44px] min-w-[44px] flex items-center justify-center sm:min-h-0 sm:min-w-0",
                       index === activeIndex
-                        ? "w-8 h-2.5 sm:h-2 bg-primary"
-                        : "w-2.5 h-2.5 sm:w-2 sm:h-2 bg-white/20 hover:bg-white/40 active:bg-white/50"
+                        ? "sm:w-8 sm:h-2.5 bg-primary"
+                        : "sm:w-2.5 sm:h-2.5 bg-white/20 hover:bg-white/40 active:bg-white/50"
                     )}
                     aria-label={`Ga naar testimonial ${index + 1}`}
                     aria-current={index === activeIndex ? "true" : "false"}
-                  />
+                  >
+                    <span className={cn(
+                      "rounded-full",
+                      index === activeIndex
+                        ? "w-8 h-2.5 bg-primary sm:w-full sm:h-full"
+                        : "w-2.5 h-2.5 bg-white/20 sm:w-full sm:h-full"
+                    )} />
+                  </button>
                 ))}
               </div>
+              
+              {/* Pause/Play button */}
+              {!shouldReduceMotion && (
+                <Button
+                  onClick={() => setIsPaused(!isPaused)}
+                  variant="ghost"
+                  size="icon"
+                  className="w-11 h-11 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-white/5 hover:bg-primary hover:border-primary text-white/70 hover:text-white transition-all duration-300"
+                  aria-label={isPaused ? "Hervatten automatisch wisselen" : "Pauzeren automatisch wisselen"}
+                >
+                  {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
+                </Button>
+              )}
               
               {/* Next button */}
               <button

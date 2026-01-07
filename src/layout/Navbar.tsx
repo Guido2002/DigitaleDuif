@@ -71,7 +71,7 @@ const Navbar = () => {
             <SheetTrigger asChild>
               <Button 
                 variant="ghost" 
-                className="h-12 w-12 min-h-[48px] min-w-[48px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" 
+                className="h-12 w-12 min-h-[48px] min-w-[48px] p-0 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" 
                 aria-label="Open navigatiemenu"
               >
                 <Menu className="h-6 w-6 text-foreground" aria-hidden="true" />
