@@ -8,6 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { useCategory } from "@/context/CategoryContext";
 import { getCategoryConfig, defaultConfig } from "@/data/categoryConfig";
 import { DoodleStar, DoodleSpiral, FloatingDoodle, DotPattern } from "@/components/ui/doodles";
+import WaveDivider from "./WaveDivider";
 
 const ProcessSection = () => {
   const [lineRef, inView] = useInView({
@@ -21,7 +22,13 @@ const ProcessSection = () => {
   const { process: sectionTitles } = config.sectionTitles;
 
   return (
-    <section id="process" className="bg-background relative overflow-hidden">
+    <section id="process" className="bg-primary/5 relative overflow-hidden">
+      {/* Wave divider to transition from previous section */}
+      <WaveDivider 
+        className="absolute top-0 left-0 w-full z-10" 
+        fillColor="fill-background" 
+      />
+
       {/* Doodle decorations */}
       <FloatingDoodle className="top-20 right-[8%] text-primary/15" duration={7}>
         <DoodleStar className="w-10 h-10" />
@@ -31,7 +38,7 @@ const ProcessSection = () => {
       </FloatingDoodle>
       <DotPattern className="text-foreground" />
       
-      <div className="container px-4 md:px-6 py-20 md:py-28 relative z-10">
+      <div className="container px-4 md:px-6 py-24 md:py-32 relative z-10">
         <FadeInWhenVisible delay={0.1}>
           <AnimatePresence mode="wait">
             <motion.div
