@@ -22,11 +22,12 @@ const ProcessSection = () => {
   const { process: sectionTitles } = config.sectionTitles;
 
   return (
-    <section id="process" className="bg-primary/5 relative overflow-hidden">
+    <section id="process" className="bg-primary/5 relative overflow-visible">
       {/* Wave divider to transition from previous section */}
       <WaveDivider 
-        className="absolute top-0 left-0 w-full z-10" 
-        fillColor="fill-background" 
+        className="absolute -top-[1px] left-0 w-full z-10 translate-y-[-99%]" 
+        fillColor="fill-primary/5" 
+        flip
       />
 
       {/* Doodle decorations */}

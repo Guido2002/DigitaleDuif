@@ -71,7 +71,7 @@ const CallToActionSection = () => {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <img
-                src="/IMG_0005.png"
+                src="/IMG_0005.JPG"
                 alt="DigitaleDuif XR Innovation"
                 className="w-full h-full object-cover rounded-[1.5rem]"
                 loading="lazy"

@@ -76,17 +76,9 @@ const TestimonialsSection = () => {
   return (
     <section 
       id="testimonials" 
-      className="relative overflow-hidden bg-gradient-to-b from-[#0f0f1a] via-[#1a1a2e] to-[#0f0f1a]"
+      className="relative overflow-hidden bg-foreground"
       aria-labelledby="testimonials-heading"
     >
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Large gradient orb */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
-        {/* Corner accents */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      </div>
       
       <div className="container px-4 md:px-6 py-12 sm:py-16 md:py-24 lg:py-32 relative z-10">
         {/* Header */}
@@ -163,7 +155,7 @@ const TestimonialsSection = () => {
               {/* Previous button */}
               <button
                 onClick={goToPrevious}
-                className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 active:bg-white/15 hover:border-primary/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#1a1a2e]"
+                className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground"
                 aria-label="Vorige testimonial"
               >
                 <ArrowLeft className="h-5 w-5 text-white/70 group-hover:text-white transition-colors" />
@@ -176,7 +168,7 @@ const TestimonialsSection = () => {
                     key={index}
                     onClick={() => setActiveIndex(index)}
                     className={cn(
-                      "rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#1a1a2e]",
+                      "rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground",
                       index === activeIndex
                         ? "w-8 h-2.5 sm:h-2 bg-primary"
                         : "w-2.5 h-2.5 sm:w-2 sm:h-2 bg-white/20 hover:bg-white/40 active:bg-white/50"
@@ -190,7 +182,7 @@ const TestimonialsSection = () => {
               {/* Next button */}
               <button
                 onClick={goToNext}
-                className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 active:bg-white/15 hover:border-primary/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#1a1a2e]"
+                className="group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/20 bg-white/5 hover:bg-primary hover:border-primary transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground"
                 aria-label="Volgende testimonial"
               >
                 <ArrowRight className="h-5 w-5 text-white/70 group-hover:text-white transition-colors" />

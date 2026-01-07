@@ -38,9 +38,9 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
       <Link
         to={`/projecten#${project.id}`}
         className={cn(
-          "block h-full rounded-2xl overflow-hidden border border-border bg-card",
-          "transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:border-primary/50",
-          "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          "block h-full rounded-2xl overflow-hidden bg-primary border-none",
+          "transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:shadow-primary/20",
+          "focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
         )}
       >
         {/* Image */}
@@ -63,10 +63,10 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
 
         {/* Content */}
         <div className="p-5">
-          <h3 className="text-lg font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
+          <h3 className="text-lg font-bold text-primary-foreground mb-1 transition-colors">
             {project.title}
           </h3>
-          <p className="text-sm text-muted-foreground mb-4">
+          <p className="text-sm text-primary-foreground/80 mb-4">
             {project.tagline}
           </p>
 
@@ -75,7 +75,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded"
+                className="px-2 py-1 text-xs bg-primary-foreground/10 text-primary-foreground rounded"
               >
                 {tech}
               </span>
@@ -85,7 +85,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
 
         {/* Hover arrow */}
         <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
-          <ArrowRight className="w-5 h-5 text-primary" />
+          <ArrowRight className="w-5 h-5 text-primary-foreground" />
         </div>
       </Link>
     </animated.div>
@@ -105,12 +105,14 @@ const FeaturedProjectsSection: React.FC = () => {
   }
 
   return (
-    <section id="featured-projects" className="bg-background relative">
+    <section id="featured-projects" className="bg-foreground relative">
       <div className="container px-4 md:px-6 py-16 md:py-24">
         <FadeInWhenVisible delay={0.05}>
           <SectionHeader
             title="Uitgelichte projecten"
             subtitle="Bekijk een selectie van mijn werk in deze categorie."
+            titleClassName="text-white"
+            subtitleClassName="text-white/70"
           />
         </FadeInWhenVisible>
 
@@ -128,7 +130,7 @@ const FeaturedProjectsSection: React.FC = () => {
         {/* View all CTA */}
         <FadeInWhenVisible delay={0.3}>
           <div className="mt-10 text-center">
-            <Button asChild variant="outline" size="lg">
+            <Button asChild size="lg">
               <Link to="/projecten" className="group">
                 Bekijk alle projecten
                 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />

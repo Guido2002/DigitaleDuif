@@ -28,7 +28,7 @@ const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({
       return "text-primary-foreground shadow-xl p-0 border-primary/50 min-h-[320px] hover:shadow-2xl hover:border-primary";
     }
     if (isDarkBackground) {
-      return "bg-foreground border-foreground/80 p-6 hover:shadow-lg hover:border-primary/50";
+      return "bg-primary border-none p-6 hover:shadow-lg hover:shadow-primary/20";
     }
     return "bg-card text-foreground glassmorphism p-6 border-border hover:shadow-lg hover:border-primary/50";
   }, [highlight, isDarkBackground]);
@@ -91,7 +91,7 @@ const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({
                 "flex items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110",
                 "h-16 w-16",
                 isDarkBackground
-                  ? "bg-primary/20 text-primary"
+                  ? "bg-primary-foreground/10 text-primary-foreground"
                   : "bg-primary/10 text-primary"
               )}
             >
@@ -100,13 +100,13 @@ const FeatureCard: React.FC<FeatureCardProps> = memo(function FeatureCard({
           </CardHeader>
           <CardTitle className={cn(
             "mb-2 text-xl font-semibold",
-            isDarkBackground ? "text-white" : "text-foreground"
+            isDarkBackground ? "text-primary-foreground" : "text-foreground"
           )}>
             {title}
           </CardTitle>
           <CardDescription className={cn(
             "flex-grow",
-            isDarkBackground ? "text-white/70" : "text-muted-foreground"
+            isDarkBackground ? "text-primary-foreground/80" : "text-muted-foreground"
           )}>
             {description}
           </CardDescription>
