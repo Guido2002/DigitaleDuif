@@ -63,22 +63,21 @@ const HeroSection: React.FC = memo(function HeroSection() {
         style={shouldReduceMotion ? undefined : { y: parallaxY, scale: parallaxScale }}
       >
         <AnimatePresence mode="wait">
-          {heroContent.backgroundImages.map((image, index) => (
-            <motion.img
-              key={`${selectedCategory}-${image}`}
-              src={image}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
-              transition={{ duration: shouldReduceMotion ? 0 : 1 }}
-              style={{ zIndex: 0 }}
-              loading={index === 0 ? "eager" : "lazy"}
-              decoding="async"
-              {...(index === 0 ? { fetchPriority: "high" } : {})}
-            />
-          ))}
+          <motion.img
+            key={`${selectedCategory}-${heroContent.backgroundImages[currentImageIndex]}`}
+            src={heroContent.backgroundImages[currentImageIndex]}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 1 }}
+            style={{ zIndex: 0 }}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
         </AnimatePresence>
       </motion.div>
       
