@@ -3,18 +3,15 @@ import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
 
-  const toggleVisibility = () => {
-    if (window.scrollY > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
+  const rafRef = React.useRef<number | null>(null);
+  const lastVisibleRef = React.useRef<boolean>(false);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -24,11 +21,31 @@ const BackToTopButton = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
-    return () => {
-      window.removeEventListener("scroll", toggleVisibility);
+    if (isMobile) return;
+
+    const onScroll = () => {
+      if (rafRef.current !== null) return;
+      rafRef.current = globalThis.requestAnimationFrame(() => {
+        rafRef.current = null;
+        const nextVisible = window.scrollY > 300;
+        if (nextVisible !== lastVisibleRef.current) {
+          lastVisibleRef.current = nextVisible;
+          setIsVisible(nextVisible);
+        }
+      });
     };
-  }, []);
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current !== null) {
+        globalThis.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [isMobile]);
 
   // Check if a project modal is open by checking if the URL contains a project query param
   // Also check for body overflow hidden as a fallback
@@ -38,7 +55,7 @@ const BackToTopButton = () => {
     return hasProjectParam || isOverflowHidden;
   }, [location.search]);
 
-  if (isModalOpen) return null;
+  if (isMobile || isModalOpen) return null;
 
   return (
     <Button

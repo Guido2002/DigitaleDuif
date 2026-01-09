@@ -43,6 +43,12 @@ const categoryImages: Record<CategoryId, string> = {
   "mobile-apps": "/media/site/ux1.jpeg",
 };
 
+const CATEGORY_DISPLAY_LABEL: Record<CategoryId, string> = {
+  xr: "XR",
+  websites: "Web",
+  "mobile-apps": "Mobile",
+};
+
 // Simple static doodle components (no animations for performance)
 const DoodleScribble = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 120 30" className={cn("w-28", className)} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -85,33 +91,17 @@ const SpringCard: React.FC<SpringCardProps> = ({
 }) => {
   // Device-specific card animations
   const getInitialState = () => {
-    // Tablet offsets for spiral animation
-    const tabletOffsets = [
-      { x: -200, y: -100, rotate: -20 },
-      { x: 200, y: -50, rotate: 15 },
-      { x: 0, y: 200, rotate: 10 },
-    ];
-    
-    // Mobile rotation values
-    const mobileRotations = [-5, 3, -2];
-    
     switch (deviceType) {
       case 'mobile':
-        // Cards slide up from bottom with stagger, like a deck of cards being dealt
+        // Simple fade in for mobile
         return { 
-          y: 150 + (index * 30),
           opacity: 0,
-          scale: 0.8,
-          rotateZ: mobileRotations[index] || 0,
         };
       case 'tablet':
-        // Cards spiral in from corners with rotation
+        // Simple fade and scale for tablet
         return {
-          x: tabletOffsets[index]?.x || 0,
-          y: tabletOffsets[index]?.y || 0,
           opacity: 0,
-          scale: 0.6,
-          rotateZ: tabletOffsets[index]?.rotate || 0,
+          scale: 0.95,
         };
       default:
         // Desktop: 3D train effect (original)
@@ -126,24 +116,15 @@ const SpringCard: React.FC<SpringCardProps> = ({
   };
 
   const getAnimateState = () => {
-    // Tablet rotation values for resting state
-    const tabletRestRotations = [-2, 2, 0];
-    
     switch (deviceType) {
       case 'mobile':
         return { 
-          y: 0,
           opacity: 1,
-          scale: 1,
-          rotateZ: 0,
         };
       case 'tablet':
         return {
-          x: 0,
-          y: 0,
           opacity: 1,
-          scale: isHovered ? 1.02 : 1,
-          rotateZ: isHovered ? 0 : (tabletRestRotations[index] || 0),
+          scale: 1,
         };
       default:
         return { 
@@ -159,11 +140,9 @@ const SpringCard: React.FC<SpringCardProps> = ({
   const getTransition = () => {
     switch (deviceType) {
       case 'mobile':
-        // Snappy, bouncy feel for mobile
+        // Simple fade for mobile, no bouncing
         return {
-          type: "spring" as const,
-          stiffness: 120,
-          damping: 14,
+          duration: 0.3,
           delay: isVisible ? delay : 0,
         };
       case 'tablet':
@@ -191,8 +170,8 @@ const SpringCard: React.FC<SpringCardProps> = ({
       animate={isVisible ? getAnimateState() : {}}
       transition={getTransition()}
       className={cn(
-        // Mobile: stack vertically with nice height
-        "min-h-[180px]",
+        // Mobile: stack vertically with large tap targets
+        "min-h-[280px]",
         // Tablet (sm to lg): optimized 2-column grid with XR card spanning 2 rows
         isLarge 
           ? "sm:row-span-2 sm:min-h-[320px] md:min-h-[380px]" 
@@ -200,7 +179,7 @@ const SpringCard: React.FC<SpringCardProps> = ({
         // Desktop (lg+): original sizing - no min-height needed
         "lg:min-h-0",
       )}
-      style={{ transformStyle: 'preserve-3d' }}
+      style={deviceType !== 'mobile' ? { transformStyle: 'preserve-3d' } : undefined}
     >
       <button
         onMouseEnter={() => onHover(categoryId)}
@@ -208,7 +187,8 @@ const SpringCard: React.FC<SpringCardProps> = ({
         onClick={onClick}
         className={cn(
           "relative w-full h-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden cursor-pointer group",
-          "focus:outline-none focus:ring-4 focus:ring-primary/30"
+          "focus:outline-none focus:ring-4 focus:ring-primary/30",
+          "touch-manipulation"
         )}
       >
         {children}
@@ -529,7 +509,7 @@ const XrCardContent: React.FC<Omit<CategoryCardContentProps, 'categoryId'>> = ({
             isHovered ? "translate-x-1" : ""
           )}
         >
-          {CATEGORIES.xr.shortLabel}
+          {CATEGORY_DISPLAY_LABEL.xr}
         </h3>
         <p className="text-white/80 text-sm lg:text-base max-w-[280px] leading-relaxed">
           {CATEGORIES.xr.description}
@@ -559,7 +539,7 @@ const StandardCardContent: React.FC<CategoryCardContentProps> = ({ categoryId, i
         : "bg-gradient-to-t from-black/70 via-black/20 to-transparent"
     )} />
     
-    <div className="absolute inset-0 flex flex-col justify-between p-5 lg:p-6">
+    <div className="absolute inset-0 flex flex-col justify-between p-6 lg:p-6">
       <div
         className={cn(
           "w-9 h-9 rounded-full bg-white/20 backdrop-blur flex items-center justify-center self-end transition-transform duration-300",
@@ -576,7 +556,7 @@ const StandardCardContent: React.FC<CategoryCardContentProps> = ({ categoryId, i
             isHovered ? "translate-x-1" : ""
           )}
         >
-          {CATEGORIES[categoryId].shortLabel}
+          {CATEGORY_DISPLAY_LABEL[categoryId]}
         </h3>
         <p className="text-white/70 text-xs lg:text-sm line-clamp-2">
           {CATEGORIES[categoryId].description}
@@ -605,7 +585,7 @@ const CategoryCardsPanel: React.FC<CategoryCardsPanelProps> = ({
 }) => (
   <motion.div 
     className={cn(
-      "w-full p-4 pb-8",
+      "w-full px-2 pb-6",
       "sm:p-6 sm:pb-10 sm:max-w-[600px] sm:mx-auto",
       "md:max-w-[680px] md:p-8",
       "lg:w-[52%] lg:max-w-none lg:mx-0 lg:p-8 lg:pb-8",
@@ -619,12 +599,12 @@ const CategoryCardsPanel: React.FC<CategoryCardsPanelProps> = ({
     <div 
       className={cn(
         "w-full h-full",
-        "grid grid-cols-1 gap-4",
+        "grid grid-cols-1 gap-3",
         "sm:grid-cols-2 sm:grid-rows-[1fr_1fr] sm:gap-4 sm:auto-rows-fr",
         "md:gap-5",
         "lg:max-h-[700px] lg:gap-6 lg:grid-rows-2"
       )}
-      style={{ perspective: "1200px", perspectiveOrigin: "center center" }}
+      style={deviceType !== 'mobile' ? { perspective: "1200px", perspectiveOrigin: "center center" } : undefined}
     >
       {/* XR Card */}
       <SpringCard
@@ -673,7 +653,7 @@ const CategoryCardsPanel: React.FC<CategoryCardsPanelProps> = ({
 );
 
 const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({ onClose }) => {
-  const { showCategoryModal, setShowCategoryModal, setCategory, markAsVisited } = useCategory();
+  const { showCategoryModal, setCategory, markAsVisited } = useCategory();
   const [hoveredCard, setHoveredCard] = useState<CategoryId | null>(null);
   const deviceType = useDeviceType();
   
@@ -715,12 +695,11 @@ const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({ onClose
 
   useEffect(() => {
     if (!showCategoryModal) return;
-    
+
     const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     
     // Trigger animations in sequence
@@ -730,11 +709,8 @@ const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({ onClose
     
     return () => {
       timers.forEach(clearTimeout);
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.overflow = '';
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousBodyOverflow;
       window.scrollTo(0, scrollY);
       resetAnimationStage();
     };
@@ -743,7 +719,6 @@ const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({ onClose
   const handleSelectCategory = (categoryId: CategoryId) => {
     setCategory(categoryId);
     markAsVisited();
-    setShowCategoryModal(false);
     onClose?.();
   };
 
@@ -755,12 +730,17 @@ const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({ onClose
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-[100] bg-background overflow-y-auto lg:overflow-hidden overscroll-contain"
+          className={cn(
+            "fixed inset-0 z-[100] bg-background",
+            "h-[100dvh] overflow-y-auto overscroll-contain",
+            "lg:overflow-hidden",
+            "[-webkit-overflow-scrolling:touch]"
+          )}
           role="dialog"
           aria-modal="true"
           aria-labelledby="category-modal-title"
         >
-          <div className="min-h-screen lg:h-screen flex flex-col lg:flex-row">
+          <div className="min-h-[100dvh] lg:h-screen flex flex-col lg:flex-row">
             <ModalLeftPanel deviceType={deviceType} animationStage={animationStage} />
             <CategoryCardsPanel
               deviceType={deviceType}

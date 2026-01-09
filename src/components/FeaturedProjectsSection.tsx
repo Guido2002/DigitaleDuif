@@ -9,6 +9,57 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useReducedMotion } from "framer-motion";
+import { usePauseMediaWhenNotInView } from "@/hooks/use-pause-media-when-not-in-view";
+
+function renderProjectMedia(
+  project: Project,
+  shouldAutoplayVideo: boolean,
+  mediaRef: (node: HTMLVideoElement | HTMLIFrameElement | null) => void,
+): React.ReactNode {
+  const videoUrl = project.videoUrl;
+  if (!videoUrl) {
+    return (
+      <img
+        src={project.images[0]}
+        alt={project.title}
+        width={640}
+        height={400}
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+        decoding="async"
+      />
+    );
+  }
+
+  const isLocalVideo = videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm");
+  if (isLocalVideo) {
+    // eslint-disable-next-line jsx-a11y/media-has-caption
+    return (
+      <video
+        ref={mediaRef}
+        src={videoUrl}
+        autoPlay={shouldAutoplayVideo}
+        muted
+        loop
+        playsInline
+        preload={shouldAutoplayVideo ? "metadata" : "none"}
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+    );
+  }
+
+  return (
+    <iframe
+      ref={mediaRef}
+      src={`${videoUrl}?autoplay=${shouldAutoplayVideo ? 1 : 0}&mute=1&controls=${shouldAutoplayVideo ? 0 : 1}&loop=1&playlist=${videoUrl.split("/").pop()}&enablejsapi=1`}
+      title={project.title}
+      className="w-full h-full object-cover scale-150"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    />
+  );
+}
 
 // Map category to serviceIds (same as in ImpactCasesSection)
 const categoryServiceMap: Record<string, string[]> = {
@@ -25,72 +76,45 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const isMobile = useIsMobile();
+  const shouldReduceMotion = useReducedMotion();
   
+  const yOffset = shouldReduceMotion ? 0 : 16;
   const springProps = useSpring({
     opacity: inView ? 1 : 0,
-    y: inView ? 0 : 20,
-    delay: index * 100,
-    config: { tension: 280, friction: 60 },
+    y: inView ? 0 : yOffset,
+    delay: shouldReduceMotion ? 0 : index * 60,
+    config: { tension: 320, friction: 32 },
+    immediate: shouldReduceMotion,
   });
 
   const videoUrl = project.videoUrl;
-  const isLocalVideo = Boolean(
-    videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))
-  );
-
-  let mediaNode: React.ReactNode;
-  if (videoUrl) {
-    mediaNode = isLocalVideo ? (
-      // eslint-disable-next-line jsx-a11y/media-has-caption
-      <video
-        src={videoUrl}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-      />
-    ) : (
-      <iframe
-        src={`${videoUrl}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoUrl.split("/").pop()}`}
-        title={project.title}
-        className="w-full h-full object-cover scale-150"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      />
-    );
-  } else {
-    mediaNode = (
-      <img
-        src={project.images[0]}
-        alt={project.title}
-        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-        loading="lazy"
-      />
-    );
-  }
+  const shouldAutoplayVideo = Boolean(videoUrl) && !isMobile && !shouldReduceMotion;
+  const mediaRef = usePauseMediaWhenNotInView({ enabled: Boolean(videoUrl) });
+  const mediaNode = renderProjectMedia(project, shouldAutoplayVideo, mediaRef);
 
   return (
     <animated.div
       ref={ref}
       style={{
         opacity: springProps.opacity,
-        transform: springProps.y.to(y => `translateY(${y}px)`),
+        transform: springProps.y.to(y => `translate3d(0, ${y}px, 0)`),
+        willChange: 'opacity, transform',
       }}
       className="group relative h-full"
     >
       <Link
         to={`/projecten?project=${project.id}`}
         className={cn(
-          "block h-full rounded-2xl overflow-hidden bg-primary border-none",
-          "transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:shadow-primary/20",
+          "block h-full rounded-2xl overflow-hidden bg-primary border border-primary-foreground/15",
+          "transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:shadow-primary/20 hover:border-primary-foreground/25",
           "focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
         )}
       >
         {/* Media (prefer video when available) */}
         <div className="relative aspect-[16/10] overflow-hidden">
           {mediaNode}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
           
           {/* Client badge */}
           <div className="absolute top-4 left-4">
@@ -105,7 +129,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
           <h3 className="text-lg font-bold text-primary-foreground mb-1 transition-colors">
             {project.title}
           </h3>
-          <p className="text-sm text-primary-foreground/80 mb-4">
+          <p className="text-sm text-primary-foreground/90 mb-4">
             {project.tagline}
           </p>
 
@@ -114,13 +138,13 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
             {project.techStack.slice(0, 3).map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-1 text-xs bg-primary-foreground/10 text-primary-foreground rounded"
+                className="px-2 py-1 text-xs bg-primary-foreground/15 text-primary-foreground rounded border border-primary-foreground/15"
               >
                 {tech}
               </span>
             ))}
             {project.techStack.length > 3 && (
-              <span className="px-2 py-1 text-xs bg-primary-foreground/10 text-primary-foreground rounded">
+              <span className="px-2 py-1 text-xs bg-primary-foreground/15 text-primary-foreground rounded border border-primary-foreground/15">
                 +{project.techStack.length - 3}
               </span>
             )}

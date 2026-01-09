@@ -24,16 +24,16 @@ const TestimonialsSection = () => {
   const touchEndX = useRef<number | null>(null);
   const minSwipeDistance = 50;
   
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchEndX.current = null;
-  };
+  }, []);
   
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
     touchEndX.current = e.touches[0].clientX;
-  };
+  }, []);
   
-  const handleTouchEnd = () => {
+  const handleTouchEnd = useCallback(() => {
     if (!touchStartX.current || !touchEndX.current) return;
     
     const distance = touchStartX.current - touchEndX.current;
@@ -51,7 +51,7 @@ const TestimonialsSection = () => {
     
     touchStartX.current = null;
     touchEndX.current = null;
-  };
+  }, [testimonials.length]);
   
   // Reset to first testimonial when category changes
   useEffect(() => {
@@ -137,7 +137,7 @@ const TestimonialsSection = () => {
                     };
                   }}
                   transition={{ 
-                    duration: shouldReduceMotion ? 0 : 0.5, 
+                    duration: shouldReduceMotion ? 0 : 0.35, 
                     ease: [0.25, 0.46, 0.45, 0.94]
                   }}
                   className={cn(

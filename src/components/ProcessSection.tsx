@@ -78,11 +78,11 @@ const ProcessSection = () => {
               className="absolute top-[37px] left-0 right-0 h-1 border-t-4 border-dashed border-primary/30 z-0 hidden lg:block"
               initial={{ width: 0 }}
               animate={inView ? { width: "100%" } : { width: 0 }}
-              transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
             />
 
             {processSteps.map((step, index) => (
-              <FadeInWhenVisible key={`${selectedCategory}-step-${step.title}`} delay={0.1 + index * 0.1} className="w-full h-full">
+              <FadeInWhenVisible key={`${selectedCategory}-step-${step.title}`} delay={0.05 + index * 0.05} className="w-full h-full">
                 <ProcessStepCard
                   icon={step.icon}
                   title={step.title}

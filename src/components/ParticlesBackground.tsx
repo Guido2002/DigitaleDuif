@@ -21,12 +21,65 @@ interface ParticlesBackgroundProps {
   className?: string;
 }
 
+function applyMousePush(
+  prevParticles: Particle[],
+  rect: DOMRect,
+  mouseX: number,
+  mouseY: number,
+): Particle[] {
+  let changed = false;
+  const next = prevParticles.map((p) => {
+    const particleX = (p.x / 100) * rect.width;
+    const particleY = (p.y / 100) * rect.height;
+
+    const dx = mouseX - particleX;
+    const dy = mouseY - particleY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    const maxPushDistance = 200;
+    const pushForce = 0.05;
+
+    if (distance < maxPushDistance) {
+      const forceMagnitude = (1 - distance / maxPushDistance) * pushForce;
+      const angle = Math.atan2(dy, dx);
+      changed = true;
+      return {
+        ...p,
+        tempTranslateX: -Math.cos(angle) * forceMagnitude * 50,
+        tempTranslateY: -Math.sin(angle) * forceMagnitude * 50,
+        pushedAt: Date.now(),
+      };
+    }
+
+    return p;
+  });
+
+  return changed ? next : prevParticles;
+}
+
+function resetExpiredPush(prevParticles: Particle[], now: number): Particle[] {
+  let changed = false;
+  const next = prevParticles.map((p) => {
+    if (p.pushedAt && now - p.pushedAt > 800) {
+      if ((p.tempTranslateX ?? 0) !== 0 || (p.tempTranslateY ?? 0) !== 0) {
+        changed = true;
+      }
+      return { ...p, tempTranslateX: 0, tempTranslateY: 0, pushedAt: undefined };
+    }
+    return p;
+  });
+
+  return changed ? next : prevParticles;
+}
+
 const ParticlesBackground: React.FC<ParticlesBackgroundProps> = ({
   particleCount = 50,
   className,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [particles, setParticles] = useState<Particle[]>([]);
+  const rafRef = useRef<number | null>(null);
+  const lastMouseRef = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     const generateParticles = () => {
@@ -60,54 +113,42 @@ const ParticlesBackground: React.FC<ParticlesBackgroundProps> = ({
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
+    lastMouseRef.current = { x: e.clientX, y: e.clientY };
 
-    const rect = containerRef.current.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    if (rafRef.current !== null) return;
+    rafRef.current = globalThis.requestAnimationFrame(() => {
+      rafRef.current = null;
+      if (!containerRef.current || !lastMouseRef.current) return;
 
-    setParticles((prevParticles) =>
-      prevParticles.map((p) => {
-        const particleX = (p.x / 100) * rect.width;
-        const particleY = (p.y / 100) * rect.height;
+      const rect = containerRef.current.getBoundingClientRect();
+      const mouseX = lastMouseRef.current.x - rect.left;
+      const mouseY = lastMouseRef.current.y - rect.top;
 
-        const dx = mouseX - particleX;
-        const dy = mouseY - particleY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        const maxPushDistance = 200; // 200px radius
-        const pushForce = 0.05; // How strongly particles are pushed
-
-        if (distance < maxPushDistance) {
-          const forceMagnitude = (1 - distance / maxPushDistance) * pushForce;
-          const angle = Math.atan2(dy, dx);
-
-          // Apply a temporary transform to push particles away
-          return {
-            ...p,
-            tempTranslateX: -Math.cos(angle) * forceMagnitude * 50, // Adjust multiplier for stronger push
-            tempTranslateY: -Math.sin(angle) * forceMagnitude * 50,
-            pushedAt: Date.now(), // Timestamp when pushed
-          };
-        }
-        return p;
-      }),
-    );
+      setParticles((prevParticles) => applyMousePush(prevParticles, rect, mouseX, mouseY));
+    });
   };
 
-  // Reset temporary transforms after a short delay
+  // Reset temporary transforms after a short delay (only when needed)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setParticles((prevParticles) =>
-        prevParticles.map((p) => {
-          if (p.pushedAt && Date.now() - p.pushedAt > 800) { // Reset after 800ms
-            return { ...p, tempTranslateX: 0, tempTranslateY: 0, pushedAt: undefined };
-          }
-          return p;
-        }),
-      );
-    }, 100); // Check frequently for particles to reset
-    return () => clearTimeout(timer);
+    const hasPushedParticles = particles.some((p) => p.pushedAt);
+    if (!hasPushedParticles) return;
+
+    const interval = globalThis.setInterval(() => {
+      const now = Date.now();
+      setParticles((prevParticles) => resetExpiredPush(prevParticles, now));
+    }, 200);
+
+    return () => globalThis.clearInterval(interval);
   }, [particles]);
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) {
+        globalThis.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, []);
 
 
   return (

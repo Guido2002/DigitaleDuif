@@ -1,11 +1,14 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { useReducedMotion } from "framer-motion";
 
 interface AbstractBackgroundAnimationProps {
   className?: string;
 }
 
 const AbstractBackgroundAnimation: React.FC<AbstractBackgroundAnimationProps> = ({ className }) => {
+  const shouldReduceMotion = useReducedMotion();
+  
   return (
     <div
       className={cn(
@@ -13,7 +16,10 @@ const AbstractBackgroundAnimation: React.FC<AbstractBackgroundAnimationProps> = 
         className
       )}
     >
-      <div className="h-32 w-32 rounded-full bg-primary/10 animate-pulse-fade" />
+      <div className={cn(
+        "h-32 w-32 rounded-full bg-primary/10",
+        !shouldReduceMotion && "animate-pulse-fade"
+      )} />
     </div>
   );
 };

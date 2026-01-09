@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar, Glasses, Globe, Smartphone } from "lucide-react";
@@ -48,28 +48,48 @@ const FloatingCTA = () => {
   const isMobile = breakpoint === "mobile";
   const isTablet = breakpoint === "tablet";
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Show after hero section is out of view (more than viewport height)
-      const viewportHeight = window.innerHeight;
-      const shouldShow = window.scrollY > viewportHeight * 0.9;
-      setIsVisible(shouldShow && !isDismissed);
-    };
+  const rafRef = useRef<number | null>(null);
+  const dismissedRef = useRef(isDismissed);
+  const lastVisibleRef = useRef<boolean>(false);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  useEffect(() => {
+    dismissedRef.current = isDismissed;
   }, [isDismissed]);
 
-  // Reset dismissed state when user scrolls back to top
   useEffect(() => {
-    const handleScrollTop = () => {
-      if (window.scrollY < window.innerHeight * 0.9) {
-        setIsDismissed(false);
-      }
+    const onScroll = () => {
+      if (rafRef.current !== null) return;
+      rafRef.current = globalThis.requestAnimationFrame(() => {
+        rafRef.current = null;
+
+        const viewportHeight = window.innerHeight;
+        const threshold = viewportHeight * 0.9;
+        const y = window.scrollY;
+
+        // Reset dismissed state when back near top
+        if (y < threshold && dismissedRef.current) {
+          dismissedRef.current = false;
+          setIsDismissed(false);
+        }
+
+        const nextVisible = y > threshold && !dismissedRef.current;
+        if (nextVisible !== lastVisibleRef.current) {
+          lastVisibleRef.current = nextVisible;
+          setIsVisible(nextVisible);
+        }
+      });
     };
 
-    window.addEventListener("scroll", handleScrollTop);
-    return () => window.removeEventListener("scroll", handleScrollTop);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current !== null) {
+        globalThis.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
   }, []);
 
   // Detect when modal is open by checking body overflow or data attribute

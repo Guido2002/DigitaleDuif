@@ -6,6 +6,8 @@ import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { usePauseMediaWhenNotInView } from '@/hooks/use-pause-media-when-not-in-view';
 
 // Define filter categories
 const categories = [
@@ -20,6 +22,9 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
+  const shouldAutoplayVideo = Boolean(project.videoUrl) && !shouldReduceMotion && !isMobile;
+  const featuredMediaRef = usePauseMediaWhenNotInView({ enabled: Boolean(project.videoUrl) });
 
   const media = useMemo(() => {
     const items: Array<{ type: 'video' | 'image'; src: string }> = [];
@@ -64,12 +69,13 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
             {currentMedia?.type === 'video' ? (
               <motion.video
                 key={currentMedia.src}
+                ref={featuredMediaRef}
                 src={currentMedia.src}
                 muted
                 loop
                 playsInline
-                autoPlay={!shouldReduceMotion}
-                preload="metadata"
+                autoPlay={shouldAutoplayVideo}
+                preload={shouldAutoplayVideo ? 'metadata' : 'none'}
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
@@ -81,6 +87,10 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
                 key={currentMedia?.src ?? currentImageIndex}
                 src={currentMedia?.src ?? project.images[0]}
                 alt={project.title}
+                width={800}
+                height={500}
+                loading="lazy"
+                decoding="async"
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}

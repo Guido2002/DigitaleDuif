@@ -9,7 +9,11 @@ export function useScrollToHash() {
       const id = location.hash.substring(1); // Remove the '#'
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        const nav = document.querySelector('nav[aria-label="Hoofdnavigatie"]');
+        const navHeight = nav instanceof HTMLElement ? nav.getBoundingClientRect().height : 80;
+        const extraGap = 12;
+        const top = element.getBoundingClientRect().top + globalThis.scrollY - navHeight - extraGap;
+        globalThis.window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
       }
     } else {
       // If no hash, scroll to top on route change (e.g., navigating from /#about to /diensten)

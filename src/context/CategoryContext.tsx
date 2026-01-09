@@ -37,6 +37,25 @@ export const CATEGORIES: Record<CategoryId, Category> = {
 const STORAGE_KEY = "digitaleDuif_selectedCategory";
 const FIRST_VISIT_KEY = "digitaleDuif_hasVisited";
 
+const safeStorage = {
+  getItem(key: string): string | null {
+    if (globalThis.window === undefined) return null;
+    try {
+      return globalThis.localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  },
+  setItem(key: string, value: string): void {
+    if (globalThis.window === undefined) return;
+    try {
+      globalThis.localStorage.setItem(key, value);
+    } catch {
+      // Ignore storage failures (e.g. Safari private mode / blocked storage)
+    }
+  },
+};
+
 interface CategoryContextType {
   selectedCategory: CategoryId | null;
   setCategory: (category: CategoryId) => void;
@@ -51,23 +70,23 @@ const CategoryContext = createContext<CategoryContextType | undefined>(undefined
 
 export const CategoryProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryId | null>(() => {
-    if (typeof globalThis.window === "undefined") return null;
-    const stored = localStorage.getItem(STORAGE_KEY);
+    if (globalThis.window === undefined) return null;
+    const stored = safeStorage.getItem(STORAGE_KEY);
     return stored && (stored === "xr" || stored === "websites" || stored === "mobile-apps")
       ? (stored as CategoryId)
       : null;
   });
 
   const [isFirstVisit, setIsFirstVisit] = useState<boolean>(() => {
-    if (typeof globalThis.window === "undefined") return true;
-    return !localStorage.getItem(FIRST_VISIT_KEY);
+    if (globalThis.window === undefined) return true;
+    return !safeStorage.getItem(FIRST_VISIT_KEY);
   });
 
   const [showCategoryModal, setShowCategoryModal] = useState<boolean>(() => {
     // Show modal immediately if first visit and no category selected
-    if (typeof globalThis.window === "undefined") return false;
-    const hasVisited = localStorage.getItem(FIRST_VISIT_KEY);
-    const hasCategory = localStorage.getItem(STORAGE_KEY);
+    if (globalThis.window === undefined) return false;
+    const hasVisited = safeStorage.getItem(FIRST_VISIT_KEY);
+    const hasCategory = safeStorage.getItem(STORAGE_KEY);
     return !hasVisited && !hasCategory;
   });
 
@@ -84,13 +103,13 @@ export const CategoryProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const setCategory = useCallback((category: CategoryId) => {
     setSelectedCategory(category);
-    localStorage.setItem(STORAGE_KEY, category);
+    safeStorage.setItem(STORAGE_KEY, category);
     setShowCategoryModal(false);
   }, []);
 
   const markAsVisited = useCallback(() => {
     setIsFirstVisit(false);
-    localStorage.setItem(FIRST_VISIT_KEY, "true");
+    safeStorage.setItem(FIRST_VISIT_KEY, "true");
   }, []);
 
   const contextValue = useMemo(

@@ -20,41 +20,54 @@ export function useActiveSection(sections: Section[] = homeSections) {
   const [activeSection, setActiveSection] = useState<string>(sections[0]?.id || "");
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    const sectionElements: Map<string, Element> = new Map();
-
-    // Find all section elements
+    const elements: HTMLElement[] = [];
     sections.forEach((section) => {
-      const element = document.getElementById(section.id);
-      if (element) {
-        sectionElements.set(section.id, element);
-      }
+      const el = document.getElementById(section.id);
+      if (el instanceof HTMLElement) elements.push(el);
     });
 
-    // Create intersection observer for each section
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    if (elements.length === 0) return;
+
+    const lastEntriesById = new Map<string, IntersectionObserverEntry>();
+
+    const pickBestActive = () => {
+      const viewportCenter = globalThis.innerHeight / 2;
+
+      let bestId: string | null = null;
+      let bestDistance = Number.POSITIVE_INFINITY;
+
+      for (const entry of lastEntriesById.values()) {
+        if (!entry.isIntersecting) continue;
+        const rect = entry.boundingClientRect;
+        const sectionCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCenter - viewportCenter);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestId = (entry.target as HTMLElement).id;
         }
-      });
+      }
+
+      if (bestId) setActiveSection(bestId);
     };
 
-    const observerOptions: IntersectionObserverOptions = {
-      root: null,
-      rootMargin: "-40% 0px -40% 0px", // Trigger when section is in middle 20% of viewport
-      threshold: 0,
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = (entry.target as HTMLElement).id;
+          if (id) lastEntriesById.set(id, entry);
+        }
+        pickBestActive();
+      },
+      {
+        root: null,
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      },
+    );
 
-    sectionElements.forEach((element, id) => {
-      const observer = new IntersectionObserver(observerCallback, observerOptions);
-      observer.observe(element);
-      observers.push(observer);
-    });
+    for (const el of elements) observer.observe(el);
 
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
+    return () => observer.disconnect();
   }, [sections]);
 
   return activeSection;

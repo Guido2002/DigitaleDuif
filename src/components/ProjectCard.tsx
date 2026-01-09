@@ -3,6 +3,7 @@ import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Project } from '../data/mockData';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { usePauseMediaWhenNotInView } from '@/hooks/use-pause-media-when-not-in-view';
 import { cn } from '@/lib/utils';
 
 interface ProjectCardProps {
@@ -49,6 +50,9 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
 
   const primaryMedia = project.videoUrl ?? project.images[0];
   const isVideo = Boolean(project.videoUrl);
+  const shouldAutoplayVideo = isVideo && !shouldReduceMotion && !isMobile;
+
+  const mediaRef = usePauseMediaWhenNotInView({ enabled: isVideo });
 
   // Helper function to avoid nested ternary
   const getAnimateState = () => {
@@ -77,9 +81,9 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
         isActive && "border-primary/50 shadow-lg is-active",
         isPressed && "scale-[0.98] shadow-inner"
       )}
-      whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+      whileHover={shouldReduceMotion ? undefined : { y: -3 }}
       animate={getAnimateState()}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+      transition={{ type: "spring", stiffness: 500, damping: 35, mass: 0.8 }}
     >
       <div className="relative flex flex-col h-full">
         {/* Image container */}
@@ -91,12 +95,13 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
 
           {isVideo ? (
             <video
+              ref={mediaRef}
               src={primaryMedia}
               muted
               loop
               playsInline
-              autoPlay={!shouldReduceMotion}
-              preload="metadata"
+              autoPlay={shouldAutoplayVideo}
+              preload={shouldAutoplayVideo ? "metadata" : "none"}
               className={cn(
                 "h-full w-full object-cover transition-transform duration-300 ease-out",
                 "group-hover:scale-105 group-[.is-active]:scale-105"
@@ -106,6 +111,8 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
             <img
               src={primaryMedia}
               alt={project.title}
+              width={400}
+              height={225}
               loading="lazy"
               decoding="async"
               onLoad={handleImageLoad}
@@ -161,18 +168,18 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
         <div className="flex items-center justify-end mt-4 pt-3 border-t border-border/50">
           <motion.div 
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+              "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
               "bg-primary/15 text-primary",
               "group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-lg group-hover:shadow-primary/25",
               "group-[.is-active]:bg-primary group-[.is-active]:text-primary-foreground group-[.is-active]:shadow-lg group-[.is-active]:shadow-primary/25"
             )}
-            animate={(isHovered || isActive) ? { scale: 1.03 } : { scale: 1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            animate={shouldReduceMotion ? undefined : { scale: (isHovered || isActive) ? 1.02 : 1 }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
           >
             Bekijk project
             <motion.span
-              animate={(isHovered || isActive) ? { x: 3 } : { x: 0 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              animate={shouldReduceMotion ? undefined : { x: (isHovered || isActive) ? 2 : 0 }}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
             >
               <ArrowRight className="w-4 h-4" />
             </motion.span>

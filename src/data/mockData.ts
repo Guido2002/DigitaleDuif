@@ -135,6 +135,7 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     companyLogo: "https://ui-avatars.com/api/?name=Global+Corp&background=3AA7FF&color=fff&size=80&bold=true&format=svg",
   },
+
 ];
 
 // Project Data
@@ -232,7 +233,8 @@ export const projects: Project[] = [
     solution: "Een Unity-gebaseerde Mixed Reality applicatie waarin sporen in de ruimte worden geplaatst en persistent opgeslagen. Spelers doorlopen een vast forensisch proces: sporen lokaliseren, veiligstellen, labelen en verzenden, met focus op realistische handelingen en volgorde.",
     impact: "Studenten leren forensische procedures door actief te oefenen in hun eigen omgeving, zonder fysieke materialen of een echte plaats delict nodig te hebben.",
     techStack: ["Unity", "C#", "Mixed Reality", "Spatial Anchors", "Scenario opslag", "Forensic Training"],
-    images: ["/media/site/placeholder.svg"],
+    images: [
+    ],
     serviceId: "mr-interfaces",
     videoUrl: "/media/projects/mr-sporensimulator/sporen-simulator.webm",
   },

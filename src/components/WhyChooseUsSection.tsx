@@ -60,7 +60,7 @@ const WhyChooseUsSection = () => {
               {usps.slice(0, 3).map((usp, index) => (
                 <FadeInWhenVisible 
                   key={`${selectedCategory}-${usp.title}`} 
-                  delay={0.05 + index * 0.05}
+                  delay={0.03 + index * 0.03}
                   className={cn(index === 2 ? "md:col-span-2 lg:col-span-1" : "")}
                 >
                   <div className={cn("h-full", index === 2 ? "md:w-[calc(50%-0.75rem)] md:mx-auto lg:w-full lg:mx-0" : "")}>
@@ -82,7 +82,7 @@ const WhyChooseUsSection = () => {
               {usps.slice(3, 6).map((usp, index) => (
                 <FadeInWhenVisible 
                   key={`${selectedCategory}-${usp.title}`} 
-                  delay={0.15 + index * 0.05}
+                  delay={0.09 + index * 0.03}
                   className={cn(index === 2 ? "md:col-span-2 lg:col-span-1" : "")}
                 >
                   <div className={cn("h-full", index === 2 ? "md:w-[calc(50%-0.75rem)] md:mx-auto lg:w-full lg:mx-0" : "")}>

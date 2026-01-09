@@ -24,7 +24,7 @@ const Navbar = () => {
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
 
   // Check if a nav link is active based on scroll position or route
-  const isActive = (path: string) => {
+  const isActive = React.useCallback((path: string) => {
     // On homepage, use scroll-based active detection
     if (location.pathname === "/") {
       if (path === "/") {
@@ -50,7 +50,7 @@ const Navbar = () => {
       return true;
     }
     return location.pathname + location.hash === path;
-  };
+  }, [location.pathname, location.hash, activeSection]);
 
   return (
     <nav 

@@ -1,8 +1,10 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 // Hand-drawn style SVG doodle components for consistent use across the website
+// Note: These components use whileInView animations which respect browser reduced motion settings
+// via framer-motion's built-in accessibility features
 
 export const DoodleScribble = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 120 30" className={cn("w-28", className)} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -11,7 +13,7 @@ export const DoodleScribble = ({ className }: { className?: string }) => (
       initial={{ pathLength: 0, opacity: 0 }}
       whileInView={{ pathLength: 1, opacity: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+      transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
     />
   </svg>
 );
@@ -35,7 +37,7 @@ export const DoodleSpiral = ({ className }: { className?: string }) => (
       initial={{ pathLength: 0 }}
       whileInView={{ pathLength: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 2, delay: 0.5 }}
+      transition={{ duration: 1.2, delay: 0.3 }}
     />
   </svg>
 );
@@ -59,21 +61,24 @@ export const DoodleArrowCurved = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export const DoodleStar = ({ className, filled = true }: { className?: string; filled?: boolean }) => (
-  <motion.svg 
-    viewBox="0 0 40 40" 
-    className={cn("w-8 h-8", className)} 
-    fill={filled ? "currentColor" : "none"}
-    stroke={filled ? "none" : "currentColor"}
-    strokeWidth="2"
-    initial={{ scale: 0, rotate: -180 }}
-    whileInView={{ scale: 1, rotate: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay: 0.8, type: "spring", stiffness: 200 }}
-  >
-    <path d="M20 4 L22 16 L34 16 L24 22 L28 34 L20 26 L12 34 L16 22 L6 16 L18 16 Z" />
-  </motion.svg>
-);
+export const DoodleStar = ({ className, filled = true }: { className?: string; filled?: boolean }) => {
+  const shouldReduceMotion = useReducedMotion();
+  return (
+    <motion.svg 
+      viewBox="0 0 40 40" 
+      className={cn("w-8 h-8", className)} 
+      fill={filled ? "currentColor" : "none"}
+      stroke={filled ? "none" : "currentColor"}
+      strokeWidth="2"
+      initial={shouldReduceMotion ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
+      whileInView={{ scale: 1, rotate: 0 }}
+      viewport={{ once: true }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: 0.8, type: "spring", stiffness: 200 }}
+    >
+      <path d="M20 4 L22 16 L34 16 L24 22 L28 34 L20 26 L12 34 L16 22 L6 16 L18 16 Z" />
+    </motion.svg>
+  );
+};
 
 export const DoodleCircle = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 50 50" className={cn("w-10 h-10", className)} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -82,7 +87,7 @@ export const DoodleCircle = ({ className }: { className?: string }) => (
       initial={{ pathLength: 0 }}
       whileInView={{ pathLength: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 1.5, delay: 0.3 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
     />
   </svg>
 );

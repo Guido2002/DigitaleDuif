@@ -149,6 +149,16 @@ const xrConfig: CategoryConfig = {
       companyLogo: "/icons/sweco_logo.png",
       linkedinUrl: "https://www.linkedin.com/in/quinten-mollema-78b20495/",
     },
+
+    {
+    quote: "In 2024-2025 heeft Guido van Duivenvoorde voor een renovatie/nieuwbouw project bij onze opdrachtgever een Mixed Reality model gemaakt. Hiermee konden de ontwerpers en de opdrachtgever op de projectlocatie meekijken hoe de renovatie van o.a. ruimtes en installaties in de bestaande bouw eruit kon komen te zien en hoe de nieuwbouw aansloot bij de bestaande bouw. Mixed Reality is daarmee een fantastisch middel gebleken om op de projectlocatie aan te tonen dat het ontworpen 3D model past op en naast de bestaande bouw of clashes goed in beeld bracht. De passie en inzet van Guido om deze makkelijk bedienbaar Mixed Reality model te maken, heeft enorm geholpen om voor het ontwerpbureau en de opdrachtgever een mooi en inzichtelijk ontwerp te maken.",
+    author: "Cor-Jan Baltus",
+    title: "Projectmanager Drinkwater, Sweco Nederland",
+    avatar: "/icons/corjan.jpg",
+    rating: 5,
+    companyLogo: "/icons/sweco_logo.png",
+  },
+
   ],
   processSteps: [
     {

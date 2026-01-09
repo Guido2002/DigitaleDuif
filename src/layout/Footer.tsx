@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { Mail, Linkedin, ExternalLink, Bird } from "lucide-react";
 import { Link } from "react-router-dom";
 import { DoodleScribble, DoodleStar, FloatingDoodle } from "@/components/ui/doodles";
 
-const Footer = () => {
+const Footer: React.FC = memo(function Footer() {
   const linkFocus = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
 
   // Animated underline link style
@@ -90,6 +90,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
 
 export default Footer;

@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import pigeon1Image from "@/assets/pigeon1.png";
 import pigeon4Image from "@/assets/pigeon4.png";
@@ -29,6 +29,7 @@ const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
   rotateIntensity = 2, // degrees
   animateOpacity = 1, // Default to full opacity after fade-in
 }) => {
+  const shouldReduceMotion = useReducedMotion();
   const sizeClasses = {
     small: "h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20", // Small on mobile, larger on desktop
     medium: "h-20 w-20 md:h-28 md:w-28 lg:h-36 lg:w-36", // Medium on mobile, larger on desktop
@@ -50,13 +51,20 @@ const FlyingBirdIllustration: React.FC<FlyingBirdIllustrationProps> = ({
         className
       )}
       initial={{ opacity: 0, x: initialX, y: initialY }}
-      animate={{
+      animate={shouldReduceMotion ? {
+        opacity: animateOpacity,
+        x: initialX,
+        y: initialY,
+        rotate: 0,
+      } : {
         opacity: animateOpacity,
         y: [initialY, `${parseFloat(initialY) + floatIntensity}%`, initialY, `${parseFloat(initialY) - floatIntensity}%`, initialY],
         x: [initialX, `${parseFloat(initialX) + floatIntensity}%`, initialX, `${parseFloat(initialX) - floatIntensity}%`, initialX],
         rotate: [0, rotateIntensity, -rotateIntensity, rotateIntensity, 0],
       }}
-      transition={{
+      transition={shouldReduceMotion ? {
+        opacity: { duration: 0.3, delay: animationDelay },
+      } : {
         opacity: { duration: 1, delay: animationDelay, ease: "easeOut" },
         y: { duration: animationDuration, repeat: Infinity, ease: "easeInOut", delay: animationDelay },
         x: { duration: animationDuration * 1.2, repeat: Infinity, ease: "easeInOut", delay: animationDelay + 0.5 },

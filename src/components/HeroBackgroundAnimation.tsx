@@ -2,6 +2,7 @@ import React from "react";
 import { motion, Variants } from "framer-motion"; // Import Variants
 import { cn } from "@/lib/utils";
 import ParticlesBackground from "./ParticlesBackground"; // Import the new ParticlesBackground
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface HeroBackgroundAnimationProps {
   className?: string;
@@ -9,6 +10,7 @@ interface HeroBackgroundAnimationProps {
 }
 
 const HeroBackgroundAnimation: React.FC<HeroBackgroundAnimationProps> = ({ className, reducedMotion = false }) => {
+  const isMobile = useIsMobile();
   // const baseTransition = { // This variable is not used
   //   duration: reducedMotion ? 0 : 15,
   //   ease: "easeInOut",
@@ -60,9 +62,10 @@ const HeroBackgroundAnimation: React.FC<HeroBackgroundAnimationProps> = ({ class
         style={{ animationDelay: reducedMotion ? '0s' : '1s' }}
       />
 
-      {/* 3D Particle Field */}
-      {!reducedMotion && <ParticlesBackground particleCount={50} className="hidden md:block" />}
-      {!reducedMotion && <ParticlesBackground particleCount={20} className="md:hidden" />}
+      {/* Particle field (skip on mobile for performance) */}
+      {!reducedMotion && !isMobile && (
+        <ParticlesBackground particleCount={50} />
+      )}
     </div>
   );
 };

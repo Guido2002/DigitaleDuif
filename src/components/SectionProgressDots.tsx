@@ -22,9 +22,13 @@ const SectionProgressDots: React.FC<SectionProgressDotsProps> = ({
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    if (!element) return;
+
+    const nav = document.querySelector('nav[aria-label="Hoofdnavigatie"]');
+    const navHeight = nav instanceof HTMLElement ? nav.getBoundingClientRect().height : 80;
+    const extraGap = 12;
+    const top = element.getBoundingClientRect().top + globalThis.scrollY - navHeight - extraGap;
+    globalThis.window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   };
 
   // Determine dot colors based on current section background

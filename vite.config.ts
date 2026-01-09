@@ -3,37 +3,89 @@ import dyadComponentTagger from "@dyad-sh/react-vite-component-tagger";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-export default defineConfig(() => ({
-  server: {
-    host: "::",
-    port: 8080,
-  },
-  plugins: [dyadComponentTagger(), react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  optimizeDeps: {
-    exclude: ['pdfjs-dist', 'react-pdf'],
-    esbuildOptions: {
-      supported: {
-        bigint: true
+export default defineConfig(() => {
+  const getPackageName = (moduleId: string): string | null => {
+    const parts = moduleId.split('node_modules/');
+    let subpath = parts.at(-1) ?? '';
+
+    // pnpm stores deps under: node_modules/.pnpm/<pkg>@<ver>/node_modules/<pkg>/...
+    if (subpath.startsWith('.pnpm/')) {
+      const nestedIndex = subpath.indexOf('/node_modules/');
+      if (nestedIndex === -1) {
+        subpath = subpath.slice('.pnpm/'.length);
+      } else {
+        subpath = subpath.slice(nestedIndex + '/node_modules/'.length);
       }
     }
-  },
-  ssr: {
-    noExternal: ['pdfjs-dist']
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['@radix-ui/react-accordion', '@radix-ui/react-alert-dialog', '@radix-ui/react-aspect-ratio', '@radix-ui/react-avatar', '@radix-ui/react-checkbox', '@radix-ui/react-collapsible', '@radix-ui/react-context-menu', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-hover-card', '@radix-ui/react-label', '@radix-ui/react-menubar', '@radix-ui/react-navigation-menu', '@radix-ui/react-popover', '@radix-ui/react-progress', '@radix-ui/react-radio-group', '@radix-ui/react-scroll-area', '@radix-ui/react-select', '@radix-ui/react-separator', '@radix-ui/react-slider', '@radix-ui/react-slot', '@radix-ui/react-switch', '@radix-ui/react-tabs', '@radix-ui/react-toast', '@radix-ui/react-toggle', '@radix-ui/react-toggle-group', '@radix-ui/react-tooltip', 'class-variance-authority', 'clsx', 'cmdk', 'lucide-react', 'tailwind-merge'],
-          framer: ['framer-motion'],
+
+    if (!subpath) return null;
+    if (subpath.startsWith('@')) {
+      const [scope, name] = subpath.split('/');
+      if (!scope || !name) return null;
+      return `${scope}/${name}`;
+    }
+    return subpath.split('/')[0] ?? null;
+  };
+
+  return {
+    server: {
+      host: '::',
+      port: 8080,
+    },
+    plugins: [dyadComponentTagger(), react()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
+    optimizeDeps: {
+      exclude: ['pdfjs-dist', 'react-pdf'],
+      esbuildOptions: {
+        supported: {
+          bigint: true,
         },
       },
     },
-  },
-}));
+    ssr: {
+      noExternal: ['pdfjs-dist'],
+    },
+    build: {
+      target: 'es2020',
+      minify: 'esbuild',
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return;
+
+            const pkg = getPackageName(id);
+            if (!pkg) return;
+
+            // Core framework
+            if (pkg === 'react' || pkg === 'react-dom' || pkg === 'scheduler') return 'vendor-react';
+            if (pkg === 'react-router' || pkg === 'react-router-dom') return 'vendor-router';
+
+            // UI primitives + helpers
+            if (pkg.startsWith('@radix-ui/')) return 'vendor-radix';
+            if (pkg === 'lucide-react') return 'vendor-icons';
+            if (pkg === 'cmdk') return 'vendor-cmdk';
+            if (pkg === 'class-variance-authority' || pkg === 'clsx' || pkg === 'tailwind-merge') return 'vendor-ui-utils';
+
+            // Data + forms
+            if (pkg === '@tanstack/react-query' || pkg.startsWith('@tanstack/')) return 'vendor-query';
+            if (pkg === 'react-hook-form' || pkg === '@hookform/resolvers' || pkg === 'zod') return 'vendor-forms';
+
+            // Animations
+            if (pkg === 'framer-motion') return 'framer';
+            if (pkg.startsWith('@react-spring/')) return 'spring';
+
+            // Charts (only if/when used)
+            if (pkg === 'recharts' || pkg.startsWith('d3-')) return 'vendor-charts';
+
+            // Everything else: let Rollup decide.
+          },
+        },
+      },
+    },
+  };
+});

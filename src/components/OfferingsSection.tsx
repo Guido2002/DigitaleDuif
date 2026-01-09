@@ -3,6 +3,7 @@ import SectionHeader from "./SectionHeader";
 import FadeInWhenVisible from "./FadeInWhenVisible";
 import { useSpring, animated } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
+import { useReducedMotion } from "framer-motion";
 import { useCategory } from "@/context/CategoryContext";
 import { getCategoryConfig, defaultConfig, type OfferingContent } from "@/data/categoryConfig";
 import { cn } from "@/lib/utils";
@@ -19,6 +20,7 @@ interface OfferingCardProps {
 const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => {
   const [isHovered, setIsHovered] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
+  const shouldReduceMotion = useReducedMotion();
   
   const { ref, inView } = useInView({ 
     triggerOnce: true, 
@@ -35,18 +37,20 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
   }, []);
 
   // Enhanced spring animation with scale and stagger
-  // Remove scale on mobile for better performance
-  const initialScale = isMobile ? 1 : 0.92;
+  // Skip animations when reduced motion is preferred
+  const initialScale = (isMobile || shouldReduceMotion) ? 1 : 0.97;
+  const yOffset = shouldReduceMotion ? 0 : 20;
   const springProps = useSpring({
     opacity: inView ? 1 : 0,
-    y: inView ? 0 : 40,
+    y: inView ? 0 : yOffset,
     scale: inView ? 1 : initialScale,
-    delay: index * 100,
+    delay: shouldReduceMotion ? 0 : index * 50,
     config: { 
-      tension: 220, 
+      tension: 300, 
       friction: 28,
-      mass: 1
+      mass: 0.7
     },
+    immediate: shouldReduceMotion,
   });
 
   // Separate spring for hover effects
