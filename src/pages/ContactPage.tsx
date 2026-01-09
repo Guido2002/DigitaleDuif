@@ -131,7 +131,7 @@ const ContactPage = () => {
   // Animation config respects reduced motion
   const animConfig = {
     duration: shouldReduceMotion ? 0 : 0.3,
-    ease: "easeOut"
+    ease: "easeOut" as const
   };
 
   return (
