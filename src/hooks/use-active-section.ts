@@ -9,6 +9,7 @@ export const homeSections: Section[] = [
   { id: "home", label: "Home" },
   { id: "about", label: "Over mij" },
   { id: "why-us", label: "Waarom wij" },
+  { id: "featured-projects", label: "Projecten" },
   { id: "process", label: "Proces" },
   { id: "testimonials", label: "Reviews" },
   { id: "faq", label: "FAQ" },

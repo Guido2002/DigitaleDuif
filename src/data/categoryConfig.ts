@@ -598,13 +598,23 @@ const mobileAppsConfig: CategoryConfig = {
   ],
   testimonials: [
     {
-      quote: "Onze event app had binnen 2 weken 90% downloadgraad onder bezoekers. De pushnotificaties waren een game-changer.",
-      author: "Thomas Visser",
-      title: "Event Manager, Festival Org",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      quote: "Guido is iemand die zich met veel energie en toewijding inzet voor projecten waar hij enthousiast over is. Hij werkt met plezier en brengt op een natuurlijke manier humor in het werk. Door zijn kritische houding en hoge standaarden levert hij consistent goede resultaten.",
+      author: "Daniel Looijestijn",
+      title: "Low code developer, UNO",
+      avatar: "domineedaniel.jpg",
       rating: 5,
-      companyLogo: "https://ui-avatars.com/api/?name=Festival+Org&background=0074FF&color=fff&size=80&bold=true&format=svg",
+      companyLogo: "uno_logo.jpg",
     },
+
+    {
+      quote: "Ik heb de samenwerking met Guido als erg positief ervaren. Hij is gedreven, werkt snel en denkt actief mee. Wat ik vooral fijn vond, is dat hij continu feedback vraagt zodat het eindresultaat echt aansluit bij de wensen van zowel de opdrachtgever als de gebruiker.",
+      author: "Enrique Alonso Barreiro",
+      title: "Junior IT Professional",
+      avatar: "enrique.jpg",
+      rating: 5,
+      linkedinUrl: "https://www.linkedin.com/in/enrique-alonso-barreiro-78929925a/",
+    },
+    
   ],
   processSteps: [
     {

@@ -1,17 +1,24 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import SectionHeader from "./SectionHeader";
 import FadeInWhenVisible from "./FadeInWhenVisible";
 import { useSpring, animated } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
 import { useCategory } from "@/context/CategoryContext";
-import { getCategoryConfig, defaultConfig, type FeaturedProjectContent } from "@/data/categoryConfig";
+import { projects, Project } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
+// Map category to serviceIds (same as in ImpactCasesSection)
+const categoryServiceMap: Record<string, string[]> = {
+  'xr': ['vr-app-dev', 'mr-interfaces', 'data-analytics'],
+  'websites': ['web-development', 'ui-ux-design'],
+  'mobile-apps': ['mobile-app-development'],
+};
+
 interface ProjectCardProps {
-  project: FeaturedProjectContent;
+  project: Project;
   index: number;
   categoryKey?: string | null;
 }
@@ -36,7 +43,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
       className="group relative h-full"
     >
       <Link
-        to={`/projecten#${project.id}`}
+        to={`/projecten?project=${project.id}`}
         className={cn(
           "block h-full rounded-2xl overflow-hidden bg-primary border-none",
           "transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:shadow-primary/20",
@@ -46,7 +53,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
         {/* Image */}
         <div className="relative aspect-[16/10] overflow-hidden">
           <img
-            src={project.image}
+            src={project.images[0]}
             alt={project.title}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
@@ -72,7 +79,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
 
           {/* Tech stack */}
           <div className="flex flex-wrap gap-2">
-            {project.techStack.map((tech) => (
+            {project.techStack.slice(0, 3).map((tech) => (
               <span
                 key={tech}
                 className="px-2 py-1 text-xs bg-primary-foreground/10 text-primary-foreground rounded"
@@ -80,6 +87,11 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
                 {tech}
               </span>
             ))}
+            {project.techStack.length > 3 && (
+              <span className="px-2 py-1 text-xs bg-primary-foreground/10 text-primary-foreground rounded">
+                +{project.techStack.length - 3}
+              </span>
+            )}
           </div>
         </div>
 
@@ -96,8 +108,24 @@ ProjectCard.displayName = "ProjectCard";
 
 const FeaturedProjectsSection: React.FC = () => {
   const { selectedCategory } = useCategory();
-  const config = selectedCategory ? getCategoryConfig(selectedCategory) : defaultConfig;
-  const { featuredProjects } = config;
+  
+  // Filter projects based on selected category
+  const featuredProjects = useMemo(() => {
+    if (!selectedCategory) {
+      // Default: show 3 random projects from different categories
+      return projects.slice(0, 3);
+    }
+    
+    const serviceIds = categoryServiceMap[selectedCategory];
+    if (!serviceIds) return projects.slice(0, 3);
+    
+    const filtered = projects.filter(
+      (p) => p.serviceId && serviceIds.includes(p.serviceId)
+    );
+    
+    // Return up to 3 projects
+    return filtered.slice(0, 3);
+  }, [selectedCategory]);
 
   // Don't render if no projects
   if (!featuredProjects || featuredProjects.length === 0) {
@@ -116,7 +144,12 @@ const FeaturedProjectsSection: React.FC = () => {
           />
         </FadeInWhenVisible>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className={cn(
+          "grid",
+          featuredProjects.length === 1 && "grid-cols-1 max-w-md mx-auto gap-4 md:gap-6",
+          featuredProjects.length === 2 && "grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto gap-6 md:gap-10",
+          featuredProjects.length >= 3 && "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+        )}>
           {featuredProjects.map((project, index) => (
             <ProjectCard
               key={`${selectedCategory}-${project.id}`}

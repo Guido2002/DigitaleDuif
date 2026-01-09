@@ -167,7 +167,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = memo(function Testimonia
                   )}
                 </div>
                 <p className={cn(
-                  "text-sm max-w-[200px]",
+                  "text-sm max-w-[200px] text-center",
                   isDarkBackground ? "text-primary-foreground/70" : "text-muted-foreground"
                 )}>
                   {title}

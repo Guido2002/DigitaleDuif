@@ -65,6 +65,7 @@ const ValidationIndicator = ({ isValid, isTouched }: { isValid: boolean; isTouch
 const ContactPage = () => {
   const [searchParams] = useSearchParams();
   const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -94,10 +95,37 @@ const ContactPage = () => {
   }, [searchParams, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await new Promise(resolve => setTimeout(resolve, 1500)); 
+    setSubmitError(null);
+    
+    try {
+      const formData = new FormData();
+      formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+      formData.append("name", values.name);
+      formData.append("email", values.email);
+      formData.append("message", values.message);
+      if (values.service) {
+        const serviceName = services.find(s => s.id === values.service)?.title || values.service;
+        formData.append("service", serviceName);
+      }
+      // Add subject for email
+      formData.append("subject", `Nieuw contactformulier bericht van ${values.name}`);
 
-    setIsSubmitted(true);
-    form.reset();
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+        form.reset();
+      } else {
+        setSubmitError("Er is iets misgegaan. Probeer het later opnieuw.");
+      }
+    } catch {
+      setSubmitError("Er is een netwerkfout opgetreden. Controleer uw internetverbinding.");
+    }
   };
 
   // Animation config respects reduced motion
@@ -175,25 +203,32 @@ const ContactPage = () => {
               </motion.div>
             ) : (
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field, fieldState }) => (
                     <FormItem>
-                      <FormLabel className="text-foreground font-medium">Naam</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Input 
-                            placeholder="Uw naam" 
+                            placeholder=" "
                             autoComplete="name"
                             {...field} 
                             className={cn(
-                              "border-input bg-background/50 text-foreground transition-all duration-150 focus:border-primary focus:ring-2 focus:ring-primary/20 h-12 pr-10",
+                              "peer border-input bg-background/50 text-foreground transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 pr-10 pt-4",
                               fieldState.isTouched && !fieldState.error && "border-green-500/50",
                               fieldState.error && "border-destructive/50"
                             )}
                           />
+                          <FormLabel className={cn(
+                            "absolute left-3 transition-all duration-200 pointer-events-none text-muted-foreground",
+                            "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base",
+                            "peer-focus:top-2 peer-focus:-translate-y-0 peer-focus:text-xs peer-focus:text-primary peer-focus:font-medium",
+                            field.value ? "top-2 -translate-y-0 text-xs font-medium text-foreground" : ""
+                          )}>
+                            Naam
+                          </FormLabel>
                           <ValidationIndicator 
                             isValid={!fieldState.error && field.value.length >= 2} 
                             isTouched={fieldState.isTouched || false} 
@@ -209,20 +244,27 @@ const ContactPage = () => {
                   name="email"
                   render={({ field, fieldState }) => (
                     <FormItem>
-                      <FormLabel className="text-foreground font-medium">E-mailadres</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Input 
                             type="email" 
-                            placeholder="uw.email@voorbeeld.nl" 
+                            placeholder=" "
                             autoComplete="email"
                             {...field} 
                             className={cn(
-                              "border-input bg-background/50 text-foreground transition-all duration-150 focus:border-primary focus:ring-2 focus:ring-primary/20 h-12 pr-10",
+                              "peer border-input bg-background/50 text-foreground transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 pr-10 pt-4",
                               fieldState.isTouched && !fieldState.error && field.value && "border-green-500/50",
                               fieldState.error && "border-destructive/50"
                             )}
                           />
+                          <FormLabel className={cn(
+                            "absolute left-3 transition-all duration-200 pointer-events-none text-muted-foreground",
+                            "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base",
+                            "peer-focus:top-2 peer-focus:-translate-y-0 peer-focus:text-xs peer-focus:text-primary peer-focus:font-medium",
+                            field.value ? "top-2 -translate-y-0 text-xs font-medium text-foreground" : ""
+                          )}>
+                            E-mailadres
+                          </FormLabel>
                           <ValidationIndicator 
                             isValid={!fieldState.error && field.value.length > 0} 
                             isTouched={fieldState.isTouched || false} 
@@ -239,13 +281,16 @@ const ContactPage = () => {
                   name="service"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-foreground font-medium">Onderwerp / Dienst</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="border-input bg-background/50 text-foreground transition-all duration-150 focus:border-primary focus:ring-2 focus:ring-primary/20 h-12">
-                            <SelectValue placeholder="Selecteer een onderwerp" />
-                          </SelectTrigger>
-                        </FormControl>
+                      <div className="relative">
+                        <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger className={cn(
+                              "border-input bg-background/50 text-foreground transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20 h-14 pt-4",
+                              field.value && "[&>span]:pt-0"
+                            )}>
+                              <SelectValue placeholder=" " />
+                            </SelectTrigger>
+                          </FormControl>
                         <SelectContent>
                           {services.map((service) => (
                             <SelectItem key={service.id} value={service.id}>
@@ -255,6 +300,13 @@ const ContactPage = () => {
                           <SelectItem value="other">Anders</SelectItem>
                         </SelectContent>
                       </Select>
+                        <FormLabel className={cn(
+                          "absolute left-3 transition-all duration-200 pointer-events-none text-muted-foreground",
+                          field.value ? "top-2 text-xs font-medium text-foreground" : "top-1/2 -translate-y-1/2 text-base"
+                        )}>
+                          Onderwerp / Dienst
+                        </FormLabel>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -273,23 +325,30 @@ const ContactPage = () => {
 
                     return (
                     <FormItem>
-                      <div className="flex items-center justify-between">
-                        <FormLabel className="text-foreground font-medium">Bericht</FormLabel>
-                        {/* Character counter */}
-                        <span className={cn("text-xs transition-colors duration-150", getCounterColor())}>
-                          {messageLength}/{maxMessageLength}
-                        </span>
-                      </div>
                       <FormControl>
-                        <Textarea 
-                          placeholder="Waar kan ik u mee helpen?" 
-                          {...field} 
-                          className={cn(
-                            "min-h-[120px] md:min-h-[150px] border-input bg-background/50 text-foreground transition-all duration-150 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none",
-                            fieldState.isTouched && !fieldState.error && messageLength >= 10 && "border-green-500/50",
-                            fieldState.error && "border-destructive/50"
-                          )}
-                        />
+                        <div className="relative">
+                          <Textarea 
+                            placeholder=" "
+                            {...field} 
+                            className={cn(
+                              "peer min-h-[120px] md:min-h-[150px] border-input bg-background/50 text-foreground transition-all duration-200 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none pt-6",
+                              fieldState.isTouched && !fieldState.error && messageLength >= 10 && "border-green-500/50",
+                              fieldState.error && "border-destructive/50"
+                            )}
+                          />
+                          <FormLabel className={cn(
+                            "absolute left-3 transition-all duration-200 pointer-events-none text-muted-foreground",
+                            "peer-placeholder-shown:top-3 peer-placeholder-shown:text-base",
+                            "peer-focus:top-1.5 peer-focus:text-xs peer-focus:text-primary peer-focus:font-medium",
+                            field.value ? "top-1.5 text-xs font-medium text-foreground" : ""
+                          )}>
+                            Bericht
+                          </FormLabel>
+                          {/* Character counter */}
+                          <span className={cn("absolute right-3 top-1.5 text-xs transition-colors duration-150", getCounterColor())}>
+                            {messageLength}/{maxMessageLength}
+                          </span>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -297,6 +356,13 @@ const ContactPage = () => {
                   }}
                 />
                 
+                {submitError && (
+                  <div className="flex items-center gap-2 p-3 rounded-lg bg-destructive/10 text-destructive text-sm">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                    <span>{submitError}</span>
+                  </div>
+                )}
+
                 <Button 
                   type="submit" 
                   className="w-full h-12 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-150 active:scale-[0.98]"

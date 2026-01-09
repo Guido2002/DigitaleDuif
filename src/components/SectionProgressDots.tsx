@@ -5,7 +5,7 @@ import { useActiveSection, homeSections, Section } from "@/hooks/use-active-sect
 import { useIsMobile } from "@/hooks/use-mobile";
 
 // Define which sections have dark or blue backgrounds
-const blueSections = ["home", "cta"]; // Hero has blue gradient overlay, CTA has blue gradient
+const blueSections = ["home", "featured-projects", "cta"]; // Hero has blue gradient overlay, Featured Projects has dark bg, CTA has blue gradient
 
 interface SectionProgressDotsProps {
   sections?: Section[];
