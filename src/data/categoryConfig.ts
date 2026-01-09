@@ -84,26 +84,26 @@ const xrConfig: CategoryConfig = {
     title: "Transformeer jouw bedrijf met",
     titleHighlight: "XR-technologie",
     subtitle: "Ik bouw immersieve VR, AR en MR ervaringen die trainen, simuleren en inspireren. Van concept tot implementatie, samen met jou.",
-    backgroundImages: ["/xr.jpeg", "/ux1.jpeg"],
+    backgroundImages: ["/media/site/xr.jpeg", "/media/site/ux1.jpeg"],
   },
   usps: [
     {
       icon: Glasses,
       title: "XR Specialist",
       description: "Jarenlange ervaring met VR, AR en MR projecten in diverse sectoren.",
-      backgroundImage: "/xr.jpeg",
+      backgroundImage: "/media/site/xr.jpeg",
     },
     {
       icon: Gamepad2,
       title: "Unity Expert",
       description: "Diepgaande Unity kennis voor complexe simulaties en interactieve ervaringen.",
-      backgroundImage: "/unity-modified.jpg",
+      backgroundImage: "/media/site/unity-modified.jpg",
     },
     {
       icon: Eye,
       title: "Immersief Design",
       description: "Ontwerp dat de gebruiker volledig onderdompelt en engageert.",
-      backgroundImage: "/ux1.jpeg",
+      backgroundImage: "/media/site/ux1.jpeg",
     },
     {
       icon: Users,
@@ -324,26 +324,26 @@ const websitesConfig: CategoryConfig = {
     title: "Jouw digitale visitekaartje,",
     titleHighlight: "professioneel gebouwd",
     subtitle: "Ik bouw snelle, schaalbare websites en webapplicaties die converteren. Van startup landing page tot enterprise platform.",
-    backgroundImages: ["/webapp.jpeg", "/ux1.jpeg"],
+    backgroundImages: ["/media/site/webapp.jpeg", "/media/site/ux1.jpeg"],
   },
   usps: [
     {
       icon: PenTool,
       title: "Strategie & UX Design",
       description: "Ik ontwerp websites met een logische structuur en sterke gebruikerservaring die bezoekers gericht naar actie leiden.",
-      backgroundImage: "/webapp.jpeg",
+      backgroundImage: "/media/site/webapp.jpeg",
     },
     {
       icon: Zap,
       title: "Techniek & Performance",
       description: "Ik bouw snelle, veilige en toekomstbestendige websites die op elk apparaat optimaal presteren.",
-      backgroundImage: "/website_performance.png",
+      backgroundImage: "/media/site/website_performance.png",
     },
     {
       icon: Palette,
       title: "Design & Branding",
       description: "Ik vertaal jouw merk naar een modern, consistent en visueel aantrekkelijk webdesign.",
-      backgroundImage: "/ux1.jpeg"
+      backgroundImage: "/media/site/ux1.jpeg"
     },
     {
       icon: Code,
@@ -559,26 +559,26 @@ const mobileAppsConfig: CategoryConfig = {
     title: "Jouw idee, altijd binnen",
     titleHighlight: "handbereik",
     subtitle: "Ik ontwikkel mobiele apps in Flutter voor MVP's, prototypes en compacte producties. Focus op UX, performance en een duidelijke scope.",
-    backgroundImages: ["/webapp.jpeg", "/ux1.jpeg"],
+    backgroundImages: ["/media/site/webapp.jpeg", "/media/site/ux1.jpeg"],
   },
   usps: [
     {
       icon: Smartphone,
       title: "iOS & Android",
       description: "Eén codebase voor beide platformen met Flutter. Kostenefficiënt en snel naar de markt.",
-      backgroundImage: "/webapp.jpeg",
+      backgroundImage: "/media/site/webapp.jpeg",
     },
     {
       icon: PenTool,
       title: "UX & Interactieontwerp",
       description: "Sterke focus op gebruiksvriendelijkheid, intuïtieve flows en een fijne gebruikservaring.",
-      backgroundImage: "/ux1.jpeg",
+      backgroundImage: "/media/site/ux1.jpeg",
     },
     {
       icon: Rocket,
       title: "App Store Ready",
       description: "Volledige begeleiding bij publicatie in de App Store en Play Store.",
-      backgroundImage: "/appstore-modified.jpg",
+      backgroundImage: "/media/site/appstore-modified.jpg",
     },
     {
       icon: Target,
@@ -833,7 +833,7 @@ export const defaultConfig: CategoryConfig = {
     title: "DigitaleDuif: Ik geef jouw",
     titleHighlight: "idee vleugels",
     subtitle: "Ik bouw VR, MR, websites en apps die écht werken. Van idee tot lancering, samen met jou.",
-    backgroundImages: ["/xr.jpeg", "/webapp.jpeg", "/ux1.jpeg"],
+    backgroundImages: ["/media/site/xr.jpeg", "/media/site/webapp.jpeg", "/media/site/ux1.jpeg"],
   },
   usps: xrConfig.usps, // Use XR as default since it was original
   testimonials: xrConfig.testimonials,

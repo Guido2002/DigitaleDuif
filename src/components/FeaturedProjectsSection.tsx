@@ -33,6 +33,43 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
     config: { tension: 280, friction: 60 },
   });
 
+  const videoUrl = project.videoUrl;
+  const isLocalVideo = Boolean(
+    videoUrl && (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm"))
+  );
+
+  let mediaNode: React.ReactNode;
+  if (videoUrl) {
+    mediaNode = isLocalVideo ? (
+      // eslint-disable-next-line jsx-a11y/media-has-caption
+      <video
+        src={videoUrl}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+    ) : (
+      <iframe
+        src={`${videoUrl}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoUrl.split("/").pop()}`}
+        title={project.title}
+        className="w-full h-full object-cover scale-150"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      />
+    );
+  } else {
+    mediaNode = (
+      <img
+        src={project.images[0]}
+        alt={project.title}
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+      />
+    );
+  }
+
   return (
     <animated.div
       ref={ref}
@@ -50,14 +87,9 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
           "focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
         )}
       >
-        {/* Image */}
+        {/* Media (prefer video when available) */}
         <div className="relative aspect-[16/10] overflow-hidden">
-          <img
-            src={project.images[0]}
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
-          />
+          {mediaNode}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           
           {/* Client badge */}

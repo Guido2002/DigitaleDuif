@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import headsetImage from "/public/placeholder.svg"; // Placeholder image for now
+import headsetImage from "/media/site/placeholder.svg"; // Placeholder image for now
 
 interface VrHeadsetIllustrationProps {
   className?: string;

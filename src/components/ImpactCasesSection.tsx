@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import { projects, Project } from '../data/mockData';
 import ProjectCard from './ProjectCard';
@@ -19,15 +19,25 @@ const categories = [
 const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ project, onClick }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  const media = useMemo(() => {
+    const items: Array<{ type: 'video' | 'image'; src: string }> = [];
+    if (project.videoUrl) items.push({ type: 'video', src: project.videoUrl });
+    project.images.forEach((src) => items.push({ type: 'image', src }));
+    return items;
+  }, [project.videoUrl, project.images]);
 
   // Auto-rotate images on hover
   useEffect(() => {
-    if (!isHovered || project.images.length <= 1) return;
+    if (!isHovered || media.length <= 1) return;
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+      setCurrentImageIndex((prev) => (prev + 1) % media.length);
     }, 2000);
     return () => clearInterval(interval);
-  }, [isHovered, project.images.length]);
+  }, [isHovered, media.length]);
+
+  const currentMedia = media[currentImageIndex];
 
   return (
     <motion.div
@@ -51,16 +61,33 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
         {/* Image Side */}
         <div className="relative w-full lg:w-1/2 aspect-video lg:aspect-auto lg:min-h-[420px] overflow-hidden flex-shrink-0">
           <AnimatePresence mode="wait">
-            <motion.img
-              key={currentImageIndex}
-              src={project.images[currentImageIndex]}
-              alt={project.title}
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            {currentMedia?.type === 'video' ? (
+              <motion.video
+                key={currentMedia.src}
+                src={currentMedia.src}
+                muted
+                loop
+                playsInline
+                autoPlay={!shouldReduceMotion}
+                preload="metadata"
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <motion.img
+                key={currentMedia?.src ?? currentImageIndex}
+                src={currentMedia?.src ?? project.images[0]}
+                alt={project.title}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
           </AnimatePresence>
           
           {/* Overlay gradient */}
@@ -77,16 +104,16 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
               <span className="relative flex h-2 w-2">
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-foreground" />
               </span>
-              Uitgelicht
+              <span>Uitgelicht</span>
             </motion.span>
           </div>
 
           {/* Image carousel indicators */}
-          {project.images.length > 1 && (
+          {media.length > 1 && (
             <div className="absolute bottom-4 left-4 z-10 flex gap-1.5">
-              {project.images.map((_, idx) => (
+              {media.map((item, idx) => (
                 <button
-                  key={idx}
+                  key={`${item.type}-${item.src}`}
                   onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
                   className={cn(
                     "h-1.5 rounded-full transition-all duration-300",
@@ -94,7 +121,7 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
                       ? "w-6 bg-white" 
                       : "w-1.5 bg-white/50 hover:bg-white/75"
                   )}
-                  aria-label={`Bekijk afbeelding ${idx + 1}`}
+                  aria-label={item.type === 'video' ? 'Bekijk video' : `Bekijk afbeelding ${idx + 1}`}
                 />
               ))}
             </div>

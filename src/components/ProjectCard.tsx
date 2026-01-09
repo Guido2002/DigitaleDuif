@@ -31,7 +31,7 @@ export { ProjectCardSkeleton };
 
 const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ project, onClick }) {
   const divRef = useRef<HTMLDivElement>(null);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(() => Boolean(project.videoUrl));
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -46,6 +46,9 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
   const handlePressStart = useCallback(() => setIsPressed(true), []);
   const handlePressEnd = useCallback(() => setIsPressed(false), []);
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => e.key === 'Enter' && onClick(), [onClick]);
+
+  const primaryMedia = project.videoUrl ?? project.images[0];
+  const isVideo = Boolean(project.videoUrl);
 
   // Helper function to avoid nested ternary
   const getAnimateState = () => {
@@ -82,22 +85,37 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
         {/* Image container */}
         <div className="relative mb-4 overflow-hidden rounded-xl aspect-video bg-muted">
           {/* Skeleton while loading - softer pulse */}
-          {!imageLoaded && (
+          {!imageLoaded && !isVideo && (
             <div className="absolute inset-0 bg-muted skeleton-pulse" />
           )}
-          
-          <img
-            src={project.images[0]}
-            alt={project.title}
-            loading="lazy"
-            decoding="async"
-            onLoad={handleImageLoad}
-            className={cn(
-              "h-full w-full object-cover transition-transform duration-300 ease-out",
-              "group-hover:scale-105 group-[.is-active]:scale-105",
-              imageLoaded ? "opacity-100" : "opacity-0"
-            )}
-          />
+
+          {isVideo ? (
+            <video
+              src={primaryMedia}
+              muted
+              loop
+              playsInline
+              autoPlay={!shouldReduceMotion}
+              preload="metadata"
+              className={cn(
+                "h-full w-full object-cover transition-transform duration-300 ease-out",
+                "group-hover:scale-105 group-[.is-active]:scale-105"
+              )}
+            />
+          ) : (
+            <img
+              src={primaryMedia}
+              alt={project.title}
+              loading="lazy"
+              decoding="async"
+              onLoad={handleImageLoad}
+              className={cn(
+                "h-full w-full object-cover transition-transform duration-300 ease-out",
+                "group-hover:scale-105 group-[.is-active]:scale-105",
+                imageLoaded ? "opacity-100" : "opacity-0"
+              )}
+            />
+          )}
           
           {/* Subtle dark gradient overlay on hover */}
           <div className={cn(

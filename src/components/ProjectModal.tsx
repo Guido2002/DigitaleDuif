@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, ChevronLeft, ChevronRight, ChevronDown, Play } from 'lucide-react';
 import { Project } from '../data/mockData';
-import { Link } from 'react-router-dom';
 
 interface ProjectModalProps {
   project: Project;
@@ -69,16 +68,18 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     };
   }, []);
 
-  // Header Carousel Logic
+  // Header Carousel Logic - pause on video
+  const isCurrentHeaderVideo = mediaItems[headerMediaIndex]?.type === 'video';
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (mediaItems.length > 1) {
+    // Don't auto-rotate if current item is a video
+    if (mediaItems.length > 1 && !isCurrentHeaderVideo) {
       interval = setInterval(() => {
         setHeaderMediaIndex((prev) => (prev + 1) % mediaItems.length);
       }, 3500);
     }
     return () => clearInterval(interval);
-  }, [mediaItems.length]);
+  }, [mediaItems.length, isCurrentHeaderVideo]);
 
   // Gallery Logic
   const handleNextMedia = useCallback((e?: React.MouseEvent) => {
@@ -99,8 +100,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   }, [isGalleryOpen, handleNextMedia, handlePrevMedia]);
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    globalThis.addEventListener('keydown', handleKeyDown);
+    return () => globalThis.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
   return (
@@ -146,9 +147,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         <div className="flex flex-col lg:flex-row flex-1 overflow-y-auto lg:overflow-hidden pb-24 lg:pb-0">
           
           {/* Image Section */}
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
           <div 
             className="relative w-full lg:w-1/2 h-[450px] lg:h-auto group cursor-pointer overflow-hidden shrink-0 touch-pan-y"
-            onClick={() => setIsGalleryOpen(true)}
+            onClick={() => { setCurrentMediaIndex(headerMediaIndex); setIsGalleryOpen(true); }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -162,8 +164,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                   exit={{ opacity: 0 }}
                   className="absolute inset-0 w-full h-full bg-black"
                 >
-                   <div className="absolute inset-0 pointer-events-none">
-                      {mediaItems[headerMediaIndex].url.endsWith('.mp4') ? (
+                   <div className="absolute inset-0">
+                      {mediaItems[headerMediaIndex].url.endsWith('.mp4') || mediaItems[headerMediaIndex].url.endsWith('.webm') ? (
                         <video
                           src={mediaItems[headerMediaIndex].url}
                           autoPlay
@@ -200,20 +202,23 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
             
-            {/* Play Button Indicator */}
+            {/* Play Button Indicator - click for fullscreen with audio */}
             {mediaItems[headerMediaIndex].type === 'video' && (
                <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
-                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-900/20">
-                    <Play className="w-8 h-8 text-white fill-white ml-1" />
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-900/20">
+                      <Play className="w-8 h-8 text-white fill-white ml-1" />
+                    </div>
+                    <span className="text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">Klik voor geluid</span>
                   </div>
                </div>
             )}
 
             {/* Carousel Indicators (Desktop) */}
             <div className="hidden min-[645px]:flex absolute bottom-6 left-1/2 -translate-x-1/2 z-20 gap-2 pointer-events-none">
-              {mediaItems.map((_, idx) => (
+              {mediaItems.map((item, idx) => (
                 <div 
-                  key={idx} 
+                  key={`indicator-${item.type}-${idx}`} 
                   className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${
                     idx === headerMediaIndex ? 'w-6 bg-blue-600' : 'w-1.5 bg-white/50'
                   }`} 
@@ -270,7 +275,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 <section>
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-red-500 rounded-full" />
-                    Uitdaging
+                    {' '}Uitdaging
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
                     {project.challenge}
@@ -280,7 +285,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 <section>
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-blue-500 rounded-full" />
-                    Oplossing
+                    {' '}Oplossing
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-lg">
                     {project.solution}
@@ -290,7 +295,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 <section>
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <span className="w-1 h-6 bg-green-500 rounded-full" />
-                    Impact
+                    {' '}Impact
                   </h3>
                   <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
                     <p className="text-gray-700 font-medium leading-relaxed text-lg">
@@ -304,9 +309,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                     Tech Stack
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech, index) => (
+                    {project.techStack.map((tech) => (
                       <span
-                        key={index}
+                        key={tech}
                         className="px-3 py-1.5 text-sm rounded-lg bg-gray-100 text-gray-700 border border-gray-200"
                       >
                         {tech}
@@ -359,8 +364,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
             className="fixed inset-0 z-[60] bg-black flex items-center justify-center"
             onClick={() => setIsGalleryOpen(false)}
+            onKeyDown={(e) => { if (e.key === 'Escape') setIsGalleryOpen(false); }}
           >
             <button
               onClick={() => setIsGalleryOpen(false)}
@@ -388,15 +396,19 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
             <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-10">
               {mediaItems[currentMediaIndex].type === 'video' ? (
+                // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
                 <div 
                   className="w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border border-white/10"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {mediaItems[currentMediaIndex].url.endsWith('.mp4') ? (
+                  {mediaItems[currentMediaIndex].url.endsWith('.mp4') || mediaItems[currentMediaIndex].url.endsWith('.webm') ? (
+                    // eslint-disable-next-line jsx-a11y/media-has-caption
                     <video
+                      key={mediaItems[currentMediaIndex].url}
                       src={mediaItems[currentMediaIndex].url}
                       controls
                       autoPlay
+                      playsInline
                       className="w-full h-full"
                     />
                   ) : (
@@ -426,9 +438,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               )}
               
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-                {mediaItems.map((_, idx) => (
+                {mediaItems.map((item, idx) => (
                   <button
-                    key={idx}
+                    key={`fullscreen-dot-${item.type}-${idx}`}
                     onClick={(e) => {
                       e.stopPropagation();
                       setCurrentMediaIndex(idx);

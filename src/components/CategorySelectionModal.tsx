@@ -38,9 +38,9 @@ const useDeviceType = (): DeviceType => {
 };
 
 const categoryImages: Record<CategoryId, string> = {
-  xr: "/xr.jpeg",
-  websites: "/webapp.jpeg",
-  "mobile-apps": "/ux1.jpeg",
+  xr: "/media/site/xr.jpeg",
+  websites: "/media/site/webapp.jpeg",
+  "mobile-apps": "/media/site/ux1.jpeg",
 };
 
 // Simple static doodle components (no animations for performance)

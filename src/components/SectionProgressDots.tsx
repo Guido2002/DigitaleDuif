@@ -5,7 +5,7 @@ import { useActiveSection, homeSections, Section } from "@/hooks/use-active-sect
 import { useIsMobile } from "@/hooks/use-mobile";
 
 // Define which sections have dark or blue backgrounds
-const blueSections = ["home", "featured-projects", "cta"]; // Hero has blue gradient overlay, Featured Projects has dark bg, CTA has blue gradient
+const blueSections = new Set(["home", "featured-projects", "cta"]); // Hero has blue gradient overlay, Featured Projects has dark bg, CTA has blue gradient
 
 interface SectionProgressDotsProps {
   sections?: Section[];
@@ -28,7 +28,7 @@ const SectionProgressDots: React.FC<SectionProgressDotsProps> = ({
   };
 
   // Determine dot colors based on current section background
-  const isBlueBackground = blueSections.includes(activeSection);
+  const isBlueBackground = blueSections.has(activeSection);
   
   // On blue backgrounds: white dots, otherwise: primary (blue) dots
   const dotActiveColor = isBlueBackground ? "bg-white" : "bg-primary";
