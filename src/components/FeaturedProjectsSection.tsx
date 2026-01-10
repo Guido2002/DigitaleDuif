@@ -150,7 +150,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
       
       // Aggressive polling for mobile (every 200ms for 3 seconds)
       let attempts = 0;
-      playAttemptIntervalRef.current = window.setInterval(() => {
+      playAttemptIntervalRef.current = globalThis.setInterval(() => {
         attempts++;
         attemptPlay();
         if (attempts > 15 || !(mediaElementRef.current instanceof HTMLVideoElement) || !mediaElementRef.current.paused) {

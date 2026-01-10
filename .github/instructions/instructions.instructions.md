@@ -14,6 +14,8 @@ Each time you complete a task or learn important information about the project, 
 
 ALWAYS check your work before returning control to the user. Run tests if available, verify builds, etc. Never return incomplete or unverified work to the user.
 
+Project note: `pnpm lint` currently reports unrelated errors (e.g. a JSX parse error in `src/components/BentoServices.tsx` and missing `jsx-a11y/*` rule definitions). Don’t block small fixes on lint until those are addressed.
+
 Be a good steward of terminal instances. Try and reuse existing terminals where possible and use the VS Code API to close terminals that are no longer needed each time you open a new terminal.
 
 ## Mandatory Coding Principles

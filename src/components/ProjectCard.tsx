@@ -46,21 +46,19 @@ const ProjectCardMedia: React.FC<ProjectCardMediaProps> = memo(function ProjectC
       )}
 
       {isVideo ? (
-        <>
-          <video
-            ref={mediaRef}
-            src={primaryMedia}
-            muted
-            loop
-            playsInline
-            autoPlay={shouldAutoplayVideo}
-            preload={shouldPreloadVideo ? "metadata" : "auto"}
-            className={cn(
-              "h-full w-full object-cover transition-transform duration-300 ease-out",
-              "group-hover:scale-105 group-[.is-active]:scale-105",
-            )}
-          />
-        </>
+        <video
+          ref={mediaRef}
+          src={primaryMedia}
+          muted
+          loop
+          playsInline
+          autoPlay={shouldAutoplayVideo}
+          preload={shouldPreloadVideo ? "metadata" : "auto"}
+          className={cn(
+            "h-full w-full object-cover transition-transform duration-300 ease-out",
+            "group-hover:scale-105 group-[.is-active]:scale-105",
+          )}
+        />
       ) : (
         <img
           src={primaryMedia}
@@ -190,7 +188,7 @@ function useVideoPlaybackInViewport(options: {
       
       // Aggressive polling for mobile (every 200ms for 3 seconds)
       let attempts = 0;
-      playAttemptIntervalRef.current = window.setInterval(() => {
+      playAttemptIntervalRef.current = globalThis.setInterval(() => {
         attempts++;
         attemptPlay();
         if (attempts > 15 || !videoRef.current?.paused) {

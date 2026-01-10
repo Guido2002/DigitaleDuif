@@ -10,6 +10,26 @@ import { Bird, ArrowUpRight } from "lucide-react";
 
 type DeviceType = "mobile" | "tablet" | "desktop";
 
+type TimeoutHandle = ReturnType<typeof setTimeout>;
+
+const scheduleStageTrue = <Stage extends Record<PropertyKey, boolean>>(
+  setStage: React.Dispatch<React.SetStateAction<Stage>>,
+  key: keyof Stage,
+  delayMs: number
+): TimeoutHandle =>
+  setTimeout(
+    () => setStage((prev) => ({ ...prev, [key]: true } as Stage)),
+    delayMs
+  );
+
+const scheduleStageSequence = <Stage extends Record<PropertyKey, boolean>>(
+  sequence: Record<keyof Stage, number>,
+  setStage: React.Dispatch<React.SetStateAction<Stage>>
+): TimeoutHandle[] =>
+  (Object.entries(sequence) as Array<[keyof Stage, number]>).map(
+    ([key, delayMs]) => scheduleStageTrue(setStage, key, delayMs)
+  );
+
 const categoryImages: Record<CategoryId, string> = {
   xr: "/media/site/xr.jpeg",
   websites: "/media/site/webapp.jpeg",
@@ -201,7 +221,7 @@ const MOBILE_ANIMATION_SEQUENCE = {
   titleWord3: 550,
   subtitle: 700,
   cards: 900,
-};
+} satisfies Record<keyof MobileAnimationStage, number>;
 
 interface MobileCardProps {
   onClick: () => void;
@@ -257,13 +277,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ onSelect }) => {
   });
 
   useEffect(() => {
-    const timers = Object.entries(MOBILE_ANIMATION_SEQUENCE).map(
-      ([key, delay]) =>
-        setTimeout(
-          () => setAnimationStage((prev) => ({ ...prev, [key]: true })),
-          delay
-        )
-    );
+    const timers = scheduleStageSequence(MOBILE_ANIMATION_SEQUENCE, setAnimationStage);
     return () => timers.forEach(clearTimeout);
   }, []);
 
@@ -294,7 +308,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ onSelect }) => {
         >
           <span className="inline-flex items-center gap-2 text-sm font-medium text-primary bg-primary/10 px-3 py-1.5 rounded-full">
             <span className="w-2 h-2 rounded-full bg-primary" />
-            Kies je richting
+            <span>Kies je richting</span>
           </span>
         </motion.div>
 
@@ -401,7 +415,7 @@ const TABLET_ANIMATION_SEQUENCE = {
   titleWord3: 800,
   subtitle: 1000,
   cards: 1200,
-};
+} satisfies Record<keyof TabletAnimationStage, number>;
 
 interface TabletCardProps {
   onClick: () => void;
@@ -461,13 +475,7 @@ const TabletLayout: React.FC<TabletLayoutProps> = ({ onSelect }) => {
   });
 
   useEffect(() => {
-    const timers = Object.entries(TABLET_ANIMATION_SEQUENCE).map(
-      ([key, delay]) =>
-        setTimeout(
-          () => setAnimationStage((prev) => ({ ...prev, [key]: true })),
-          delay
-        )
-    );
+    const timers = scheduleStageSequence(TABLET_ANIMATION_SEQUENCE, setAnimationStage);
     return () => timers.forEach(clearTimeout);
   }, []);
 
@@ -499,7 +507,7 @@ const TabletLayout: React.FC<TabletLayoutProps> = ({ onSelect }) => {
         >
           <span className="inline-flex items-center gap-2 text-sm font-medium text-primary bg-primary/10 px-3 py-1.5 rounded-full">
             <span className="w-2 h-2 rounded-full bg-primary" />
-            Kies je richting
+            <span>Kies je richting</span>
           </span>
         </motion.div>
 
@@ -615,7 +623,7 @@ const DESKTOP_ANIMATION_SEQUENCE = {
   arrow: 1700,
   footer: 1900,
   cards: 2200,
-};
+} satisfies Record<keyof DesktopAnimationStage, number>;
 
 interface DesktopCardProps {
   categoryId: CategoryId;
@@ -703,13 +711,7 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({ onSelect }) => {
   });
 
   useEffect(() => {
-    const timers = Object.entries(DESKTOP_ANIMATION_SEQUENCE).map(
-      ([key, delay]) =>
-        setTimeout(
-          () => setAnimationStage((prev) => ({ ...prev, [key]: true })),
-          delay
-        )
-    );
+    const timers = scheduleStageSequence(DESKTOP_ANIMATION_SEQUENCE, setAnimationStage);
     return () => timers.forEach(clearTimeout);
   }, []);
 
@@ -759,7 +761,7 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({ onSelect }) => {
                 }
                 transition={{ repeat: Infinity, duration: 1.5 }}
               />
-              Kies je richting
+              <span>Kies je richting</span>
             </span>
           </motion.div>
 

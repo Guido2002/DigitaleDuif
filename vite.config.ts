@@ -2,6 +2,9 @@ import { defineConfig } from "vite";
 import dyadComponentTagger from "@dyad-sh/react-vite-component-tagger";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(() => {
   const getPackageName = (moduleId: string): string | null => {
@@ -56,7 +59,7 @@ export default defineConfig(() => {
       cssCodeSplit: true,
       rollupOptions: {
         output: {
-          manualChunks(id) {
+          manualChunks(id: string) {
             if (!id.includes('node_modules')) return;
 
             const pkg = getPackageName(id);
