@@ -7,9 +7,8 @@ import { useReducedMotion } from "framer-motion";
 import { useCategory } from "@/context/CategoryContext";
 import { getCategoryConfig, defaultConfig, type OfferingContent } from "@/data/categoryConfig";
 import { cn } from "@/lib/utils";
-import { Check, Star, ArrowRight, Euro } from "lucide-react";
+import { Check, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 interface OfferingCardProps {
   offering: OfferingContent;
@@ -158,13 +157,6 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
             <span>{feature}</span>
           </li>
         ))}
-        {/* Price indication - styled like features */}
-        <li className="flex items-start gap-2.5 text-sm text-foreground pt-2 border-t border-border/50">
-          <div className="mt-0.5 flex-shrink-0">
-            <Euro className="w-4 h-4 text-primary" />
-          </div>
-          <span className="font-medium">{offering.priceIndication}</span>
-        </li>
       </animated.ul>
 
       {/* CTA Button */}
@@ -181,16 +173,18 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
             offering.popular && "shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30"
           )}
         >
-          <Link 
-            to={offering.defaultMessage ? `/contact?message=${encodeURIComponent(offering.defaultMessage)}` : '/contact'}
+          <a 
+            href="https://app.cal.eu/digitale-duif/30min"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center justify-center gap-2"
           >
-            Meer informatie
+            Ik ben geïnteresseerd
             <ArrowRight className={cn(
               "w-4 h-4 transition-transform duration-200",
               isHovered && "translate-x-1"
             )} />
-          </Link>
+          </a>
         </Button>
       </animated.div>
     </animated.div>
