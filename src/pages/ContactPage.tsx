@@ -92,6 +92,11 @@ const ContactPage = () => {
         form.setValue("service", serviceId);
       }
     }
+    
+    const messageParam = searchParams.get("message");
+    if (messageParam) {
+      form.setValue("message", decodeURIComponent(messageParam));
+    }
   }, [searchParams, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

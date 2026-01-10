@@ -12,7 +12,7 @@ const ScrollProgressBar = () => {
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 h-1 bg-primary z-[9999]" // High z-index to be on top
-      style={{ scaleX, transformOrigin: "0%" }}
+      style={{ scaleX, transformOrigin: "0%", willChange: "transform" }}
     />
   );
 };

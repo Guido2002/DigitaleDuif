@@ -40,23 +40,32 @@ const ProjectCardMedia: React.FC<ProjectCardMediaProps> = memo(function ProjectC
   return (
     <div className="relative mb-4 overflow-hidden rounded-xl aspect-video bg-muted">
       {!imageLoaded && !isVideo && (
-        <div className="absolute inset-0 bg-muted skeleton-pulse" />
+        <div className="absolute inset-0 bg-muted">
+          <div className="absolute inset-0 bg-gradient-to-r from-muted via-muted-foreground/5 to-muted animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
+        </div>
       )}
 
       {isVideo ? (
-        <video
-          ref={mediaRef}
-          src={primaryMedia}
-          muted
-          loop
-          playsInline
-          autoPlay={shouldAutoplayVideo}
-          preload={shouldPreloadVideo ? "metadata" : "none"}
-          className={cn(
-            "h-full w-full object-cover transition-transform duration-300 ease-out",
-            "group-hover:scale-105 group-[.is-active]:scale-105",
+        <>
+          {shouldPreloadVideo === false && (
+            <div className="absolute inset-0 flex items-center justify-center bg-muted/50 backdrop-blur-sm">
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+            </div>
           )}
-        />
+          <video
+            ref={mediaRef}
+            src={primaryMedia}
+            muted
+            loop
+            playsInline
+            autoPlay={shouldAutoplayVideo}
+            preload={shouldPreloadVideo ? "metadata" : "auto"}
+            className={cn(
+              "h-full w-full object-cover transition-transform duration-300 ease-out",
+              "group-hover:scale-105 group-[.is-active]:scale-105",
+            )}
+          />
+        </>
       ) : (
         <img
           src={primaryMedia}
@@ -147,6 +156,7 @@ function useVideoPlaybackInViewport(options: {
   shouldPlay: boolean;
 }) {
   const { enabled, videoRef, shouldReduceMotion, shouldPlay } = options;
+  const playAttemptIntervalRef = React.useRef<number | null>(null);
 
   React.useEffect(() => {
     if (!enabled) return;
@@ -159,16 +169,60 @@ function useVideoPlaybackInViewport(options: {
       return;
     }
 
-    if (shouldPlay) {
-      Promise.resolve()
-        .then(() => video.play())
-        .catch(() => {
-          // Autoplay can be blocked or play() can fail; do nothing.
+    const attemptPlay = () => {
+      const currentVideo = videoRef.current;
+      if (!currentVideo || !shouldPlay) return;
+      
+      if (currentVideo.paused && currentVideo.readyState >= 2) {
+        currentVideo.play().catch(() => {
+          // Silently fail - autoplay might be blocked
         });
+      }
+    };
+
+    if (shouldPlay) {
+      // Immediate attempt
+      attemptPlay();
+      
+      // Event-based attempts
+      const handleLoadedMetadata = () => attemptPlay();
+      const handleCanPlay = () => attemptPlay();
+      const handleLoadedData = () => attemptPlay();
+      
+      video.addEventListener('loadedmetadata', handleLoadedMetadata);
+      video.addEventListener('canplay', handleCanPlay);
+      video.addEventListener('loadeddata', handleLoadedData);
+      
+      // Aggressive polling for mobile (every 200ms for 3 seconds)
+      let attempts = 0;
+      playAttemptIntervalRef.current = window.setInterval(() => {
+        attempts++;
+        attemptPlay();
+        if (attempts > 15 || !videoRef.current?.paused) {
+          if (playAttemptIntervalRef.current) {
+            clearInterval(playAttemptIntervalRef.current);
+            playAttemptIntervalRef.current = null;
+          }
+        }
+      }, 200);
+      
+      return () => {
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        video.removeEventListener('canplay', handleCanPlay);
+        video.removeEventListener('loadeddata', handleLoadedData);
+        if (playAttemptIntervalRef.current) {
+          clearInterval(playAttemptIntervalRef.current);
+          playAttemptIntervalRef.current = null;
+        }
+      };
     } else {
       video.pause();
+      if (playAttemptIntervalRef.current) {
+        clearInterval(playAttemptIntervalRef.current);
+        playAttemptIntervalRef.current = null;
+      }
     }
-  }, [enabled, shouldReduceMotion, shouldPlay]);
+  }, [enabled, shouldReduceMotion, shouldPlay, videoRef]);
 }
 
 function usePauseVideoOnPageHide(options: {
@@ -222,14 +276,23 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
   const shouldReduceMotion = useReducedMotion();
   
   const isMobile = useIsMobile();
-  const isCardInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4 });
-  const isMediaInView = useInView(divRef, { margin: "-20% 0px -20% 0px", amount: 0.2, once: false });
+  const isCardInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4, once: false });
+  const isMediaInView = useInView(divRef, { margin: "0px", amount: 0.2, once: false });
   const isActive = isMobile && isCardInView;
+
+  // On mobile, use the card active state for video playback; on desktop use media viewport detection
+  const shouldUseForVideoPlayback = isMobile ? isCardInView : isMediaInView;
 
   const handleImageLoad = useCallback(() => setImageLoaded(true), []);
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
   const handleMouseLeave = useCallback(() => { setIsHovered(false); setIsPressed(false); }, []);
-  const handlePressStart = useCallback(() => setIsPressed(true), []);
+  const handlePressStart = useCallback(() => {
+    setIsPressed(true);
+    // On touch, try to start video immediately (helps with mobile autoplay restrictions)
+    if (isMobile && videoElementRef.current && project.videoUrl && shouldUseForVideoPlayback) {
+      videoElementRef.current.play().catch(() => {});
+    }
+  }, [isMobile, project.videoUrl, shouldUseForVideoPlayback]);
   const handlePressEnd = useCallback(() => setIsPressed(false), []);
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => e.key === 'Enter' && onClick(), [onClick]);
 
@@ -242,10 +305,13 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
   const { shouldPlayVideoNow, shouldPreloadVideo } = getProjectCardVideoBehavior({
     isVideo,
     shouldReduceMotion,
-    isMediaInView,
+    isMediaInView: shouldUseForVideoPlayback,
   });
 
-  const shouldAutoplayVideo = false;
+  // On mobile, always preload metadata to enable faster playback
+  const effectivePreload = isMobile && isVideo ? true : shouldPreloadVideo;
+
+  const shouldAutoplayVideo = true;
 
   useVideoPlaybackInViewport({
     enabled: isVideo,
@@ -295,7 +361,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
           onImageLoad={handleImageLoad}
           mediaRef={setMediaElementRef}
           shouldAutoplayVideo={shouldAutoplayVideo}
-          shouldPreloadVideo={shouldPreloadVideo}
+          shouldPreloadVideo={effectivePreload}
         />
 
         <div className="flex-1 flex flex-col">

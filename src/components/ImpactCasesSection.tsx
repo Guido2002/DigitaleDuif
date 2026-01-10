@@ -95,7 +95,7 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
                 muted
                 loop
                 playsInline
-                autoPlay={false}
+                autoPlay={true}
                 preload={shouldPreloadVideo ? 'metadata' : 'none'}
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}

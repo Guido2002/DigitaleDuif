@@ -111,6 +111,8 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
                       className="w-full h-full object-cover"
                       loading="lazy"
                       decoding="async"
+                      width="120"
+                      height="80"
                     />
                   </button>
                 ))}

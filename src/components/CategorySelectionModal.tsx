@@ -93,6 +93,9 @@ const XrCardContent: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
           "w-full h-full object-cover transition-transform duration-500",
           isHovered ? "scale-110" : "scale-100"
         )}
+        loading="lazy"
+        width="400"
+        height="300"
       />
     </div>
     <div
@@ -147,6 +150,9 @@ const StandardCardContent: React.FC<CardContentProps> = ({
           "w-full h-full object-cover transition-transform duration-500",
           isHovered ? "scale-110" : "scale-100"
         )}
+        loading="lazy"
+        width="400"
+        height="300"
       />
     </div>
     <div

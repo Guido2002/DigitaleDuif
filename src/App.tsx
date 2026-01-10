@@ -23,9 +23,19 @@ const App = () => (
             <Suspense
               fallback={
                 <div className="flex min-h-screen items-center justify-center bg-background px-4">
-                  <div className="flex items-center gap-3 text-muted-foreground">
-                    <span className="h-3 w-3 rounded-full bg-muted animate-pulse" aria-hidden="true" />
-                    <span className="text-sm">Pagina laden…</span>
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="relative">
+                      <div className="h-12 w-12 rounded-full border-4 border-muted" />
+                      <div className="absolute inset-0 h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+                    </div>
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <span className="text-sm font-medium">Pagina laden</span>
+                      <span className="flex gap-1">
+                        <span className="h-1 w-1 animate-bounce rounded-full bg-primary" style={{ animationDelay: '0ms' }} />
+                        <span className="h-1 w-1 animate-bounce rounded-full bg-primary" style={{ animationDelay: '150ms' }} />
+                        <span className="h-1 w-1 animate-bounce rounded-full bg-primary" style={{ animationDelay: '300ms' }} />
+                      </span>
+                    </div>
                   </div>
                 </div>
               }

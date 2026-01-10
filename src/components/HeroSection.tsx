@@ -77,6 +77,8 @@ const HeroSection: React.FC = memo(function HeroSection() {
             loading="eager"
             decoding="async"
             fetchpriority="high"
+            width="1920"
+            height="1080"
           />
         </AnimatePresence>
       </motion.div>

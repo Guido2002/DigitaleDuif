@@ -99,6 +99,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = memo(function Testimonia
                         alt="Company"
                         className="h-5 w-5 sm:h-6 sm:w-6 object-contain rounded-full"
                         loading="lazy"
+                        width="24"
+                        height="24"
                       />
                     )}
                     {linkedinUrl && (
@@ -142,6 +144,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = memo(function Testimonia
                   alt="Company"
                   className="h-10 w-10 object-contain rounded-full ring-2 ring-white/20"
                   loading="lazy"
+                  width="40"
+                  height="40"
                 />
               )}
               

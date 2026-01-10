@@ -156,6 +156,7 @@ const ParticlesBackground: React.FC<ParticlesBackgroundProps> = ({
       ref={containerRef}
       className={cn("absolute inset-0 overflow-hidden", className)}
       onMouseMove={handleMouseMove}
+      style={{ willChange: "transform" }}
     >
       {particles.map((p) => (
         <motion.div
@@ -173,6 +174,7 @@ const ParticlesBackground: React.FC<ParticlesBackgroundProps> = ({
             top: `${p.y}vh`,
             filter: `blur(${p.size / 10}px)`, // Subtle blur for glow effect
             boxShadow: `0 0 ${p.size / 4}px rgba(255,255,255,0.4)`, // Subtle white glow
+            willChange: "transform, opacity",
           }}
           initial={{ opacity: 0, scale: 0 }}
           animate={{

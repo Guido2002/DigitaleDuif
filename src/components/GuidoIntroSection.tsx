@@ -81,7 +81,10 @@ const GuidoIntroSection = () => {
               src={profilePhoto}
               alt="Portretfoto van Guido van Duijvenvoorde, lachend in een professionele setting"
               className="w-full h-auto object-cover rounded-xl transition-opacity duration-700 ease-in-out"
+              loading="lazy"
               decoding="async"
+              width="400"
+              height="500"
               style={{ 
                 aspectRatio: '4/5',
                 opacity: isHovered ? 0 : 1
@@ -92,7 +95,10 @@ const GuidoIntroSection = () => {
               alt=""
               aria-hidden="true"
               className="w-full h-auto object-cover rounded-xl transition-opacity duration-700 ease-in-out absolute top-0 left-0"
+              loading="lazy"
               decoding="async"
+              width="400"
+              height="500"
               style={{ 
                 aspectRatio: '4/5',
                 opacity: isHovered ? 1 : 0

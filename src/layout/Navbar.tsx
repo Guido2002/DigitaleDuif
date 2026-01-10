@@ -57,6 +57,7 @@ const Navbar = () => {
       className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur-md"
       role="navigation"
       aria-label="Hoofdnavigatie"
+      style={{ willChange: "transform" }}
     >
       <div className="container flex h-20 items-center justify-between"> {/* Increased height to h-20 */}
         <Link to="/" className="flex items-center space-x-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md" aria-label="DigitaleDuif - Ga naar homepage">

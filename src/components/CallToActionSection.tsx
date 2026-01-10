@@ -76,6 +76,8 @@ const CallToActionSection = () => {
                 className="w-full h-full object-cover rounded-[1.5rem]"
                 loading="lazy"
                 decoding="async"
+                width="380"
+                height="440"
               />
               {/* Overlay gradient */}
               <div className="absolute inset-2 bg-gradient-to-t from-primary/30 to-transparent rounded-[1.5rem]" />

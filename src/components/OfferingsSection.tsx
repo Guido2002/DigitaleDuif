@@ -76,6 +76,7 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
       style={{
         opacity: springProps.opacity,
         transform: combinedTransform,
+        willChange: inView ? 'transform, opacity' : 'auto',
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -168,7 +169,10 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
             offering.popular && "shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30"
           )}
         >
-          <Link to="/contact" className="flex items-center justify-center gap-2">
+          <Link 
+            to={offering.defaultMessage ? `/contact?message=${encodeURIComponent(offering.defaultMessage)}` : '/contact'}
+            className="flex items-center justify-center gap-2"
+          >
             Meer informatie
             <ArrowRight className={cn(
               "w-4 h-4 transition-transform duration-200",

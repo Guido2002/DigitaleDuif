@@ -27,9 +27,10 @@ function renderProjectMedia(
         alt={project.title}
         width={640}
         height={400}
-        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         loading="lazy"
         decoding="async"
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        style={{ willChange: 'transform' }}
       />
     );
   }
@@ -79,7 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
   const mediaElementRef = useRef<ProjectMediaElement | null>(null);
 
   const { ref: animationRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ threshold: 0.2, rootMargin: "0px" });
+  const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ threshold: 0.2, rootMargin: "0px", triggerOnce: false });
 
   const setCardRefs = useCallback(
     (node: HTMLElement | null) => {
@@ -108,6 +109,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
   const shouldControlVideo = Boolean(videoUrl) && !shouldReduceMotion;
   const shouldPlayVideoNow = shouldControlVideo && isMediaInView;
   const shouldPreloadVideo = shouldControlVideo && isMediaInView;
+  const shouldAutoplayVideo = true;
 
   React.useEffect(() => {
     if (!shouldControlVideo) return;
@@ -125,7 +127,24 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
     }
   }, [shouldControlVideo, shouldPlayVideoNow]);
 
-  const mediaNode = renderProjectMedia(project, false, shouldPreloadVideo, setMediaRef);
+  // Pause video when page is hidden (tab switch, minimize, etc.)
+  React.useEffect(() => {
+    if (!shouldControlVideo) return;
+
+    const handleVisibilityChange = () => {
+      const element = mediaElementRef.current;
+      if (!(element instanceof HTMLVideoElement)) return;
+
+      if (document.hidden) {
+        element.pause();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [shouldControlVideo]);
+
+  const mediaNode = renderProjectMedia(project, shouldAutoplayVideo, shouldPreloadVideo, setMediaRef);
 
   return (
     <animated.div
@@ -133,7 +152,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
       style={{
         opacity: springProps.opacity,
         transform: springProps.y.to(y => `translate3d(0, ${y}px, 0)`),
-        willChange: 'opacity, transform',
+        willChange: inView ? 'opacity, transform' : 'auto',
       }}
       className="group relative h-full"
     >

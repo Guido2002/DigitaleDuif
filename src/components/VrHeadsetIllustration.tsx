@@ -34,6 +34,8 @@ const VrHeadsetIllustration: React.FC<VrHeadsetIllustrationProps> = ({
         className="w-full h-auto object-contain drop-shadow-lg"
         loading="lazy"
         decoding="async"
+        width="400"
+        height="400"
       />
       {/* Subtle glow around lenses - simulated */}
       <div className="absolute inset-0 flex items-center justify-center">

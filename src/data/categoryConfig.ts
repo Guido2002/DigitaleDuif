@@ -42,6 +42,7 @@ export interface OfferingContent {
   features: string[];
   priceIndication: string;
   popular?: boolean;
+  defaultMessage?: string;
 }
 
 export interface FeaturedProjectContent {
@@ -81,7 +82,7 @@ export interface CategoryConfig {
 
 const xrConfig: CategoryConfig = {
   hero: {
-    title: "Van hoog overzien naar gericht",
+    title: "Van hoog overzien naar gericht ",
     titleHighlight: "bouwen",
     subtitle: "Ik bouw immersieve VR, AR en MR ervaringen die trainen, simuleren en inspireren. Van concept tot implementatie, samen met jou.",
     backgroundImages: ["/media/site/xr.jpeg", "/media/site/ux1.jpeg"],
@@ -211,6 +212,7 @@ const xrConfig: CategoryConfig = {
       ],
       priceIndication: "vanaf €14.000",
       popular: true,
+      defaultMessage: "Hoi Guido,\n\nIk ben geïnteresseerd in een VR applicatie. Ik zou graag meer willen weten over de mogelijkheden en hoe we kunnen samenwerken.\n\nGroeten,",
     },
     {
       id: "ar-visual",
@@ -223,6 +225,7 @@ const xrConfig: CategoryConfig = {
         "Ideaal voor marketing of productvisualisatie",
       ],
       priceIndication: "vanaf €10.500",
+      defaultMessage: "Hoi Guido,\n\nIk wil graag mijn product visualiseren met AR. Kunnen we bespreken hoe dit eruit zou kunnen zien?\n\nGroeten,",
     },
     {
       id: "mr-intro",
@@ -235,6 +238,7 @@ const xrConfig: CategoryConfig = {
         "Perfect voor instructies of showroom-ervaringen",
       ],
       priceIndication: "vanaf €17.500",
+      defaultMessage: "Hoi Guido,\n\nMixed Reality klinkt interessant voor mijn project. Ik zou graag meer willen weten over de mogelijkheden.\n\nGroeten,",
     },
     {
       id: "xr-consultancy",
@@ -247,6 +251,7 @@ const xrConfig: CategoryConfig = {
         "Strategisch fundament voor innovatie",
       ],
       priceIndication: "Vanaf €2.500",
+      defaultMessage: "Hoi Guido,\n\nIk wil graag advies over XR voor mijn organisatie. Kunnen we een kennismakingsgesprek plannen?\n\nGroeten,",
     },
   ],
   featuredProjects: [
@@ -436,6 +441,7 @@ const websitesConfig: CategoryConfig = {
       ],
       priceIndication: "Vanaf €5.000",
       popular: true,
+      defaultMessage: "Hoi Guido,\n\nIk ben op zoek naar een professionele bedrijfswebsite. Kunnen we bespreken wat de mogelijkheden zijn?\n\nGroeten,",
     },
     {
       id: "webshop",
@@ -449,6 +455,7 @@ const websitesConfig: CategoryConfig = {
         "Responsive design",
       ],
       priceIndication: "Vanaf €12.500",
+      defaultMessage: "Hoi Guido,\n\nIk wil graag een webshop laten bouwen. Kunnen we de mogelijkheden bespreken?\n\nGroeten,",
     },
     {
       id: "one-page-website",
@@ -462,6 +469,7 @@ const websitesConfig: CategoryConfig = {
         "Snelle oplevering",
       ],
       priceIndication: "Vanaf €3.500",
+      defaultMessage: "Hoi Guido,\n\nIk ben geïnteresseerd in een one-page website. Kunnen we bespreken hoe dit eruit zou kunnen zien?\n\nGroeten,",
     },
   ],
   featuredProjects: [
@@ -539,7 +547,7 @@ const websitesConfig: CategoryConfig = {
 
 const mobileAppsConfig: CategoryConfig = {
   hero: {
-    title: "Jouw idee, altijd binnen",
+    title: "Jouw idee, altijd binnen ",
     titleHighlight: "handbereik",
     subtitle: "Ik ontwikkel mobiele apps in Flutter voor MVP's, prototypes en compacte producties. Focus op UX, performance en een duidelijke scope.",
     backgroundImages: ["/media/site/webapp.jpeg", "/media/site/ux1.jpeg"],
@@ -650,6 +658,7 @@ const mobileAppsConfig: CategoryConfig = {
       ],
       priceIndication: "Vanaf €10.000",
       popular: true,
+      defaultMessage: "Hoi Guido,\n\nIk heb een app-idee en wil graag starten met een MVP. Kunnen we bespreken hoe we dit kunnen aanpakken?\n\nGroeten,",
     },
     {
       id: "compact-app",
@@ -662,6 +671,7 @@ const mobileAppsConfig: CategoryConfig = {
         "Geschikt als interne tool of content-gedreven app",
       ],
       priceIndication: "Vanaf €15.000",
+      defaultMessage: "Hoi Guido,\n\nIk wil graag een compacte maar complete app laten ontwikkelen. Kunnen we de mogelijkheden bespreken?\n\nGroeten,",
     },
     {
       id: "app-consult",
@@ -674,6 +684,7 @@ const mobileAppsConfig: CategoryConfig = {
         "Realistische kosteninschatting",
       ],
       priceIndication: "Vanaf €500",
+      defaultMessage: "Hoi Guido,\n\nIk wil graag advies over mijn app-idee voordat ik ga investeren. Kunnen we een sessie plannen?\n\nGroeten,",
     },
     {
       id: "app-maintenance",
@@ -686,6 +697,7 @@ const mobileAppsConfig: CategoryConfig = {
         "Doorlopende ondersteuning en onderhoud",
       ],
       priceIndication: "Vanaf €400 / maand",
+      defaultMessage: "Hoi Guido,\n\nIk ben op zoek naar onderhoud voor mijn bestaande app. Kunnen we bespreken wat je hiervoor kunt bieden?\n\nGroeten,",
     },
   ],
   featuredProjects: [
@@ -809,7 +821,7 @@ export const getSectionTitles = (categoryId: CategoryId) => {
 // Default content for when no category is selected (uses general/mixed content)
 export const defaultConfig: CategoryConfig = {
   hero: {
-    title: "DigitaleDuif: Ik geef jouw",
+    title: "DigitaleDuif: Ik geef jouw ",
     titleHighlight: "idee vleugels",
     subtitle: "Ik bouw VR, MR, websites en apps die écht werken. Van idee tot lancering, samen met jou.",
     backgroundImages: ["/media/site/xr.jpeg", "/media/site/webapp.jpeg", "/media/site/ux1.jpeg"],
