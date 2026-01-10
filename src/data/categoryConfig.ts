@@ -303,6 +303,10 @@ const xrConfig: CategoryConfig = {
   ],
   faqItems: [
     {
+      question: "Waarom staan er geen prijzen op de website?",
+      answer: "Elk XR-project is uniek qua complexiteit, platforms en functionaliteiten. Een eenvoudige VR-demo kan relatief weinig kosten, terwijl een uitgebreide VR-training veel duurder kan zijn. Door eerst je wensen en doelen te bespreken, kan ik je een eerlijke prijs geven die past bij jouw project.",
+    },
+    {
       question: "Wat is het verschil tussen VR, AR en MR?",
       answer: "Virtual Reality (VR) plaatst je volledig in een digitale wereld via een headset. Augmented Reality (AR) projecteert digitale elementen over de echte wereld (denk aan Pokémon GO). Mixed Reality (MR) combineert beide: digitale objecten interageren met je fysieke omgeving en blijven op hun plek staan.",
     },
@@ -520,6 +524,10 @@ const websitesConfig: CategoryConfig = {
     },
   ],
   faqItems: [
+    {
+      question: "Waarom staan er geen prijzen op de website?",
+      answer: "Elke website heeft andere vereisten qua design, functionaliteiten en integraties. Een eenvoudige bedrijfssite kost anders dan een webshop met betalingen en voorraadbeheer. Door je wensen te bespreken, kan ik je een passende prijs geven zonder verrassingen.",
+    },
     {
       question: "Welke technologieën gebruik je voor websites?",
       answer: "Ik werk voornamelijk met React en Next.js voor de frontend, gecombineerd met TypeScript voor betrouwbare code. Voor styling gebruik ik Tailwind CSS. Voor eenvoudige backend-functionaliteit werk ik met Node.js en databases zoals PostgreSQL of MongoDB.",
@@ -749,6 +757,10 @@ const mobileAppsConfig: CategoryConfig = {
   ],
   faqItems: [
     {
+      question: "Waarom staan er geen prijzen op de website?",
+      answer: "App-projecten verschillen enorm in complexiteit. Een eenvoudige informatie-app kost anders dan een app met login, betalingen en backend-integratie. Door eerst je functionele wensen te bespreken, kan ik een realistische prijs geven die past bij jouw budget en doelen.",
+    },
+    {
       question: "Voor welk type apps is dit geschikt?",
       answer: "Mijn app development is ideaal voor MVP's, proof-of-concepts, interne tools, content-gedreven apps en apps zonder zware backend-logica. Denk aan event apps, informatieve apps, eenvoudige bestel-apps of tools voor in het veld. Minder geschikt voor grote enterprise-apps of zeer complexe real-time systemen.",
     },
@@ -857,6 +869,10 @@ export const defaultConfig: CategoryConfig = {
     ...mobileAppsConfig.featuredProjects.slice(0, 1),
   ],
   faqItems: [
+    {
+      question: "Waarom staan er geen prijzen op de website?",
+      answer: "Elk digitaal project is uniek. Een website, app of XR-ervaring heeft andere vereisten qua complexiteit, design en functionaliteiten. Door eerst een persoonlijk gesprek te voeren over jouw ideeën en doelen, kan ik een eerlijke offerte maken die precies past bij wat je zoekt.",
+    },
     {
       question: "Wat voor projecten kan ik bij DigitaleDuif laten maken?",
       answer: "Ik specialiseer me in drie gebieden: XR (Virtual Reality, Augmented Reality, Mixed Reality), websites & webapplicaties, en mobiele apps. Van VR-trainingen tot e-commerce platforms tot iOS/Android apps - ik help je van idee tot lancering.",

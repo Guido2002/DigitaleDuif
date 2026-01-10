@@ -179,7 +179,7 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2"
           >
-            Ik ben geïnteresseerd
+            Meer informatie
             <ArrowRight className={cn(
               "w-4 h-4 transition-transform duration-200",
               isHovered && "translate-x-1"
