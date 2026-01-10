@@ -3,13 +3,124 @@ import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Project } from '../data/mockData';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { usePauseMediaWhenNotInView } from '@/hooks/use-pause-media-when-not-in-view';
+import { useIsTabletOrMobile } from '@/hooks/use-tablet-or-mobile';
 import { cn } from '@/lib/utils';
 
 interface ProjectCardProps {
   project: Project;
   onClick: () => void;
 }
+
+type ProjectCardMediaProps = {
+  isVideo: boolean;
+  primaryMedia: string;
+  title: string;
+  client: string;
+  isHovered: boolean;
+  isActive: boolean;
+  imageLoaded: boolean;
+  onImageLoad: () => void;
+  mediaRef: (node: HTMLVideoElement | HTMLIFrameElement | null) => void;
+  shouldAutoplayVideo: boolean;
+  shouldPreloadVideo: boolean;
+};
+
+const ProjectCardMedia: React.FC<ProjectCardMediaProps> = memo(function ProjectCardMedia({
+  isVideo,
+  primaryMedia,
+  title,
+  client,
+  isHovered,
+  isActive,
+  imageLoaded,
+  onImageLoad,
+  mediaRef,
+  shouldAutoplayVideo,
+  shouldPreloadVideo,
+}) {
+  return (
+    <div className="relative mb-4 overflow-hidden rounded-xl aspect-video bg-muted">
+      {!imageLoaded && !isVideo && (
+        <div className="absolute inset-0 bg-muted skeleton-pulse" />
+      )}
+
+      {isVideo ? (
+        <video
+          ref={mediaRef}
+          src={primaryMedia}
+          muted
+          loop
+          playsInline
+          autoPlay={shouldAutoplayVideo}
+          preload={shouldPreloadVideo ? "metadata" : "none"}
+          className={cn(
+            "h-full w-full object-cover transition-transform duration-300 ease-out",
+            "group-hover:scale-105 group-[.is-active]:scale-105",
+          )}
+        />
+      ) : (
+        <img
+          src={primaryMedia}
+          alt={title}
+          width={400}
+          height={225}
+          loading="lazy"
+          decoding="async"
+          onLoad={onImageLoad}
+          className={cn(
+            "h-full w-full object-cover transition-transform duration-300 ease-out",
+            "group-hover:scale-105 group-[.is-active]:scale-105",
+            imageLoaded ? "opacity-100" : "opacity-0",
+          )}
+        />
+      )}
+
+      <div
+        className={cn(
+          "absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300",
+          (isHovered || isActive) ? "opacity-100" : "opacity-0",
+        )}
+      />
+
+      <div className="absolute top-3 left-3">
+        <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-white text-primary group-hover:bg-primary group-hover:text-white group-[.is-active]:bg-primary group-[.is-active]:text-white transition-all duration-300 shadow-sm">
+          {client}
+        </span>
+      </div>
+    </div>
+  );
+});
+
+type ProjectCardTechStackProps = {
+  projectId: string;
+  techStack: string[];
+};
+
+const ProjectCardTechStack: React.FC<ProjectCardTechStackProps> = memo(function ProjectCardTechStack({
+  projectId,
+  techStack,
+}) {
+  const visibleTech = techStack.slice(0, 3);
+  const remainingCount = Math.max(0, techStack.length - visibleTech.length);
+
+  return (
+    <div className="flex flex-wrap gap-1.5 mt-auto">
+      {visibleTech.map((tech) => (
+        <span
+          key={`${projectId}-tech-${tech}`}
+          className="px-2 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary border border-primary/20"
+        >
+          {tech}
+        </span>
+      ))}
+      {remainingCount > 0 && (
+        <span className="px-2 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary border border-primary/20">
+          +{remainingCount}
+        </span>
+      )}
+    </div>
+  );
+});
 
 // Skeleton loader component with softer animation
 const ProjectCardSkeleton: React.FC = () => (
@@ -30,16 +141,101 @@ const ProjectCardSkeleton: React.FC = () => (
 
 export { ProjectCardSkeleton };
 
+function useVideoPlaybackInViewport(options: {
+  enabled: boolean;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
+  shouldReduceMotion: boolean;
+  shouldPlay: boolean;
+}) {
+  const { enabled, videoRef, shouldReduceMotion, shouldPlay } = options;
+
+  React.useEffect(() => {
+    if (!enabled) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (shouldReduceMotion) {
+      video.pause();
+      return;
+    }
+
+    if (shouldPlay) {
+      Promise.resolve()
+        .then(() => video.play())
+        .catch(() => {
+          // Autoplay can be blocked or play() can fail; do nothing.
+        });
+    } else {
+      video.pause();
+    }
+  }, [enabled, videoRef, shouldReduceMotion, shouldPlay]);
+}
+
+function usePauseVideoOnPageHide(options: {
+  enabled: boolean;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
+}) {
+  const { enabled, videoRef } = options;
+
+  React.useEffect(() => {
+    if (!enabled) return;
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState !== 'visible') {
+        videoRef.current?.pause();
+      }
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange, { passive: true });
+    return () => document.removeEventListener('visibilitychange', onVisibilityChange);
+  }, [enabled, videoRef]);
+}
+
+function getProjectCardAnimateState(shouldReduceMotion: boolean, isActive: boolean) {
+  if (shouldReduceMotion) return undefined;
+  return isActive ? { y: -4 } : { y: 0 };
+}
+
+function getProjectCardVideoBehavior(options: {
+  isVideo: boolean;
+  shouldReduceMotion: boolean;
+  isTabletOrMobile: boolean;
+  isHovered: boolean;
+  isMediaInView: boolean;
+}) {
+  const { isVideo, shouldReduceMotion, isTabletOrMobile, isHovered, isMediaInView } = options;
+
+  if (!isVideo || shouldReduceMotion) {
+    return { shouldPlayVideoNow: false, shouldPreloadVideo: false };
+  }
+
+  if (isTabletOrMobile) {
+    return {
+      shouldPlayVideoNow: isMediaInView,
+      shouldPreloadVideo: isMediaInView,
+    };
+  }
+
+  return {
+    shouldPlayVideoNow: isHovered && isMediaInView,
+    shouldPreloadVideo: isHovered,
+  };
+}
+
 const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ project, onClick }) {
   const divRef = useRef<HTMLDivElement>(null);
+  const videoElementRef = useRef<HTMLVideoElement | null>(null);
   const [imageLoaded, setImageLoaded] = useState(() => Boolean(project.videoUrl));
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   
   const isMobile = useIsMobile();
-  const isInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4 });
-  const isActive = isMobile && isInView;
+  const isTabletOrMobile = useIsTabletOrMobile();
+  const isCardInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4 });
+  const isMediaInView = useInView(divRef, { margin: "0px", amount: 0.2 });
+  const isActive = isMobile && isCardInView;
 
   const handleImageLoad = useCallback(() => setImageLoaded(true), []);
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
@@ -48,17 +244,32 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
   const handlePressEnd = useCallback(() => setIsPressed(false), []);
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => e.key === 'Enter' && onClick(), [onClick]);
 
+  const setMediaElementRef = useCallback((node: HTMLVideoElement | HTMLIFrameElement | null) => {
+    videoElementRef.current = node instanceof HTMLVideoElement ? node : null;
+  }, []);
+
   const primaryMedia = project.videoUrl ?? project.images[0];
   const isVideo = Boolean(project.videoUrl);
-  const shouldAutoplayVideo = isVideo && !shouldReduceMotion && !isMobile;
+  const { shouldPlayVideoNow, shouldPreloadVideo } = getProjectCardVideoBehavior({
+    isVideo,
+    shouldReduceMotion,
+    isTabletOrMobile,
+    isHovered,
+    isMediaInView,
+  });
 
-  const mediaRef = usePauseMediaWhenNotInView({ enabled: isVideo });
+  const shouldAutoplayVideo = false;
 
-  // Helper function to avoid nested ternary
-  const getAnimateState = () => {
-    if (shouldReduceMotion) return undefined;
-    return isActive ? { y: -4 } : { y: 0 };
-  };
+  useVideoPlaybackInViewport({
+    enabled: isVideo,
+    videoRef: videoElementRef,
+    shouldReduceMotion,
+    shouldPlay: shouldPlayVideoNow,
+  });
+
+  usePauseVideoOnPageHide({ enabled: isVideo, videoRef: videoElementRef });
+
+  const animateState = getProjectCardAnimateState(shouldReduceMotion, isActive);
 
   return (
     <motion.div
@@ -82,61 +293,23 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
         isPressed && "scale-[0.98] shadow-inner"
       )}
       whileHover={shouldReduceMotion ? undefined : { y: -3 }}
-      animate={getAnimateState()}
+      animate={animateState}
       transition={{ type: "spring", stiffness: 500, damping: 35, mass: 0.8 }}
     >
       <div className="relative flex flex-col h-full">
-        {/* Image container */}
-        <div className="relative mb-4 overflow-hidden rounded-xl aspect-video bg-muted">
-          {/* Skeleton while loading - softer pulse */}
-          {!imageLoaded && !isVideo && (
-            <div className="absolute inset-0 bg-muted skeleton-pulse" />
-          )}
-
-          {isVideo ? (
-            <video
-              ref={mediaRef}
-              src={primaryMedia}
-              muted
-              loop
-              playsInline
-              autoPlay={shouldAutoplayVideo}
-              preload={shouldAutoplayVideo ? "metadata" : "none"}
-              className={cn(
-                "h-full w-full object-cover transition-transform duration-300 ease-out",
-                "group-hover:scale-105 group-[.is-active]:scale-105"
-              )}
-            />
-          ) : (
-            <img
-              src={primaryMedia}
-              alt={project.title}
-              width={400}
-              height={225}
-              loading="lazy"
-              decoding="async"
-              onLoad={handleImageLoad}
-              className={cn(
-                "h-full w-full object-cover transition-transform duration-300 ease-out",
-                "group-hover:scale-105 group-[.is-active]:scale-105",
-                imageLoaded ? "opacity-100" : "opacity-0"
-              )}
-            />
-          )}
-          
-          {/* Subtle dark gradient overlay on hover */}
-          <div className={cn(
-            "absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300",
-            (isHovered || isActive) ? "opacity-100" : "opacity-0"
-          )} />
-          
-          {/* Client badge */}
-          <div className="absolute top-3 left-3">
-            <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-white text-primary group-hover:bg-primary group-hover:text-white group-[.is-active]:bg-primary group-[.is-active]:text-white transition-all duration-300 shadow-sm">
-              {project.client}
-            </span>
-          </div>
-        </div>
+        <ProjectCardMedia
+          isVideo={isVideo}
+          primaryMedia={primaryMedia}
+          title={project.title}
+          client={project.client}
+          isHovered={isHovered}
+          isActive={isActive}
+          imageLoaded={imageLoaded}
+          onImageLoad={handleImageLoad}
+          mediaRef={setMediaElementRef}
+          shouldAutoplayVideo={shouldAutoplayVideo}
+          shouldPreloadVideo={shouldPreloadVideo}
+        />
 
         <div className="flex-1 flex flex-col">
           <h3 className="text-lg font-semibold text-foreground mb-1.5 group-hover:text-primary group-[.is-active]:text-primary transition-colors duration-300 line-clamp-1">
@@ -146,22 +319,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
             {project.tagline}
           </p>
           
-          {/* Tech stack */}
-          <div className="flex flex-wrap gap-1.5 mt-auto">
-            {project.techStack.slice(0, 3).map((tech) => (
-              <span
-                key={`${project.id}-tech-${tech}`}
-                className="px-2 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary border border-primary/20"
-              >
-                {tech}
-              </span>
-            ))}
-            {project.techStack.length > 3 && (
-              <span className="px-2 py-1 text-xs font-medium rounded-md bg-primary/10 text-primary border border-primary/20">
-                +{project.techStack.length - 3}
-              </span>
-            )}
-          </div>
+          <ProjectCardTechStack projectId={project.id} techStack={project.techStack} />
         </div>
 
         {/* CTA footer */}

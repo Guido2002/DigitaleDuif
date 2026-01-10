@@ -6,8 +6,8 @@ import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { usePauseMediaWhenNotInView } from '@/hooks/use-pause-media-when-not-in-view';
+import { useIsTabletOrMobile } from '@/hooks/use-tablet-or-mobile';
 
 // Define filter categories
 const categories = [
@@ -22,9 +22,15 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const shouldReduceMotion = useReducedMotion();
-  const isMobile = useIsMobile();
-  const shouldAutoplayVideo = Boolean(project.videoUrl) && !shouldReduceMotion && !isMobile;
-  const featuredMediaRef = usePauseMediaWhenNotInView({ enabled: Boolean(project.videoUrl) });
+  const isTabletOrMobile = useIsTabletOrMobile();
+  const shouldAutoplayVideo = Boolean(project.videoUrl) && !shouldReduceMotion && !isTabletOrMobile;
+  const shouldPlayInViewport = Boolean(project.videoUrl) && !shouldReduceMotion && isTabletOrMobile;
+  const featuredMediaRef = usePauseMediaWhenNotInView({
+    enabled: Boolean(project.videoUrl),
+    playOnEnter: shouldPlayInViewport,
+    threshold: 0.2,
+    rootMargin: shouldPlayInViewport ? "0px" : "200px 0px",
+  });
 
   const media = useMemo(() => {
     const items: Array<{ type: 'video' | 'image'; src: string }> = [];
@@ -75,7 +81,7 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
                 loop
                 playsInline
                 autoPlay={shouldAutoplayVideo}
-                preload={shouldAutoplayVideo ? 'metadata' : 'none'}
+                  preload={(shouldAutoplayVideo || shouldPlayInViewport) ? 'metadata' : 'none'}
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}

@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useCallback, useMemo, useRef, useState } from "react";
 import SectionHeader from "./SectionHeader";
 import FadeInWhenVisible from "./FadeInWhenVisible";
 import { useSpring, animated } from "@react-spring/web";
@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { useReducedMotion } from "framer-motion";
-import { usePauseMediaWhenNotInView } from "@/hooks/use-pause-media-when-not-in-view";
+import { useIsTabletOrMobile } from "@/hooks/use-tablet-or-mobile";
 
 function renderProjectMedia(
   project: Project,
   shouldAutoplayVideo: boolean,
+  shouldPreloadVideo: boolean,
   mediaRef: (node: HTMLVideoElement | HTMLIFrameElement | null) => void,
 ): React.ReactNode {
   const videoUrl = project.videoUrl;
@@ -44,7 +44,7 @@ function renderProjectMedia(
         muted
         loop
         playsInline
-        preload={shouldAutoplayVideo ? "metadata" : "none"}
+        preload={shouldPreloadVideo ? "metadata" : "none"}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
       />
     );
@@ -75,8 +75,25 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const isMobile = useIsMobile();
+  const [isHovered, setIsHovered] = useState(false);
+  const mediaElementRef = useRef<HTMLVideoElement | HTMLIFrameElement | null>(null);
+
+  const { ref: animationRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ threshold: 0.2, rootMargin: "0px" });
+
+  const setCardRefs = useCallback(
+    (node: HTMLElement | null) => {
+      animationRef(node);
+      mediaInViewRef(node);
+    },
+    [animationRef, mediaInViewRef],
+  );
+
+  const setMediaRef = useCallback((node: HTMLVideoElement | HTMLIFrameElement | null) => {
+    mediaElementRef.current = node;
+  }, []);
+
+  const isTabletOrMobile = useIsTabletOrMobile();
   const shouldReduceMotion = useReducedMotion();
   
   const yOffset = shouldReduceMotion ? 0 : 16;
@@ -89,13 +106,31 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
   });
 
   const videoUrl = project.videoUrl;
-  const shouldAutoplayVideo = Boolean(videoUrl) && !isMobile && !shouldReduceMotion;
-  const mediaRef = usePauseMediaWhenNotInView({ enabled: Boolean(videoUrl) });
-  const mediaNode = renderProjectMedia(project, shouldAutoplayVideo, mediaRef);
+  const shouldControlVideo = Boolean(videoUrl) && !shouldReduceMotion;
+  const shouldPlayVideoNow = shouldControlVideo && (isTabletOrMobile ? isMediaInView : (isHovered && isMediaInView));
+  const shouldPreloadVideo = shouldControlVideo && (isTabletOrMobile ? isMediaInView : isHovered);
+
+  React.useEffect(() => {
+    if (!shouldControlVideo) return;
+    const element = mediaElementRef.current;
+    if (!(element instanceof HTMLVideoElement)) return;
+
+    if (shouldPlayVideoNow) {
+      Promise.resolve()
+        .then(() => element.play())
+        .catch(() => {
+          // Autoplay can be blocked or play() can fail; do nothing.
+        });
+    } else {
+      element.pause();
+    }
+  }, [shouldControlVideo, shouldPlayVideoNow]);
+
+  const mediaNode = renderProjectMedia(project, false, shouldPreloadVideo, setMediaRef);
 
   return (
     <animated.div
-      ref={ref}
+      ref={setCardRefs}
       style={{
         opacity: springProps.opacity,
         transform: springProps.y.to(y => `translate3d(0, ${y}px, 0)`),
@@ -105,6 +140,8 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
     >
       <Link
         to={`/projecten?project=${project.id}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         className={cn(
           "block h-full rounded-2xl overflow-hidden bg-primary border border-primary-foreground/15",
           "transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:shadow-primary/20 hover:border-primary-foreground/25",
