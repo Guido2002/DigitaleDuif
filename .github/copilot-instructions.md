@@ -6,7 +6,43 @@
 - Tailwind CSS + shadcn/ui (Radix primitives)
 - Framer Motion (animations)
 - React Spring (scroll animations)
-- React Router DOM (routing)
+- React Router DOM (routing with basename for GitHub Pages)
+
+## GitHub Pages Deployment
+
+### Asset Path Handling
+All public assets (images, videos in `/public` folder) must use `getAssetPath()` utility:
+```tsx
+import { getAssetPath } from "@/utils/assets";
+
+// Correct:
+<img src={getAssetPath("/media/hero.jpg")} />
+videoUrl: getAssetPath("/media/projects/demo.webm")
+
+// Wrong:
+<img src="/media/hero.jpg" /> // Will break on GitHub Pages
+```
+
+### Vite Configuration
+- Base path: `/DigitaleDuif/` in production, `/` in development
+- Automatic via `import.meta.env.BASE_URL`
+- BrowserRouter uses `basename={import.meta.env.BASE_URL}` for proper routing
+
+### Deployment Commands
+```bash
+pnpm build        # Build for production
+pnpm run deploy   # Deploy to gh-pages branch
+```
+
+### Assets: Bundled vs Public
+- **Bundled (src/assets/)**: Imported in components, optimized by Vite
+  ```tsx
+  import logo from "../assets/logo.png"; // ✓ No getAssetPath needed
+  ```
+- **Public (public/)**: Referenced by path, needs getAssetPath()
+  ```tsx
+  src={getAssetPath("/media/hero.jpg")} // ✓ Required for GitHub Pages
+  ```
 
 ## Performance Optimizations Applied
 

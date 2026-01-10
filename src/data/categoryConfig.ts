@@ -1,5 +1,6 @@
 import { LucideIcon, Glasses, Smartphone, Rocket, Lightbulb, Users, Code, Layers, Palette, Zap, Target, HeartHandshake, Eye, Gamepad2, Search, MessageCircle, Sparkles, PenTool } from "lucide-react";
 import type { CategoryId } from "@/context/CategoryContext";
+import { getAssetPath } from "@/utils/assets";
 
 // ============================================
 // TYPE DEFINITIONS
@@ -85,26 +86,26 @@ const xrConfig: CategoryConfig = {
     title: "Van hoog overzien naar gericht ",
     titleHighlight: "bouwen",
     subtitle: "Ik bouw immersieve VR, AR en MR ervaringen die trainen, simuleren en inspireren. Van concept tot implementatie, samen met jou.",
-    backgroundImages: ["/media/site/xr.jpeg", "/media/site/ux1.jpeg"],
+    backgroundImages: [getAssetPath("/media/site/xr.jpeg"), getAssetPath("/media/site/ux1.jpeg")],
   },
   usps: [
     {
       icon: Glasses,
       title: "XR Specialist",
       description: "Jarenlange ervaring met VR, AR en MR projecten in diverse sectoren.",
-      backgroundImage: "/media/site/xr.jpeg",
+      backgroundImage: getAssetPath("/media/site/xr.jpeg"),
     },
     {
       icon: Gamepad2,
       title: "Unity Expert",
       description: "Diepgaande Unity kennis voor complexe simulaties en interactieve ervaringen.",
-      backgroundImage: "/media/site/unity-modified.jpg",
+      backgroundImage: getAssetPath("/media/site/unity-modified.jpg"),
     },
     {
       icon: Eye,
       title: "Immersief Design",
       description: "Ontwerp dat de gebruiker volledig onderdompelt en engageert.",
-      backgroundImage: "/media/site/ux1.jpeg",
+      backgroundImage: getAssetPath("/media/site/ux1.jpeg"),
     },
     {
       icon: Users,
@@ -127,27 +128,27 @@ const xrConfig: CategoryConfig = {
       quote: "Voor een ombouwproject heeft Guido ons uitstekend geholpen met het vervaardigen van een mixed reality applicatie. De applicatie had als doel om inzicht te krijgen in het bouwterrein en de daarbij horende vervoersbewegingen. Tevens hebben we hiermee nieuwe manieren ontdekt om ontwerp op locatie te kunnen beoordelen. De samenwerking was erg fijn.",
       author: "Wouter van Hulst",
       title: "Werktuigbouwkundig Ingenieur Watertechniek, Sweco Nederland",
-      avatar: "/icons/woutervanhulst.jpg",
+      avatar: getAssetPath("/icons/woutervanhulst.jpg"),
       rating: 5,
-      companyLogo: "/icons/sweco_logo.png",
+      companyLogo: getAssetPath("/icons/sweco_logo.png"),
       linkedinUrl: "https://www.linkedin.com/in/wouter-van-hulst-6a3254100/",
     },
     {
       quote: "Tijdens zijn afstudeerstage in ons team heeft Guido laten zien hoe krachtig AR/VR kan zijn voor het ontwerpen en realiseren van drinkwaterzuiveringen, door complexe installaties en bouwfases op ware schaal inzichtelijk te maken. Met zijn aanstekelijke enthousiasme wist hij ons moeiteloos mee te nemen in deze wereld, zonder technische drempels op te werpen. Guido combineert creativiteit met oprechte betrokkenheid en werkt sterk samen, waarbij hij actief zoekt naar input uit de praktijk. Dat maakt hem niet alleen prettig om mee te werken, maar ook iemand die oplossingen ontwikkelt die écht aansluiten bij de gebruiker.",
       author: "Marc de Graaf",
       title: "Werktuigbouwkundig Ingenieur Watertechniek, Sweco Nederland",
-      avatar: "/icons/marcdegraaf.jpg",
+      avatar: getAssetPath("/icons/marcdegraaf.jpg"),
       rating: 5,
-      companyLogo: "/icons/sweco_logo.png",
+      companyLogo: getAssetPath("/icons/sweco_logo.png"),
       linkedinUrl: "https://www.linkedin.com/in/marc-de-graaf-23246a144/",
     },
     {
       quote: "Guido was tijdens zijn stageperiode opvallend nieuwsgierig, leergierig en deed alles met een aanstekelijke glimlach. Tijdens zijn praktische experiment viel het mij vooral op dat hij kritisch was op zijn eigen concept en perfectionistisch nadacht over zijn eigen einddoel. Al met al een fijne periode.",
       author: "Quinten Mollema",
       title: "Projectleider, Sweco Nederland",
-      avatar: "/icons/quintenmollema.jpg",
+      avatar: getAssetPath("/icons/quintenmollema.jpg"),
       rating: 5,
-      companyLogo: "/icons/sweco_logo.png",
+      companyLogo: getAssetPath("/icons/sweco_logo.png"),
       linkedinUrl: "https://www.linkedin.com/in/quinten-mollema-78b20495/",
     },
 
@@ -155,9 +156,9 @@ const xrConfig: CategoryConfig = {
     quote: "In 2024-2025 heeft Guido van Duivenvoorde voor een renovatie/nieuwbouw project bij onze opdrachtgever een Mixed Reality model gemaakt. Hiermee konden de ontwerpers en de opdrachtgever op de projectlocatie meekijken hoe de renovatie van o.a. ruimtes en installaties in de bestaande bouw eruit kon komen te zien en hoe de nieuwbouw aansloot bij de bestaande bouw. Mixed Reality is daarmee een fantastisch middel gebleken om op de projectlocatie aan te tonen dat het ontworpen 3D model past op en naast de bestaande bouw of clashes goed in beeld bracht. De passie en inzet van Guido om deze makkelijk bedienbaar Mixed Reality model te maken, heeft enorm geholpen om voor het ontwerpbureau en de opdrachtgever een mooi en inzichtelijk ontwerp te maken.",
     author: "Cor-Jan Baltus",
     title: "Projectmanager Drinkwater, Sweco Nederland",
-    avatar: "/icons/corjan.jpg",
+    avatar: getAssetPath("/icons/corjan.jpg"),
     rating: 5,
-    companyLogo: "/icons/sweco_logo.png",
+    companyLogo: getAssetPath("/icons/sweco_logo.png"),
   },
 
   ],
@@ -331,26 +332,26 @@ const websitesConfig: CategoryConfig = {
     title: "Jouw digitale visitekaartje,",
     titleHighlight: "professioneel gebouwd",
     subtitle: "Ik bouw snelle, schaalbare websites en webapplicaties die converteren. Van startup landing page tot enterprise platform.",
-    backgroundImages: ["/media/site/webapp.jpeg", "/media/site/ux1.jpeg"],
+    backgroundImages: [getAssetPath("/media/site/webapp.jpeg"), getAssetPath("/media/site/ux1.jpeg")],
   },
   usps: [
     {
       icon: PenTool,
       title: "Strategie & UX Design",
       description: "Ik ontwerp websites met een logische structuur en sterke gebruikerservaring die bezoekers gericht naar actie leiden.",
-      backgroundImage: "/media/site/webapp.jpeg",
+      backgroundImage: getAssetPath("/media/site/webapp.jpeg"),
     },
     {
       icon: Zap,
       title: "Techniek & Performance",
       description: "Ik bouw snelle, veilige en toekomstbestendige websites die op elk apparaat optimaal presteren.",
-      backgroundImage: "/media/site/website_performance.png",
+      backgroundImage: getAssetPath("/media/site/website_performance.png"),
     },
     {
       icon: Palette,
       title: "Design & Branding",
       description: "Ik vertaal jouw merk naar een modern, consistent en visueel aantrekkelijk webdesign.",
-      backgroundImage: "/media/site/ux1.jpeg"
+      backgroundImage: getAssetPath("/media/site/ux1.jpeg")
     },
     {
       icon: Code,
@@ -373,9 +374,9 @@ const websitesConfig: CategoryConfig = {
       quote: "Guido combineert een sterke technische kennis met een aanstekelijke passie voor technologie. Daardoor voelen uitdagingen als interessante puzzels, en met zijn goede gevoel voor humor is het simpelweg fijn om met hem samen te werken.",
       author: "Maarten Gerritse",
       title: "UX Designer, Framespace",
-      avatar: "/icons/maartengerritse.jpg",
+      avatar: getAssetPath("/icons/maartengerritse.jpg"),
       rating: 5,
-      companyLogo: "/icons/framespace_logo.jpg",
+      companyLogo: getAssetPath("/icons/framespace_logo.jpg"),
       linkedinUrl: "https://www.linkedin.com/in/maartengerritse/",
     },
 
@@ -384,7 +385,7 @@ const websitesConfig: CategoryConfig = {
       author: "Florian Hierck",
       title: "Student Informatica, Hogeschool Leiden",
       rating: 5,
-      avatar: "/icons/florianhierck.jpg",
+      avatar: getAssetPath("/icons/florianhierck.jpg"),
       linkedinUrl: "https://www.linkedin.com/in/florian-hierck-203569210/",
     }
 
@@ -550,26 +551,26 @@ const mobileAppsConfig: CategoryConfig = {
     title: "Jouw idee, altijd binnen ",
     titleHighlight: "handbereik",
     subtitle: "Ik ontwikkel mobiele apps in Flutter voor MVP's, prototypes en compacte producties. Focus op UX, performance en een duidelijke scope.",
-    backgroundImages: ["/media/site/webapp.jpeg", "/media/site/ux1.jpeg"],
+    backgroundImages: [getAssetPath("/media/site/webapp.jpeg"), getAssetPath("/media/site/ux1.jpeg")],
   },
   usps: [
     {
       icon: Smartphone,
       title: "iOS & Android",
       description: "Eén codebase voor beide platformen met Flutter. Kostenefficiënt en snel naar de markt.",
-      backgroundImage: "/media/site/webapp.jpeg",
+      backgroundImage: getAssetPath("/media/site/webapp.jpeg"),
     },
     {
       icon: PenTool,
       title: "UX & Interactieontwerp",
       description: "Sterke focus op gebruiksvriendelijkheid, intuïtieve flows en een fijne gebruikservaring.",
-      backgroundImage: "/media/site/ux1.jpeg",
+      backgroundImage: getAssetPath("/media/site/ux1.jpeg"),
     },
     {
       icon: Rocket,
       title: "App Store Ready",
       description: "Volledige begeleiding bij publicatie in de App Store en Play Store.",
-      backgroundImage: "/media/site/appstore-modified.jpg",
+      backgroundImage: getAssetPath("/media/site/appstore-modified.jpg"),
     },
     {
       icon: Target,
@@ -824,7 +825,7 @@ export const defaultConfig: CategoryConfig = {
     title: "DigitaleDuif: Ik geef jouw ",
     titleHighlight: "idee vleugels",
     subtitle: "Ik bouw VR, MR, websites en apps die écht werken. Van idee tot lancering, samen met jou.",
-    backgroundImages: ["/media/site/xr.jpeg", "/media/site/webapp.jpeg", "/media/site/ux1.jpeg"],
+    backgroundImages: [getAssetPath("/media/site/xr.jpeg"), getAssetPath("/media/site/webapp.jpeg"), getAssetPath("/media/site/ux1.jpeg")],
   },
   usps: xrConfig.usps, // Use XR as default since it was original
   testimonials: xrConfig.testimonials,

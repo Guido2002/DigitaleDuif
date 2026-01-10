@@ -18,7 +18,7 @@ const App = () => (
     <TooltipProvider>
       <CategoryProvider>
         <Sonner /> {/* This is for the sonner toast library */}
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Layout>
             <Suspense
               fallback={

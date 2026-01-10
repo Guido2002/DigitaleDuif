@@ -1,6 +1,7 @@
 // This file will contain mock data for various sections of the website.
 
 import { LucideIcon, Glasses, Rocket, Lightbulb, Users, TrendingUp, Code, Star, Globe, Smartphone, LayoutDashboard, Cloud, Search, Settings } from "lucide-react";
+import { getAssetPath } from "@/utils/assets";
 
 // USP Card Data
 interface USP {
@@ -15,19 +16,19 @@ export const uspCards: USP[] = [
     icon: Glasses,
     title: "XR Specialist",
     description: "Diepgaande XR kennis voor innovatieve ervaringen.",
-    backgroundImage: "/media/site/xr.jpeg",
+    backgroundImage: getAssetPath("/media/site/xr.jpeg"),
   },
   {
     icon: Globe,
     title: "Web & App Development",
     description: "Van concept tot lancering, robuuste websites en apps.",
-    backgroundImage: "/media/site/webapp.jpeg",
+    backgroundImage: getAssetPath("/media/site/webapp.jpeg"),
   },
   {
     icon: Lightbulb,
     title: "Techniek & UX in Balans",
     description: "Solide techniek gecombineerd met een fijne gebruikservaring.",
-    backgroundImage: "/media/site/ux1.jpeg",
+    backgroundImage: getAssetPath("/media/site/ux1.jpeg"),
   },
   {
     icon: Users,
@@ -205,7 +206,7 @@ export const projects: Project[] = [
       "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1526666923127-b2970f64b422?w=800&h=600&fit=crop",
     ],
-    videoUrl: "/media/projects/vr-escape-room/vr-escape-room.webm",
+    videoUrl: getAssetPath("/media/projects/vr-escape-room/vr-escape-room.webm"),
     serviceId: "vr-app-dev",
   },
   {
@@ -221,7 +222,7 @@ export const projects: Project[] = [
     images: [
     ],
     serviceId: "mr-interfaces",
-    videoUrl: "/media/projects/mr-bim-4d/afstudeerzitting.webm",
+    videoUrl: getAssetPath("/media/projects/mr-bim-4d/afstudeerzitting.webm"),
   },
   {
     id: "mr-sporensimulator",
@@ -236,7 +237,7 @@ export const projects: Project[] = [
     images: [
     ],
     serviceId: "mr-interfaces",
-    videoUrl: "/media/projects/mr-sporensimulator/sporen-simulator.webm",
+    videoUrl: getAssetPath("/media/projects/mr-sporensimulator/sporen-simulator.webm"),
   },
   {
     id: "xr-sportanalyse",
@@ -251,7 +252,7 @@ export const projects: Project[] = [
     images: [
     ],
     serviceId: "data-analytics",
-    videoUrl: "/media/projects/passing-prototype/passingprototype.webm",
+    videoUrl: getAssetPath("/media/projects/passing-prototype/passingprototype.webm"),
   },
   {
     id: "flutter-todo-app",
@@ -268,12 +269,12 @@ export const projects: Project[] = [
       "Een schaalbare basis voor productiviteitsapps, waarbij taken snel kunnen worden aangemaakt en beheerd. De combinatie van visuele feedback en animatie zorgt voor een prettige en efficiënte gebruikerservaring.",
     techStack: ["Flutter", "Dart", "Material Design 3"],
     images: [
-      "/media/flutter (1).png",
-      "/media/flutter (2).png",
-      "/media/flutter (3).png",
-      "/media/flutter (4).png",
-      "/media/flutter (5).png",
-      "/media/flutter (6).png",
+      getAssetPath("/media/flutter (1).png"),
+      getAssetPath("/media/flutter (2).png"),
+      getAssetPath("/media/flutter (3).png"),
+      getAssetPath("/media/flutter (4).png"),
+      getAssetPath("/media/flutter (5).png"),
+      getAssetPath("/media/flutter (6).png"),
     ],
     serviceId: "mobile-app-development",
   },
