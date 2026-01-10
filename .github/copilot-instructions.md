@@ -41,6 +41,10 @@
 - Canvas animations skipped on mobile
 - Scroll listeners have passive: true
 
+### Project Preview Video Behavior
+- All devices (desktop + tablet/mobile): play preview video when the card/hero is ≥20% in viewport; pause when out of view.
+- Prefer observing the card/container (not the `<video>` element) for in-view logic; this avoids Chrome edge cases where the first card can fail to pause.
+
 ## Component Patterns
 
 ### Category UX mapping

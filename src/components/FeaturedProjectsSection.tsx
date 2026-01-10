@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useRef, useState } from "react";
+import React, { memo, useCallback, useMemo, useRef } from "react";
 import SectionHeader from "./SectionHeader";
 import FadeInWhenVisible from "./FadeInWhenVisible";
 import { useSpring, animated } from "@react-spring/web";
@@ -10,13 +10,14 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useReducedMotion } from "framer-motion";
-import { useIsTabletOrMobile } from "@/hooks/use-tablet-or-mobile";
+
+type ProjectMediaElement = HTMLVideoElement | HTMLIFrameElement;
 
 function renderProjectMedia(
   project: Project,
   shouldAutoplayVideo: boolean,
   shouldPreloadVideo: boolean,
-  mediaRef: (node: HTMLVideoElement | HTMLIFrameElement | null) => void,
+  mediaRef: (node: ProjectMediaElement | null) => void,
 ): React.ReactNode {
   const videoUrl = project.videoUrl;
   if (!videoUrl) {
@@ -75,8 +76,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const mediaElementRef = useRef<HTMLVideoElement | HTMLIFrameElement | null>(null);
+  const mediaElementRef = useRef<ProjectMediaElement | null>(null);
 
   const { ref: animationRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
   const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ threshold: 0.2, rootMargin: "0px" });
@@ -89,11 +89,10 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
     [animationRef, mediaInViewRef],
   );
 
-  const setMediaRef = useCallback((node: HTMLVideoElement | HTMLIFrameElement | null) => {
+  const setMediaRef = useCallback((node: ProjectMediaElement | null) => {
     mediaElementRef.current = node;
   }, []);
 
-  const isTabletOrMobile = useIsTabletOrMobile();
   const shouldReduceMotion = useReducedMotion();
   
   const yOffset = shouldReduceMotion ? 0 : 16;
@@ -107,8 +106,8 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
 
   const videoUrl = project.videoUrl;
   const shouldControlVideo = Boolean(videoUrl) && !shouldReduceMotion;
-  const shouldPlayVideoNow = shouldControlVideo && (isTabletOrMobile ? isMediaInView : (isHovered && isMediaInView));
-  const shouldPreloadVideo = shouldControlVideo && (isTabletOrMobile ? isMediaInView : isHovered);
+  const shouldPlayVideoNow = shouldControlVideo && isMediaInView;
+  const shouldPreloadVideo = shouldControlVideo && isMediaInView;
 
   React.useEffect(() => {
     if (!shouldControlVideo) return;
@@ -140,8 +139,6 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
     >
       <Link
         to={`/projecten?project=${project.id}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         className={cn(
           "block h-full rounded-2xl overflow-hidden bg-primary border border-primary-foreground/15",
           "transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:shadow-primary/20 hover:border-primary-foreground/25",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import { projects, Project } from '../data/mockData';
@@ -6,8 +6,7 @@ import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
-import { usePauseMediaWhenNotInView } from '@/hooks/use-pause-media-when-not-in-view';
-import { useIsTabletOrMobile } from '@/hooks/use-tablet-or-mobile';
+import { useInView } from 'react-intersection-observer';
 
 // Define filter categories
 const categories = [
@@ -21,16 +20,9 @@ const categories = [
 const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ project, onClick }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const videoElementRef = useRef<HTMLVideoElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
-  const isTabletOrMobile = useIsTabletOrMobile();
-  const shouldAutoplayVideo = Boolean(project.videoUrl) && !shouldReduceMotion && !isTabletOrMobile;
-  const shouldPlayInViewport = Boolean(project.videoUrl) && !shouldReduceMotion && isTabletOrMobile;
-  const featuredMediaRef = usePauseMediaWhenNotInView({
-    enabled: Boolean(project.videoUrl),
-    playOnEnter: shouldPlayInViewport,
-    threshold: 0.2,
-    rootMargin: shouldPlayInViewport ? "0px" : "200px 0px",
-  });
+  const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ threshold: 0.2, rootMargin: '0px' });
 
   const media = useMemo(() => {
     const items: Array<{ type: 'video' | 'image'; src: string }> = [];
@@ -49,6 +41,26 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
   }, [isHovered, media.length]);
 
   const currentMedia = media[currentImageIndex];
+  const isVideoActive = currentMedia?.type === 'video';
+  const shouldControlVideo = Boolean(project.videoUrl) && isVideoActive && !shouldReduceMotion;
+  const shouldPlayVideoNow = shouldControlVideo && isMediaInView;
+  const shouldPreloadVideo = shouldControlVideo && isMediaInView;
+
+  useEffect(() => {
+    if (!shouldControlVideo) return;
+    const element = videoElementRef.current;
+    if (!element) return;
+
+    if (shouldPlayVideoNow) {
+      Promise.resolve()
+        .then(() => element.play())
+        .catch(() => {
+          // Autoplay can be blocked or play() can fail; do nothing.
+        });
+    } else {
+      element.pause();
+    }
+  }, [shouldControlVideo, shouldPlayVideoNow]);
 
   return (
     <motion.div
@@ -70,18 +82,21 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
       
       <div className="flex flex-col lg:flex-row">
         {/* Image Side */}
-        <div className="relative w-full lg:w-1/2 aspect-video lg:aspect-auto lg:min-h-[420px] overflow-hidden flex-shrink-0">
+        <div
+          ref={mediaInViewRef}
+          className="relative w-full lg:w-1/2 aspect-video lg:aspect-auto lg:min-h-[420px] overflow-hidden flex-shrink-0"
+        >
           <AnimatePresence mode="wait">
             {currentMedia?.type === 'video' ? (
               <motion.video
                 key={currentMedia.src}
-                ref={featuredMediaRef}
+                ref={videoElementRef}
                 src={currentMedia.src}
                 muted
                 loop
                 playsInline
-                autoPlay={shouldAutoplayVideo}
-                  preload={(shouldAutoplayVideo || shouldPlayInViewport) ? 'metadata' : 'none'}
+                autoPlay={false}
+                preload={shouldPreloadVideo ? 'metadata' : 'none'}
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}

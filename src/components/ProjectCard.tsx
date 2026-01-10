@@ -3,7 +3,6 @@ import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Project } from '../data/mockData';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useIsTabletOrMobile } from '@/hooks/use-tablet-or-mobile';
 import { cn } from '@/lib/utils';
 
 interface ProjectCardProps {
@@ -169,7 +168,7 @@ function useVideoPlaybackInViewport(options: {
     } else {
       video.pause();
     }
-  }, [enabled, videoRef, shouldReduceMotion, shouldPlay]);
+  }, [enabled, shouldReduceMotion, shouldPlay]);
 }
 
 function usePauseVideoOnPageHide(options: {
@@ -200,26 +199,17 @@ function getProjectCardAnimateState(shouldReduceMotion: boolean, isActive: boole
 function getProjectCardVideoBehavior(options: {
   isVideo: boolean;
   shouldReduceMotion: boolean;
-  isTabletOrMobile: boolean;
-  isHovered: boolean;
   isMediaInView: boolean;
 }) {
-  const { isVideo, shouldReduceMotion, isTabletOrMobile, isHovered, isMediaInView } = options;
+  const { isVideo, shouldReduceMotion, isMediaInView } = options;
 
   if (!isVideo || shouldReduceMotion) {
     return { shouldPlayVideoNow: false, shouldPreloadVideo: false };
   }
 
-  if (isTabletOrMobile) {
-    return {
-      shouldPlayVideoNow: isMediaInView,
-      shouldPreloadVideo: isMediaInView,
-    };
-  }
-
   return {
-    shouldPlayVideoNow: isHovered && isMediaInView,
-    shouldPreloadVideo: isHovered,
+    shouldPlayVideoNow: isMediaInView,
+    shouldPreloadVideo: isMediaInView,
   };
 }
 
@@ -232,9 +222,8 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
   const shouldReduceMotion = useReducedMotion();
   
   const isMobile = useIsMobile();
-  const isTabletOrMobile = useIsTabletOrMobile();
   const isCardInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4 });
-  const isMediaInView = useInView(divRef, { margin: "0px", amount: 0.2 });
+  const isMediaInView = useInView(divRef, { margin: "-20% 0px -20% 0px", amount: 0.2, once: false });
   const isActive = isMobile && isCardInView;
 
   const handleImageLoad = useCallback(() => setImageLoaded(true), []);
@@ -253,8 +242,6 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
   const { shouldPlayVideoNow, shouldPreloadVideo } = getProjectCardVideoBehavior({
     isVideo,
     shouldReduceMotion,
-    isTabletOrMobile,
-    isHovered,
     isMediaInView,
   });
 
