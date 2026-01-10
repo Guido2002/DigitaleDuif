@@ -189,6 +189,24 @@ const OfferingsSection: React.FC = () => {
   const { offerings } = config;
   const { offerings: sectionTitles } = config.sectionTitles;
 
+  const offeringsGridClassName = React.useMemo(() => {
+    const base = "grid gap-4 md:gap-6 mx-auto";
+
+    if (offerings.length <= 1) {
+      return `${base} grid-cols-1 max-w-md`;
+    }
+
+    if (offerings.length === 2) {
+      return `${base} grid-cols-1 sm:grid-cols-2 max-w-3xl`;
+    }
+
+    if (offerings.length === 3) {
+      return `${base} grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl`;
+    }
+
+    return `${base} grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`;
+  }, [offerings.length]);
+
   // Don't render if no offerings
   if (!offerings || offerings.length === 0) {
     return null;
@@ -204,7 +222,7 @@ const OfferingsSection: React.FC = () => {
           />
         </FadeInWhenVisible>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className={offeringsGridClassName}>
           {offerings.map((offering, index) => (
             <OfferingCard
               key={`${selectedCategory}-${offering.id}`}

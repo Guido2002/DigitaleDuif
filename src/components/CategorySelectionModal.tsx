@@ -292,7 +292,10 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ onSelect }) => {
           </span>
         </motion.div>
 
-        <h1 className="text-4xl font-black text-foreground leading-[0.85] tracking-tight">
+        <h1
+          id="category-modal-title"
+          className="text-4xl font-black text-foreground leading-[0.85] tracking-tight"
+        >
           <motion.span
             className="inline-block"
             initial={{ opacity: 0, x: -30 }}
@@ -301,7 +304,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ onSelect }) => {
             }
             transition={{ type: "spring", stiffness: 120, damping: 12 }}
           >
-            WAT
+            WAAR
           </motion.span>
           <br />
           <motion.span
@@ -312,7 +315,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ onSelect }) => {
             }
             transition={{ type: "spring", stiffness: 100, damping: 14 }}
           >
-            MAKEN
+            WIL JE
             <motion.span
               className="absolute -bottom-1 left-0 w-full text-primary/60"
               initial={{ scaleX: 0, opacity: 0 }}
@@ -334,7 +337,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ onSelect }) => {
             }
             transition={{ type: "spring", stiffness: 120, damping: 12 }}
           >
-            WE<span className="text-primary">?</span>
+            AAN BOUWEN<span className="text-primary">?</span>
           </motion.span>
         </h1>
 
@@ -494,7 +497,10 @@ const TabletLayout: React.FC<TabletLayoutProps> = ({ onSelect }) => {
           </span>
         </motion.div>
 
-        <h1 className="text-6xl md:text-7xl font-black text-foreground leading-[0.85] tracking-tight">
+        <h1
+          id="category-modal-title"
+          className="text-6xl md:text-7xl font-black text-foreground leading-[0.85] tracking-tight"
+        >
           <motion.span
             className="inline-block"
             initial={{ opacity: 0, y: -50, scale: 0.9 }}
@@ -505,7 +511,7 @@ const TabletLayout: React.FC<TabletLayoutProps> = ({ onSelect }) => {
             }
             transition={{ type: "spring", stiffness: 80, damping: 12 }}
           >
-            WAT
+            WAAR
           </motion.span>
           <br />
           <motion.span
@@ -518,7 +524,7 @@ const TabletLayout: React.FC<TabletLayoutProps> = ({ onSelect }) => {
             }
             transition={{ type: "spring", stiffness: 70, damping: 14 }}
           >
-            MAKEN
+            WIL JE
             <motion.span
               className="absolute -bottom-1 left-0 w-full text-primary/60"
               initial={{ scaleX: 0, opacity: 0 }}
@@ -542,7 +548,7 @@ const TabletLayout: React.FC<TabletLayoutProps> = ({ onSelect }) => {
             }
             transition={{ type: "spring", stiffness: 100, damping: 10 }}
           >
-            WE<span className="text-primary">?</span>
+            AAN BOUWEN<span className="text-primary">?</span>
           </motion.span>
         </h1>
 
@@ -765,7 +771,7 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({ onSelect }) => {
               }
               transition={{ type: "spring", stiffness: 80, damping: 12 }}
             >
-              WAT
+              WAAR
             </motion.span>
             <br />
             <motion.span
@@ -778,7 +784,7 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({ onSelect }) => {
               }
               transition={{ type: "spring", stiffness: 70, damping: 14 }}
             >
-              MAKEN
+              WIL JE
               <motion.span
                 className="absolute -bottom-1 left-0 w-full text-primary/60"
                 initial={{ scaleX: 0, opacity: 0 }}
@@ -804,7 +810,7 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({ onSelect }) => {
               }
               transition={{ type: "spring", stiffness: 100, damping: 10 }}
             >
-              WE<span className="text-primary">?</span>
+              AAN BOUWEN<span className="text-primary">?</span>
             </motion.span>
           </h1>
 
