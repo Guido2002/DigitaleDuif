@@ -31,7 +31,7 @@ export default defineConfig(() => {
   };
 
   return {
-    base: process.env.NODE_ENV === 'production' ? '/DigitaleDuif/' : '/',
+    base: process.env.NODE_ENV === 'production' ? '/' : '/',
     server: {
       host: '::',
       port: 8080,
@@ -65,12 +65,9 @@ export default defineConfig(() => {
             const pkg = getPackageName(id);
             if (!pkg) return;
 
-            // Core framework
-            if (pkg === 'react' || pkg === 'react-dom' || pkg === 'scheduler') return 'vendor-react';
+            // Core framework - combine React and Radix to avoid circular deps
+            if (pkg === 'react' || pkg === 'react-dom' || pkg === 'scheduler' || pkg.startsWith('@radix-ui/')) return 'vendor-react';
             if (pkg === 'react-router' || pkg === 'react-router-dom') return 'vendor-router';
-
-            // UI primitives + helpers
-            if (pkg.startsWith('@radix-ui/')) return 'vendor-radix';
             if (pkg === 'lucide-react') return 'vendor-icons';
             if (pkg === 'cmdk') return 'vendor-cmdk';
             if (pkg === 'class-variance-authority' || pkg === 'clsx' || pkg === 'tailwind-merge') return 'vendor-ui-utils';
