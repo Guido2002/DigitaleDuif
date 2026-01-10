@@ -1,7 +1,21 @@
 // This file will contain mock data for various sections of the website.
 
 import { LucideIcon, Glasses, Rocket, Lightbulb, Users, TrendingUp, Code, Star, Globe, Smartphone, LayoutDashboard, Cloud, Search, Settings } from "lucide-react";
-import { getAssetPath } from "@/utils/assets";
+
+// Import media assets
+import xrImage from "@/assets/media/site/xr.jpeg";
+import webappImage from "@/assets/media/site/webapp.jpeg";
+import ux1Image from "@/assets/media/site/ux1.jpeg";
+import vrEscapeRoomVideo from "@/assets/media/projects/vr-escape-room/vr-escape-room.webm";
+import mrBim4dVideo from "@/assets/media/projects/mr-bim-4d/afstudeerzitting.webm";
+import mrSporenVideo from "@/assets/media/projects/mr-sporensimulator/sporen-simulator.webm";
+import passingPrototypeVideo from "@/assets/media/projects/passing-prototype/passingprototype.webm";
+import flutter1 from "@/assets/media/flutter (1).png";
+import flutter2 from "@/assets/media/flutter (2).png";
+import flutter3 from "@/assets/media/flutter (3).png";
+import flutter4 from "@/assets/media/flutter (4).png";
+import flutter5 from "@/assets/media/flutter (5).png";
+import flutter6 from "@/assets/media/flutter (6).png";
 
 // USP Card Data
 interface USP {
@@ -16,19 +30,19 @@ export const uspCards: USP[] = [
     icon: Glasses,
     title: "XR Specialist",
     description: "Diepgaande XR kennis voor innovatieve ervaringen.",
-    backgroundImage: getAssetPath("/media/site/xr.jpeg"),
+    backgroundImage: xrImage,
   },
   {
     icon: Globe,
     title: "Web & App Development",
     description: "Van concept tot lancering, robuuste websites en apps.",
-    backgroundImage: getAssetPath("/media/site/webapp.jpeg"),
+    backgroundImage: webappImage,
   },
   {
     icon: Lightbulb,
     title: "Techniek & UX in Balans",
     description: "Solide techniek gecombineerd met een fijne gebruikservaring.",
-    backgroundImage: getAssetPath("/media/site/ux1.jpeg"),
+    backgroundImage: ux1Image,
   },
   {
     icon: Users,
@@ -206,7 +220,7 @@ export const projects: Project[] = [
       "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=600&fit=crop",
       "https://images.unsplash.com/photo-1526666923127-b2970f64b422?w=800&h=600&fit=crop",
     ],
-    videoUrl: getAssetPath("/media/projects/vr-escape-room/vr-escape-room.webm"),
+    videoUrl: vrEscapeRoomVideo,
     serviceId: "vr-app-dev",
   },
   {
@@ -222,7 +236,7 @@ export const projects: Project[] = [
     images: [
     ],
     serviceId: "mr-interfaces",
-    videoUrl: getAssetPath("/media/projects/mr-bim-4d/afstudeerzitting.webm"),
+    videoUrl: mrBim4dVideo,
   },
   {
     id: "mr-sporensimulator",
@@ -237,7 +251,7 @@ export const projects: Project[] = [
     images: [
     ],
     serviceId: "mr-interfaces",
-    videoUrl: getAssetPath("/media/projects/mr-sporensimulator/sporen-simulator.webm"),
+    videoUrl: mrSporenVideo,
   },
   {
     id: "xr-sportanalyse",
@@ -252,7 +266,7 @@ export const projects: Project[] = [
     images: [
     ],
     serviceId: "data-analytics",
-    videoUrl: getAssetPath("/media/projects/passing-prototype/passingprototype.webm"),
+    videoUrl: passingPrototypeVideo,
   },
   {
     id: "flutter-todo-app",
@@ -269,12 +283,12 @@ export const projects: Project[] = [
       "Een schaalbare basis voor productiviteitsapps, waarbij taken snel kunnen worden aangemaakt en beheerd. De combinatie van visuele feedback en animatie zorgt voor een prettige en efficiënte gebruikerservaring.",
     techStack: ["Flutter", "Dart", "Material Design 3"],
     images: [
-      getAssetPath("/media/flutter (1).png"),
-      getAssetPath("/media/flutter (2).png"),
-      getAssetPath("/media/flutter (3).png"),
-      getAssetPath("/media/flutter (4).png"),
-      getAssetPath("/media/flutter (5).png"),
-      getAssetPath("/media/flutter (6).png"),
+      flutter1,
+      flutter2,
+      flutter3,
+      flutter4,
+      flutter5,
+      flutter6,
     ],
     serviceId: "mobile-app-development",
   },

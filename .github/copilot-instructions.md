@@ -10,17 +10,17 @@
 
 ## GitHub Pages Deployment
 
-### Asset Path Handling
-All public assets (images, videos in `/public` folder) must use `getAssetPath()` utility:
+### Asset Management
+**All assets are now in `src/assets/` and bundled by Vite:**
 ```tsx
-import { getAssetPath } from "@/utils/assets";
+// Import assets directly
+import myImage from "@/assets/media/image.jpg";
+import myVideo from "@/assets/media/video.webm";
+import myIcon from "@/assets/icons/icon.png";
 
-// Correct:
-<img src={getAssetPath("/media/hero.jpg")} />
-videoUrl: getAssetPath("/media/projects/demo.webm")
-
-// Wrong:
-<img src="/media/hero.jpg" /> // Will break on GitHub Pages
+// Use in JSX
+<img src={myImage} />
+<video src={myVideo} />
 ```
 
 ### Vite Configuration
@@ -34,15 +34,16 @@ pnpm build        # Build for production
 pnpm run deploy   # Deploy to gh-pages branch
 ```
 
-### Assets: Bundled vs Public
-- **Bundled (src/assets/)**: Imported in components, optimized by Vite
-  ```tsx
-  import logo from "../assets/logo.png"; // ✓ No getAssetPath needed
-  ```
-- **Public (public/)**: Referenced by path, needs getAssetPath()
-  ```tsx
-  src={getAssetPath("/media/hero.jpg")} // ✓ Required for GitHub Pages
-  ```
+### Asset Organization
+```
+src/assets/
+├── media/
+│   ├── site/          # Site background images
+│   ├── projects/      # Project videos
+│   └── flutter (*.png) # Flutter app screenshots
+├── icons/             # Avatars and company logos
+└── *.jpg/png          # Other bundled assets
+```
 
 ## Performance Optimizations Applied
 
