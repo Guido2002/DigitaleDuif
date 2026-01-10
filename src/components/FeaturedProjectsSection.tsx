@@ -79,7 +79,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
   const mediaElementRef = useRef<ProjectMediaElement | null>(null);
-  const playAttemptIntervalRef = useRef<number | null>(null);
+  const playAttemptIntervalRef = useRef<ReturnType<typeof globalThis.setInterval> | null>(null);
   const isMobile = useIsMobile();
 
   const { ref: animationRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });

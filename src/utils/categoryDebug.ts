@@ -80,7 +80,7 @@ export const categoryDebug = {
 
 // Attach to window in development
 if (typeof window !== "undefined") {
-  (window as any).categoryDebug = categoryDebug;
+  (window as unknown as { categoryDebug: typeof categoryDebug }).categoryDebug = categoryDebug;
   
   // Log availability on load
   if (import.meta.env.DEV) {

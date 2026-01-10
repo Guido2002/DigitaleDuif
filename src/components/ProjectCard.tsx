@@ -149,7 +149,7 @@ function useVideoPlaybackInViewport(options: {
   shouldPlay: boolean;
 }) {
   const { enabled, videoRef, shouldReduceMotion, shouldPlay } = options;
-  const playAttemptIntervalRef = React.useRef<number | null>(null);
+  const playAttemptIntervalRef = React.useRef<ReturnType<typeof globalThis.setInterval> | null>(null);
 
   React.useEffect(() => {
     if (!enabled) return;

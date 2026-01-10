@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import cvPdf from "@/assets/cv.pdf";
 
 interface CvModalProps {
   trigger: React.ReactNode;
@@ -36,7 +37,7 @@ const CvModal: React.FC<CvModalProps> = ({ trigger }) => {
           </p>
           <Button asChild className="w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
             <a 
-              href="/cv.pdf" 
+              href={cvPdf} 
               download="Guido_van_Duijvenvoorde_CV.pdf"
               className="flex items-center justify-center gap-2"
               aria-label="Download CV als PDF bestand"

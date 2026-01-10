@@ -17,27 +17,22 @@ interface OfferingCardProps {
   categoryKey?: string | null;
 }
 
-const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+// Separate hooks for cleaner organization
+const useMobileDetection = () => {
   const [isMobile, setIsMobile] = React.useState(false);
-  const shouldReduceMotion = useReducedMotion();
   
-  const { ref, inView } = useInView({ 
-    triggerOnce: true, 
-    threshold: 0.15,
-    rootMargin: "-80px"
-  });
-
-  // Detect mobile for performance optimizations
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+  
+  return isMobile;
+};
 
+const useOfferingCardAnimations = (inView: boolean, index: number, isHovered: boolean, isMobile: boolean, shouldReduceMotion: boolean) => {
   // Enhanced spring animation with scale and stagger
-  // Skip animations when reduced motion is preferred
   const initialScale = (isMobile || shouldReduceMotion) ? 1 : 0.97;
   const yOffset = shouldReduceMotion ? 0 : 20;
   const springProps = useSpring({
@@ -53,15 +48,14 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
     immediate: shouldReduceMotion,
   });
 
-  // Separate spring for hover effects
-  // Disable hover scale on mobile for better performance
+  // Separate spring for hover effects - disable hover scale on mobile
   const hoverSpring = useSpring({
     scale: (isHovered && !isMobile) ? 1.02 : 1,
     y: isHovered ? -6 : 0,
     config: { tension: 300, friction: 25 }
   });
 
-  // Combine transforms in useMemo to avoid nested callbacks (performance optimization)
+  // Combine transforms in useMemo to avoid nested callbacks
   const combinedTransform = React.useMemo(() => {
     const entryY = springProps.y.get();
     const entryScale = springProps.scale.get();
@@ -69,6 +63,24 @@ const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => 
     const hoverScale = hoverSpring.scale.get();
     return `translateY(${entryY + hoverY}px) scale(${entryScale * hoverScale})`;
   }, [springProps.y, springProps.scale, hoverSpring.y, hoverSpring.scale]);
+
+  return { springProps, combinedTransform };
+};
+
+const OfferingCard: React.FC<OfferingCardProps> = memo(({ offering, index }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+  const isMobile = useMobileDetection();
+  const shouldReduceMotion = useReducedMotion();
+  
+  const { ref, inView } = useInView({ 
+    triggerOnce: true, 
+    threshold: 0.15,
+    rootMargin: "-80px"
+  });
+
+  const { springProps, combinedTransform } = useOfferingCardAnimations(
+    inView, index, isHovered, isMobile, shouldReduceMotion
+  );
 
   return (
     <animated.div

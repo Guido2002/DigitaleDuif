@@ -31,6 +31,7 @@ const CallToActionSection = () => {
                 Klaar om samen<br />
                 <span className="relative inline-block">
                   te vliegen?
+                  {" "}
                   <span className="absolute -bottom-2 left-0 w-full text-white/40">
                     <DoodleScribble className="w-full" />
                   </span>

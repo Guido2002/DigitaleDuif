@@ -1,4 +1,4 @@
-import React, { useRef, useState, memo } from "react";
+import React, { useState, memo } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
@@ -51,10 +51,14 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ service, index, colSpan,
 
   // Enhanced spring animation with stagger effect
   // Remove scale on mobile for better performance
+  let scaleValue = 1;
+  if (!inView) {
+    scaleValue = isMobile ? 1 : 0.95;
+  }
   const springProps = useSpring({
     opacity: inView ? 1 : 0,
     y: inView ? 0 : 30,
-    scale: inView ? 1 : (isMobile ? 1 : 0.95),
+    scale: scaleValue,
     delay: index * 80,
     config: { 
       tension: 200, 
@@ -69,9 +73,7 @@ const ServiceCard: React.FC<ServiceCardProps> = memo(({ service, index, colSpan,
       id={service.id}
       style={{
         opacity: springProps.opacity,
-        transform: springProps.y.to(y => 
-          springProps.scale.to(s => `translateY(${y}px) scale(${s})`)
-        ),
+        transform: springProps.y.to(y => `translateY(${y}px)`),
       }}
       onClick={onClick}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
@@ -206,7 +208,7 @@ const BentoServices = () => {
             role="tablist"
             aria-label="Filter diensten op categorie"
           >
-          <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3">
             {serviceCategories.map((category) => (
               <Button
                 key={category.id}
@@ -231,6 +233,7 @@ const BentoServices = () => {
           <p className="mt-4 text-sm text-muted-foreground">
             {serviceCategories.find(c => c.id === activeCategory)?.description}
           </p>
+          </div>
         </FadeInWhenVisible>
 
         <div 

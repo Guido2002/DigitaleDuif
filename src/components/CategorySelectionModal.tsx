@@ -12,7 +12,7 @@ type DeviceType = "mobile" | "tablet" | "desktop";
 
 type TimeoutHandle = ReturnType<typeof setTimeout>;
 
-const scheduleStageTrue = <Stage extends Record<PropertyKey, boolean>>(
+const scheduleStageTrue = <Stage extends Record<string, boolean>>(
   setStage: React.Dispatch<React.SetStateAction<Stage>>,
   key: keyof Stage,
   delayMs: number
@@ -22,7 +22,7 @@ const scheduleStageTrue = <Stage extends Record<PropertyKey, boolean>>(
     delayMs
   );
 
-const scheduleStageSequence = <Stage extends Record<PropertyKey, boolean>>(
+const scheduleStageSequence = <Stage extends Record<string, boolean>>(
   sequence: Record<keyof Stage, number>,
   setStage: React.Dispatch<React.SetStateAction<Stage>>
 ): TimeoutHandle[] =>
@@ -252,6 +252,7 @@ const MobileCard: React.FC<MobileCardProps> = ({
 );
 
 interface MobileAnimationStage {
+  [key: string]: boolean;
   logo: boolean;
   badge: boolean;
   titleWord1: boolean;
@@ -450,6 +451,7 @@ const TabletCard: React.FC<TabletCardProps> = ({
 );
 
 interface TabletAnimationStage {
+  [key: string]: boolean;
   logo: boolean;
   badge: boolean;
   titleWord1: boolean;
@@ -681,6 +683,7 @@ const DesktopCard: React.FC<DesktopCardProps> = ({
 );
 
 interface DesktopAnimationStage {
+  [key: string]: boolean;
   logo: boolean;
   badge: boolean;
   titleWord1: boolean;
