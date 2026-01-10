@@ -28,6 +28,7 @@ export default defineConfig(() => {
   };
 
   return {
+    base: process.env.NODE_ENV === 'production' ? '/DigitaleDuif/' : '/',
     server: {
       host: '::',
       port: 8080,
