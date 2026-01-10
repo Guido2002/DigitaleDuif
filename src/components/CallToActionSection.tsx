@@ -4,6 +4,7 @@ import FadeInWhenVisible from "./FadeInWhenVisible";
 import { Calendar, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { DoodleStar, DoodleScribble, FloatingDoodle } from "@/components/ui/doodles";
+import img0005 from "@/assets/IMG_0005.JPG";
 
 const CallToActionSection = () => {
   return (
@@ -72,7 +73,7 @@ const CallToActionSection = () => {
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <img
-                src="/IMG_0005.JPG"
+                src={img0005}
                 alt="DigitaleDuif XR Innovation"
                 className="w-full h-full object-cover rounded-[1.5rem]"
                 loading="lazy"

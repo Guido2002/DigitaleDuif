@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCategory, CATEGORIES, type CategoryId } from "@/context/CategoryContext";
 import { cn } from "@/lib/utils";
 import { Bird, ArrowUpRight } from "lucide-react";
+import xrImage from "@/assets/media/site/xr.jpeg";
+import webappImage from "@/assets/media/site/webapp.jpeg";
+import ux1Image from "@/assets/media/site/ux1.jpeg";
 
 // ============================================
 // SHARED TYPES & CONSTANTS
@@ -31,9 +34,9 @@ const scheduleStageSequence = <Stage extends Record<string, boolean>>(
   );
 
 const categoryImages: Record<CategoryId, string> = {
-  xr: "/media/site/xr.jpeg",
-  websites: "/media/site/webapp.jpeg",
-  "mobile-apps": "/media/site/ux1.jpeg",
+  xr: xrImage,
+  websites: webappImage,
+  "mobile-apps": ux1Image,
 };
 
 const CATEGORY_DISPLAY_LABEL: Record<CategoryId, string> = {

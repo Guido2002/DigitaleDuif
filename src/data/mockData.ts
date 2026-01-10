@@ -185,7 +185,7 @@ export const projects: Project[] = [
       "Een schaalbare en onderhoudsvriendelijke basis voor online acquisitie. Bezoekers krijgen snel inzicht in expertise en resultaten, wat leidt tot meer kwalitatieve contactaanvragen.",
     techStack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Web3Forms"],
     images: [
-      "/media/site/webapp.jpeg",
+      webappImage,
     ],
     serviceId: "web-development",
   },
@@ -200,8 +200,8 @@ export const projects: Project[] = [
     impact: "De optimalisaties droegen bij aan een stabiele en toegankelijke ervaring die inmiddels door honderden bezoekers is gebruikt. De Limescoop maakt het Romeinse erfgoed tastbaar in de publieke ruimte en vervangt een statisch informatiebord door een actieve beleving die jong en oud aanspreekt.",
     techStack: ["Unity", "C#", "Android", "Real-time 3D", "Asset optimalisatie"],
     images: [
-      "/media/projects/limescoop/Limescoop.webp",
-      "/media/projects/limescoop/Limescoop-1024x598.webp",
+      limescoopImage1,
+      limescoopImage2,
     ],
     serviceId: "vr-app-dev",
   },
