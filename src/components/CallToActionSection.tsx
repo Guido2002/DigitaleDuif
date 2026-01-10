@@ -4,7 +4,7 @@ import FadeInWhenVisible from "./FadeInWhenVisible";
 import { Calendar, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { DoodleStar, DoodleScribble, FloatingDoodle } from "@/components/ui/doodles";
-import img0005 from "@/assets/IMG_0005.JPG";
+import img0005 from "@/assets/IMG_0005.png";
 
 const CallToActionSection = () => {
   return (

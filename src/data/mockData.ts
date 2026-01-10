@@ -16,6 +16,8 @@ import flutter3 from "@/assets/media/flutter (3).png";
 import flutter4 from "@/assets/media/flutter (4).png";
 import flutter5 from "@/assets/media/flutter (5).png";
 import flutter6 from "@/assets/media/flutter (6).png";
+import limescoopImage1 from "@/assets/media/projects/limescoop/Limescoop.webp";
+import limescoopImage2 from "@/assets/media/projects/limescoop/Limescoop-1024x598.webp";
 
 // USP Card Data
 interface USP {
@@ -215,11 +217,7 @@ export const projects: Project[] = [
     solution: "Een Unity-gebaseerde VR-applicatie voor Oculus Quest 2 met real-time multiplayer via Photon Fusion. Door duidelijke instructies, voice-over begeleiding en gesynchroniseerde interacties kunnen leerlingen zonder VR-ervaring direct aan de slag.",
     impact: "Leerlingen ervaren geschiedenis op een interactieve manier en ontwikkelen samenwerking en communicatievaardigheden binnen een veilige leeromgeving.",
     techStack: ["Unity", "C#", "Oculus Quest 2", "Photon Fusion", "Multiplayer VR", "Educational VR"],
-    images: [
-      "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1526666923127-b2970f64b422?w=800&h=600&fit=crop",
-    ],
+    images: [],
     videoUrl: vrEscapeRoomVideo,
     serviceId: "vr-app-dev",
   },
