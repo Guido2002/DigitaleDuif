@@ -7,6 +7,7 @@ import ProjectModal from './ProjectModal';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Define filter categories
 const categories = [
@@ -22,7 +23,12 @@ const FeaturedProjectCard: React.FC<{ project: Project; onClick: () => void }> =
   const [isHovered, setIsHovered] = useState(false);
   const videoElementRef = useRef<HTMLVideoElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
-  const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ threshold: 0.2, rootMargin: '0px' });
+  const isMobile = useIsMobile();
+  // Desktop: stricter viewport detection - 50% visible with 20% margins
+  const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ 
+    threshold: isMobile ? 0.2 : 0.5, 
+    rootMargin: isMobile ? '0px' : '-20% 0px -20% 0px' 
+  });
 
   const media = useMemo(() => {
     const items: Array<{ type: 'video' | 'image'; src: string }> = [];

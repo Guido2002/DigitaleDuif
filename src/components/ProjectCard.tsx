@@ -47,11 +47,6 @@ const ProjectCardMedia: React.FC<ProjectCardMediaProps> = memo(function ProjectC
 
       {isVideo ? (
         <>
-          {shouldPreloadVideo === false && (
-            <div className="absolute inset-0 flex items-center justify-center bg-muted/50 backdrop-blur-sm">
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-            </div>
-          )}
           <video
             ref={mediaRef}
             src={primaryMedia}
@@ -277,7 +272,8 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(function ProjectCard({ proj
   
   const isMobile = useIsMobile();
   const isCardInView = useInView(divRef, { margin: "-10% 0px -10% 0px", amount: 0.4, once: false });
-  const isMediaInView = useInView(divRef, { margin: "0px", amount: 0.2, once: false });
+  // Desktop: stricter viewport detection - requires more of the card to be visible (50%)
+  const isMediaInView = useInView(divRef, { margin: "-20% 0px -20% 0px", amount: isMobile ? 0.2 : 0.5, once: false });
   const isActive = isMobile && isCardInView;
 
   // On mobile, use the card active state for video playback; on desktop use media viewport detection

@@ -10,6 +10,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useReducedMotion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type ProjectMediaElement = HTMLVideoElement | HTMLIFrameElement;
 
@@ -46,7 +47,7 @@ function renderProjectMedia(
         muted
         loop
         playsInline
-        preload={shouldPreloadVideo ? "metadata" : "none"}
+        preload={shouldPreloadVideo ? "metadata" : "auto"}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
       />
     );
@@ -78,9 +79,16 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
   const mediaElementRef = useRef<ProjectMediaElement | null>(null);
+  const playAttemptIntervalRef = useRef<number | null>(null);
+  const isMobile = useIsMobile();
 
   const { ref: animationRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ threshold: 0.2, rootMargin: "0px", triggerOnce: false });
+  // Desktop: stricter viewport detection - requires 50% visible with 20% margins
+  const { ref: mediaInViewRef, inView: isMediaInView } = useInView({ 
+    threshold: isMobile ? 0.2 : 0.5, 
+    rootMargin: isMobile ? "0px" : "-20% 0px -20% 0px", 
+    triggerOnce: false 
+  });
 
   const setCardRefs = useCallback(
     (node: HTMLElement | null) => {
@@ -108,7 +116,7 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
   const videoUrl = project.videoUrl;
   const shouldControlVideo = Boolean(videoUrl) && !shouldReduceMotion;
   const shouldPlayVideoNow = shouldControlVideo && isMediaInView;
-  const shouldPreloadVideo = shouldControlVideo && isMediaInView;
+  const shouldPreloadVideo = true; // Always preload for homepage featured projects
   const shouldAutoplayVideo = true;
 
   React.useEffect(() => {
@@ -116,14 +124,58 @@ const ProjectCard: React.FC<ProjectCardProps> = memo(({ project, index }) => {
     const element = mediaElementRef.current;
     if (!(element instanceof HTMLVideoElement)) return;
 
-    if (shouldPlayVideoNow) {
-      Promise.resolve()
-        .then(() => element.play())
-        .catch(() => {
-          // Autoplay can be blocked or play() can fail; do nothing.
+    const attemptPlay = () => {
+      const currentVideo = mediaElementRef.current;
+      if (!(currentVideo instanceof HTMLVideoElement) || !shouldPlayVideoNow) return;
+      
+      if (currentVideo.paused && currentVideo.readyState >= 2) {
+        currentVideo.play().catch(() => {
+          // Silently fail - autoplay might be blocked
         });
+      }
+    };
+
+    if (shouldPlayVideoNow) {
+      // Immediate attempt
+      attemptPlay();
+      
+      // Event-based attempts
+      const handleLoadedMetadata = () => attemptPlay();
+      const handleCanPlay = () => attemptPlay();
+      const handleLoadedData = () => attemptPlay();
+      
+      element.addEventListener('loadedmetadata', handleLoadedMetadata);
+      element.addEventListener('canplay', handleCanPlay);
+      element.addEventListener('loadeddata', handleLoadedData);
+      
+      // Aggressive polling for mobile (every 200ms for 3 seconds)
+      let attempts = 0;
+      playAttemptIntervalRef.current = window.setInterval(() => {
+        attempts++;
+        attemptPlay();
+        if (attempts > 15 || !(mediaElementRef.current instanceof HTMLVideoElement) || !mediaElementRef.current.paused) {
+          if (playAttemptIntervalRef.current) {
+            clearInterval(playAttemptIntervalRef.current);
+            playAttemptIntervalRef.current = null;
+          }
+        }
+      }, 200);
+      
+      return () => {
+        element.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        element.removeEventListener('canplay', handleCanPlay);
+        element.removeEventListener('loadeddata', handleLoadedData);
+        if (playAttemptIntervalRef.current) {
+          clearInterval(playAttemptIntervalRef.current);
+          playAttemptIntervalRef.current = null;
+        }
+      };
     } else {
       element.pause();
+      if (playAttemptIntervalRef.current) {
+        clearInterval(playAttemptIntervalRef.current);
+        playAttemptIntervalRef.current = null;
+      }
     }
   }, [shouldControlVideo, shouldPlayVideoNow]);
 
