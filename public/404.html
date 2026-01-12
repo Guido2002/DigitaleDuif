@@ -4,20 +4,17 @@
   <meta charset="UTF-8">
   <title>Redirecting...</title>
   <script>
-    // GitHub Pages SPA redirect workaround
+    // GitHub Pages SPA redirect workaround for custom domain
     // When a 404 occurs, redirect to index.html with the original path preserved
     const path = window.location.pathname;
-    const segments = path.split('/').filter(Boolean);
-    
-    // Extract the repository name and the route
-    const repoIndex = segments.findIndex(seg => seg !== '' && path.startsWith('/' + seg));
-    let route = '/' + segments.slice(repoIndex + 1).join('/');
+    const search = window.location.search;
+    const hash = window.location.hash;
     
     // Store the route in sessionStorage for index.html to process
-    sessionStorage.setItem('redirect', route || '/');
+    sessionStorage.setItem('redirect', path + search + hash);
     
-    // Redirect to index.html
-    window.location.replace(window.location.origin + window.location.pathname.split('/').slice(0, 2).join('/') + '/index.html');
+    // Redirect to root index.html
+    window.location.replace(window.location.origin + '/');
   </script>
 </head>
 <body>
