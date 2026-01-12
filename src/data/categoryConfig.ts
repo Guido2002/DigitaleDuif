@@ -103,7 +103,7 @@ export interface CategoryConfig {
 
 const xrConfig: CategoryConfig = {
   hero: {
-    title: "Van hoog overzien naar gericht ",
+    title: "Overzicht naar gericht ",
     titleHighlight: "bouwen",
     subtitle: "Ik bouw immersieve VR, AR en MR ervaringen die trainen, simuleren en inspireren. Van concept tot implementatie, samen met jou.",
     backgroundImages: [xrImage, ux1Image],
