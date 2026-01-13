@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import dyadComponentTagger from "@dyad-sh/react-vite-component-tagger";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -6,7 +6,10 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const base = env.VITE_BASE || '/';
+
   const getPackageName = (moduleId: string): string | null => {
     const parts = moduleId.split('node_modules/');
     let subpath = parts.at(-1) ?? '';
@@ -31,7 +34,7 @@ export default defineConfig(() => {
   };
 
   return {
-    base: process.env.NODE_ENV === 'production' ? '/' : '/',
+    base,
     server: {
       host: '::',
       port: 8080,

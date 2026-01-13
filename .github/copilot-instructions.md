@@ -24,9 +24,13 @@ import myIcon from "@/assets/icons/icon.png";
 ```
 
 ### Vite Configuration
-- Base path: `/DigitaleDuif/` in production, `/` in development
+- This repo currently deploys to GitHub Pages with a custom domain (see `public/CNAME`), so the Vite base path is `/` in production.
+- If you ever deploy as a GitHub “project page” under a repo path, you’ll need a non-root base (e.g. `/DigitaleDuif/`).
 - Automatic via `import.meta.env.BASE_URL`
 - BrowserRouter uses `basename={import.meta.env.BASE_URL}` for proper routing
+
+### Favicon / public assets
+- Put favicons in `public/` and reference them in `index.html` using `%BASE_URL%...` (e.g. `%BASE_URL%Website.ico`, `%BASE_URL%favicon.png`) so it works with both root and subpath deployments.
 
 ### Deployment Commands
 ```bash
