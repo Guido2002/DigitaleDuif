@@ -10,6 +10,7 @@ const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
+const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/projecten" element={<ProjectsPage />} />
                 <Route path="/contact" element={<ContactPage />} />
+                <Route path="/privacy" element={<PrivacyPolicyPage />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

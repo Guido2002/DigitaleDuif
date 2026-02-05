@@ -34,6 +34,7 @@ import myIcon from "@/assets/icons/icon.png";
 
 ### Deployment Commands
 ```bash
+pnpm install      # Install dependencies (run if build tools like vite are missing)
 pnpm build        # Build for production
 pnpm run deploy   # Deploy to gh-pages branch
 ```
