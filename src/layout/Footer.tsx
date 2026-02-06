@@ -47,7 +47,7 @@ const Footer: React.FC = memo(function Footer() {
               <Link to="/contact" className={animatedLink}>
                 Contact
               </Link>
-              <Link to="/privacy" className={animatedLink}>
+              <Link to="/privacy/" className={animatedLink}>
                 Privacy Policy
               </Link>
             </nav>
