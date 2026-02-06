@@ -61,6 +61,10 @@ export default defineConfig(({ mode }) => {
       minify: 'esbuild',
       cssCodeSplit: true,
       rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+          privacy: path.resolve(__dirname, 'privacy/index.html'),
+        },
         output: {
           manualChunks(id: string) {
             if (!id.includes('node_modules')) return;
