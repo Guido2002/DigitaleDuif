@@ -66,7 +66,7 @@ function renderProjectMedia(
 
 // Map category to serviceIds (same as in ImpactCasesSection)
 const categoryServiceMap: Record<string, string[]> = {
-  'xr': ['vr-app-dev', 'mr-interfaces', 'data-analytics'],
+  'xr': ['vr-app-dev', 'mr-interfaces', 'data-analytics', 'mixed-reality-development'],
   'websites': ['web-development', 'ui-ux-design'],
   'mobile-apps': ['mobile-app-development'],
 };

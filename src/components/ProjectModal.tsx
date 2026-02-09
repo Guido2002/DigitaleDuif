@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { X, Calendar, ChevronLeft, ChevronRight, ChevronDown, Play } from 'lucide-react';
+import { X, Calendar, ChevronLeft, ChevronRight, ChevronDown, Play, ExternalLink } from 'lucide-react';
 import { Project } from '../data/mockData';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { usePauseMediaWhenNotInView } from "@/hooks/use-pause-media-when-not-in-view";
@@ -377,6 +377,17 @@ const ProjectModalContent: React.FC<{ project: Project; contentRef: React.RefObj
         <div className="hidden lg:flex flex-col xl:flex-row items-center justify-between gap-4 text-center xl:text-left">
           <span className="text-white font-medium text-lg">Interesse in een soortgelijk project?</span>
           <div className="flex items-center gap-4">
+            {project.storeLink ? (
+              <a
+                href={project.storeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center px-5 py-2.5 bg-white hover:bg-blue-50 text-blue-600 rounded-lg font-bold transition-colors text-sm whitespace-nowrap shadow-lg shadow-blue-900/20"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Bekijk in store
+              </a>
+            ) : null}
             <a
               href="https://app.cal.eu/digitale-duif/30min"
               target="_blank"
@@ -390,6 +401,17 @@ const ProjectModalContent: React.FC<{ project: Project; contentRef: React.RefObj
         </div>
 
         <div className="lg:hidden w-full">
+          {project.storeLink ? (
+            <a
+              href={project.storeLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-full px-5 py-3 bg-white hover:bg-blue-50 text-blue-700 rounded-xl font-bold transition-colors text-base shadow-lg shadow-blue-900/20 border border-blue-100 mb-3"
+            >
+              <ExternalLink className="w-5 h-5 mr-2" />
+              Bekijk in store
+            </a>
+          ) : null}
           <a
             href="https://app.cal.eu/digitale-duif/30min"
             target="_blank"

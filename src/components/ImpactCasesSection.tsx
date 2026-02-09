@@ -12,7 +12,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 // Define filter categories
 const categories = [
   { id: 'all', label: 'Alles' },
-  { id: 'xr', label: 'XR / VR / MR', serviceIds: ['vr-app-dev', 'mr-interfaces', 'data-analytics'] },
+  { id: 'xr', label: 'XR / VR / MR', serviceIds: ['vr-app-dev', 'mr-interfaces', 'data-analytics', 'mixed-reality-development'] },
   { id: 'web', label: 'Web', serviceIds: ['web-development', 'ui-ux-design'] },
   { id: 'mobile', label: 'Mobile', serviceIds: ['mobile-app-development'] },
 ];

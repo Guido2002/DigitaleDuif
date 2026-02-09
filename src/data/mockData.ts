@@ -18,6 +18,12 @@ import flutter5 from "@/assets/media/flutter (5).png";
 import flutter6 from "@/assets/media/flutter (6).png";
 import limescoopImage1 from "@/assets/media/projects/limescoop/Limescoop.webp";
 import limescoopImage2 from "@/assets/media/projects/limescoop/Limescoop-1024x598.webp";
+import footballDancerBanner from "@/assets/media/projects/football-dancer/banner.png";
+import footballDancer1 from "@/assets/media/projects/football-dancer/dancer (1).png";
+import footballDancer2 from "@/assets/media/projects/football-dancer/dancer (2).png";
+import footballDancer3 from "@/assets/media/projects/football-dancer/dancer (3).png";
+import footballDancer4 from "@/assets/media/projects/football-dancer/dancer (4).png";
+import footballDancer5 from "@/assets/media/projects/football-dancer/dancer (5).png";
 
 // USP Card Data
 interface USP {
@@ -169,6 +175,7 @@ export interface Project {
   images: string[];
   serviceId?: string; // New field
   videoUrl?: string; // New field for project video
+  storeLink?: string;
 }
 
 export const projects: Project[] = [
@@ -290,6 +297,33 @@ export const projects: Project[] = [
     ],
     serviceId: "mobile-app-development",
   },
+
+  {
+    id: "football-dancer-meta-quest-mixed-reality",
+    title: "Football Dancer",
+    tagline: "Breng het feestje naar je kamer met een speelse Mixed Reality dancer op Meta Quest.",
+    client: "Eigen project",
+    description:
+      "Football Dancer is een speelse Mixed Reality app voor Meta Quest waarmee je een virtuele voetbalavatar in je echte ruimte plaatst. Met eenvoudige tap-controls stuur je de danser aan en maak je in seconden een mini performance in je eigen kamer—zonder gedoe of online functies.",
+    challenge:
+      "Een snelle en toegankelijke MR-ervaring ontwerpen die direct leuk is, zonder complexe setup of overbodige interactiestappen, en die duidelijk maakt wat de gebruiker kan doen zodra de app start.",
+    solution:
+      "De app laat gebruikers een virtuele voetbalavatar in hun real-world omgeving plaatsen en via simpele knoppen direct dansmoves triggeren. Ingebouwde routines zoals Macarena, The Twist en Breakdance zorgen voor afwisseling: van klassiek en casual tot energiek en spectaculair. De besturing is bewust minimalistisch gehouden zodat je meteen kunt beginnen en makkelijk stijlen kunt mixen.",
+    impact:
+      "Een lichtgewicht, vrolijke MR-ervaring die ideaal is voor een korte lach, een chill moment of een spontane performance met vrienden. Door de combinatie van real-space placement en één-tap interactie ontstaat instant fun in elke kamer.",
+    techStack: ["Meta Quest", "Mixed Reality", "XR (Unity/OpenXR)"],
+    images: [
+      footballDancerBanner,
+      footballDancer1,
+      footballDancer2,
+      footballDancer3,
+      footballDancer4,
+      footballDancer5,
+    ],
+    serviceId: "mixed-reality-development",
+    storeLink: "https://www.meta.com/nl-nl/experiences/footballdancer/26346546164930151",
+  }
+
 ];
 
 // Service Data
