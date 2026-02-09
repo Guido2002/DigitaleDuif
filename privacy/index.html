@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Performance: Preconnect to external origins -->
+    <link rel="preconnect" href="https://app.cal.eu" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.linkedin.com" />
+
+    <!-- Font Loading: Inter with font-display swap -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/Website.ico" sizes="any" />
+    <link rel="shortcut icon" href="/Website.ico" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <title>XR, Web & Mobile | DigitaleDuif</title>
+    <meta
+      name="description"
+      content="XR-applicatie, website of mobiele app laten ontwikkelen? DigitaleDuif bouwt Unity XR-oplossingen, webapps en MVP’s met focus op de eindgebruiker en klant."
+    />
+    <link rel="canonical" href="https://www.digitale-duif.nl/privacy/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Performance hints -->
+    <meta name="theme-color" content="#0074FF" />
+    <script type="module" crossorigin src="/assets/vendor-react-lVC4Kowj.js"></script>
+    <script type="module" crossorigin src="/assets/vendor-icons-B8oiOBJv.js"></script>
+    <script type="module" crossorigin src="/assets/vendor-ui-utils--X5BZniO.js"></script>
+    <script type="module" crossorigin src="/assets/vendor-query-DUOCXZnE.js"></script>
+    <script type="module" crossorigin src="/assets/vendor-router-PtayaTq6.js"></script>
+    <script type="module" crossorigin src="/assets/framer-Cz4ZsD71.js"></script>
+    <script type="module" crossorigin src="/assets/main-CDv6sIt1.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-DdxgIILW.css">
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- Handle SPA redirect from 404.html -->
+    <script>
+      (function () {
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          globalThis.history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    <!-- Important: absolute path so this works from /privacy/ during dev -->
+  </body>
+</html>
