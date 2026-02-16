@@ -15,9 +15,12 @@ import marcdegraafAvatar from "@/assets/icons/marcdegraaf.jpg";
 import quintenmollemaAvatar from "@/assets/icons/quintenmollema.jpg";
 import corjanAvatar from "@/assets/icons/corjan.jpg";
 import maartengerritseAvatar from "@/assets/icons/maartengerritse.jpg";
-import florianhierckAvatar from "@/assets/icons/florianhierck.jpg";
+import florianHierckAvatar from "@/assets/icons/florianhierck.jpg";
+import nielsdobbelaarAvatar from "@/assets/icons/nielsdobbelaar.jpg";
+import EsmeeVogelezangAvatar from "@/assets/icons/esmee.jpg";
 import swecoLogo from "@/assets/icons/sweco_logo.png";
 import framespaceLogo from "@/assets/icons/framespace_logo.jpg";
+import tolllogo from "@/assets/icons/24tollcom_logo.jpg";
 import domineedanielAvatar from "@/assets/domineedaniel.jpg";
 import enriqueAvatar from "@/assets/enrique.jpg";
 import unoLogo from "@/assets/uno_logo.jpg";
@@ -173,12 +176,23 @@ const xrConfig: CategoryConfig = {
     },
 
     {
-    quote: "In 2024-2025 heeft Guido van Duivenvoorde voor een renovatie/nieuwbouw project bij onze opdrachtgever een Mixed Reality model gemaakt. Hiermee konden de ontwerpers en de opdrachtgever op de projectlocatie meekijken hoe de renovatie van o.a. ruimtes en installaties in de bestaande bouw eruit kon komen te zien en hoe de nieuwbouw aansloot bij de bestaande bouw. Mixed Reality is daarmee een fantastisch middel gebleken om op de projectlocatie aan te tonen dat het ontworpen 3D model past op en naast de bestaande bouw of clashes goed in beeld bracht. De passie en inzet van Guido om deze makkelijk bedienbaar Mixed Reality model te maken, heeft enorm geholpen om voor het ontwerpbureau en de opdrachtgever een mooi en inzichtelijk ontwerp te maken.",
+    quote: "In 2024-2025 heeft Guido voor een renovatie/nieuwbouw project bij onze opdrachtgever een Mixed Reality model gemaakt. Hiermee konden de ontwerpers en de opdrachtgever op de projectlocatie meekijken hoe de renovatie van o.a. ruimtes en installaties in de bestaande bouw eruit kon komen te zien en hoe de nieuwbouw aansloot bij de bestaande bouw. Mixed Reality is daarmee een fantastisch middel gebleken om op de projectlocatie aan te tonen dat het ontworpen 3D model past op en naast de bestaande bouw of clashes goed in beeld bracht. De passie en inzet van Guido om deze makkelijk bedienbaar Mixed Reality model te maken, heeft enorm geholpen om voor het ontwerpbureau en de opdrachtgever een mooi en inzichtelijk ontwerp te maken.",
     author: "Cor-Jan Baltus",
     title: "Projectmanager Drinkwater, Sweco Nederland",
     avatar: corjanAvatar,
     rating: 5,
     companyLogo: swecoLogo,
+    linkedinUrl: "https://www.linkedin.com/in/cjbaltus/",
+  },
+
+  {
+    quote: "Guido heb ik leren kennen als een hardwerkende en gedreven collega. Hij heeft een duidelijke visie op zijn doelen en weet deze ook daadwerkelijk te realiseren. Naast zijn professionele inzet is Guido een sociaal en prettig persoon in de omgang. Hij vindt snel aansluiting binnen een team en maakt met iedereen een praatje. Ik kan Guido iedereen aanbevelen, hij is een echte aanwinst voor ieder team.",
+    author: "Esmee Vogelezang",
+    title: "Assistent projectleider, Sweco Nederland",
+    avatar: EsmeeVogelezangAvatar,
+    rating: 5,
+    companyLogo: swecoLogo,
+    linkedinUrl: "https://www.linkedin.com/in/esmee-vogelezang-856396286/",
   },
 
   ],
@@ -409,8 +423,18 @@ const websitesConfig: CategoryConfig = {
       author: "Florian Hierck",
       title: "Student Informatica, Hogeschool Leiden",
       rating: 5,
-      avatar: florianhierckAvatar,
+      avatar: florianHierckAvatar,
       linkedinUrl: "https://www.linkedin.com/in/florian-hierck-203569210/",
+    },
+
+    {
+      quote: "Guido is iemand met wie ik tijdens mijn studie aan meerdere projecten heb samengewerkt. Hij viel altijd op door zijn door zijn oog voor detail en harde werk. Hierdoor zorgt hij altijd voor een prettige samenwerking en product van hoge kwaliteit.",
+      author: "Niels Dobbelaar",
+      title: "Fullstack Developer, 24Toll.com",
+      rating: 5,
+      avatar: nielsdobbelaarAvatar,
+      companyLogo: tolllogo,
+      linkedinUrl: "https://www.linkedin.com/in/niels-dobbelaar-084619274/",
     }
 
   ],
