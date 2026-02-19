@@ -11,6 +11,9 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
+const PrivacyPolicyPianoPrototypePage = lazy(
+  () => import("./pages/PrivacyPolicyPianoPrototypePage")
+);
 
 const queryClient = new QueryClient();
 
@@ -47,6 +50,14 @@ const App = () => (
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/privacy" element={<PrivacyPolicyPage />} />
                 <Route path="/privacy/" element={<PrivacyPolicyPage />} />
+                <Route
+                  path="/privacy/piano-prototype"
+                  element={<PrivacyPolicyPianoPrototypePage />}
+                />
+                <Route
+                  path="/privacy/piano-prototype/"
+                  element={<PrivacyPolicyPianoPrototypePage />}
+                />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -110,6 +110,12 @@ src/assets/
 
 ## Component Patterns
 
+### Privacy policy routes
+- The static entrypoint in `privacy/index.html` is a SPA shell (React mount + GitHub Pages redirect restore); policy text is rendered by React pages.
+- Routes are defined in `src/App.tsx`:
+  - Football Dancer privacy policy: `src/pages/PrivacyPolicyPage.tsx` at `/privacy` (and `/privacy/`)
+  - Piano Prototype privacy policy: `src/pages/PrivacyPolicyPianoPrototypePage.tsx` at `/privacy/piano-prototype` (and `/privacy/piano-prototype/`)
+
 ### Category UX mapping
 - The “WAT MAKEN WE?” 3-option chooser is implemented in `src/components/CategorySelectionModal.tsx`.
 - `src/components/WhatWeDoSection.tsx` currently exists but is empty (likely unused).
