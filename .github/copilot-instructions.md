@@ -116,6 +116,10 @@ src/assets/
   - Football Dancer privacy policy: `src/pages/PrivacyPolicyPage.tsx` at `/privacy` (and `/privacy/`)
   - Piano Prototype privacy policy: `src/pages/PrivacyPolicyPianoPrototypePage.tsx` at `/privacy/piano-prototype` (and `/privacy/piano-prototype/`)
 
+### Static hosting deep links
+- This repo uses Vite multi-page inputs (see `vite.config.ts`) to emit extra HTML entrypoints under `dist/privacy/...`.
+- If a route must work via direct navigation on static hosting without server rewrites, add a matching HTML entrypoint under `privacy/<route>/index.html` and include it in `build.rollupOptions.input`.
+
 ### Category UX mapping
 - The “WAT MAKEN WE?” 3-option chooser is implemented in `src/components/CategorySelectionModal.tsx`.
 - `src/components/WhatWeDoSection.tsx` currently exists but is empty (likely unused).

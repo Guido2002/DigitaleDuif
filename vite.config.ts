@@ -64,6 +64,10 @@ export default defineConfig(({ mode }) => {
         input: {
           main: path.resolve(__dirname, 'index.html'),
           privacy: path.resolve(__dirname, 'privacy/index.html'),
+          privacyPianoPrototype: path.resolve(
+            __dirname,
+            'privacy/piano-prototype/index.html'
+          ),
         },
         output: {
           manualChunks(id: string) {
